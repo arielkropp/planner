@@ -1,4 +1,4 @@
-const CACHE_NAME = "trip-planner-5e303ff";
+const CACHE_NAME = "trip-planner-1d60aa6";
 
 const STATIC_ASSETS = [
   "./",

@@ -132,9 +132,15 @@
   }
 
   main {
+    --main-pad-top: max(6px, env(safe-area-inset-top));
     grid-area: main;
     min-width: 0;
-    padding: max(6px, env(safe-area-inset-top)) 16px calc(84px + env(safe-area-inset-bottom));
+    padding: var(--main-pad-top) 16px calc(84px + env(safe-area-inset-bottom));
+  }
+
+  /* Keep the sticky toolbar's pinned height equal to its in-flow height so it never covers the content below */
+  .itinerary-toolbar {
+    --tb-pad: var(--main-pad-top);
   }
 
   .desktop-only {
