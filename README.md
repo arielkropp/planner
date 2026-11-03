@@ -64,4 +64,4 @@ After you first open the site while online and the service worker finishes insta
 
 This private repository is the development source. To publish a tested snapshot to the public `planner` repository, run **Actions → Publish to public planner → Run workflow**. The workflow runs the test suite, then updates the public site's files; the public repository's GitHub Pages workflow deploys the result.
 
-The workflow requires a `PLANNER_PUBLISH_TOKEN` Actions secret in this repository. Use a fine-grained personal access token with **Contents: read and write** access to `arielkropp/planner`. GitHub Pages is not enabled for this development repository.
+The workflow pushes to the public repository's `main` branch using a write-enabled deploy key: the private key is stored here as the `PLANNER_DEPLOY_KEY` Actions secret, and the public key is registered under `arielkropp/planner` → Settings → Deploy keys. GitHub Pages (source: GitHub Actions) is enabled on the public repository only.
