@@ -76,13 +76,9 @@ export function validateV2(st) {
     let endTime = (typeof a.endTime === "string" && /^([01]\d|2[0-3]):[0-5]\d$/.test(a.endTime)) ? a.endTime : "";
     const endDate = (a.endDate && validDate(a.endDate) && a.endDate >= date) ? a.endDate : "";
     const rawTz = (typeof a.tz === "string" && a.tz.trim()) ? a.tz.trim().slice(0, 50) : DEFAULT_TZ;
-    const tz = TIMEZONES.some(t => t.id === rawTz || t.short === rawTz)
-      ? (TIMEZONES.find(t => t.id === rawTz || t.short === rawTz)?.id || DEFAULT_TZ)
-      : DEFAULT_TZ;
+    const tz = TIMEZONES.some(t => t.id === rawTz) ? rawTz : DEFAULT_TZ;
     const rawEndTz = (typeof a.endTz === "string" && a.endTz.trim()) ? a.endTz.trim().slice(0, 50) : tz;
-    const endTz = TIMEZONES.some(t => t.id === rawEndTz || t.short === rawEndTz)
-      ? (TIMEZONES.find(t => t.id === rawEndTz || t.short === rawEndTz)?.id || tz)
-      : tz;
+    const endTz = TIMEZONES.some(t => t.id === rawEndTz) ? rawEndTz : tz;
 
     if (!isValidTimeInterval(date, endDate, time, endTime, tz, endTz)) {
       endTime = "";

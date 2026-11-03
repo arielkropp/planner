@@ -16,7 +16,6 @@ export const DEFAULT_STD_DAY = 8;
 
 export const KEY = "trip-planner-v1";
 export const V1_KEY = "trip-planner-v1-backup";
-export const LEGACY_KEYS = [["arg-plan-public-v1", KEY], ["arg-plan-public-v1-backup", V1_KEY]];
 export const SAVED_TEXT = "Saved in this browser only. Back up before switching browsers or devices.";
 
 export const TYPES = ["Stay", "Transport", "Activity", "Flight", "Other"];
@@ -43,13 +42,12 @@ const ZONES = [
   ["America/New_York", "US", "New York", "United States"],
   ["America/Toronto", "CA", "Toronto", "Canada"],
   ["America/Mexico_City", "MX", "Mexico City", "Mexico"],
-  ["America/Bogota", "CO", "Bogota", "Colombia", "COT"],
-  ["America/Lima", "PE", "Lima", "Peru", "PET"],
-  ["America/La_Paz", "BO", "La Paz", "Bolivia", "BOT"],
-  ["America/Santiago", "CL", "Santiago", "Chile", "CLT"],
-  ["America/Argentina/Buenos_Aires", "AR", "Buenos Aires", "Argentina", "ART"],
-  ["America/Montevideo", "UY", "Montevideo", "Uruguay", "UYT"],
-  ["America/Sao_Paulo", "BR", "São Paulo", "Brazil", "BRT"],
+  ["America/Bogota", "CO", "Bogota", "Colombia"],
+  ["America/Lima", "PE", "Lima", "Peru"],
+  ["America/La_Paz", "BO", "La Paz", "Bolivia"],
+  ["America/Santiago", "CL", "Santiago", "Chile"],
+  ["America/Montevideo", "UY", "Montevideo", "Uruguay"],
+  ["America/Sao_Paulo", "BR", "São Paulo", "Brazil"],
   ["Atlantic/Reykjavik", "IS", "Reykjavik", "Iceland"],
   ["Europe/London", "GB", "London", "United Kingdom"],
   ["Europe/Lisbon", "PT", "Lisbon", "Portugal"],
@@ -59,7 +57,7 @@ const ZONES = [
   ["Europe/Berlin", "DE", "Berlin", "Germany"],
   ["Europe/Athens", "GR", "Athens", "Greece"],
   ["Europe/Istanbul", "TR", "Istanbul", "Türkiye"],
-  ["Asia/Jerusalem", "IL", "Tel Aviv", "Israel", "IST"],
+  ["Asia/Jerusalem", "IL", "Tel Aviv", "Israel"],
   ["Africa/Cairo", "EG", "Cairo", "Egypt"],
   ["Africa/Johannesburg", "ZA", "Johannesburg", "South Africa"],
   ["Africa/Nairobi", "KE", "Nairobi", "Kenya"],
@@ -87,8 +85,8 @@ if (!ZONES.some(z => z[0] === browserTz)) {
 
 export const DEFAULT_TZ = browserTz;
 
-export const TIMEZONES = ZONES.map(([id, country, city, name, short]) => ({
-  id, country, city, short, label: name ? `${city} (${name})` : city
+export const TIMEZONES = ZONES.map(([id, country, city, name]) => ({
+  id, country, city, label: name ? `${city} (${name})` : city
 }));
 
 export const PACK_TEMPLATES = [

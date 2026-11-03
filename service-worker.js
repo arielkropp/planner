@@ -1,4 +1,4 @@
-const CACHE_NAME = "trip-planner-73ef24f";
+const CACHE_NAME = "trip-planner-5e303ff";
 
 const STATIC_ASSETS = [
   "./",
@@ -59,7 +59,7 @@ self.addEventListener("activate", event => {
   event.waitUntil(
     caches.keys()
       .then(keys => Promise.all(
-        keys.filter(key => (key.startsWith("trip-planner-") || key.startsWith("argentina-trip-planner-")) && key !== CACHE_NAME)
+        keys.filter(key => key.startsWith("trip-planner-") && key !== CACHE_NAME)
           .map(key => caches.delete(key))
       ))
       .then(() => self.clients.claim())

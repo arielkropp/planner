@@ -49,8 +49,8 @@ export const parseDate = text => {
 };
 
 export const tzInfo = tzId =>
-  TIMEZONES.find(t => t.id === tzId || (t.short && t.short === tzId))
-  || { id: tzId || DEFAULT_TZ, country: "", short: undefined, city: String(tzId || DEFAULT_TZ).split("/").pop().replace(/_/g, " "), label: tzId || DEFAULT_TZ };
+  TIMEZONES.find(t => t.id === tzId)
+  || { id: tzId || DEFAULT_TZ, country: "", city: String(tzId || DEFAULT_TZ).split("/").pop().replace(/_/g, " "), label: tzId || DEFAULT_TZ };
 
 const dtfCache = new Map();
 
