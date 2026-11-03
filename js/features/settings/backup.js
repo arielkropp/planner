@@ -17,7 +17,7 @@ export function downloadBackup() {
   );
   const link = document.createElement("a");
   link.href = url;
-  link.download = `argentina-trip-backup-${todayIso()}.json`;
+  link.download = `trip-planner-backup-${todayIso()}.json`;
   link.click();
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 }

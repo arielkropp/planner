@@ -161,8 +161,8 @@ export function validateV2(st) {
   const validRate = value => Number.isFinite(Number(value)) && Number(value) > 0 ? Number(value) : null;
   const rates = {
     base: CURRENCIES.includes(r.base) ? r.base : DEFAULT_RATES.base,
-    ARS: validRate(r.ARS),
     EUR: validRate(r.EUR),
+    GBP: validRate(r.GBP),
     ILS: validRate(r.ILS)
   };
 

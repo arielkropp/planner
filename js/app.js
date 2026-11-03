@@ -1,4 +1,4 @@
-/* Argentina Trip Planner - Main Application Entry */
+/* Trip Planner - Main Application Entry */
 
 import { initStore, subscribe } from "./state/store.js";
 import { initDialogs } from "./components/dialog.js";

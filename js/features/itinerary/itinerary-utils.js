@@ -47,7 +47,7 @@ export function scheduleTimeText(a, currentDay, isCont = false) {
   const sInfo = tzInfo(sTz);
   const eInfo = tzInfo(eTz);
   const timeLabel = (time, info) => isCrossTz
-    ? `${time} ${info.label.slice(info.label.lastIndexOf("(") + 1, -1)}`
+    ? `${time} ${info.city}`
     : time;
 
   if (isCont) return currentDay === a.endDate && a.endTime ? timeLabel(a.endTime, eInfo) : "";

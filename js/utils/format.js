@@ -6,8 +6,8 @@ export const fmtCost = (cost, cur = "USD") => {
   if (!Number.isFinite(cost) || cost <= 0) return "";
   const formatted = cost.toLocaleString("en-US", { maximumFractionDigits: 2 });
   if (cur === "USD") return `$${formatted} USD`;
-  if (cur === "ARS") return `$${formatted} ARS`;
   if (cur === "EUR") return `€${formatted}`;
+  if (cur === "GBP") return `£${formatted}`;
   if (cur === "ILS") return `₪${formatted}`;
   return `${formatted} ${cur}`;
 };

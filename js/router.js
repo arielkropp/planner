@@ -52,7 +52,7 @@ export function route(focus = true) {
     }
   });
 
-  document.title = `${PAGES[page]} · Argentina trip`;
+  document.title = `${PAGES[page]} · Trip Planner`;
 
   if (page === "itinerary") {
     requestAnimationFrame(() => updateItineraryLens(firstRoute));

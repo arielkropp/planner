@@ -12,7 +12,7 @@ test("Format utilities: num formatting", () => {
 
 test("Format utilities: fmtCost", () => {
   assert.equal(fmtCost(150, "USD"), "$150 USD");
-  assert.equal(fmtCost(2500.5, "ARS"), "$2,500.5 ARS");
+  assert.equal(fmtCost(2500.5, "GBP"), "£2,500.5");
   assert.equal(fmtCost(80, "EUR"), "€80");
   assert.equal(fmtCost(300, "ILS"), "₪300");
   assert.equal(fmtCost(0, "USD"), "");

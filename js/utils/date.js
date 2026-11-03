@@ -49,25 +49,45 @@ export const parseDate = text => {
 };
 
 export const tzInfo = tzId =>
-  TIMEZONES.find(t => t.id === tzId || t.short === tzId || t.country === tzId)
-  || (tzId === "Asia/Jerusalem" || tzId === "IST" || tzId === "IL"
-    ? { id: "Asia/Jerusalem", country: "IL", label: "IST +2 (Israel)", short: "IST", offset: 2, city: "Tel Aviv" }
-    : { id: tzId || DEFAULT_TZ, country: "AR", label: "ART −3 (Argentina)", short: "ART", offset: -3, city: "Buenos Aires" });
+  TIMEZONES.find(t => t.id === tzId || (t.short && t.short === tzId))
+  || { id: tzId || DEFAULT_TZ, country: "", short: undefined, city: String(tzId || DEFAULT_TZ).split("/").pop().replace(/_/g, " "), label: tzId || DEFAULT_TZ };
+
+const dtfCache = new Map();
+
+// UTC offset (in minutes) of a timezone at a given UTC instant, DST-aware.
+export function tzOffsetMinutes(tzId, utcMs) {
+  let dtf = dtfCache.get(tzId);
+  if (!dtf) {
+    try {
+      dtf = new Intl.DateTimeFormat("en-US", {
+        timeZone: tzId, hourCycle: "h23",
+        year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric", second: "numeric"
+      });
+    } catch {
+      dtf = null;
+    }
+    dtfCache.set(tzId, dtf);
+  }
+  if (!dtf) return 0;
+  const p = Object.fromEntries(dtf.formatToParts(new Date(utcMs)).map(x => [x.type, Number(x.value)]));
+  const asUtc = Date.UTC(p.year, p.month - 1, p.day, p.hour, p.minute, p.second);
+  return Math.round((asUtc - Math.floor(utcMs / 1000) * 1000) / 60000);
+}
 
 export function toUtcMs(dateStr, timeStr, tzId) {
   if (!dateStr) return null;
   const [y, m, d] = dateStr.split("-").map(Number);
   const [hh, mm] = (timeStr || "00:00").split(":").map(Number);
-  const offsetHours = tzInfo(tzId).offset;
-  return Date.UTC(y, m - 1, d, hh - offsetHours, mm, 0);
+  const wall = Date.UTC(y, m - 1, d, hh, mm, 0);
+  const first = wall - tzOffsetMinutes(tzId, wall) * 60000;
+  return wall - tzOffsetMinutes(tzId, first) * 60000;
 }
 
 export function convertTimezone(dateStr, timeStr, fromTzId, toTzId) {
   if (!dateStr || !timeStr) return null;
   const utcMs = toUtcMs(dateStr, timeStr, fromTzId);
   if (utcMs === null) return null;
-  const toOffset = tzInfo(toTzId).offset;
-  const targetMs = utcMs + toOffset * 3600000;
+  const targetMs = utcMs + tzOffsetMinutes(toTzId, utcMs) * 60000;
   const d = new Date(targetMs);
   const isoDate = d.toISOString().slice(0, 10);
   const hours = pad(d.getUTCHours());
@@ -89,14 +109,18 @@ export function formatDurationMs(ms) {
   return `${m}m`;
 }
 
-export function tzDifferenceLabel(startTzId, endTzId) {
+export function tzDifferenceLabel(startTzId, endTzId, atMs = Date.now()) {
   const sInfo = tzInfo(startTzId);
   const eInfo = tzInfo(endTzId);
-  const diff = sInfo.offset - eInfo.offset;
-  if (diff === 0) return "";
-  const ahead = diff > 0 ? sInfo.short : eInfo.short;
-  const behind = diff > 0 ? eInfo.short : sInfo.short;
-  return `${ahead} is ${Math.abs(diff)}h ahead of ${behind}`;
+  const diffMin = tzOffsetMinutes(startTzId, atMs) - tzOffsetMinutes(endTzId, atMs);
+  if (diffMin === 0) return "";
+  const ahead = diffMin > 0 ? sInfo.city : eInfo.city;
+  const behind = diffMin > 0 ? eInfo.city : sInfo.city;
+  const abs = Math.abs(diffMin);
+  const h = Math.floor(abs / 60);
+  const m = abs % 60;
+  const amount = m ? `${h}h ${m}m` : `${h}h`;
+  return `${ahead} is ${amount} ahead of ${behind}`;
 }
 
 export const TRIP_DAYS = [];

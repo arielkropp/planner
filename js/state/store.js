@@ -1,6 +1,6 @@
 /* Central State Store and Persistence */
 
-import { KEY, V1_KEY, SAVED_TEXT, DEFAULT_TZ, TIMEZONES } from "../constants.js";
+import { KEY, V1_KEY, LEGACY_KEYS, SAVED_TEXT, DEFAULT_TZ, TIMEZONES } from "../constants.js";
 import { $ } from "../utils/dom.js";
 import { defaults } from "./validation.js";
 import { fromAnyVersion } from "./migrations.js";
@@ -81,6 +81,14 @@ export function initStore() {
   }
 
   try {
+    // Carry over data saved under the storage keys used before the rename
+    for (const [oldKey, newKey] of LEGACY_KEYS) {
+      try {
+        const legacy = localStorage.getItem(oldKey);
+        if (legacy !== null && localStorage.getItem(newKey) === null) localStorage.setItem(newKey, legacy);
+      } catch {}
+    }
+
     const raw = localStorage.getItem(KEY);
     if (raw === null) {
       s = defaults();

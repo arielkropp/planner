@@ -13,12 +13,11 @@ test("Validation: isValidTimeInterval chronological ordering", () => {
   assert.equal(isValidTimeInterval(START, START, "10:00", "12:00"), true);
   assert.equal(isValidTimeInterval(START, START, "12:00", "10:00"), false);
 
-  // Cross timezone on same date: 10:00 ART (-3) vs 14:00 IST (+2)
-  // 10:00 ART = 13:00 UTC. 14:00 IST = 12:00 UTC. 12:00 UTC < 13:00 UTC, so invalid!
-  assert.equal(isValidTimeInterval(START, START, "10:00", "14:00", "America/Argentina/Buenos_Aires", "Asia/Jerusalem"), false);
+  // Cross timezone on same date: 10:00 New York is 14:00-15:00 UTC, 14:00 Tel Aviv is 11:00-12:00 UTC -> ends before it starts
+  assert.equal(isValidTimeInterval(START, START, "10:00", "14:00", "America/New_York", "Asia/Jerusalem"), false);
 
-  // 10:00 ART (-3) = 13:00 UTC vs 16:00 IST (+2) = 14:00 UTC -> valid!
-  assert.equal(isValidTimeInterval(START, START, "10:00", "16:00", "America/Argentina/Buenos_Aires", "Asia/Jerusalem"), true);
+  // 10:00 New York is 14:00-15:00 UTC, 23:00 Tel Aviv is 20:00-21:00 UTC -> valid
+  assert.equal(isValidTimeInterval(START, START, "10:00", "23:00", "America/New_York", "Asia/Jerusalem"), true);
 });
 
 test("Validation: validateV2 sanitizes state and fills defaults", () => {
@@ -37,7 +36,7 @@ test("Migrations: migrateV1 correctly transforms legacy schema", () => {
   const legacyV1 = {
     planner: {
       agenda: [
-        { id: "act-1", title: "Wine Tour", date: START, time: "14:00", done: true, place: "Mendoza" }
+        { id: "act-1", title: "Wine Tour", date: START, time: "14:00", done: true, place: "Winery" }
       ],
       bookings: [
         { id: "book-1", title: "Hotel Park", date: START, type: "Stay", status: "Confirmed", details: "Room 101" }

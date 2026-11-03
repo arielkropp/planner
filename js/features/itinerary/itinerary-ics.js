@@ -19,7 +19,7 @@ export function exportIcsCalendar() {
   const lines = [
     "BEGIN:VCALENDAR",
     "VERSION:2.0",
-    "PRODID:-//Argentina Trip Planner//EN",
+    "PRODID:-//Trip Planner//EN",
     "CALSCALE:GREGORIAN",
     "METHOD:PUBLISH"
   ];
@@ -27,7 +27,7 @@ export function exportIcsCalendar() {
 
   for (const a of sorted) {
     lines.push("BEGIN:VEVENT");
-    lines.push(`UID:${a.id}@argentina-trip-planner`);
+    lines.push(`UID:${a.id}@trip-planner`);
     lines.push(`DTSTAMP:${nowStamp}`);
     const startClean = a.date.replace(/-/g, "");
     const sTz = a.tz || DEFAULT_TZ;
@@ -62,7 +62,7 @@ export function exportIcsCalendar() {
         descParts.push(`Timezones: ${tzInfo(sTz).label} → ${tzInfo(eTz).label}`);
         const u1 = toUtcMs(a.date, a.time, sTz);
         const u2 = a.endTime ? toUtcMs(a.endDate || a.date, a.endTime, eTz) : null;
-        if (u2 && u2 > u1) descParts.push(`Duration: ${formatDurationMs(u2 - u1)} (${tzDifferenceLabel(sTz, eTz)})`);
+        if (u2 && u2 > u1) descParts.push(`Duration: ${formatDurationMs(u2 - u1)} (${tzDifferenceLabel(sTz, eTz, u1)})`);
       } else {
         descParts.push(`Timezone: ${tzInfo(sTz).label}`);
       }
@@ -82,7 +82,7 @@ export function exportIcsCalendar() {
   const url = URL.createObjectURL(new Blob([lines.join("\r\n")], { type: "text/calendar;charset=utf-8" }));
   const link = document.createElement("a");
   link.href = url;
-  link.download = `argentina-trip-${todayIso()}.ics`;
+  link.download = `trip-${todayIso()}.ics`;
   link.click();
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 }

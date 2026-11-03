@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Argentina Trip Planner</title>
+<title>Trip Planner</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -210,7 +210,7 @@
           <button type="button" class="icon-btn" data-close aria-label="Close"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg></button>
         </div>
         <div class="title-status-box">
-          <input id="itemTitle" required maxlength="200" autocomplete="off" placeholder="Hotel, bus to Mendoza, wine tour...">
+          <input id="itemTitle" required maxlength="200" autocomplete="off" placeholder="Hotel, train to the coast, museum tour...">
         </div>
         <div class="chips title-status-chips" id="itemStatuses" role="radiogroup" aria-label="Status"></div>
       </div>
@@ -223,7 +223,7 @@
             <input type="time" id="itemStartTime" aria-label="Start time">
             <div class="sep" aria-hidden="true"></div>
             <div class="dtz-wrap" title="Start timezone">
-              <span class="dtz-badge" id="itemTzBadge" aria-hidden="true">AR</span>
+              <span class="dtz-badge" id="itemTzBadge" aria-hidden="true">TZ</span>
               <svg class="dtz-arrow" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
               <select id="itemTz" class="dtz-select" aria-label="Start timezone"></select>
             </div>
@@ -237,7 +237,7 @@
             <input type="time" id="itemEndTime" aria-label="End time">
             <div class="sep" aria-hidden="true"></div>
             <div class="dtz-wrap" title="End timezone">
-              <span class="dtz-badge" id="itemEndTzBadge" aria-hidden="true">AR</span>
+              <span class="dtz-badge" id="itemEndTzBadge" aria-hidden="true">TZ</span>
               <svg class="dtz-arrow" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
               <select id="itemEndTz" class="dtz-select" aria-label="End timezone"></select>
             </div>
@@ -251,8 +251,8 @@
         <label class="field" style="width:88px;flex-shrink:0"><span>Currency</span>
           <select id="itemCurrency">
             <option value="USD">USD</option>
-            <option value="ARS">ARS</option>
             <option value="EUR">EUR</option>
+            <option value="GBP">GBP</option>
             <option value="ILS">ILS</option>
           </select>
         </label>
@@ -276,13 +276,13 @@
           <option value="USD">USD ($)</option>
           <option value="EUR">EUR (€)</option>
           <option value="ILS">ILS (₪)</option>
-          <option value="ARS">ARS ($)</option>
+          <option value="GBP">GBP (£)</option>
         </select>
       </label>
       <p class="muted" style="font-size:12px">Units per 1 USD (used to calculate combined budget total):</p>
       <div class="row2">
-        <label class="field"><span>ARS per 1 USD</span><input id="rateARS" type="number" min="0.0001" step="any"></label>
         <label class="field"><span>EUR per 1 USD</span><input id="rateEUR" type="number" min="0.0001" step="any"></label>
+        <label class="field"><span>GBP per 1 USD</span><input id="rateGBP" type="number" min="0.0001" step="any"></label>
       </div>
       <label class="field"><span>ILS per 1 USD</span><input id="rateILS" type="number" min="0.0001" step="any"></label>
     </div>

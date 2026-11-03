@@ -51,20 +51,29 @@ test("Date utilities: validation and parsing", () => {
 });
 
 test("Timezone utilities: UTC conversion and timezone offsets", () => {
-  const utcMs = toUtcMs("2026-11-15", "14:00", "America/Argentina/Buenos_Aires");
-  // Buenos Aires is UTC-3, so 14:00 ART is 17:00 UTC
-  const d = new Date(utcMs);
-  assert.equal(d.getUTCHours(), 17);
+  const utcMs = toUtcMs("2026-11-15", "14:00", "America/New_York");
+  // New York is UTC-5 in November, so 14:00 is 19:00 UTC
+  assert.equal(new Date(utcMs).getUTCHours(), 19);
 
-  // Convert 14:00 ART (UTC-3) to IST (UTC+2) -> should be 19:00 (+5 hours)
-  const conv = convertTimezone("2026-11-15", "14:00", "America/Argentina/Buenos_Aires", "Asia/Jerusalem");
+  // DST-aware: UTC-4 in July
+  assert.equal(new Date(toUtcMs("2026-07-15", "14:00", "America/New_York")).getUTCHours(), 18);
+
+  // Convert 14:00 New York (UTC-5) to Tel Aviv (UTC+2) -> should be 21:00 (+7 hours)
+  const conv = convertTimezone("2026-11-15", "14:00", "America/New_York", "Asia/Jerusalem");
   assert.ok(conv);
-  assert.equal(conv.time, "19:00");
+  assert.equal(conv.time, "21:00");
   assert.equal(conv.diffDays, 0);
 
+  // Crossing midnight reports the day difference
+  const late = convertTimezone("2026-11-15", "20:00", "America/New_York", "Asia/Jerusalem");
+  assert.equal(late.time, "03:00");
+  assert.equal(late.diffDays, 1);
+
   // Timezone difference label
-  const diffLabel = tzDifferenceLabel("Asia/Jerusalem", "America/Argentina/Buenos_Aires");
-  assert.equal(diffLabel, "IST is 5h ahead of ART");
+  const at = toUtcMs("2026-11-15", "14:00", "America/New_York");
+  assert.equal(tzDifferenceLabel("Asia/Jerusalem", "America/New_York", at), "Tel Aviv is 7h ahead of New York");
+  assert.equal(tzDifferenceLabel("Asia/Kolkata", "Asia/Jerusalem", at), "Delhi is 3h 30m ahead of Tel Aviv");
+  assert.equal(tzDifferenceLabel("Asia/Jerusalem", "Asia/Jerusalem", at), "");
 
   // Duration formatting
   assert.equal(formatDurationMs(3600000), "1h");

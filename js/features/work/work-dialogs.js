@@ -15,8 +15,8 @@ import { getState, save } from "../../state/store.js";
 export function openRatesDialog() {
   const r = getState().rates || DEFAULT_RATES;
   if ($("ratesBase")) $("ratesBase").value = r.base || "USD";
-  if ($("rateARS")) $("rateARS").value = r.ARS ?? "";
   if ($("rateEUR")) $("rateEUR").value = r.EUR ?? "";
+  if ($("rateGBP")) $("rateGBP").value = r.GBP ?? "";
   if ($("rateILS")) $("rateILS").value = r.ILS ?? "";
   $("ratesDialog")?.showModal();
 }
@@ -36,15 +36,15 @@ export function initWorkDialogs({ onRatesSaved, onLeaveSaved }) {
 
   $("ratesForm")?.addEventListener("submit", e => {
     e.preventDefault();
-    const ars = parseFloat($("rateARS").value);
     const eur = parseFloat($("rateEUR").value);
+    const gbp = parseFloat($("rateGBP").value);
     const ils = parseFloat($("rateILS").value);
     const state = getState();
 
     state.rates = {
       base: CURRENCIES.includes($("ratesBase").value) ? $("ratesBase").value : "USD",
-      ARS: (Number.isFinite(ars) && ars > 0) ? ars : null,
       EUR: (Number.isFinite(eur) && eur > 0) ? eur : null,
+      GBP: (Number.isFinite(gbp) && gbp > 0) ? gbp : null,
       ILS: (Number.isFinite(ils) && ils > 0) ? ils : null
     };
 

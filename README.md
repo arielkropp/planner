@@ -1,4 +1,4 @@
-# Argentina Trip Planner
+# Trip Planner
 
 A static, client-side travel planner. Open the [live site](https://arielkropp.github.io/planner/).
 
@@ -62,6 +62,6 @@ After you first open the site while online and the service worker finishes insta
 
 ## Deployment
 
-This private repository is the development source. To publish a tested snapshot to the public `planner` repository, run **Actions → Publish to public planner → Run workflow**. The workflow runs the test suite, then updates the public site's files; the public repository's GitHub Pages workflow deploys the result.
+This private repository is the development source. Work on the `dev` branch (the **Tests** workflow runs on every push and pull request), then merge into `main` when ready. Every push to `main` runs the test suite and publishes the site to the public `planner` repository, whose GitHub Pages workflow deploys it. You can also publish manually via **Actions → Publish to public planner → Run workflow**. The publish step stamps the service worker cache name with the commit so browsers pick up new versions.
 
 The workflow pushes to the public repository's `main` branch using a write-enabled deploy key: the private key is stored here as the `PLANNER_DEPLOY_KEY` Actions secret, and the public key is registered under `arielkropp/planner` → Settings → Deploy keys. GitHub Pages (source: GitHub Actions) is enabled on the public repository only.

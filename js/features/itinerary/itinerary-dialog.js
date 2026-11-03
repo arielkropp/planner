@@ -61,11 +61,11 @@ export function updateTzBadges() {
   const sBadge = $("itemTzBadge");
   const eBadge = $("itemEndTzBadge");
   if (sBadge) {
-    sBadge.textContent = sInfo.country;
+    sBadge.textContent = sInfo.country || "TZ";
     sBadge.closest(".dtz-wrap")?.setAttribute("title", `Start timezone: ${sInfo.label}`);
   }
   if (eBadge) {
-    eBadge.textContent = eInfo.country;
+    eBadge.textContent = eInfo.country || "TZ";
     eBadge.closest(".dtz-wrap")?.setAttribute("title", `End timezone: ${eInfo.label}`);
   }
 }
