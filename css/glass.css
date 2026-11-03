@@ -1,0 +1,360 @@
+/* =========================================================
+   OPTICAL GLASS DESIGN SYSTEM
+   ========================================================= */
+
+/* 1. Interaction Primitive: .glass-btn */
+.glass-btn,
+.icon-btn.solid,
+.itinerary-switcher .glass-action {
+  cursor: pointer;
+  touch-action: manipulation;
+  user-select: none;
+  transition: transform var(--motion-duration) var(--motion-spring),
+              box-shadow var(--motion-duration) ease,
+              filter 0.15s ease,
+              color 0.15s ease;
+}
+
+.glass-btn:hover,
+.icon-btn.solid:hover,
+.itinerary-switcher .glass-action:hover {
+  filter: brightness(1.06);
+  transform: translateY(-0.5px);
+}
+
+.glass-btn:active,
+.icon-btn.solid:active,
+.itinerary-switcher .glass-action:active {
+  filter: brightness(0.96);
+  transform: scale(0.94);
+}
+
+/* 2. Specular Gleam Overlay: .glass-sheen */
+.glass-sheen::before,
+.itinerary-switcher .glass-action::before {
+  content: "";
+  position: absolute;
+  top: -10%;
+  left: -30%;
+  width: 160%;
+  height: 120%;
+  padding: 0;
+  border-radius: 0;
+  -webkit-mask: none;
+  mask: none;
+  pointer-events: none;
+  background: linear-gradient(
+    108deg,
+    transparent 26%,
+    rgba(255, 255, 255, 0.55) 45%,
+    rgba(255, 255, 255, 0.85) 50%,
+    rgba(255, 255, 255, 0.35) 55%,
+    transparent 72%
+  );
+  transform: translateX(-6%);
+  transition: transform var(--motion-duration) var(--motion-spring);
+}
+
+.glass-sheen:hover::before,
+.itinerary-switcher .glass-action:hover::before {
+  transform: translateX(6%);
+}
+
+/* 3. Material Primitive: .glass-frosted (Translucent Optical Glass) */
+.glass-frosted,
+.itinerary-switcher .glass-action {
+  --lens-ca: var(--lens-aberration, 0.18);
+  position: relative;
+  isolation: isolate;
+  color: var(--ink);
+  border: 0;
+  overflow: hidden;
+  background: radial-gradient(
+    125% 110% at 50% 8%,
+    rgba(255, 255, 255, 0.96) 0%,
+    rgba(255, 255, 255, 0.80) 52%,
+    rgba(255, 255, 255, 0.64) 100%
+  );
+  -webkit-backdrop-filter: blur(20px) saturate(190%) contrast(106%);
+  backdrop-filter: blur(20px) saturate(190%) contrast(106%);
+  box-shadow:
+    inset 0 1.5px 1px 0 rgba(255, 255, 255, 1),
+    inset 0 -2px 5px 0 rgba(20, 35, 60, 0.075),
+    inset 7px 0 12px -8px rgb(85 170 255 / var(--lens-ca)),
+    inset -7px 0 12px -8px rgb(255 160 105 / calc(var(--lens-ca) * 0.8)),
+    0 0 0 0.5px rgba(20, 35, 60, 0.09),
+    0 5px 14px -3px rgba(15, 23, 38, 0.16),
+    0 2px 4px -1px rgba(15, 23, 38, 0.08);
+}
+
+.glass-frosted .i,
+.itinerary-switcher .glass-action .i {
+  position: relative;
+  z-index: 1;
+}
+
+.itinerary-switcher .glass-action {
+  width: 38px;
+  height: 38px;
+  display: inline-grid;
+  place-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.glass-frosted:hover,
+.itinerary-switcher .glass-action:hover {
+  --lens-ca: var(--lens-aberration-motion, 0.28);
+  color: var(--ink);
+  background: radial-gradient(
+    125% 110% at 50% 8%,
+    rgba(255, 255, 255, 0.98) 0%,
+    rgba(255, 255, 255, 0.84) 52%,
+    rgba(255, 255, 255, 0.68) 100%
+  );
+}
+
+/* 4. Material Primitive: .glass-jewel (Solid Saturated Colored Glass) */
+.glass-jewel,
+.icon-btn.solid {
+  --jewel-top: #2a7cd0;
+  --jewel-mid: #1f69b3;
+  --jewel-bot: #13518f;
+  --jewel-shadow: 28 106 181;
+  --jewel-rim: rgba(10, 45, 80, 0.22);
+  --jewel-ink: #FFFFFF;
+
+  position: relative;
+  isolation: isolate;
+  border: 0;
+  color: var(--jewel-ink);
+  background:
+    radial-gradient(90% 55% at 50% 100%, rgb(255 255 255 / 0.16) 0%, transparent 70%),
+    linear-gradient(180deg, rgb(255 255 255 / 0.10) 0%, transparent 45%),
+    linear-gradient(180deg, var(--jewel-top) 0%, var(--jewel-mid) 100%);
+  box-shadow:
+    inset 0 0 0 1px rgb(255 255 255 / 0.16),
+    inset 0 1px 0 0 rgb(255 255 255 / 0.45),
+    inset 0 -1px 0 0 rgb(255 255 255 / 0.22),
+    inset 0 0 6px 0 rgb(255 255 255 / 0.10),
+    0 0 0 0.5px var(--jewel-rim),
+    0 2px 6px -1px rgb(var(--jewel-shadow) / 0.28),
+    0 6px 16px -4px rgb(var(--jewel-shadow) / 0.30);
+}
+
+.glass-jewel .i,
+.icon-btn.solid .i {
+  position: relative;
+  z-index: 1;
+  color: #FFFFFF;
+  filter: drop-shadow(0 1px 1px rgba(10, 35, 65, 0.3));
+}
+
+.icon-btn.solid {
+  width: 38px;
+  height: 38px;
+  display: inline-grid;
+  place-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.glass-jewel:hover,
+.icon-btn.solid:hover {
+  box-shadow:
+    inset 0 0 0 1px rgb(255 255 255 / 0.22),
+    inset 0 1px 0 0 rgb(255 255 255 / 0.55),
+    inset 0 -1px 0 0 rgb(255 255 255 / 0.28),
+    inset 0 0 8px 0 rgb(255 255 255 / 0.14),
+    0 0 0 0.5px var(--jewel-rim),
+    0 3px 8px -1px rgb(var(--jewel-shadow) / 0.34),
+    0 8px 20px -4px rgb(var(--jewel-shadow) / 0.38);
+}
+
+.glass-jewel:active,
+.icon-btn.solid:active {
+  box-shadow:
+    inset 0 0 0 1px rgb(255 255 255 / 0.14),
+    inset 0 1px 3px 0 rgb(0 0 0 / 0.18),
+    0 0 0 0.5px var(--jewel-rim),
+    0 1px 3px rgb(var(--jewel-shadow) / 0.25);
+}
+
+/* Jewel Color Variants */
+.glass-jewel.green {
+  --jewel-top: #00ba66;
+  --jewel-mid: #00a859;
+  --jewel-bot: #008f4c;
+  --jewel-shadow: 0 168 89;
+  --jewel-rim: rgba(0, 70, 35, 0.22);
+}
+
+.glass-jewel.amber {
+  --jewel-top: #f59e0b;
+  --jewel-mid: #d97706;
+  --jewel-bot: #b45309;
+  --jewel-shadow: 217 119 6;
+  --jewel-rim: rgba(120, 53, 15, 0.22);
+}
+
+.glass-jewel.red {
+  --jewel-top: #ef4444;
+  --jewel-mid: #dc2626;
+  --jewel-bot: #b91c1c;
+  --jewel-shadow: 220 38 38;
+  --jewel-rim: rgba(127, 29, 29, 0.22);
+}
+
+.glass-jewel.purple {
+  --jewel-top: #8b5cf6;
+  --jewel-mid: #7c3aed;
+  --jewel-bot: #6d28d9;
+  --jewel-shadow: 124 58 237;
+  --jewel-rim: rgba(76, 29, 149, 0.22);
+}
+
+/* Dark Theme Glass Overrides */
+:root[data-theme="dark"] .glass-frosted,
+:root[data-theme="dark"] .itinerary-switcher .glass-action {
+  color: #FFFFFF;
+  background: radial-gradient(
+    100% 100% at 50% 50%,
+    rgba(255, 255, 255, 0.02) 0%,
+    rgba(255, 255, 255, 0.05) 58%,
+    rgba(255, 255, 255, 0.15) 100%
+  );
+  -webkit-backdrop-filter: blur(20px) saturate(200%) brightness(1.14);
+  backdrop-filter: blur(20px) saturate(200%) brightness(1.14);
+  box-shadow:
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.42),
+    inset 0 -1.5px 2.5px 0 rgba(255, 255, 255, 0.18),
+    inset 0 0 8px 0 rgba(255, 255, 255, 0.06),
+    inset 8px 0 14px -8px rgb(80 185 255 / calc(var(--lens-ca) * 1.25)),
+    inset -8px 0 14px -8px rgb(255 150 90 / calc(var(--lens-ca) * 1.05)),
+    0 4px 12px -2px rgba(0, 0, 0, 0.45);
+}
+
+:root[data-theme="dark"] .glass-frosted:hover,
+:root[data-theme="dark"] .itinerary-switcher .glass-action:hover {
+  color: #FFFFFF;
+  background: radial-gradient(
+    100% 100% at 50% 50%,
+    rgba(255, 255, 255, 0.04) 0%,
+    rgba(255, 255, 255, 0.08) 58%,
+    rgba(255, 255, 255, 0.19) 100%
+  );
+}
+
+:root[data-theme="dark"] .glass-sheen::before,
+:root[data-theme="dark"] .itinerary-switcher .glass-action::before {
+  background: radial-gradient(
+    65% 55% at 50% 4%,
+    rgba(255, 255, 255, 0.24) 0%,
+    rgba(255, 255, 255, 0.06) 55%,
+    transparent 100%
+  );
+}
+
+:root[data-theme="dark"] .glass-jewel,
+:root[data-theme="dark"] .icon-btn.solid {
+  --jewel-top: #3790f0;
+  --jewel-mid: #2072d6;
+  --jewel-bot: #1354a3;
+  --jewel-shadow: 32 114 214;
+  --jewel-rim: rgba(0, 0, 0, 0.45);
+  box-shadow:
+    inset 0 0 0 1px rgb(255 255 255 / 0.14),
+    inset 0 1px 0 0 rgb(255 255 255 / 0.40),
+    inset 0 -1px 0 0 rgb(255 255 255 / 0.20),
+    inset 0 0 6px 0 rgb(255 255 255 / 0.08),
+    0 0 0 0.5px var(--jewel-rim),
+    0 2px 6px -1px rgb(0 0 0 / 0.40),
+    0 6px 18px -4px rgb(var(--jewel-shadow) / 0.40);
+}
+
+:root[data-theme="dark"] .glass-jewel.green {
+  --jewel-top: #10b981;
+  --jewel-mid: #059669;
+  --jewel-bot: #047857;
+  --jewel-shadow: 5 150 105;
+}
+
+:root[data-theme="dark"] .glass-jewel.amber {
+  --jewel-top: #fbbf24;
+  --jewel-mid: #d97706;
+  --jewel-bot: #92400e;
+  --jewel-shadow: 217 119 6;
+}
+
+:root[data-theme="dark"] .glass-jewel.red {
+  --jewel-top: #f87171;
+  --jewel-mid: #ef4444;
+  --jewel-bot: #b91c1c;
+  --jewel-shadow: 239 68 68;
+}
+
+:root[data-theme="dark"] .glass-jewel.purple {
+  --jewel-top: #a78bfa;
+  --jewel-mid: #8b5cf6;
+  --jewel-bot: #6d28d9;
+  --jewel-shadow: 139 92 246;
+}
+
+:root[data-theme="dark"] .glass-jewel:hover,
+:root[data-theme="dark"] .icon-btn.solid:hover {
+  box-shadow:
+    inset 0 0 0 1px rgb(255 255 255 / 0.20),
+    inset 0 1px 0 0 rgb(255 255 255 / 0.50),
+    inset 0 -1px 0 0 rgb(255 255 255 / 0.26),
+    inset 0 0 8px 0 rgb(255 255 255 / 0.12),
+    0 0 0 0.5px var(--jewel-rim),
+    0 3px 8px -1px rgb(0 0 0 / 0.45),
+    0 8px 22px -4px rgb(var(--jewel-shadow) / 0.50);
+}
+
+/* Liquid glass shared control material */
+.itinerary-switcher .seg,
+.itinerary-actions {
+  background: var(--lg-pool), var(--lg-fill) !important;
+  -webkit-backdrop-filter: var(--lg-blur) !important;
+  backdrop-filter: var(--lg-blur) !important;
+  box-shadow: var(--lg-rim), var(--lg-lift) !important;
+}
+
+.itinerary-actions {
+  gap: 4px;
+  padding: 3px;
+  border-radius: 999px;
+}
+
+.itinerary-switcher .glass-action {
+  width: 34px;
+  height: 34px;
+  background: transparent !important;
+  box-shadow: none !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+.itinerary-switcher .glass-action:hover {
+  background: var(--lg-pill) !important;
+  transform: none;
+}
+
+.itinerary-switcher .glass-action::after {
+  display: none;
+}
+
+.itinerary-actions .icon-btn.solid {
+  width: 34px;
+  height: 34px;
+}
+
+:root:not([data-theme="dark"]) .icon-btn.solid {
+  --jewel-top: #3a8ee3;
+  --jewel-mid: #2475c9;
+  --jewel-shadow: 36 117 201;
+  --jewel-rim: rgb(20 70 130 / .18);
+}
+

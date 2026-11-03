@@ -1,0 +1,120 @@
+@property --lens-ca {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 0.18;
+}
+@property --toolbar-ca {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 0.18;
+}
+
+:root {
+  /* =========================================================
+     APP MOTION SYSTEM
+     ========================================================= */
+  --motion-duration: 0.25s;
+  --motion-spring: cubic-bezier(0.16, 1, 0.3, 1);
+  --motion-spring-bouncy: cubic-bezier(0.34, 1.4, 0.64, 1);
+
+  /* Optical Glass Lens (Itinerary viewpicker) */
+  --lens-duration: var(--motion-duration);
+  --lens-spring: var(--motion-spring);
+  --lens-aberration: 0.18;
+  --lens-aberration-motion: 0.28;
+  --lens-blue-tint: 50;
+
+  /* Micro-bounce & Jelly Deformation Variables */
+  --jelly-duration: var(--motion-duration);
+  --jelly-bounce-y: -3px;
+  --jelly-stretch-x: 1.02;
+  --jelly-squash-y: 0.98;
+  --jelly-rebound-y: 1px;
+  --jelly-rebound-sx: 0.98;
+  --jelly-rebound-sy: 1.02;
+  --jelly-gear-rotate: 45deg;
+
+  --bg: #F4F6F8;
+  --surface: #FFFFFF;
+  --ink: #12161C;
+  --muted: #525964;
+  --faint: #8C95A2;
+  --line: #CBD2DC;
+  --font-ui: "Manrope", Roboto, Arial, sans-serif;
+  --accent: #2266A3;
+  --accent-ink: #FFFFFF;
+  --warn: #944A00;
+  --ok: #1E6A2C;
+  --crit: #B3261A;
+  --t-stay: #6C3BB0;
+  --t-transport: #0B6B63;
+  --t-activity: #2C731D;
+  --t-flight: #1E5CA8;
+  --t-other: #525964;
+  --event-fill-mix: 20%;
+  --event-hover-mix: 32%;
+
+  --glass-bg: radial-gradient(125% 150% at 14% 8%, rgb(255 255 255 / .96) 0%, rgb(255 255 255 / .72) 48%, rgb(234 240 248 / .64) 80%, rgb(255 255 255 / .88) 100%);
+  --glass-border: linear-gradient(135deg, rgb(255 255 255 / 1) 0%, rgb(255 255 255 / .72) 30%, rgb(20 28 40 / .08) 56%, rgb(255 255 255 / .75) 80%, rgb(255 255 255 / .96) 100%);
+  --glass-shadow: inset 0 1.5px 1px rgb(255 255 255 / .95), inset 0 -1px 2px rgb(20 28 40 / .04), 0 0 0 .5px rgb(20 28 40 / .08), 0 10px 24px -8px rgb(20 28 40 / .12), 0 2px 6px rgb(20 28 40 / .05);
+  --glass-well: rgb(20 28 40 / .055);
+  --glass-well-border: rgb(20 28 40 / .22);
+  --glass-well-shadow: inset 0 1px 2px rgb(20 28 40 / .08), 0 1px 0 rgb(255 255 255 / .9);
+  color-scheme: light;
+
+  /* Liquid Glass v2 */
+  --lg-fill: linear-gradient(180deg, rgb(255 255 255 / .42) 0%, rgb(255 255 255 / .24) 100%);
+  --lg-pool: radial-gradient(90% 60% at 50% 100%, rgb(255 255 255 / .45) 0%, transparent 70%);
+  --lg-rim:
+    inset 0 0 0 .5px rgb(255 255 255 / .7),
+    inset 0 1px 0 0 rgb(255 255 255 / .95),
+    inset 0 -1px 0 0 rgb(255 255 255 / .6),
+    inset 0 0 10px 0 rgb(255 255 255 / .25);
+  --lg-lift: 0 0 0 .5px rgb(20 28 40 / .10), 0 8px 24px -6px rgb(20 28 40 / .18), 0 2px 6px -1px rgb(20 28 40 / .08);
+  --lg-blur: blur(14px) saturate(180%) brightness(1.04);
+  --lg-pill: rgb(20 28 40 / .07);
+  --lens-swell-duration: .38s;
+  --lens-glass-duration: .75s;
+}
+
+:root[data-theme="dark"] {
+  --bg: #101317;
+  --surface: #171B21;
+  --ink: #E7EAEE;
+  --muted: #9AA2AD;
+  --faint: #5A626E;
+  --line: #343C48;
+  --accent: #5FA8E6;
+  --accent-ink: #0A1826;
+  --warn: #F0A050;
+  --ok: #6CC47E;
+  --crit: #F2796E;
+  --t-stay: #B894F2;
+  --t-transport: #4FC7BC;
+  --t-activity: #82CF70;
+  --t-flight: #73B2F2;
+  --t-other: #9AA2AD;
+  --event-fill-mix: 30%;
+  --event-hover-mix: 38%;
+
+  --glass-bg: radial-gradient(130% 160% at 12% 6%, rgb(255 255 255 / .22) 0%, rgb(255 255 255 / .12) 45%, rgb(255 255 255 / .08) 78%, rgb(255 255 255 / .14) 100%);
+  --glass-border: linear-gradient(135deg, rgb(255 255 255 / .62) 0%, rgb(255 255 255 / .22) 28%, rgb(255 255 255 / .08) 54%, rgb(255 255 255 / .18) 76%, rgb(255 255 255 / .42) 100%);
+  --glass-shadow: inset 0 1px 1px rgb(255 255 255 / .18), inset 0 -1px 1px rgb(255 255 255 / .06), 0 12px 28px -8px rgb(0 0 0 / .55), 0 2px 6px rgb(0 0 0 / .32);
+  --glass-well: rgb(0 0 0 / .24);
+  --glass-well-border: rgb(255 255 255 / .28);
+  --glass-well-shadow: inset 0 1px 2px rgb(0 0 0 / .38), 0 1px 0 rgb(255 255 255 / .08);
+  color-scheme: dark;
+
+  /* Liquid Glass v2 dark */
+  --lg-fill: linear-gradient(180deg, rgb(255 255 255 / .12) 0%, rgb(255 255 255 / .06) 100%);
+  --lg-pool: radial-gradient(90% 60% at 50% 100%, rgb(255 255 255 / .10) 0%, transparent 70%);
+  --lg-rim:
+    inset 0 0 0 .5px rgb(255 255 255 / .14),
+    inset 0 1px 0 0 rgb(255 255 255 / .38),
+    inset 0 -1px 0 0 rgb(255 255 255 / .16),
+    inset 0 0 10px 0 rgb(255 255 255 / .05);
+  --lg-lift: 0 0 0 .5px rgb(0 0 0 / .5), 0 10px 28px -6px rgb(0 0 0 / .6), 0 2px 6px rgb(0 0 0 / .35);
+  --lg-blur: blur(14px) saturate(190%) brightness(1.1);
+  --lg-pill: rgb(255 255 255 / .12);
+}
+
