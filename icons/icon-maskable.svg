@@ -1,29 +1,33 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
-  <defs>
-    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#2F84CE" />
-      <stop offset="100%" stop-color="#174A78" />
-    </linearGradient>
-    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#0E2D4A" flood-opacity="0.35" />
-    </filter>
-  </defs>
-  <rect width="512" height="512" fill="url(#bg)" />
-  
-    <g filter="url(#glow)">
-      <!-- Retractable handle -->
-      <path d="M 212 178 V 122 C 212 108 223 96 238 96 H 274 C 289 96 300 108 300 122 V 178"
-            fill="none" stroke="#FFFFFF" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
-      <!-- Wheels -->
-      <circle cx="196" cy="424" r="18" fill="#FFFFFF"/>
-      <circle cx="316" cy="424" r="18" fill="#FFFFFF"/>
-      <!-- Suitcase body -->
-      <rect x="156" y="178" width="200" height="234" rx="36"
-            fill="none" stroke="#FFFFFF" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
-      <!-- Suitcase horizontal bands -->
-      <line x1="156" y1="260" x2="356" y2="260" stroke="#FFFFFF" stroke-width="16" stroke-linecap="round"/>
-      <line x1="156" y1="330" x2="356" y2="330" stroke="#FFFFFF" stroke-width="16" stroke-linecap="round"/>
-      <!-- Center latch -->
-      <rect x="238" y="246" width="36" height="28" rx="8" fill="#FFFFFF"/>
-    </g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" fill="none">
+  <title>Departure Calendar &amp; Route — Travel Planner App Icon</title>
+  <rect width="512" height="512" fill="#0F2942"></rect>
+  <rect x="256" width="256" height="512" fill="#091B2E"></rect>
+  <!-- Calendar Card Base & Cast Shadow -->
+          <rect x="84" y="106" width="320" height="304" rx="40" fill="#091B2E"></rect>
+          <rect x="76" y="96" width="320" height="304" rx="40" fill="#F8FAFC"></rect>
+          <path d="M236 96 H356 A40 40 0 0 1 396 136 V360 A40 40 0 0 1 356 400 H236 Z" fill="#DCE5F2"></path>
+          <!-- Calendar Header Band -->
+          <path d="M76 136 A40 40 0 0 1 116 96 H356 A40 40 0 0 1 396 136 V178 H76 Z" fill="#1A75FF"></path>
+          <path d="M236 96 H356 A40 40 0 0 1 396 136 V178 H236 Z" fill="#0052CC"></path>
+          <!-- Binder Rings -->
+          <rect x="138" y="68" width="24" height="54" rx="12" fill="#FFB020"></rect>
+          <rect x="310" y="68" width="24" height="54" rx="12" fill="#E09000"></rect>
+          <!-- Schedule Date Blocks -->
+          <rect x="112" y="208" width="44" height="36" rx="8" fill="#DCE5F2"></rect>
+          <rect x="174" y="208" width="44" height="36" rx="8" fill="#DCE5F2"></rect>
+          <rect x="236" y="208" width="44" height="36" rx="8" fill="#F8FAFC"></rect>
+          <rect x="112" y="262" width="44" height="36" rx="8" fill="#DCE5F2"></rect>
+          <!-- Planned Route S-Curve -->
+          <path d="M138 338 C 195 338, 190 232, 316 232" fill="none" stroke="#1A75FF" stroke-width="14" stroke-linecap="round" stroke-dasharray="18 18"></path>
+          <!-- Origin Node -->
+          <circle cx="138" cy="338" r="22" fill="#FFB020"></circle>
+          <circle cx="138" cy="338" r="9" fill="#F8FAFC"></circle>
+          <!-- Destination Pin -->
+          <path d="M316 164 C289 164 268 185 268 212 C268 246 316 292 316 292 C316 292 364 246 364 212 C364 185 343 164 316 164 Z" fill="#FF4D38"></path>
+          <circle cx="316" cy="210" r="17" fill="#F8FAFC"></circle>
+          <!-- Banking Flat Paper Jet Badge -->
+          <circle cx="382" cy="370" r="76" fill="#FFB020"></circle>
+          <path d="M382 294 A76 76 0 0 1 458 370 A76 76 0 0 1 382 446 Z" fill="#E09000"></path>
+          <polygon points="334,372 428,332 394,418 374,386" fill="#F8FAFC"></polygon>
+          <polygon points="374,386 428,332 384,402" fill="#DCE5F2"></polygon>
 </svg>
