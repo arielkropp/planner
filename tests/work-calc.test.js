@@ -8,10 +8,10 @@ import {
   leave,
   maxHoursFor,
   nextWorkDate
-} from "../js/features/work/work-calc.js";
-import { initStore, setState } from "../js/state/store.js";
-import { defaults } from "../js/state/validation.js";
-import { START } from "../js/constants.js";
+} from "../js/shared/domain/work-calc.js";
+import { initStore, setState } from "../js/shared/state/store.js";
+import { defaults } from "../js/shared/state/validation.js";
+import { START } from "../js/shared/constants.js";
 
 test("Work calculations: workday and standard hours", () => {
   const workdays = getTripWorkdays();

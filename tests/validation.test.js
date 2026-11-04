@@ -1,9 +1,9 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 
-import { isValidTimeInterval, validateV2, defaults } from "../js/state/validation.js";
-import { migrateV1, fromAnyVersion } from "../js/state/migrations.js";
-import { START } from "../js/constants.js";
+import { isValidTimeInterval, validateV2, defaults } from "../js/shared/state/validation.js";
+import { migrateV1, fromAnyVersion } from "../js/shared/state/migrations.js";
+import { START } from "../js/shared/constants.js";
 
 test("Validation: isValidTimeInterval chronological ordering", () => {
   // Same day without time

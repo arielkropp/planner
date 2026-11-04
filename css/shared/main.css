@@ -1,0 +1,5 @@
+/* Trip Planner - styles shared by the desktop and mobile layouts */
+@import "./variables.css";
+@import "./base.css";
+@import "./glass.css";
+@import "./motion.css";

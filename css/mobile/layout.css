@@ -1,0 +1,201 @@
+/* Mobile chrome: fixed bottom tab bar, with the utilities in a floating drawer opened from the Settings tab */
+
+.app {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: 1fr;
+  grid-template-areas: "main";
+  min-height: 100vh;
+}
+
+/* The sidebar only wraps the tab bar and drawer, which position themselves */
+.sidebar {
+  display: contents;
+}
+
+.save-note {
+  display: none;
+}
+
+/* Bottom tab bar */
+nav {
+  position: fixed;
+  z-index: 20;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+  background: var(--surface);
+  border-top: 1px solid var(--line);
+  padding: 6px 4px calc(6px + env(safe-area-inset-bottom));
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-width: 0;
+  flex: none;
+  flex-direction: column;
+  gap: 2px;
+  padding: 6px 2px;
+  border-radius: 8px;
+  color: var(--muted);
+  text-decoration: none;
+  font-family: var(--font-ui);
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 14px;
+  justify-content: center;
+  text-align: center;
+  touch-action: manipulation;
+}
+
+.nav-link .i {
+  width: 22px;
+  height: 22px;
+}
+
+.nav-link:hover {
+  color: var(--ink);
+}
+
+.nav-link[aria-current="page"],
+.nav-link[aria-current="page"]:hover {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.nav-link[aria-current="page"] .i {
+  color: var(--accent);
+}
+
+/* Settings tab */
+.settings-toggle .i {
+  transition: transform .32s cubic-bezier(0.34, 1.56, 0.64, 1), color .12s;
+}
+
+.settings-toggle[aria-expanded="true"] {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.settings-toggle[aria-expanded="true"] .i {
+  color: var(--accent);
+  transform: rotate(var(--jelly-gear-rotate, 45deg));
+}
+
+/* Floating utilities drawer */
+.utilities {
+  --toolbar-ca: var(--lens-aberration, 0.18);
+  position: fixed;
+  z-index: 30;
+  right: max(12px, env(safe-area-inset-right));
+  bottom: calc(72px + env(safe-area-inset-bottom));
+  transform-origin: calc(100% - 36px) calc(100% + 14px);
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  justify-content: center;
+  gap: 4px;
+  margin: 0;
+  padding: 5px;
+  border: 0;
+  border-radius: 999px;
+  overflow: hidden;
+  background: var(--lg-pool), var(--lg-fill) !important;
+  -webkit-backdrop-filter: var(--lg-blur) !important;
+  backdrop-filter: var(--lg-blur) !important;
+  box-shadow: var(--lg-rim), var(--lg-lift) !important;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(8px) scale(0.12, 0.12);
+  transition: opacity .16s ease-in, transform .2s cubic-bezier(0.4, 0, 0.2, 1), visibility 0s linear .2s;
+  will-change: transform, opacity;
+}
+
+.utilities::before,
+.utilities.is-open::before {
+  display: none !important;
+  animation: none !important;
+}
+
+.utilities.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition: none;
+  transform: translateY(0) scale(1, 1);
+  animation: jelly-grow var(--jelly-duration, 0.42s) cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes jelly-grow {
+  0% {
+    opacity: 0;
+    --toolbar-ca: var(--lens-aberration-motion, 0.28);
+    transform: translateY(8px) scale(0.12, 0.12);
+  }
+  38% {
+    opacity: 1;
+    --toolbar-ca: var(--lens-aberration-motion, 0.28);
+    transform: translateY(var(--jelly-bounce-y, -6px)) scale(var(--jelly-stretch-x, 1.1), var(--jelly-squash-y, 0.9));
+  }
+  58% {
+    transform: translateY(var(--jelly-rebound-y, 2px)) scale(var(--jelly-rebound-sx, 0.95), var(--jelly-rebound-sy, 1.04));
+  }
+  76% {
+    transform: translateY(-0.8px) scale(1.02, 0.99);
+  }
+  89% {
+    transform: translateY(0.2px) scale(0.995, 1.005);
+  }
+  100% {
+    opacity: 1;
+    --toolbar-ca: var(--lens-aberration, 0.18);
+    transform: translateY(0) scale(1, 1);
+  }
+}
+
+.util {
+  position: relative;
+  z-index: 1;
+  flex: 0 0 36px;
+  width: 36px;
+  height: 36px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 999px;
+  color: var(--ink);
+  transition: transform 0.14s var(--motion-spring), background-color 0.14s ease;
+  touch-action: manipulation;
+}
+
+.util:hover {
+  background: color-mix(in srgb, var(--ink) 7%, transparent);
+}
+
+.util:active {
+  transform: scale(0.9);
+}
+
+.util .i {
+  width: 20px;
+  height: 20px;
+}
+
+main {
+  --main-pad-top: max(6px, env(safe-area-inset-top));
+  grid-area: main;
+  min-width: 0;
+  width: 100%;
+  max-width: 1040px;
+  padding: var(--main-pad-top) 16px calc(84px + env(safe-area-inset-bottom));
+}
+
+/* Keep the sticky toolbar's pinned height equal to its in-flow height so it never covers the content below */
+.itinerary-toolbar {
+  --tb-pad: var(--main-pad-top);
+}

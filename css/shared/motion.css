@@ -1,0 +1,29 @@
+/* Motion preferences that apply to both layouts */
+
+@media (prefers-reduced-motion: no-preference) {
+  .btn,
+  .icon-btn,
+  .nav-link,
+  .ag-item,
+  .ev,
+  .chip-opt span,
+  .stat-seg #balPre {
+    transition: background-color .12s, color .12s, border-color .12s, box-shadow .12s;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .utilities,
+  dialog,
+  .seg button,
+  .view-enter {
+    transition: none !important;
+    animation: none !important;
+    transform: none !important;
+  }
+
+  .settings-toggle .i {
+    transition: none !important;
+    transform: none !important;
+  }
+}

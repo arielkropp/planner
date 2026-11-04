@@ -1,0 +1,105 @@
+/* Phone adjustments layered over the shared screen styles in this folder */
+
+.ag-day {
+  grid-template-columns: 72px minmax(0, 1fr);
+  gap: 10px;
+}
+
+.ag-date .d {
+  font-size: 13px;
+}
+
+.row2:not(.dt-row) {
+  grid-template-columns: 1fr;
+}
+
+.tv-title {
+  font-size: 12.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tv-bar {
+  justify-content: flex-start;
+}
+
+.itinerary-switcher {
+  width: 100%;
+  gap: 6px;
+}
+
+.itinerary-actions {
+  gap: 6px;
+}
+
+.itinerary-switcher .seg button {
+  padding: 0 7px;
+  text-align: center;
+  font-size: 12.5px;
+}
+
+.week {
+  grid-template-columns: 1fr;
+}
+
+.wcol {
+  border-left: none;
+  border-top: 1px solid var(--line);
+  min-height: 0;
+  padding-bottom: 8px;
+}
+
+.wcol:first-child {
+  border-top: none;
+}
+
+.wh {
+  flex-direction: row;
+  gap: 8px;
+  align-items: baseline;
+}
+
+.day-add-cue {
+  display: none;
+}
+
+.month-week {
+  min-height: 0;
+  grid-template-rows: 24px repeat(var(--month-lanes), 20px);
+}
+
+.mcell {
+  min-height: 64px;
+  padding: 3px 2px;
+}
+
+.mchip {
+  margin: 1px 1px 0;
+  padding: 0 2px;
+  font-size: 10px;
+  line-height: 18px;
+}
+
+th {
+  font-size: 11px;
+}
+
+@media (max-width: 560px) {
+  .ag-day {
+    grid-template-columns: 1fr;
+    gap: 6px;
+    padding: 12px 0;
+  }
+
+  .ag-date {
+    flex-direction: row;
+    align-items: baseline;
+    gap: 6px;
+    padding-top: 0;
+  }
+
+  .ag-date .d {
+    font-size: 14px;
+  }
+}

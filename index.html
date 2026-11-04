@@ -17,8 +17,11 @@
     } catch(e) {}
   })();
 </script>
-<link rel="stylesheet" href="css/main.css">
-<script type="module" src="js/app.js"></script>
+<link rel="stylesheet" href="css/shared/main.css">
+<!-- The media queries pick the right stylesheet for the first paint; js/boot.js takes over from there -->
+<link rel="stylesheet" href="css/desktop/main.css" media="(min-width: 761px)" data-platform-styles="desktop">
+<link rel="stylesheet" href="css/mobile/main.css" media="(max-width: 760px)" data-platform-styles="mobile">
+<script type="module" src="js/boot.js"></script>
 </head>
 <body>
 <!-- Icon paths adapted from Lucide (ISC licence, lucide.dev) -->
@@ -51,15 +54,16 @@
   <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" x2="22" y1="12" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></symbol>
 </svg>
 
+<div id="app"></div>
+
+<!-- Each platform owns its markup; js/boot.js clones the one that matches the viewport into #app -->
+<template id="platform-desktop">
 <div class="app">
   <aside class="sidebar">
-    <nav aria-label="Pages">
+    <nav aria-label="Screens">
       <a class="nav-link" href="#itinerary"><svg class="i" aria-hidden="true"><use href="#i-calendar-days"/></svg><span>Itinerary</span></a>
       <a class="nav-link" href="#packing"><svg class="i" aria-hidden="true"><use href="#i-luggage"/></svg><span>Packing</span></a>
       <a class="nav-link" href="#work"><svg class="i" aria-hidden="true"><use href="#i-briefcase"/></svg><span>Work log</span></a>
-      <button class="nav-link settings-toggle" id="mobileSettings" type="button" aria-label="Settings" aria-expanded="false" aria-controls="utilities">
-        <svg class="i" aria-hidden="true"><use href="#i-settings"/></svg><span>Settings</span>
-      </button>
     </nav>
     <p class="save-note" id="saveStatus" role="status">Saved in this browser only. Back up before switching browsers or devices.</p>
     <div class="utilities" id="utilities" role="group" aria-label="App actions">
@@ -73,7 +77,7 @@
 
   <main>
     <p class="notice" id="storageError" role="alert" hidden></p>
-    <section data-page="itinerary" aria-label="Itinerary">
+    <section data-screen="itinerary" aria-label="Itinerary">
       <div class="itinerary-toolbar">
         <div class="itinerary-switcher">
           <div class="seg glass-control" id="itineraryViews" role="group" aria-label="Itinerary view">
@@ -103,7 +107,7 @@
       </div>
     </section>
 
-    <section data-page="packing" aria-label="Packing" hidden>
+    <section data-screen="packing" aria-label="Packing" hidden>
       <progress id="packingProgress" aria-label="Packing progress" max="1" value="0"></progress>
       <div class="packing-toolbar">
         <form class="quick-add-bar" id="packQuickForm" autocomplete="off">
@@ -122,14 +126,14 @@
           <div class="packing-toggles">
             <button type="button" class="pill-toggle" id="packGroupByCat" aria-pressed="false">
               <span class="circle-check" aria-hidden="true"><svg class="i" viewBox="0 0 24 24"><use href="#i-check"/></svg></span>
-              <span>Group<span class="desktop-only"> by category</span></span>
+              <span>Group by category</span>
             </button>
             <button type="button" class="pill-toggle" id="packUnpackedOnly" aria-pressed="false">
               <span class="circle-check" aria-hidden="true"><svg class="i" viewBox="0 0 24 24"><use href="#i-check"/></svg></span>
-              <span>Unpacked<span class="desktop-only"> only</span></span>
+              <span>Unpacked only</span>
             </button>
           </div>
-          <button type="button" class="btn sm" id="packResetAll" title="Mark all items as unpacked">Reset<span class="desktop-only"> checks</span></button>
+          <button type="button" class="btn sm" id="packResetAll" title="Mark all items as unpacked">Reset checks</button>
           <button type="button" class="btn sm" id="openTemplates">Templates</button>
           <button class="icon-btn solid" id="addPack" type="button" aria-label="Add packing item" title="Add packing item"><svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></button>
         </div>
@@ -150,7 +154,7 @@
       </div>
     </section>
 
-    <section data-page="work" aria-label="Work log" hidden>
+    <section data-screen="work" aria-label="Work log" hidden>
       <div class="work-toolbar">
         <div class="stat-bar" aria-live="polite" aria-atomic="true">
           <div class="stat-seg">
@@ -172,7 +176,7 @@
           </label>
         </div>
         <div class="work-actions">
-          <button class="btn sm" id="openLeaveSettings" type="button">Leave<span class="desktop-only"> settings</span></button>
+          <button class="btn sm" id="openLeaveSettings" type="button">Leave settings</button>
           <button class="icon-btn solid" id="addWork" type="button" aria-label="Add work row" title="Add work row"><svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></button>
         </div>
       </div>
@@ -327,6 +331,286 @@
     </div>
   </form>
 </dialog>
+</template>
+
+<template id="platform-mobile">
+<div class="app">
+  <aside class="sidebar">
+    <nav aria-label="Screens">
+      <a class="nav-link" href="#itinerary"><svg class="i" aria-hidden="true"><use href="#i-calendar-days"/></svg><span>Itinerary</span></a>
+      <a class="nav-link" href="#packing"><svg class="i" aria-hidden="true"><use href="#i-luggage"/></svg><span>Packing</span></a>
+      <a class="nav-link" href="#work"><svg class="i" aria-hidden="true"><use href="#i-briefcase"/></svg><span>Work log</span></a>
+      <button class="nav-link settings-toggle" id="mobileSettings" type="button" aria-label="Settings" aria-expanded="false" aria-controls="utilities">
+        <svg class="i" aria-hidden="true"><use href="#i-settings"/></svg><span>Settings</span>
+      </button>
+    </nav>
+    <p class="save-note" id="saveStatus" role="status">Saved in this browser only. Back up before switching browsers or devices.</p>
+    <div class="utilities" id="utilities" role="group" aria-label="App actions">
+      <button class="util" id="theme" type="button" aria-label="Toggle dark mode" title="Toggle dark mode"><svg class="i" aria-hidden="true"><use href="#i-moon"/></svg><span class="sr-only">Theme</span></button>
+      <button class="util" id="openRatesUtil" type="button" aria-label="Budget and exchange rates" title="Budget and exchange rates"><svg class="i" aria-hidden="true"><use href="#i-currency"/></svg><span class="sr-only">Currency</span></button>
+      <button class="util" id="restore" type="button" aria-label="Restore backup" title="Restore backup"><svg class="i" aria-hidden="true"><use href="#i-upload"/></svg><span class="sr-only">Upload</span></button>
+      <button class="util" id="export" type="button" aria-label="Download backup" title="Download backup"><svg class="i" aria-hidden="true"><use href="#i-download"/></svg><span class="sr-only">Download</span></button>
+      <input id="import" type="file" accept=".json,application/json" hidden>
+    </div>
+  </aside>
+
+  <main>
+    <p class="notice" id="storageError" role="alert" hidden></p>
+    <section data-screen="itinerary" aria-label="Itinerary">
+      <div class="itinerary-toolbar">
+        <div class="itinerary-switcher">
+          <div class="seg glass-control" id="itineraryViews" role="group" aria-label="Itinerary view">
+            <span class="seg-lens" id="itineraryLens" aria-hidden="true"></span>
+            <button type="button" data-itinerary-view="schedule" aria-pressed="true">Schedule</button>
+            <button type="button" data-itinerary-view="week" aria-pressed="false">Week</button>
+            <button type="button" data-itinerary-view="month" aria-pressed="false">Month</button>
+          </div>
+          <div class="itinerary-actions">
+            <button class="glass-control glass-action" id="exportIcs" type="button" aria-label="Export calendar (.ics)" title="Export calendar (.ics)"><svg class="i" aria-hidden="true"><use href="#i-calendar-download-02"/></svg></button>
+            <button class="icon-btn solid" id="addItem" type="button" aria-label="Add itinerary item" title="Add itinerary item"><svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></button>
+          </div>
+        </div>
+      </div>
+
+      <div id="scheduleView">
+        <div id="agendaList"></div>
+      </div>
+
+      <div id="calendarView" hidden>
+        <div class="tv-bar" id="tvBar" hidden>
+          <button class="icon-btn" id="tvPrev" type="button" aria-label="Previous"><svg class="i" aria-hidden="true"><use href="#i-left"/></svg></button>
+          <h2 class="tv-title" id="tvTitle" tabindex="-1" aria-live="polite"></h2>
+          <button class="icon-btn" id="tvNext" type="button" aria-label="Next"><svg class="i" aria-hidden="true"><use href="#i-right"/></svg></button>
+        </div>
+        <div class="cal" id="tvBody"></div>
+      </div>
+    </section>
+
+    <section data-screen="packing" aria-label="Packing" hidden>
+      <progress id="packingProgress" aria-label="Packing progress" max="1" value="0"></progress>
+      <div class="packing-toolbar">
+        <form class="quick-add-bar" id="packQuickForm" autocomplete="off">
+          <input id="packQuickTitle" type="text" maxlength="200" placeholder="Quick add item (press Enter)..." aria-label="New packing item name">
+          <select id="packQuickCat" aria-label="New item category"></select>
+          <input id="packQuickQty" type="number" min="1" max="99" step="1" value="1" inputmode="numeric" aria-label="New item quantity">
+          <button type="submit" class="btn sm primary">Add</button>
+        </form>
+        <div class="search-box">
+          <svg class="i sm search-icon" aria-hidden="true"><use href="#i-search"/></svg>
+          <input id="packSearch" type="search" placeholder="Search packing items..." aria-label="Search packing items" autocomplete="off">
+          <button type="button" class="search-clear" id="packSearchClear" aria-label="Clear search" hidden><svg class="i sm" aria-hidden="true"><use href="#i-x"/></svg></button>
+        </div>
+        <div class="chip-filter-group" id="packCatFilter" role="group" aria-label="Filter packing items by category"></div>
+        <div class="packing-actions">
+          <div class="packing-toggles">
+            <button type="button" class="pill-toggle" id="packGroupByCat" aria-pressed="false">
+              <span class="circle-check" aria-hidden="true"><svg class="i" viewBox="0 0 24 24"><use href="#i-check"/></svg></span>
+              <span>Group</span>
+            </button>
+            <button type="button" class="pill-toggle" id="packUnpackedOnly" aria-pressed="false">
+              <span class="circle-check" aria-hidden="true"><svg class="i" viewBox="0 0 24 24"><use href="#i-check"/></svg></span>
+              <span>Unpacked</span>
+            </button>
+          </div>
+          <button type="button" class="btn sm" id="packResetAll" title="Mark all items as unpacked">Reset</button>
+          <button type="button" class="btn sm" id="openTemplates">Templates</button>
+          <button class="icon-btn solid" id="addPack" type="button" aria-label="Add packing item" title="Add packing item"><svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></button>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table id="packTable">
+          <thead>
+            <tr>
+              <th class="col-check"><span class="sr-only">Packed</span></th>
+              <th class="col-item">Item</th>
+              <th class="col-cat">Category</th>
+              <th class="col-qty">Qty</th>
+              <th class="actions col-actions"><span class="sr-only">Actions</span></th>
+            </tr>
+          </thead>
+          <tbody id="packingRows"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section data-screen="work" aria-label="Work log" hidden>
+      <div class="work-toolbar">
+        <div class="stat-bar" aria-live="polite" aria-atomic="true">
+          <div class="stat-seg">
+            <span class="label">Logged</span>
+            <span class="val"><span id="workLogged">0</span><span class="unit">h</span></span>
+          </div>
+          <div class="stat-sep" aria-hidden="true"></div>
+          <div class="stat-seg">
+            <span class="label">Balance</span>
+            <span class="val crit" id="balanceWrap"><span id="balance">−87.3</span><span class="unit">h</span></span>
+          </div>
+          <div class="stat-sep" aria-hidden="true"></div>
+          <label class="stat-seg" for="balPre">
+            <span class="label">Pre-trip</span>
+            <span class="val has-input">
+              <input id="balPre" type="number" inputmode="decimal" min="0" max="300" step="any" value="0" aria-label="Pre-trip leave hours">
+              <span class="unit">h</span>
+            </span>
+          </label>
+        </div>
+        <div class="work-actions">
+          <button class="btn sm" id="openLeaveSettings" type="button">Leave</button>
+          <button class="icon-btn solid" id="addWork" type="button" aria-label="Add work row" title="Add work row"><svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></button>
+        </div>
+      </div>
+      <div class="work-tz-bar" style="margin-bottom:12px; display:flex; align-items:center; gap:8px; font-size:12px; color:var(--muted); background:color-mix(in srgb, var(--ink) 4%, var(--surface)); border:1px solid var(--line); border-radius:8px; padding:7px 12px;">
+        <svg class="i sm" aria-hidden="true" style="color:var(--accent);flex-shrink:0"><use href="#i-globe"/></svg>
+        <span>Workdays default to Monday–Friday. Set your standard hours in Leave settings.</span>
+      </div>
+      <p class="status-msg" id="workStatusMsg" role="status" aria-live="polite" hidden></p>
+
+      <details class="coverage-wrap" id="workCoverageDetails">
+        <summary><span id="workCoverageSummary">Workday coverage &amp; balance breakdown</span><svg class="i sm coverage-chevron" aria-hidden="true"><use href="#i-right"/></svg></summary>
+        <div class="coverage-body">
+          <div class="coverage-grid" id="workCoverageGrid"></div>
+          <div class="leave-breakdown" id="leaveBreakdown"></div>
+        </div>
+      </details>
+
+      <div class="table-wrap">
+        <table id="workTable">
+          <thead><tr><th class="col-date">Date</th><th class="col-hours">Hrs</th><th class="col-note">Note</th><th class="actions col-actions"><span class="sr-only">Actions</span></th></tr></thead>
+          <tbody id="workRows"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</div>
+
+<dialog id="itemDialog" aria-labelledby="itemDialogTitle">
+  <form id="itemForm" novalidate>
+    <h2 id="itemDialogTitle" class="sr-only">Add item</h2>
+    <div class="dlg-body">
+      <div class="field">
+        <div class="title-head-row">
+          <label for="itemTitle"><span>Title <span class="req" aria-hidden="true">*</span></span></label>
+          <button type="button" class="icon-btn" data-close aria-label="Close"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg></button>
+        </div>
+        <div class="title-status-box">
+          <input id="itemTitle" required maxlength="200" autocomplete="off" placeholder="Hotel, train to the coast, museum tour...">
+        </div>
+        <div class="chips title-status-chips" id="itemStatuses" role="radiogroup" aria-label="Status"></div>
+      </div>
+      <div class="row2 dt-row">
+        <div class="field">
+          <label for="itemStartDate">Start <span class="req" aria-hidden="true">*</span></label>
+          <div class="dt-box">
+            <input type="date" id="itemStartDate" required aria-label="Start date">
+            <div class="sep" aria-hidden="true"></div>
+            <input type="time" id="itemStartTime" aria-label="Start time">
+            <div class="sep" aria-hidden="true"></div>
+            <div class="dtz-wrap" title="Start timezone">
+              <span class="dtz-badge" id="itemTzBadge" aria-hidden="true">TZ</span>
+              <svg class="dtz-arrow" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+              <select id="itemTz" class="dtz-select" aria-label="Start timezone"></select>
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label for="itemEndDate">End</label>
+          <div class="dt-box">
+            <input type="date" id="itemEndDate" aria-label="End date">
+            <div class="sep" aria-hidden="true"></div>
+            <input type="time" id="itemEndTime" aria-label="End time">
+            <div class="sep" aria-hidden="true"></div>
+            <div class="dtz-wrap" title="End timezone">
+              <span class="dtz-badge" id="itemEndTzBadge" aria-hidden="true">TZ</span>
+              <svg class="dtz-arrow" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+              <select id="itemEndTz" class="dtz-select" aria-label="End timezone"></select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="itemTzPreview" class="tz-info-banner" hidden></div>
+      <fieldset class="field"><legend>Type</legend><div class="chips" id="itemTypes"></div></fieldset>
+      <div class="cost-currency-box">
+        <label class="field" style="flex:1;max-width:240px;min-width:0"><span>Cost</span><input id="itemCost" type="number" min="0" step="any" placeholder="0"></label>
+        <label class="field" style="width:88px;flex-shrink:0"><span>Currency</span>
+          <select id="itemCurrency">
+            <option value="USD">USD</option>
+            <option value="EUR">EUR</option>
+            <option value="GBP">GBP</option>
+            <option value="ILS">ILS</option>
+          </select>
+        </label>
+      </div>
+      <label class="field"><span>Notes</span><textarea id="itemNotes" maxlength="1000" rows="3" placeholder="Address, details..."></textarea></label>
+    </div>
+    <div class="dlg-foot">
+      <button type="button" class="btn danger left" id="itemDelete"><svg class="i sm" aria-hidden="true"><use href="#i-trash"/></svg>Delete</button>
+      <button type="button" class="btn" data-close>Cancel</button>
+      <button type="submit" class="btn primary">Save</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="ratesDialog" class="small" aria-labelledby="ratesTitle">
+  <form id="ratesForm">
+    <div class="dlg-head"><h2 id="ratesTitle">Budget &amp; exchange rates</h2><button type="button" class="icon-btn" data-close aria-label="Close"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg></button></div>
+    <div class="dlg-body">
+      <label class="field"><span>Base display currency</span>
+        <select id="ratesBase">
+          <option value="USD">USD ($)</option>
+          <option value="EUR">EUR (€)</option>
+          <option value="ILS">ILS (₪)</option>
+          <option value="GBP">GBP (£)</option>
+        </select>
+      </label>
+      <p class="muted" style="font-size:12px">Units per 1 USD (used to calculate combined budget total):</p>
+      <div class="row2">
+        <label class="field"><span>EUR per 1 USD</span><input id="rateEUR" type="number" min="0.0001" step="any"></label>
+        <label class="field"><span>GBP per 1 USD</span><input id="rateGBP" type="number" min="0.0001" step="any"></label>
+      </div>
+      <label class="field"><span>ILS per 1 USD</span><input id="rateILS" type="number" min="0.0001" step="any"></label>
+    </div>
+    <div class="dlg-foot">
+      <button type="button" class="btn" data-close>Cancel</button>
+      <button type="submit" class="btn primary">Save rates</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="leaveDialog" class="small" aria-labelledby="leaveTitle">
+  <form id="leaveForm">
+    <div class="dlg-head"><h2 id="leaveTitle">Leave calculation settings</h2><button type="button" class="icon-btn" data-close aria-label="Close"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg></button></div>
+    <div class="dlg-body">
+      <label class="field"><span>Starting leave balance (hours)</span><input id="leaveStartBal" type="number" step="any" min="-500" max="1000" required></label>
+      <div class="row2">
+        <label class="field"><span>Monthly accrual (hours)</span><input id="leaveAccrual" type="number" step="any" min="0" max="200" required></label>
+        <label class="field"><span>Accrual months</span><input id="leaveMonths" type="number" step="1" min="0" max="24" required></label>
+      </div>
+      <label class="field"><span>Standard weekday hours</span><input id="leaveStdDay" type="number" step="any" min="0" max="24" required></label>
+    </div>
+    <div class="dlg-foot">
+      <button type="button" class="btn left" id="leaveResetDefaults">Defaults</button>
+      <button type="button" class="btn" data-close>Cancel</button>
+      <button type="submit" class="btn primary">Save</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="templatesDialog" class="small" aria-labelledby="templatesTitle">
+  <div class="dlg-head"><h2 id="templatesTitle">Packing templates</h2><button type="button" class="icon-btn" data-close aria-label="Close"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg></button></div>
+  <div class="dlg-body" id="templatesBody"></div>
+  <div class="dlg-foot"><button type="button" class="btn" data-close>Close</button></div>
+</dialog>
+
+<dialog id="confirmDialog" class="small" aria-labelledby="confirmTitle">
+  <form method="dialog">
+    <div class="dlg-body"><h2 id="confirmTitle" style="font-size:17px">Delete?</h2><p id="confirmText"></p></div>
+    <div class="dlg-foot">
+      <button class="btn" value="cancel">Cancel</button>
+      <button class="btn danger-solid" value="ok" id="confirmOk">Delete</button>
+    </div>
+  </form>
+</dialog>
+</template>
 
 <script>
   if ("serviceWorker" in navigator) {

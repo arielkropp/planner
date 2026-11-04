@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 
-import { num, fmtCost, parsePackQty, str, clamp, uid } from "../js/utils/format.js";
+import { num, fmtCost, parsePackQty, str, clamp, uid } from "../js/shared/utils/format.js";
 
 test("Format utilities: num formatting", () => {
   assert.equal(num(5), "5");

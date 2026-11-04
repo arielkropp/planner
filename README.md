@@ -4,35 +4,44 @@ A static, client-side travel planner. Open the [live site](https://arielkropp.gi
 
 ## Architecture
 
-The deployed app is a modular static web application with no runtime dependencies (Vite is a development-only tool):
+The deployed app is a modular static web application with no runtime dependencies (Vite is a development-only tool).
 
-- **`index.html`**: Page shell (head, theme bootstrap) that composes the app from the folders below with `<!-- @include ... -->` directives.
-- **`pages/`**: One HTML file per page (`itinerary.html`, `packing.html`, `work.html`).
-- **`dialogs/`**: One HTML file per dialog.
-- **`layout/`**: Shared shell pieces: SVG icon symbols, the sidebar, and the service worker registration scripts.
-- **`css/`**: Modular stylesheets organized by design system and domain:
-  - `variables.css`: Design tokens, colors, motion settings, and dark theme variables.
-  - `base.css`: CSS reset, typography, buttons, and shell layout.
-  - `glass.css`: Optical glass materials, jewel buttons, and specular sheen effects.
-  - `dialogs.css`: Modal dialogs, inputs, and custom date/timezone pickers.
-  - `itinerary.css`: Toolbar, viewpicker lens, schedule list, and calendar grids.
-  - `packing.css`: Progress bar, quick add form, search bar, and item table.
-  - `work.css`: Work log metrics, coverage accordion, and log table.
-  - `responsive.css`: Breakpoints, touch targets, and mobile navigation.
-  - `main.css`: Master stylesheet aggregating all modules.
-- **`js/`**: Native ES modules (`type="module"`) split by problem space:
-  - `constants.js`: Date bounds, defaults, and configuration tables.
-  - `router.js`: Hash-based client router with view scroll preservation.
-  - `state/`: Persistent store, validation, and migration handlers.
-  - `utils/`: Date arithmetic, timezones, currency formatting, and DOM helpers.
-  - `components/`: Modal dialogs, confirmations, and theme manager.
-  - `features/itinerary/`: Schedule agenda, monthly/weekly calendars, item modal, and .ics export.
-  - `features/packing/`: Filter toggles, quick add, table editor, and preset templates.
-  - `features/work/`: Workday calculations, leave balance, coverage grid, and table editor.
-  - `features/settings/`: JSON backup/restore and mobile drawer.
-  - `app.js`: Application bootstrap and coordinator.
-- **`scripts/`**: `html-includes.mjs` (include assembler shared by the dev server and the build) and `build.mjs` (writes the deployable site to `dist/`).
-- **`tests/`**: Unit test suite powered by Node's built-in test runner, including a build test that checks the assembled site.
+It has three **screens**: Itinerary, Packing and Work log (`#itinerary`, `#packing`, `#work`). It also has two **platforms**, desktop and mobile. The two platforms are similar but independent: each one owns its markup, styles and UI code. Only the logic is shared. `index.html` is a single shell that holds one inert `<template>` per platform. `js/boot.js` mounts the one that matches the viewport (breakpoint: 760px) and swaps it live when the window crosses that width, so the two UIs never share a document.
+
+```
+index.html          Shell: head, theme bootstrap, stylesheet links and the two platform templates
+html/
+  shared/           SVG icon symbols
+  dev/              Service worker registration (build) and cleanup (dev server)
+  desktop/          app.html, shell/ (sidebar), screens/, dialogs/
+  mobile/           Same shape, with its own markup
+css/
+  shared/           Design tokens, base elements, glass materials, motion preferences
+  desktop/          Sidebar layout, plus dialog and screen styles
+  mobile/           Bottom tab bar and settings drawer, plus dialog and screen styles
+js/
+  boot.js           Picks the platform, mounts it and swaps it live
+  shared/           Logic used by both platforms (no platform UI)
+    constants.js, platform.js, router.js
+    state/          Persistent store, validation, migrations, view state (survives a platform swap)
+    domain/         Pure logic: work calculations, itinerary ordering, .ics export, backup
+    utils/          Date arithmetic, timezones, currency formatting, DOM helpers
+    components/     Dialogs and theme manager
+  desktop/          app.js (mount), shell/, screens/{itinerary,packing,work}/
+  mobile/           Same shape, plus shell/settings-drawer.js
+scripts/            html-includes.mjs (include assembler) and build.mjs (writes dist/)
+tests/              Node's built-in test runner, including a build test that checks the assembled site
+```
+
+### Adding or changing a screen
+
+A screen is one HTML file and one JS folder **per platform**, plus an entry in `SCREENS` (`js/shared/constants.js`):
+
+1. Add `html/<platform>/screens/<name>.html` (a `<section data-screen="<name>">`) and include it from `html/<platform>/app.html`.
+2. Add `js/<platform>/screens/<name>/index.js` and initialise it from `js/<platform>/app.js`.
+3. Put anything both platforms need (calculations, formatting) in `js/shared/` rather than importing across platforms.
+
+The build test checks that both platforms offer the same screens, dialogs and element ids.
 
 ## Local development
 
@@ -51,7 +60,7 @@ To check exactly what gets deployed, including the service worker and offline be
 npm run preview  # builds into dist/ and serves it at http://localhost:4173
 ```
 
-`npm run build` alone writes the site to `dist/` (git-ignored). JS and CSS are copied unbundled, so the file list in `service-worker.js` must keep matching `js/` and `css/`; the build test fails if it references a missing file. When adding a page or dialog, create a file in `pages/` or `dialogs/` and add an `<!-- @include pages/your-file.html -->` line to `index.html`. Include paths are relative to the project root, and `build-only` / `dev-only` after the path limits an include to the build or the dev server.
+`npm run build` alone writes the site to `dist/` (git-ignored). JS and CSS are copied unbundled, and the build writes the list of files the service worker precaches (everything under `js/` and `css/`) into `dist/service-worker.js`, so there is no list to maintain; the build test checks that every listed file exists. `index.html` pulls in the `html/` fragments with `<!-- @include html/... -->` directives. Include paths are relative to the project root, an include must sit alone on its line, and `build-only` / `dev-only` after the path limits it to the build or the dev server.
 
 ## Running tests
 

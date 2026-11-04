@@ -16,8 +16,8 @@ import {
   convertTimezone,
   formatDurationMs,
   tzDifferenceLabel
-} from "../js/utils/date.js";
-import { START } from "../js/constants.js";
+} from "../js/shared/utils/date.js";
+import { START } from "../js/shared/constants.js";
 
 test("Date utilities: basic math and formatting", () => {
   const base = "2026-11-15";
