@@ -10,8 +10,9 @@ It has three **screens**: Itinerary, Packing and Work log (`#itinerary`, `#packi
 
 ```
 index.html          Shell: head, theme bootstrap, stylesheet links and the two platform templates
+icon.svg            Source app icon (the build converts this into requisite PWA icons)
 manifest.webmanifest Web app manifest for PWA installation
-icons/              App icons (SVG, standard and maskable PNGs)
+icons/              Generated app icons (SVG, standard and maskable PNGs)
 html/
   shared/           SVG icon symbols
   dev/              Service worker registration (build) and cleanup (dev server)
@@ -62,7 +63,7 @@ To check exactly what gets deployed, including the service worker and offline be
 npm run preview  # builds into dist/ and serves it at http://localhost:4173
 ```
 
-`npm run build` alone writes the site to `dist/` (git-ignored). JS and CSS are copied unbundled, and the build writes the list of files the service worker precaches (everything under `js/` and `css/`) into `dist/service-worker.js`, so there is no list to maintain; the build test checks that every listed file exists. `index.html` pulls in the `html/` fragments with `<!-- @include html/... -->` directives. Include paths are relative to the project root, an include must sit alone on its line, and `build-only` / `dev-only` after the path limits it to the build or the dev server.
+`npm run build` alone writes the site to `dist/` (git-ignored). JS and CSS are copied unbundled, `icon.svg` is automatically converted into the standard 192x192, 512x512, and maskable PNG formats, and the build writes the list of files the service worker precaches into `dist/service-worker.js`, so there is no list to maintain; the build test checks that every listed file exists. `index.html` pulls in the `html/` fragments with `<!-- @include html/... -->` directives. Include paths are relative to the project root, an include must sit alone on its line, and `build-only` / `dev-only` after the path limits it to the build or the dev server.
 
 ## Running tests
 
