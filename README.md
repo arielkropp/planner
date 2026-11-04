@@ -10,6 +10,8 @@ It has three **screens**: Itinerary, Packing and Work log (`#itinerary`, `#packi
 
 ```
 index.html          Shell: head, theme bootstrap, stylesheet links and the two platform templates
+manifest.webmanifest Web app manifest for PWA installation
+icons/              App icons (SVG, standard and maskable PNGs)
 html/
   shared/           SVG icon symbols
   dev/              Service worker registration (build) and cleanup (dev server)
@@ -76,7 +78,7 @@ The deployed site and its source code are public. The app has no sign-in or serv
 
 ## Offline use
 
-After you first open the site while online and the service worker finishes installing, the app shell (including all modular scripts and stylesheets) is cached. The planner can then be reopened and used offline. Your data continues to be stored in that browser's local storage. Offline support requires a browser that supports service workers; the optional web font may fall back to a system font while offline.
+After you first open the site while online and the service worker finishes installing, the app shell (including all modular scripts, stylesheets and icons) is cached. The planner can then be reopened and used offline. Your data continues to be stored in that browser's local storage. You can also install the app to your home screen from the browser menu (Firefox: "Install" or "Add to Home screen"); installed apps launch directly into the offline shell without relying on the address bar. Offline support requires a browser that supports service workers; the optional web font may fall back to a system font while offline.
 
 ## Deployment
 

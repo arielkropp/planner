@@ -1,9 +1,10 @@
-const CACHE_NAME = "trip-planner-3f89540aeade8478662c23962d761f7428024467";
+const CACHE_NAME = "trip-planner-98114d205e8fd55609c731c05f992cc93e9b8e30";
 
-// The build replaces this line with the app shell and every file under css/ and js/ (see scripts/build.mjs)
+// The build replaces this line with the app shell, manifest and assets (see scripts/build.mjs)
 const STATIC_ASSETS = [
   "./",
   "./index.html",
+  "./manifest.webmanifest",
   "./css/desktop/dialogs.css",
   "./css/desktop/itinerary.css",
   "./css/desktop/layout.css",
@@ -67,7 +68,12 @@ const STATIC_ASSETS = [
   "./js/shared/state/view-state.js",
   "./js/shared/utils/date.js",
   "./js/shared/utils/dom.js",
-  "./js/shared/utils/format.js"
+  "./js/shared/utils/format.js",
+  "./icons/icon-192.png",
+  "./icons/icon-512.png",
+  "./icons/icon-maskable.png",
+  "./icons/icon-maskable.svg",
+  "./icons/icon.svg"
 ];
 
 const APP_ROOT = new URL("./", self.registration.scope).href;
