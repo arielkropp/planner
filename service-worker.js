@@ -1,4 +1,4 @@
-const CACHE_NAME = "trip-planner-f67924c9a114cb6fd4b270b7da6a1bc8210f7246";
+const CACHE_NAME = "trip-planner-025656cd140170a5cc3f8ab42fa1b48a34bad53e";
 
 // The build replaces this line with the app shell, manifest and assets (see scripts/build.mjs)
 const STATIC_ASSETS = [

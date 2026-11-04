@@ -12,7 +12,6 @@ It has three **screens**: Itinerary, Packing and Work log (`#itinerary`, `#packi
 index.html          Shell: head, theme bootstrap, stylesheet links and the two platform templates
 icon.svg            Source app icon (the build converts this into requisite PWA icons)
 manifest.webmanifest Web app manifest for PWA installation
-icons/              Generated app icons (SVG, standard and maskable PNGs)
 html/
   shared/           SVG icon symbols
   dev/              Service worker registration (build) and cleanup (dev server)
