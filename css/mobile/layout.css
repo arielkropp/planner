@@ -207,5 +207,6 @@ main {
 
 /* Keep the sticky toolbar's pinned height equal to its in-flow height so it never covers the content below */
 .itinerary-toolbar {
-  --tb-pad: var(--main-pad-top);
+  --tb-pad: calc(var(--main-pad-top) + 12px);
+  margin-top: calc(-1 * var(--main-pad-top));
 }
