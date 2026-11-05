@@ -2,6 +2,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
@@ -85,18 +86,17 @@ ul {
 /* Shared Motion Keyframes & Utility Classes */
 @keyframes spring-pop {
   0% { transform: scale(0.96); }
-  40% { transform: translateY(var(--jelly-bounce-y, -3px)) scale(var(--jelly-stretch-x, 1.02), var(--jelly-squash-y, 0.98)); }
-  70% { transform: translateY(var(--jelly-rebound-y, 1px)) scale(var(--jelly-rebound-sx, 0.98), var(--jelly-rebound-sy, 1.02)); }
-  100% { transform: translateY(0) scale(1, 1); }
+  50% { transform: scale(1.02); }
+  100% { transform: scale(1); }
 }
 
 @keyframes spring-in {
-  0% { opacity: 0; transform: translateY(calc(var(--jelly-bounce-y, -3px) * -2)) scale(0.96); }
+  0% { opacity: 0; transform: translateY(6px) scale(0.98); }
   100% { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 @keyframes view-enter {
-  0% { opacity: 0.35; transform: translateY(calc(var(--jelly-bounce-y, -3px) * -1.5)); }
+  0% { opacity: 0; transform: translateY(4px); }
   100% { opacity: 1; transform: translateY(0); }
 }
 
@@ -188,6 +188,45 @@ ul {
 .icon-btn.danger:hover {
   color: var(--crit);
   background: color-mix(in srgb, var(--crit) 10%, transparent);
+}
+
+.icon-btn.solid {
+  width: 38px;
+  height: 38px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  transition: background-color 0.15s ease, transform 0.15s var(--motion-spring);
+}
+
+.icon-btn.solid:hover {
+  background: color-mix(in srgb, var(--accent) 88%, var(--ink));
+}
+
+.icon-btn.solid:active {
+  transform: scale(0.95);
+}
+
+.icon-btn.tonal {
+  width: 38px;
+  height: 38px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 999px;
+  background: var(--surface-tonal);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  transition: background-color 0.15s ease, transform 0.15s var(--motion-spring);
+}
+
+.icon-btn.tonal:hover {
+  background: color-mix(in srgb, var(--ink) 8%, var(--surface-tonal));
+}
+
+.icon-btn.tonal:active {
+  transform: scale(0.95);
 }
 
 .pill {

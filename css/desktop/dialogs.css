@@ -296,10 +296,8 @@ form.was-validated .title-status-box:has(:invalid):focus-within {
   margin-top: 8px;
   padding: 3px;
   border-radius: 999px;
-  background: var(--lg-pool), var(--lg-fill);
-  -webkit-backdrop-filter: var(--lg-blur);
-  backdrop-filter: var(--lg-blur);
-  box-shadow: var(--lg-rim), var(--lg-lift);
+  background: var(--surface-tonal);
+  border: 1px solid var(--line);
 }
 
 .title-status-chips .chip-opt {

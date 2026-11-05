@@ -44,8 +44,6 @@
 
 /* Summary Metrics Bar */
 .stat-bar {
-  position: relative;
-  isolation: isolate;
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
@@ -53,11 +51,10 @@
   max-width: 100%;
   margin: 0 0 14px;
   padding: 5px 12px;
-  border-radius: 999px;
-  background: var(--glass-bg);
-  -webkit-backdrop-filter: blur(26px) saturate(185%);
-  backdrop-filter: blur(26px) saturate(185%);
-  box-shadow: var(--glass-shadow);
+  border-radius: 12px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
   box-sizing: border-box;
   overflow-x: auto;
   scrollbar-width: none;
@@ -65,20 +62,6 @@
 
 .stat-bar::-webkit-scrollbar {
   display: none;
-}
-
-.stat-bar::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 1px;
-  pointer-events: none;
-  background: var(--glass-border);
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  mask-composite: exclude;
 }
 
 .stat-seg {
@@ -139,10 +122,9 @@ label.stat-seg {
   font-weight: 650;
   line-height: 24px;
   color: var(--ink);
-  border: 1px solid var(--glass-well-border);
-  border-radius: 999px;
-  background: var(--glass-well);
-  box-shadow: var(--glass-well-shadow);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface-tonal);
   -moz-appearance: textfield;
   appearance: textfield;
 }

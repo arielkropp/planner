@@ -8,7 +8,6 @@ import { openItemDialog, initItemDialog, requestCloseItemDialog } from "./dialog
 import { exportIcsCalendar } from "../../../shared/domain/ics.js";
 
 const itineraryScrollPositions = new Map();
-let lensSlideTimer = 0;
 
 export function getItineraryView() {
   return viewState.itineraryView;
@@ -22,31 +21,18 @@ export function updateItineraryLens(immediate = false) {
   const active = container.querySelector('[data-itinerary-view][aria-pressed="true"]');
   if (!active || active.offsetWidth === 0) return;
 
-  const maxOffset = Math.max(1, container.clientWidth - active.offsetWidth);
-  const ratio = Math.min(1, Math.max(0, active.offsetLeft / maxOffset));
-  const sheen = `${((ratio - 0.5) * 32).toFixed(1)}%`;
-
   if (immediate) {
-    clearTimeout(lensSlideTimer);
-    lens.classList.remove("is-sliding");
     lens.style.transition = "none";
     lens.style.transform = `translateX(${active.offsetLeft}px)`;
     lens.style.width = `${active.offsetWidth}px`;
-    lens.style.setProperty("--lens-sheen", sheen);
     lens.classList.add("is-ready");
     void lens.offsetHeight;
     lens.style.transition = "";
     return;
   }
 
-  lens.classList.remove("is-sliding");
-  void lens.offsetWidth; // restart the swell animation on rapid re-clicks
-  lens.classList.add("is-sliding");
-  clearTimeout(lensSlideTimer);
-  lensSlideTimer = setTimeout(() => lens.classList.remove("is-sliding"), 750);
   lens.style.transform = `translateX(${active.offsetLeft}px)`;
   lens.style.width = `${active.offsetWidth}px`;
-  lens.style.setProperty("--lens-sheen", sheen);
   lens.classList.add("is-ready");
 }
 
@@ -136,7 +122,6 @@ export function initItinerary(getCurrentRoute = () => "itinerary", { signal } = 
     const button = e.target.closest("[data-itinerary-view]");
     if (!button) return;
     setItineraryView(button.dataset.itineraryView, getCurrentRoute);
-    button.focus({ preventScroll: true });
   });
 
   $("agendaList")?.addEventListener("click", e => {

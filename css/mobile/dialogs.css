@@ -5,12 +5,12 @@
 dialog {
   margin: auto;
   border: none;
-  border-radius: 14px;
+  border-radius: 20px;
   width: min(520px, calc(100vw - 24px));
   max-height: calc(100dvh - 32px);
   background: var(--surface);
   color: var(--ink);
-  box-shadow: 0 20px 60px rgb(0 0 0 / .35);
+  box-shadow: 0 12px 40px rgb(0 0 0 / .28);
   overflow: hidden;
   padding: 0;
 }
@@ -309,10 +309,8 @@ form.was-validated .title-status-box:has(:invalid):focus-within {
   margin-top: 8px;
   padding: 3px;
   border-radius: 999px;
-  background: var(--lg-pool), var(--lg-fill);
-  -webkit-backdrop-filter: var(--lg-blur);
-  backdrop-filter: var(--lg-blur);
-  box-shadow: var(--lg-rim), var(--lg-lift);
+  background: var(--surface-tonal);
+  border: 1px solid var(--line);
 }
 
 .title-status-chips .chip-opt {

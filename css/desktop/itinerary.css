@@ -36,45 +36,21 @@
   flex-shrink: 0;
 }
 
-.glass-control {
+/* Viewpicker: segmented control with sliding active indicator pill */
+.itinerary-switcher .seg {
   position: relative;
-  isolation: isolate;
   display: inline-flex;
   align-items: center;
-  border: 0;
-  border-radius: 999px;
-  overflow: visible;
-  background: var(--glass-bg);
-  -webkit-backdrop-filter: blur(26px) saturate(185%);
-  backdrop-filter: blur(26px) saturate(185%);
-  box-shadow: var(--glass-shadow);
-}
-
-.glass-control::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 1px;
-  pointer-events: none;
-  background: var(--glass-border);
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  mask-composite: exclude;
-}
-
-/* Viewpicker: segmented control with sliding optical lens */
-.itinerary-switcher .seg {
-  gap: 2px;
+  gap: 0;
   height: 40px;
   padding: 3px;
-  border: 0;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--surface-tonal);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
   overflow: visible;
-}
-
-.itinerary-switcher .seg.glass-control::before {
-  display: none !important;
 }
 
 .itinerary-switcher .seg button {
@@ -83,18 +59,22 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 34px;
-  padding: 0 15px;
+  width: 76px;
+  min-width: 76px;
+  height: 32px;
+  line-height: 32px;
+  padding: 0;
   border-radius: 999px;
   border: 0;
   color: var(--muted);
-  font-size: 12px;
+  font-size: 12.5px;
   font-weight: 550;
   white-space: nowrap;
   background: transparent;
   box-shadow: none;
-  transition: color var(--lens-duration) ease, transform var(--lens-duration) var(--lens-spring);
+  transition: color var(--motion-duration) ease;
   touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .itinerary-switcher .seg button:active {
@@ -113,7 +93,7 @@
   color: var(--ink);
   background: transparent;
   box-shadow: none;
-  font-weight: 650;
+  font-weight: 700;
   transform: none;
   text-shadow: none;
 }
@@ -130,69 +110,27 @@
 .seg-lens {
   position: absolute;
   top: 3px;
-  height: 34px;
+  height: 32px;
   left: 0;
   border-radius: 999px;
   pointer-events: none;
   z-index: 1;
   opacity: 0;
-  overflow: visible;
-  background: var(--lg-pill);
-  -webkit-backdrop-filter: none;
-  backdrop-filter: none;
-  box-shadow: none;
-  transition: transform .38s var(--motion-spring), width .38s var(--motion-spring), opacity .2s ease;
+  background: var(--surface);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.06);
+  transition: transform var(--motion-duration) var(--motion-spring),
+              width var(--motion-duration) var(--motion-spring),
+              opacity 0.15s ease;
   will-change: transform, width;
+}
+
+:root[data-theme="dark"] .seg-lens {
+  background: #252B34;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.45);
 }
 
 .seg-lens.is-ready {
   opacity: 1;
-}
-
-.seg-lens::before {
-  display: none !important;
-}
-
-.seg-lens::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  pointer-events: none;
-  background: var(--lg-pool), rgb(255 255 255 / .22);
-  box-shadow: var(--lg-rim);
-  opacity: 0;
-}
-
-:root[data-theme="dark"] .seg-lens {
-  background: var(--lg-pill);
-  box-shadow: none;
-  -webkit-backdrop-filter: none;
-  backdrop-filter: none;
-}
-
-:root[data-theme="dark"] .seg-lens::after {
-  background: var(--lg-pool), rgb(255 255 255 / .10);
-}
-
-.seg-lens.is-sliding {
-  animation: lens-swell var(--lens-swell-duration) var(--motion-spring) both;
-}
-
-.seg-lens.is-sliding::after {
-  animation: lens-glass var(--lens-glass-duration) linear both;
-}
-
-@keyframes lens-swell {
-  0%   { scale: 1 1; }
-  35%  { scale: 1.00 1.00; }
-  100% { scale: 1 1; }
-}
-
-@keyframes lens-glass {
-  0%   { opacity: 0; animation-timing-function: cubic-bezier(.3, 0, .4, 1); }
-  22%  { opacity: .1; animation-timing-function: cubic-bezier(.33, 0, .2, 1); }
-  100% { opacity: 0; }
 }
 
 /* Agenda View */
