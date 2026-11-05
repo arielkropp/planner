@@ -13,12 +13,14 @@ import {
   updateItineraryLens,
   itineraryRouteAdapter
 } from "./screens/itinerary/index.js";
+import { initItinerary2, renderItinerary2 } from "./screens/itinerary2/index.js";
 import { initPacking, renderPacking } from "./screens/packing/index.js";
 import { initWork, renderWorkView } from "./screens/work/index.js";
 import { initBackupControls } from "./shell/backup-controls.js";
 
 function renderAll() {
   renderItinerary();
+  renderItinerary2();
   renderPacking();
   renderWorkView();
 }
@@ -32,8 +34,9 @@ export function mount({ signal }) {
   initTheme({ signal });
 
   initItinerary(getCurrentRoute, { signal });
+  initItinerary2(getCurrentRoute, { signal });
   initPacking();
-  initWork({ onRatesChanged: () => renderItinerary() });
+  initWork({ onRatesChanged: () => { renderItinerary(); renderItinerary2(); } });
   initBackupControls();
 
   // Re-apply the itinerary view chosen before this platform was mounted

@@ -1,4 +1,4 @@
-const CACHE_NAME = "trip-planner-819360c6b8e89470ba51d2dc15fb08f1177b9630";
+const CACHE_NAME = "trip-planner-fba7db18549f6c75c36760c15f97974305fa9425";
 
 // The build replaces this line with the app shell, manifest and assets (see scripts/build.mjs)
 const STATIC_ASSETS = [
@@ -20,6 +20,7 @@ const STATIC_ASSETS = [
   "./css/mobile/work.css",
   "./css/shared/base.css",
   "./css/shared/main.css",
+  "./css/shared/material.css",
   "./css/shared/motion.css",
   "./css/shared/variables.css",
   "./js/boot.js",
@@ -29,6 +30,7 @@ const STATIC_ASSETS = [
   "./js/desktop/screens/itinerary/dialog.js",
   "./js/desktop/screens/itinerary/index.js",
   "./js/desktop/screens/itinerary/markup.js",
+  "./js/desktop/screens/itinerary2/index.js",
   "./js/desktop/screens/packing/index.js",
   "./js/desktop/screens/packing/table.js",
   "./js/desktop/screens/packing/templates.js",
@@ -43,6 +45,7 @@ const STATIC_ASSETS = [
   "./js/mobile/screens/itinerary/dialog.js",
   "./js/mobile/screens/itinerary/index.js",
   "./js/mobile/screens/itinerary/markup.js",
+  "./js/mobile/screens/itinerary2/index.js",
   "./js/mobile/screens/packing/index.js",
   "./js/mobile/screens/packing/table.js",
   "./js/mobile/screens/packing/templates.js",
@@ -59,6 +62,10 @@ const STATIC_ASSETS = [
   "./js/shared/domain/ics.js",
   "./js/shared/domain/itinerary.js",
   "./js/shared/domain/work-calc.js",
+  "./js/shared/material-itinerary/agenda.js",
+  "./js/shared/material-itinerary/calendar.js",
+  "./js/shared/material-itinerary/dialog.js",
+  "./js/shared/material-itinerary/index.js",
   "./js/shared/platform.js",
   "./js/shared/router.js",
   "./js/shared/state/migrations.js",
@@ -68,6 +75,7 @@ const STATIC_ASSETS = [
   "./js/shared/utils/date.js",
   "./js/shared/utils/dom.js",
   "./js/shared/utils/format.js",
+  "./js/vendor/material-web.js",
   "./icons/icon-192.png",
   "./icons/icon-512.png",
   "./icons/icon-maskable.png",
