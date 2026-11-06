@@ -20,14 +20,69 @@ export const fmtDateLong = iso => `${iso.slice(8, 10)}/${iso.slice(5, 7)}/${iso.
 
 export const fmtDay = iso => `${WD[dowOf(iso)]} ${fmtDate(iso)}`;
 
-export const inTrip = iso => iso >= START && iso <= END;
+let currentTripDates = {
+  startDate: START,
+  endDate: END,
+  effectiveEnd: END
+};
+
+export const TRIP_DAYS = [];
+export const TRIP_MONTHS = [];
+
+export function recomputeTripDays() {
+  TRIP_DAYS.length = 0;
+  const start = getTripStart();
+  const end = getTripEnd();
+  for (let d = start; d <= end; d = addDays(d, 1)) TRIP_DAYS.push(d);
+
+  TRIP_MONTHS.length = 0;
+  for (const d of TRIP_DAYS) {
+    const ym = d.slice(0, 7);
+    if (!TRIP_MONTHS.includes(ym)) TRIP_MONTHS.push(ym);
+  }
+}
+
+export function setTripDates(startDate, endDate, maxEventDate = "") {
+  const start = startDate || START;
+  let effectiveEnd = endDate || "";
+  if (!effectiveEnd) {
+    const defaultSpan = addDays(start, 37);
+    effectiveEnd = (maxEventDate && maxEventDate > defaultSpan) ? maxEventDate : defaultSpan;
+  }
+  currentTripDates = {
+    startDate: start,
+    endDate: endDate || "",
+    effectiveEnd
+  };
+  recomputeTripDays();
+}
+
+export function getTripStart() {
+  return currentTripDates.startDate;
+}
+
+export function hasTripEndDate() {
+  return Boolean(currentTripDates.endDate);
+}
+
+export function getTripEnd() {
+  return currentTripDates.endDate || currentTripDates.effectiveEnd || addDays(currentTripDates.startDate, 37);
+}
+
+export const inTrip = iso => {
+  const start = getTripStart();
+  if (currentTripDates.endDate) {
+    return iso >= start && iso <= currentTripDates.endDate;
+  }
+  return iso >= start;
+};
 
 export const todayIso = () => {
   const t = new Date();
   return `${t.getFullYear()}-${pad(t.getMonth() + 1)}-${pad(t.getDate())}`;
 };
 
-export const defaultDate = () => (inTrip(todayIso()) ? todayIso() : START);
+export const defaultDate = () => (inTrip(todayIso()) ? todayIso() : getTripStart());
 
 export const validAnyDate = v => {
   if (typeof v !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(v)) return false;
@@ -123,14 +178,7 @@ export function tzDifferenceLabel(startTzId, endTzId, atMs = Date.now()) {
   return `${ahead} is ${amount} ahead of ${behind}`;
 }
 
-export const TRIP_DAYS = [];
-for (let d = START; d <= END; d = addDays(d, 1)) TRIP_DAYS.push(d);
-
-export const TRIP_MONTHS = [];
-for (const d of TRIP_DAYS) {
-  const ym = d.slice(0, 7);
-  if (!TRIP_MONTHS.includes(ym)) TRIP_MONTHS.push(ym);
-}
+recomputeTripDays();
 
 export const daysInMonth = ym => {
   const [y, m] = ym.split("-").map(Number);

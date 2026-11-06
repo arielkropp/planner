@@ -1,9 +1,12 @@
 /* Central State Store and Persistence */
 
-import { KEY, V1_KEY, SAVED_TEXT, DEFAULT_TZ, TIMEZONES } from "../constants.js";
+import { START, END, KEY, V1_KEY, SAVED_TEXT, DEFAULT_TZ, TIMEZONES } from "../constants.js";
 import { $ } from "../utils/dom.js";
-import { defaults } from "./validation.js";
+import { defaults, defaultBalance, attachActiveTripProxies } from "./validation.js";
 import { fromAnyVersion } from "./migrations.js";
+import { setTripDates, defaultDate, todayIso, validAnyDate } from "../utils/date.js";
+import { uid } from "../utils/format.js";
+import { viewState } from "./view-state.js";
 
 let s = defaults();
 let blocked = false;
@@ -38,8 +41,112 @@ export function getState() {
   return s;
 }
 
+export function getMaxTripDate(trip) {
+  if (!trip) return "";
+  let max = "";
+  for (const a of trip.agenda || []) {
+    const d = a.endDate || a.date;
+    if (d && (!max || d > max)) max = d;
+  }
+  for (const w of trip.work || []) {
+    if (w.date && (!max || w.date > max)) max = w.date;
+  }
+  return max;
+}
+
+export function updateTripDateRange() {
+  const active = getActiveTrip();
+  if (active) {
+    setTripDates(active.startDate, active.endDate, getMaxTripDate(active));
+  } else {
+    setTripDates(START, END);
+  }
+}
+
+export function getTrips() {
+  return s.trips || [];
+}
+
+export function getActiveTrip() {
+  return s.trips?.find(t => t.id === s.activeTripId) || s.trips?.[0] || null;
+}
+
+export function setActiveTrip(tripId) {
+  const trip = s.trips?.find(t => t.id === tripId);
+  if (!trip) return false;
+  s.activeTripId = trip.id;
+  updateTripDateRange();
+  viewState.calendar.cursor = defaultDate();
+  commit();
+  return true;
+}
+
+export function addTrip({ name, startDate, endDate }, setAsActive = true) {
+  if (!s.trips) s.trips = [];
+  const start = validAnyDate(startDate) ? startDate : todayIso();
+  const end = (endDate && validAnyDate(endDate) && endDate >= start) ? endDate : "";
+  const trip = {
+    id: uid(),
+    name: (typeof name === "string" && name.trim()) ? name.trim().slice(0, 100) : "Untitled Trip",
+    startDate: start,
+    endDate: end,
+    agenda: [],
+    packing: [],
+    work: [],
+    balance: defaultBalance()
+  };
+  s.trips.push(trip);
+  if (setAsActive || s.trips.length === 1) {
+    s.activeTripId = trip.id;
+    updateTripDateRange();
+    viewState.calendar.cursor = defaultDate();
+  }
+  commit();
+  return trip;
+}
+
+export function updateTrip(tripId, { name, startDate, endDate }) {
+  const trip = s.trips?.find(t => t.id === tripId);
+  if (!trip) return false;
+  if (name !== undefined) {
+    trip.name = (typeof name === "string" && name.trim()) ? name.trim().slice(0, 100) : trip.name;
+  }
+  if (startDate && validAnyDate(startDate)) {
+    trip.startDate = startDate;
+  }
+  if (endDate !== undefined) {
+    trip.endDate = (endDate && validAnyDate(endDate) && endDate >= trip.startDate) ? endDate : "";
+  }
+  if (s.activeTripId === trip.id) {
+    updateTripDateRange();
+  }
+  commit();
+  return true;
+}
+
+export function deleteTrip(tripId) {
+  if (!s.trips || s.trips.length <= 1) return false;
+  const idx = s.trips.findIndex(t => t.id === tripId);
+  if (idx === -1) return false;
+  s.trips.splice(idx, 1);
+  if (s.activeTripId === tripId) {
+    s.activeTripId = s.trips[0].id;
+    updateTripDateRange();
+    viewState.calendar.cursor = defaultDate();
+  }
+  commit();
+  return true;
+}
+
 export function setState(newState, shouldSave = true) {
-  s = newState;
+  if (!newState || typeof newState !== "object") return;
+  if (!Array.isArray(newState.trips) || !newState.activeTripId) {
+    s = fromAnyVersion(newState);
+  } else {
+    s = newState;
+    attachActiveTripProxies(s);
+  }
+  updateTripDateRange();
   if (shouldSave) {
     commit();
   }
@@ -88,6 +195,7 @@ export function commit() {
 export function initStore() {
   if (typeof localStorage === "undefined") {
     s = defaults();
+    updateTripDateRange();
     return s;
   }
 
@@ -95,25 +203,31 @@ export function initStore() {
     const raw = localStorage.getItem(KEY);
     if (raw === null) {
       s = defaults();
+      updateTripDateRange();
       try {
         localStorage.setItem(KEY, JSON.stringify(s));
       } catch {}
     } else {
       const parsed = JSON.parse(raw);
       s = fromAnyVersion(parsed);
+      attachActiveTripProxies(s);
+      updateTripDateRange();
 
       // Synchronize confirmed flight booking details if unmodified placeholders exist
-      const originalAgendaLength = s.agenda.length;
-      s.agenda = s.agenda.filter(a => a.id !== "seed-flight-out" && a.id !== "seed-flight-home");
-      let updatedSeedFlights = s.agenda.length !== originalAgendaLength;
-      for (const item of s.agenda) {
-        if (!item.tz || !TIMEZONES.some(t => t.id === item.tz)) {
-          item.tz = DEFAULT_TZ;
-          updatedSeedFlights = true;
-        }
-        if (!item.endTz || !TIMEZONES.some(t => t.id === item.endTz)) {
-          item.endTz = item.tz;
-          updatedSeedFlights = true;
+      let updatedSeedFlights = false;
+      for (const trip of s.trips || []) {
+        const originalAgendaLength = trip.agenda.length;
+        trip.agenda = trip.agenda.filter(a => a.id !== "seed-flight-out" && a.id !== "seed-flight-home");
+        if (trip.agenda.length !== originalAgendaLength) updatedSeedFlights = true;
+        for (const item of trip.agenda) {
+          if (!item.tz || !TIMEZONES.some(t => t.id === item.tz)) {
+            item.tz = DEFAULT_TZ;
+            updatedSeedFlights = true;
+          }
+          if (!item.endTz || !TIMEZONES.some(t => t.id === item.endTz)) {
+            item.endTz = item.tz;
+            updatedSeedFlights = true;
+          }
         }
       }
       if (updatedSeedFlights) {
@@ -136,6 +250,7 @@ export function initStore() {
     }
   } catch (error) {
     s = defaults();
+    updateTripDateRange();
     blocked = true;
     storageStatus.note = "Saving is paused because the existing data could not be loaded.";
     showError(`Could not load saved data: ${error.message} Your saved data has not been overwritten. Restore a backup to resume saving.`);
@@ -152,6 +267,8 @@ export function initStore() {
         try {
           const incoming = fromAnyVersion(JSON.parse(e.newValue));
           s = incoming;
+          attachActiveTripProxies(s);
+          updateTripDateRange();
           blocked = false;
           notifySubscribers();
           setSaveNote("Synced changes from another open tab.");

@@ -1,6 +1,6 @@
 /* Itinerary Monthly and Weekly Calendar Views */
 
-import { START, END, WD, TYPE_META, pad } from "../../../shared/constants.js";
+import { WD, TYPE_META, pad } from "../../../shared/constants.js";
 import {
   addDays,
   daysDiff,
@@ -11,7 +11,9 @@ import {
   todayIso,
   TRIP_MONTHS,
   daysInMonth,
-  monthLabel
+  monthLabel,
+  getTripStart,
+  getTripEnd
 } from "../../../shared/utils/date.js";
 import { $, esc, icon } from "../../../shared/utils/dom.js";
 import { getState } from "../../../shared/state/store.js";
@@ -21,7 +23,11 @@ import { ev, typeVar } from "./markup.js";
 
 export const tv = viewState.calendar;
 
-const clampDate = d => (d < START ? START : d > END ? END : d);
+const clampDate = d => {
+  const start = getTripStart();
+  const end = getTripEnd();
+  return d < start ? start : (d > end ? end : d);
+};
 
 export function renderCalendar() {
   const c = tv.cursor;
@@ -33,10 +39,12 @@ export function renderCalendar() {
 
   if (tv.view === "week") {
     const ws = addDays(c, -dowOf(c));
-    const firstWeek = addDays(START, -dowOf(START));
-    title = `Week ${Math.floor(daysDiff(firstWeek, ws) / 7) + 1}`;
-    prev = ws > START;
-    next = addDays(ws, 7) <= END;
+    const tripStart = getTripStart();
+    const tripEnd = getTripEnd();
+    const firstWeek = addDays(tripStart, -dowOf(tripStart));
+    title = `Week ${Math.max(1, Math.floor(daysDiff(firstWeek, ws) / 7) + 1)}`;
+    prev = ws > tripStart;
+    next = addDays(ws, 7) <= tripEnd;
 
     html = `<div class="week">${[0, 1, 2, 3, 4, 5, 6].map(i => {
       const d = addDays(ws, i);

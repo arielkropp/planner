@@ -214,499 +214,15 @@
         </div>
 
         <div class="settings-group">
-          <div class="settings-group-label">Data &amp; Export</div>
-          <div class="settings-card">
-            <button type="button" class="settings-row" id="exportIcs">
-              <div class="settings-icon-well"><svg class="i" aria-hidden="true"><use href="#i-calendar-download-02"/></svg></div>
-              <div class="settings-text">
-                <div class="settings-name">Download ICS</div>
-                <div class="settings-desc">Export itinerary to calendar (.ics)</div>
-              </div>
-              <div class="settings-chevron"><svg class="i sm" aria-hidden="true"><use href="#i-download"/></svg></div>
-            </button>
-
-            <div class="settings-divider" aria-hidden="true"></div>
-
-            <button type="button" class="settings-row" id="export">
-              <div class="settings-icon-well"><svg class="i" aria-hidden="true"><use href="#i-download"/></svg></div>
-              <div class="settings-text">
-                <div class="settings-name">Download data</div>
-                <div class="settings-desc">Back up planner data as a JSON file</div>
-              </div>
-              <div class="settings-chevron"><svg class="i sm" aria-hidden="true"><use href="#i-right"/></svg></div>
-            </button>
-
-            <div class="settings-divider" aria-hidden="true"></div>
-
-            <button type="button" class="settings-row" id="restore">
-              <div class="settings-icon-well"><svg class="i" aria-hidden="true"><use href="#i-upload"/></svg></div>
-              <div class="settings-text">
-                <div class="settings-name">Upload data</div>
-                <div class="settings-desc">Restore planner data from a backup JSON file</div>
-              </div>
-              <div class="settings-chevron"><svg class="i sm" aria-hidden="true"><use href="#i-right"/></svg></div>
-            </button>
-            <input id="import" type="file" accept=".json,application/json" hidden>
-
-            <div class="settings-divider" aria-hidden="true"></div>
-
-            <button type="button" class="settings-row" id="openRatesUtil">
-              <div class="settings-icon-well"><svg class="i" aria-hidden="true"><use href="#i-currency"/></svg></div>
-              <div class="settings-text">
-                <div class="settings-name">Budget &amp; currency</div>
-                <div class="settings-desc">Set base currency and conversion rates</div>
-              </div>
-              <div class="settings-chevron"><svg class="i sm" aria-hidden="true"><use href="#i-right"/></svg></div>
+          <div class="settings-group-head">
+            <div class="settings-group-label">Trips</div>
+            <button type="button" class="btn sm primary" id="addTripBtn">
+              <svg class="i sm" aria-hidden="true"><use href="#i-plus"/></svg>
+              <span>Add trip</span>
             </button>
           </div>
-        </div>
-
-        <div class="settings-info-card">
-          <p class="settings-info-text">Data is stored in this browser only. Export a backup before switching browsers or devices.</p>
-        </div>
-      </div>
-    </section>
-
-  </main>
-</div>
-
-<dialog id="itemDialog" aria-labelledby="itemDialogTitle">
-  <form id="itemForm" novalidate>
-    <h2 id="itemDialogTitle" class="sr-only">Add item</h2>
-    <div class="dlg-body">
-      <div class="field">
-        <div class="title-head-row">
-          <label for="itemTitle"><span>Title <span class="req" aria-hidden="true">*</span></span></label>
-          <button type="button" class="icon-btn" data-close aria-label="Close"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg></button>
-        </div>
-        <div class="title-status-box">
-          <input id="itemTitle" required maxlength="200" autocomplete="off" placeholder="Hotel, train to the coast, museum tour...">
-        </div>
-        <div class="chips title-status-chips" id="itemStatuses" role="radiogroup" aria-label="Status"></div>
-      </div>
-      <div class="row2 dt-row">
-        <div class="field">
-          <label for="itemStartDate">Start <span class="req" aria-hidden="true">*</span></label>
-          <div class="dt-box">
-            <input type="date" id="itemStartDate" required aria-label="Start date">
-            <div class="sep" aria-hidden="true"></div>
-            <input type="time" id="itemStartTime" aria-label="Start time">
-            <div class="sep" aria-hidden="true"></div>
-            <div class="dtz-wrap" title="Start timezone">
-              <span class="dtz-badge" id="itemTzBadge" aria-hidden="true">TZ</span>
-              <svg class="dtz-arrow" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-              <select id="itemTz" class="dtz-select" aria-label="Start timezone"></select>
-            </div>
+          <div class="settings-card" id="tripsList">
           </div>
-        </div>
-        <div class="field">
-          <label for="itemEndDate">End</label>
-          <div class="dt-box">
-            <input type="date" id="itemEndDate" aria-label="End date">
-            <div class="sep" aria-hidden="true"></div>
-            <input type="time" id="itemEndTime" aria-label="End time">
-            <div class="sep" aria-hidden="true"></div>
-            <div class="dtz-wrap" title="End timezone">
-              <span class="dtz-badge" id="itemEndTzBadge" aria-hidden="true">TZ</span>
-              <svg class="dtz-arrow" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-              <select id="itemEndTz" class="dtz-select" aria-label="End timezone"></select>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div id="itemTzPreview" class="tz-info-banner" hidden></div>
-      <fieldset class="field"><legend>Type</legend><div class="chips" id="itemTypes"></div></fieldset>
-      <div class="cost-currency-box">
-        <label class="field" style="flex:1;max-width:240px;min-width:0"><span>Cost</span><input id="itemCost" type="number" min="0" step="any" placeholder="0"></label>
-        <label class="field" style="width:88px;flex-shrink:0"><span>Currency</span>
-          <select id="itemCurrency">
-            <option value="USD">USD</option>
-            <option value="EUR">EUR</option>
-            <option value="GBP">GBP</option>
-            <option value="ILS">ILS</option>
-          </select>
-        </label>
-      </div>
-      <label class="field"><span>Notes</span><textarea id="itemNotes" maxlength="1000" rows="3" placeholder="Address, details..."></textarea></label>
-    </div>
-    <div class="dlg-foot">
-      <button type="button" class="btn danger left" id="itemDelete"><svg class="i sm" aria-hidden="true"><use href="#i-trash"/></svg>Delete</button>
-      <button type="button" class="btn" data-close>Cancel</button>
-      <button type="submit" class="btn primary">Save</button>
-    </div>
-  </form>
-</dialog>
-
-<dialog id="itemFullscreenDialog" class="fs-item-dialog" aria-labelledby="fsDialogTitle">
-  <form id="fsItemForm" novalidate>
-    <div class="fs-header">
-      <button type="button" class="icon-btn" data-close id="fsClose" aria-label="Close"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg></button>
-      <div class="fs-handle" aria-hidden="true"></div>
-      <h2 id="fsDialogTitle" class="sr-only">Item details</h2>
-      <div class="fs-header-actions" id="fsViewActions" hidden>
-        <button type="button" class="icon-btn danger" id="fsViewDelete" aria-label="Delete item" title="Delete item"><svg class="i" aria-hidden="true"><use href="#i-trash"/></svg></button>
-        <button type="button" class="fs-edit-btn" id="fsEditBtn"><svg class="i sm" aria-hidden="true"><use href="#i-pencil"/></svg>Edit</button>
-      </div>
-      <button type="submit" class="fs-save-btn" id="fsSave">Save</button>
-    </div>
-
-    <!-- Read-Only View Mode -->
-    <div class="fs-body" id="fsViewBody" hidden>
-      <div class="fs-card fs-view-hero">
-        <div class="fs-view-badges" id="fsViewBadges"></div>
-        <h3 class="fs-view-title" id="fsViewTitle"></h3>
-      </div>
-
-      <div class="fs-group">
-        <div class="fs-group-label">Schedule</div>
-        <div class="fs-card fs-view-list">
-          <div class="fs-view-row" id="fsViewStartRow">
-            <div class="fs-view-icon" aria-hidden="true"><svg class="i"><use href="#i-calendar-days"/></svg></div>
-            <div class="fs-view-text">
-              <div class="fs-view-meta">Start</div>
-              <div class="fs-view-val" id="fsViewStartText"></div>
-              <div class="fs-view-sub" id="fsViewStartTz"></div>
-            </div>
-          </div>
-
-          <div class="fs-view-divider" id="fsViewEndDivider" hidden aria-hidden="true"></div>
-
-          <div class="fs-view-row" id="fsViewEndRow" hidden>
-            <div class="fs-view-icon" aria-hidden="true"><svg class="i"><use href="#i-clock"/></svg></div>
-            <div class="fs-view-text">
-              <div class="fs-view-meta">End</div>
-              <div class="fs-view-val" id="fsViewEndText"></div>
-              <div class="fs-view-sub" id="fsViewEndTz"></div>
-            </div>
-          </div>
-
-          <div class="fs-view-duration" id="fsViewDuration" hidden></div>
-        </div>
-      </div>
-
-      <div class="fs-group" id="fsViewDetailsGroup">
-        <div class="fs-group-label">Details</div>
-        <div class="fs-card fs-view-list">
-          <div class="fs-view-row" id="fsViewCostRow" hidden>
-            <div class="fs-view-icon" aria-hidden="true"><svg class="i"><use href="#i-currency"/></svg></div>
-            <div class="fs-view-text">
-              <div class="fs-view-meta">Cost</div>
-              <div class="fs-view-val" id="fsViewCostText"></div>
-            </div>
-          </div>
-
-          <div class="fs-view-divider" id="fsViewDetailsDivider" hidden aria-hidden="true"></div>
-
-          <div class="fs-view-row" id="fsViewNotesRow" hidden>
-            <div class="fs-view-icon" aria-hidden="true"><svg class="i"><use href="#i-sticky-note"/></svg></div>
-            <div class="fs-view-text">
-              <div class="fs-view-meta">Notes</div>
-              <div class="fs-view-notes" id="fsViewNotesText"></div>
-            </div>
-          </div>
-
-          <div class="fs-view-empty" id="fsViewNoDetails" hidden>No cost or notes added.</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Edit / Create Mode -->
-    <div class="fs-body" id="fsEditBody">
-      <!-- Title, Type & Status Card -->
-      <div class="fs-card fs-hero-card">
-        <div class="fs-title-wrap">
-          <input id="fsTitle" class="fs-title-input" required maxlength="200" autocomplete="off" placeholder="Add title...">
-        </div>
-        <div class="fs-card-divider" aria-hidden="true"></div>
-        <div class="fs-chip-section">
-          <span class="fs-label">Type</span>
-          <div class="chips" id="fsTypes" role="radiogroup" aria-label="Type"></div>
-        </div>
-        <div class="fs-chip-section">
-          <span class="fs-label">Status</span>
-          <div class="chips" id="fsStatuses" role="radiogroup" aria-label="Status"></div>
-        </div>
-      </div>
-
-      <!-- Schedule Card (Stacked Start & End) -->
-      <div class="fs-group">
-        <div class="fs-group-label">Schedule</div>
-        <div class="fs-card fs-schedule-card">
-          <div class="field">
-            <label for="fsStartDate">Start <span class="req" aria-hidden="true">*</span></label>
-            <div class="dt-box fs-dt-box">
-              <input type="date" id="fsStartDate" required aria-label="Start date">
-              <div class="sep" aria-hidden="true"></div>
-              <input type="time" id="fsStartTime" aria-label="Start time">
-              <div class="sep" aria-hidden="true"></div>
-              <div class="dtz-wrap" title="Start timezone">
-                <span class="dtz-badge" id="fsTzBadge" aria-hidden="true">TZ</span>
-                <svg class="dtz-arrow" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-                <select id="fsTz" class="dtz-select" aria-label="Start timezone"></select>
-              </div>
-            </div>
-          </div>
-
-          <div class="field">
-            <label for="fsEndDate">End</label>
-            <div class="dt-box fs-dt-box">
-              <input type="date" id="fsEndDate" aria-label="End date">
-              <div class="sep" aria-hidden="true"></div>
-              <input type="time" id="fsEndTime" aria-label="End time">
-              <div class="sep" aria-hidden="true"></div>
-              <div class="dtz-wrap" title="End timezone">
-                <span class="dtz-badge" id="fsEndTzBadge" aria-hidden="true">TZ</span>
-                <svg class="dtz-arrow" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-                <select id="fsEndTz" class="dtz-select" aria-label="End timezone"></select>
-              </div>
-            </div>
-          </div>
-
-          <div id="fsTzPreview" class="tz-info-banner" hidden></div>
-        </div>
-      </div>
-
-      <!-- Details & Cost Card -->
-      <div class="fs-group">
-        <div class="fs-group-label">Details</div>
-        <div class="fs-card fs-details-card">
-          <div class="cost-currency-box">
-            <label class="field" style="flex:1;min-width:0">
-              <span>Cost</span>
-              <input id="fsCost" type="number" min="0" step="any" placeholder="0">
-            </label>
-            <label class="field" style="width:104px;flex-shrink:0">
-              <span>Currency</span>
-              <select id="fsCurrency">
-                <option value="USD">USD</option>
-                <option value="EUR">EUR</option>
-                <option value="GBP">GBP</option>
-                <option value="ILS">ILS</option>
-              </select>
-            </label>
-          </div>
-
-          <label class="field">
-            <span>Notes</span>
-            <textarea id="fsNotes" maxlength="1000" rows="4" placeholder="Address, booking reference, details..."></textarea>
-          </label>
-        </div>
-      </div>
-
-      <div class="fs-delete-row" id="fsDeleteWrap" hidden>
-        <button type="button" class="btn danger" id="fsDelete"><svg class="i sm" aria-hidden="true"><use href="#i-trash"/></svg>Delete item</button>
-      </div>
-    </div>
-  </form>
-</dialog>
-
-<dialog id="ratesDialog" class="small" aria-labelledby="ratesTitle">
-  <form id="ratesForm">
-    <div class="dlg-head"><h2 id="ratesTitle">Budget &amp; exchange rates</h2><button type="button" class="icon-btn" data-close aria-label="Close"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg></button></div>
-    <div class="dlg-body">
-      <label class="field"><span>Base display currency</span>
-        <select id="ratesBase">
-          <option value="USD">USD ($)</option>
-          <option value="EUR">EUR (€)</option>
-          <option value="ILS">ILS (₪)</option>
-          <option value="GBP">GBP (£)</option>
-        </select>
-      </label>
-      <p class="muted" style="font-size:12px">Units per 1 USD (used to calculate combined budget total):</p>
-      <div class="row2">
-        <label class="field"><span>EUR per 1 USD</span><input id="rateEUR" type="number" min="0.0001" step="any"></label>
-        <label class="field"><span>GBP per 1 USD</span><input id="rateGBP" type="number" min="0.0001" step="any"></label>
-      </div>
-      <label class="field"><span>ILS per 1 USD</span><input id="rateILS" type="number" min="0.0001" step="any"></label>
-    </div>
-    <div class="dlg-foot">
-      <button type="button" class="btn" data-close>Cancel</button>
-      <button type="submit" class="btn primary">Save rates</button>
-    </div>
-  </form>
-</dialog>
-
-<dialog id="leaveDialog" class="small" aria-labelledby="leaveTitle">
-  <form id="leaveForm">
-    <div class="dlg-head"><h2 id="leaveTitle">Leave calculation settings</h2><button type="button" class="icon-btn" data-close aria-label="Close"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg></button></div>
-    <div class="dlg-body">
-      <label class="field"><span>Starting leave balance (hours)</span><input id="leaveStartBal" type="number" step="any" min="-500" max="1000" required></label>
-      <div class="row2">
-        <label class="field"><span>Monthly accrual (hours)</span><input id="leaveAccrual" type="number" step="any" min="0" max="200" required></label>
-        <label class="field"><span>Accrual months</span><input id="leaveMonths" type="number" step="1" min="0" max="24" required></label>
-      </div>
-      <label class="field"><span>Standard weekday hours</span><input id="leaveStdDay" type="number" step="any" min="0" max="24" required></label>
-    </div>
-    <div class="dlg-foot">
-      <button type="button" class="btn left" id="leaveResetDefaults">Defaults</button>
-      <button type="button" class="btn" data-close>Cancel</button>
-      <button type="submit" class="btn primary">Save</button>
-    </div>
-  </form>
-</dialog>
-
-<dialog id="templatesDialog" class="small" aria-labelledby="templatesTitle">
-  <div class="dlg-head"><h2 id="templatesTitle">Packing templates</h2><button type="button" class="icon-btn" data-close aria-label="Close"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg></button></div>
-  <div class="dlg-body" id="templatesBody"></div>
-  <div class="dlg-foot"><button type="button" class="btn" data-close>Close</button></div>
-</dialog>
-
-<dialog id="confirmDialog" class="small" aria-labelledby="confirmTitle">
-  <form method="dialog">
-    <div class="dlg-body"><h2 id="confirmTitle" style="font-size:17px">Delete?</h2><p id="confirmText"></p></div>
-    <div class="dlg-foot">
-      <button class="btn" value="cancel">Cancel</button>
-      <button class="btn danger-solid" value="ok" id="confirmOk">Delete</button>
-    </div>
-  </form>
-</dialog>
-</template>
-
-<template id="platform-mobile">
-<div class="app">
-  <aside class="sidebar">
-    <nav aria-label="Screens">
-      <a class="nav-link" href="#itinerary"><svg class="i" aria-hidden="true"><use href="#i-calendar-days"/></svg><span>Itinerary</span></a>
-      <a class="nav-link" href="#packing"><svg class="i" aria-hidden="true"><use href="#i-luggage"/></svg><span>Packing</span></a>
-      <a class="nav-link" href="#work"><svg class="i" aria-hidden="true"><use href="#i-briefcase"/></svg><span>Work log</span></a>
-      <a class="nav-link" href="#settings" id="mobileSettings" aria-label="Settings"><svg class="i" aria-hidden="true"><use href="#i-settings"/></svg><span>Settings</span></a>
-    </nav>
-    <p class="save-note" id="saveStatus" role="status">Saved in this browser only. Back up before switching browsers or devices.</p>
-  </aside>
-
-  <main>
-    <p class="notice" id="storageError" role="alert" hidden></p>
-    <section data-screen="itinerary" aria-label="Itinerary">
-      <div class="itinerary-toolbar">
-        <div class="itinerary-switcher">
-          <div class="seg" id="itineraryViews" role="group" aria-label="Itinerary view">
-            <span class="seg-lens" id="itineraryLens" aria-hidden="true"></span>
-            <button type="button" data-itinerary-view="schedule" aria-pressed="true">Schedule</button>
-            <button type="button" data-itinerary-view="week" aria-pressed="false">Week</button>
-            <button type="button" data-itinerary-view="month" aria-pressed="false">Month</button>
-          </div>
-          <div class="itinerary-actions">
-            <button class="icon-btn tonal" id="theme" type="button" aria-label="Toggle dark mode" title="Toggle dark mode"><svg class="i" aria-hidden="true"><use href="#i-moon"/></svg></button>
-          </div>
-        </div>
-      </div>
-
-      <div id="scheduleView">
-        <div id="agendaList"></div>
-      </div>
-
-      <div id="calendarView" hidden>
-        <div class="tv-bar" id="tvBar" hidden>
-          <button class="icon-btn" id="tvPrev" type="button" aria-label="Previous"><svg class="i" aria-hidden="true"><use href="#i-left"/></svg></button>
-          <h2 class="tv-title" id="tvTitle" tabindex="-1" aria-live="polite"></h2>
-          <button class="icon-btn" id="tvNext" type="button" aria-label="Next"><svg class="i" aria-hidden="true"><use href="#i-right"/></svg></button>
-        </div>
-        <div class="cal" id="tvBody"></div>
-      </div>
-
-      <button class="fab fab-green" id="addItemFullscreen" type="button" aria-label="Add item (full screen)" title="Add item (full screen)"><svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></button>
-      <button class="fab" id="addItem" type="button" aria-label="Add itinerary item" title="Add itinerary item"><svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></button>
-    </section>
-
-    <section data-screen="packing" aria-label="Packing" hidden>
-      <progress id="packingProgress" aria-label="Packing progress" max="1" value="0"></progress>
-      <div class="packing-toolbar">
-        <form class="quick-add-bar" id="packQuickForm" autocomplete="off">
-          <input id="packQuickTitle" type="text" maxlength="200" placeholder="Quick add item (press Enter)..." aria-label="New packing item name">
-          <select id="packQuickCat" aria-label="New item category"></select>
-          <input id="packQuickQty" type="number" min="1" max="99" step="1" value="1" inputmode="numeric" aria-label="New item quantity">
-          <button type="submit" class="btn sm primary">Add</button>
-        </form>
-        <div class="search-box">
-          <svg class="i sm search-icon" aria-hidden="true"><use href="#i-search"/></svg>
-          <input id="packSearch" type="search" placeholder="Search packing items..." aria-label="Search packing items" autocomplete="off">
-          <button type="button" class="search-clear" id="packSearchClear" aria-label="Clear search" hidden><svg class="i sm" aria-hidden="true"><use href="#i-x"/></svg></button>
-        </div>
-        <div class="chip-filter-group" id="packCatFilter" role="group" aria-label="Filter packing items by category"></div>
-        <div class="packing-actions">
-          <div class="packing-toggles">
-            <button type="button" class="pill-toggle" id="packGroupByCat" aria-pressed="false">
-              <span class="circle-check" aria-hidden="true"><svg class="i" viewBox="0 0 24 24"><use href="#i-check"/></svg></span>
-              <span>Group</span>
-            </button>
-            <button type="button" class="pill-toggle" id="packUnpackedOnly" aria-pressed="false">
-              <span class="circle-check" aria-hidden="true"><svg class="i" viewBox="0 0 24 24"><use href="#i-check"/></svg></span>
-              <span>Unpacked</span>
-            </button>
-          </div>
-          <button type="button" class="btn sm" id="packResetAll" title="Mark all items as unpacked">Reset</button>
-          <button type="button" class="btn sm" id="openTemplates">Templates</button>
-          <button class="icon-btn solid" id="addPack" type="button" aria-label="Add packing item" title="Add packing item"><svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></button>
-        </div>
-      </div>
-      <div class="table-wrap">
-        <table id="packTable">
-          <thead>
-            <tr>
-              <th class="col-check"><span class="sr-only">Packed</span></th>
-              <th class="col-item">Item</th>
-              <th class="col-cat">Category</th>
-              <th class="col-qty">Qty</th>
-              <th class="actions col-actions"><span class="sr-only">Actions</span></th>
-            </tr>
-          </thead>
-          <tbody id="packingRows"></tbody>
-        </table>
-      </div>
-    </section>
-
-    <section data-screen="work" aria-label="Work log" hidden>
-      <div class="work-toolbar">
-        <div class="stat-bar" aria-live="polite" aria-atomic="true">
-          <div class="stat-seg">
-            <span class="label">Logged</span>
-            <span class="val"><span id="workLogged">0</span><span class="unit">h</span></span>
-          </div>
-          <div class="stat-sep" aria-hidden="true"></div>
-          <div class="stat-seg">
-            <span class="label">Balance</span>
-            <span class="val crit" id="balanceWrap"><span id="balance">−87.3</span><span class="unit">h</span></span>
-          </div>
-          <div class="stat-sep" aria-hidden="true"></div>
-          <label class="stat-seg" for="balPre">
-            <span class="label">Pre-trip</span>
-            <span class="val has-input">
-              <input id="balPre" type="number" inputmode="decimal" min="0" max="300" step="any" value="0" aria-label="Pre-trip leave hours">
-              <span class="unit">h</span>
-            </span>
-          </label>
-        </div>
-        <div class="work-actions">
-          <button class="btn sm" id="openLeaveSettings" type="button">Leave</button>
-          <button class="icon-btn solid" id="addWork" type="button" aria-label="Add work row" title="Add work row"><svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></button>
-        </div>
-      </div>
-      <div class="work-tz-bar" style="margin-bottom:12px; display:flex; align-items:center; gap:8px; font-size:12px; color:var(--muted); background:color-mix(in srgb, var(--ink) 4%, var(--surface)); border:1px solid var(--line); border-radius:8px; padding:7px 12px;">
-        <svg class="i sm" aria-hidden="true" style="color:var(--accent);flex-shrink:0"><use href="#i-globe"/></svg>
-        <span>Workdays default to Monday–Friday. Set your standard hours in Leave settings.</span>
-      </div>
-      <p class="status-msg" id="workStatusMsg" role="status" aria-live="polite" hidden></p>
-
-      <details class="coverage-wrap" id="workCoverageDetails">
-        <summary><span id="workCoverageSummary">Workday coverage &amp; balance breakdown</span><svg class="i sm coverage-chevron" aria-hidden="true"><use href="#i-right"/></svg></summary>
-        <div class="coverage-body">
-          <div class="coverage-grid" id="workCoverageGrid"></div>
-          <div class="leave-breakdown" id="leaveBreakdown"></div>
-        </div>
-      </details>
-
-      <div class="table-wrap">
-        <table id="workTable">
-          <thead><tr><th class="col-date">Date</th><th class="col-hours">Hrs</th><th class="col-note">Note</th><th class="actions col-actions"><span class="sr-only">Actions</span></th></tr></thead>
-          <tbody id="workRows"></tbody>
-        </table>
-      </div>
-    </section>
-
-    <section data-screen="settings" aria-label="Settings" hidden>
-      <div class="settings-screen">
-        <div class="settings-head">
-          <h1 class="settings-title">Settings</h1>
         </div>
 
         <div class="settings-group">
@@ -1053,6 +569,580 @@
     <div class="dlg-foot">
       <button class="btn" value="cancel">Cancel</button>
       <button class="btn danger-solid" value="ok" id="confirmOk">Delete</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="tripDialog" class="small" aria-labelledby="tripTitle">
+  <form id="tripForm">
+    <div class="dlg-head">
+      <h2 id="tripTitle">Add trip</h2>
+      <button type="button" class="icon-btn" data-close aria-label="Close">
+        <svg class="i" aria-hidden="true"><use href="#i-x"/></svg>
+      </button>
+    </div>
+    <div class="dlg-body">
+      <input type="hidden" id="tripId">
+      <label class="field">
+        <span>Trip name</span>
+        <input id="tripName" type="text" placeholder="e.g. Summer Vacation" required maxlength="100">
+      </label>
+      <div class="row2">
+        <label class="field">
+          <span>Start date</span>
+          <input id="tripStartDate" type="date" required>
+        </label>
+        <label class="field">
+          <span>End date (optional)</span>
+          <input id="tripEndDate" type="date">
+        </label>
+      </div>
+      <p class="muted" style="font-size:12px;margin-top:6px">End date is optional and can be set or changed later.</p>
+    </div>
+    <div class="dlg-foot">
+      <button type="button" class="btn" data-close>Cancel</button>
+      <button type="submit" class="btn primary" id="tripSubmit">Save trip</button>
+    </div>
+  </form>
+</dialog>
+</template>
+
+<template id="platform-mobile">
+<div class="app">
+  <aside class="sidebar">
+    <nav aria-label="Screens">
+      <a class="nav-link" href="#itinerary"><svg class="i" aria-hidden="true"><use href="#i-calendar-days"/></svg><span>Itinerary</span></a>
+      <a class="nav-link" href="#packing"><svg class="i" aria-hidden="true"><use href="#i-luggage"/></svg><span>Packing</span></a>
+      <a class="nav-link" href="#work"><svg class="i" aria-hidden="true"><use href="#i-briefcase"/></svg><span>Work log</span></a>
+      <a class="nav-link" href="#settings" id="mobileSettings" aria-label="Settings"><svg class="i" aria-hidden="true"><use href="#i-settings"/></svg><span>Settings</span></a>
+    </nav>
+    <p class="save-note" id="saveStatus" role="status">Saved in this browser only. Back up before switching browsers or devices.</p>
+  </aside>
+
+  <main>
+    <p class="notice" id="storageError" role="alert" hidden></p>
+    <section data-screen="itinerary" aria-label="Itinerary">
+      <div class="itinerary-toolbar">
+        <div class="itinerary-switcher">
+          <div class="seg" id="itineraryViews" role="group" aria-label="Itinerary view">
+            <span class="seg-lens" id="itineraryLens" aria-hidden="true"></span>
+            <button type="button" data-itinerary-view="schedule" aria-pressed="true">Schedule</button>
+            <button type="button" data-itinerary-view="week" aria-pressed="false">Week</button>
+            <button type="button" data-itinerary-view="month" aria-pressed="false">Month</button>
+          </div>
+          <div class="itinerary-actions">
+            <button class="icon-btn tonal" id="theme" type="button" aria-label="Toggle dark mode" title="Toggle dark mode"><svg class="i" aria-hidden="true"><use href="#i-moon"/></svg></button>
+          </div>
+        </div>
+      </div>
+
+      <div id="scheduleView">
+        <div id="agendaList"></div>
+      </div>
+
+      <div id="calendarView" hidden>
+        <div class="tv-bar" id="tvBar" hidden>
+          <button class="icon-btn" id="tvPrev" type="button" aria-label="Previous"><svg class="i" aria-hidden="true"><use href="#i-left"/></svg></button>
+          <h2 class="tv-title" id="tvTitle" tabindex="-1" aria-live="polite"></h2>
+          <button class="icon-btn" id="tvNext" type="button" aria-label="Next"><svg class="i" aria-hidden="true"><use href="#i-right"/></svg></button>
+        </div>
+        <div class="cal" id="tvBody"></div>
+      </div>
+
+      <button class="fab fab-green" id="addItemFullscreen" type="button" aria-label="Add item (full screen)" title="Add item (full screen)"><svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></button>
+      <button class="fab" id="addItem" type="button" aria-label="Add itinerary item" title="Add itinerary item"><svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></button>
+    </section>
+
+    <section data-screen="packing" aria-label="Packing" hidden>
+      <progress id="packingProgress" aria-label="Packing progress" max="1" value="0"></progress>
+      <div class="packing-toolbar">
+        <form class="quick-add-bar" id="packQuickForm" autocomplete="off">
+          <input id="packQuickTitle" type="text" maxlength="200" placeholder="Quick add item (press Enter)..." aria-label="New packing item name">
+          <select id="packQuickCat" aria-label="New item category"></select>
+          <input id="packQuickQty" type="number" min="1" max="99" step="1" value="1" inputmode="numeric" aria-label="New item quantity">
+          <button type="submit" class="btn sm primary">Add</button>
+        </form>
+        <div class="search-box">
+          <svg class="i sm search-icon" aria-hidden="true"><use href="#i-search"/></svg>
+          <input id="packSearch" type="search" placeholder="Search packing items..." aria-label="Search packing items" autocomplete="off">
+          <button type="button" class="search-clear" id="packSearchClear" aria-label="Clear search" hidden><svg class="i sm" aria-hidden="true"><use href="#i-x"/></svg></button>
+        </div>
+        <div class="chip-filter-group" id="packCatFilter" role="group" aria-label="Filter packing items by category"></div>
+        <div class="packing-actions">
+          <div class="packing-toggles">
+            <button type="button" class="pill-toggle" id="packGroupByCat" aria-pressed="false">
+              <span class="circle-check" aria-hidden="true"><svg class="i" viewBox="0 0 24 24"><use href="#i-check"/></svg></span>
+              <span>Group</span>
+            </button>
+            <button type="button" class="pill-toggle" id="packUnpackedOnly" aria-pressed="false">
+              <span class="circle-check" aria-hidden="true"><svg class="i" viewBox="0 0 24 24"><use href="#i-check"/></svg></span>
+              <span>Unpacked</span>
+            </button>
+          </div>
+          <button type="button" class="btn sm" id="packResetAll" title="Mark all items as unpacked">Reset</button>
+          <button type="button" class="btn sm" id="openTemplates">Templates</button>
+          <button class="icon-btn solid" id="addPack" type="button" aria-label="Add packing item" title="Add packing item"><svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></button>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table id="packTable">
+          <thead>
+            <tr>
+              <th class="col-check"><span class="sr-only">Packed</span></th>
+              <th class="col-item">Item</th>
+              <th class="col-cat">Category</th>
+              <th class="col-qty">Qty</th>
+              <th class="actions col-actions"><span class="sr-only">Actions</span></th>
+            </tr>
+          </thead>
+          <tbody id="packingRows"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section data-screen="work" aria-label="Work log" hidden>
+      <div class="work-toolbar">
+        <div class="stat-bar" aria-live="polite" aria-atomic="true">
+          <div class="stat-seg">
+            <span class="label">Logged</span>
+            <span class="val"><span id="workLogged">0</span><span class="unit">h</span></span>
+          </div>
+          <div class="stat-sep" aria-hidden="true"></div>
+          <div class="stat-seg">
+            <span class="label">Balance</span>
+            <span class="val crit" id="balanceWrap"><span id="balance">−87.3</span><span class="unit">h</span></span>
+          </div>
+          <div class="stat-sep" aria-hidden="true"></div>
+          <label class="stat-seg" for="balPre">
+            <span class="label">Pre-trip</span>
+            <span class="val has-input">
+              <input id="balPre" type="number" inputmode="decimal" min="0" max="300" step="any" value="0" aria-label="Pre-trip leave hours">
+              <span class="unit">h</span>
+            </span>
+          </label>
+        </div>
+        <div class="work-actions">
+          <button class="btn sm" id="openLeaveSettings" type="button">Leave</button>
+          <button class="icon-btn solid" id="addWork" type="button" aria-label="Add work row" title="Add work row"><svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></button>
+        </div>
+      </div>
+      <div class="work-tz-bar" style="margin-bottom:12px; display:flex; align-items:center; gap:8px; font-size:12px; color:var(--muted); background:color-mix(in srgb, var(--ink) 4%, var(--surface)); border:1px solid var(--line); border-radius:8px; padding:7px 12px;">
+        <svg class="i sm" aria-hidden="true" style="color:var(--accent);flex-shrink:0"><use href="#i-globe"/></svg>
+        <span>Workdays default to Monday–Friday. Set your standard hours in Leave settings.</span>
+      </div>
+      <p class="status-msg" id="workStatusMsg" role="status" aria-live="polite" hidden></p>
+
+      <details class="coverage-wrap" id="workCoverageDetails">
+        <summary><span id="workCoverageSummary">Workday coverage &amp; balance breakdown</span><svg class="i sm coverage-chevron" aria-hidden="true"><use href="#i-right"/></svg></summary>
+        <div class="coverage-body">
+          <div class="coverage-grid" id="workCoverageGrid"></div>
+          <div class="leave-breakdown" id="leaveBreakdown"></div>
+        </div>
+      </details>
+
+      <div class="table-wrap">
+        <table id="workTable">
+          <thead><tr><th class="col-date">Date</th><th class="col-hours">Hrs</th><th class="col-note">Note</th><th class="actions col-actions"><span class="sr-only">Actions</span></th></tr></thead>
+          <tbody id="workRows"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section data-screen="settings" aria-label="Settings" hidden>
+      <div class="settings-screen">
+        <div class="settings-head">
+          <h1 class="settings-title">Settings</h1>
+        </div>
+
+        <div class="settings-group">
+          <div class="settings-group-head">
+            <div class="settings-group-label">Trips</div>
+            <button type="button" class="btn sm primary" id="addTripBtn">
+              <svg class="i sm" aria-hidden="true"><use href="#i-plus"/></svg>
+              <span>Add trip</span>
+            </button>
+          </div>
+          <div class="settings-card" id="tripsList">
+          </div>
+        </div>
+
+        <div class="settings-group">
+          <div class="settings-group-label">Data &amp; Export</div>
+          <div class="settings-card">
+            <button type="button" class="settings-row" id="exportIcs">
+              <div class="settings-icon-well"><svg class="i" aria-hidden="true"><use href="#i-calendar-download-02"/></svg></div>
+              <div class="settings-text">
+                <div class="settings-name">Download ICS</div>
+                <div class="settings-desc">Export itinerary to calendar (.ics)</div>
+              </div>
+              <div class="settings-chevron"><svg class="i sm" aria-hidden="true"><use href="#i-download"/></svg></div>
+            </button>
+
+            <div class="settings-divider" aria-hidden="true"></div>
+
+            <button type="button" class="settings-row" id="export">
+              <div class="settings-icon-well"><svg class="i" aria-hidden="true"><use href="#i-download"/></svg></div>
+              <div class="settings-text">
+                <div class="settings-name">Download data</div>
+                <div class="settings-desc">Back up planner data as a JSON file</div>
+              </div>
+              <div class="settings-chevron"><svg class="i sm" aria-hidden="true"><use href="#i-right"/></svg></div>
+            </button>
+
+            <div class="settings-divider" aria-hidden="true"></div>
+
+            <button type="button" class="settings-row" id="restore">
+              <div class="settings-icon-well"><svg class="i" aria-hidden="true"><use href="#i-upload"/></svg></div>
+              <div class="settings-text">
+                <div class="settings-name">Upload data</div>
+                <div class="settings-desc">Restore planner data from a backup JSON file</div>
+              </div>
+              <div class="settings-chevron"><svg class="i sm" aria-hidden="true"><use href="#i-right"/></svg></div>
+            </button>
+            <input id="import" type="file" accept=".json,application/json" hidden>
+
+            <div class="settings-divider" aria-hidden="true"></div>
+
+            <button type="button" class="settings-row" id="openRatesUtil">
+              <div class="settings-icon-well"><svg class="i" aria-hidden="true"><use href="#i-currency"/></svg></div>
+              <div class="settings-text">
+                <div class="settings-name">Budget &amp; currency</div>
+                <div class="settings-desc">Set base currency and conversion rates</div>
+              </div>
+              <div class="settings-chevron"><svg class="i sm" aria-hidden="true"><use href="#i-right"/></svg></div>
+            </button>
+          </div>
+        </div>
+
+        <div class="settings-info-card">
+          <p class="settings-info-text">Data is stored in this browser only. Export a backup before switching browsers or devices.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<dialog id="itemDialog" aria-labelledby="itemDialogTitle">
+  <form id="itemForm" novalidate>
+    <h2 id="itemDialogTitle" class="sr-only">Add item</h2>
+    <div class="dlg-body">
+      <div class="field">
+        <div class="title-head-row">
+          <label for="itemTitle"><span>Title <span class="req" aria-hidden="true">*</span></span></label>
+          <button type="button" class="icon-btn" data-close aria-label="Close"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg></button>
+        </div>
+        <div class="title-status-box">
+          <input id="itemTitle" required maxlength="200" autocomplete="off" placeholder="Hotel, train to the coast, museum tour...">
+        </div>
+        <div class="chips title-status-chips" id="itemStatuses" role="radiogroup" aria-label="Status"></div>
+      </div>
+      <div class="row2 dt-row">
+        <div class="field">
+          <label for="itemStartDate">Start <span class="req" aria-hidden="true">*</span></label>
+          <div class="dt-box">
+            <input type="date" id="itemStartDate" required aria-label="Start date">
+            <div class="sep" aria-hidden="true"></div>
+            <input type="time" id="itemStartTime" aria-label="Start time">
+            <div class="sep" aria-hidden="true"></div>
+            <div class="dtz-wrap" title="Start timezone">
+              <span class="dtz-badge" id="itemTzBadge" aria-hidden="true">TZ</span>
+              <svg class="dtz-arrow" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+              <select id="itemTz" class="dtz-select" aria-label="Start timezone"></select>
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label for="itemEndDate">End</label>
+          <div class="dt-box">
+            <input type="date" id="itemEndDate" aria-label="End date">
+            <div class="sep" aria-hidden="true"></div>
+            <input type="time" id="itemEndTime" aria-label="End time">
+            <div class="sep" aria-hidden="true"></div>
+            <div class="dtz-wrap" title="End timezone">
+              <span class="dtz-badge" id="itemEndTzBadge" aria-hidden="true">TZ</span>
+              <svg class="dtz-arrow" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+              <select id="itemEndTz" class="dtz-select" aria-label="End timezone"></select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="itemTzPreview" class="tz-info-banner" hidden></div>
+      <fieldset class="field"><legend>Type</legend><div class="chips" id="itemTypes"></div></fieldset>
+      <div class="cost-currency-box">
+        <label class="field" style="flex:1;max-width:240px;min-width:0"><span>Cost</span><input id="itemCost" type="number" min="0" step="any" placeholder="0"></label>
+        <label class="field" style="width:88px;flex-shrink:0"><span>Currency</span>
+          <select id="itemCurrency">
+            <option value="USD">USD</option>
+            <option value="EUR">EUR</option>
+            <option value="GBP">GBP</option>
+            <option value="ILS">ILS</option>
+          </select>
+        </label>
+      </div>
+      <label class="field"><span>Notes</span><textarea id="itemNotes" maxlength="1000" rows="3" placeholder="Address, details..."></textarea></label>
+    </div>
+    <div class="dlg-foot">
+      <button type="button" class="btn danger left" id="itemDelete"><svg class="i sm" aria-hidden="true"><use href="#i-trash"/></svg>Delete</button>
+      <button type="button" class="btn" data-close>Cancel</button>
+      <button type="submit" class="btn primary">Save</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="itemFullscreenDialog" class="fs-item-dialog" aria-labelledby="fsDialogTitle">
+  <form id="fsItemForm" novalidate>
+    <div class="fs-header">
+      <button type="button" class="icon-btn" data-close id="fsClose" aria-label="Close"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg></button>
+      <div class="fs-handle" aria-hidden="true"></div>
+      <h2 id="fsDialogTitle" class="sr-only">Item details</h2>
+      <div class="fs-header-actions" id="fsViewActions" hidden>
+        <button type="button" class="icon-btn danger" id="fsViewDelete" aria-label="Delete item" title="Delete item"><svg class="i" aria-hidden="true"><use href="#i-trash"/></svg></button>
+        <button type="button" class="fs-edit-btn" id="fsEditBtn"><svg class="i sm" aria-hidden="true"><use href="#i-pencil"/></svg>Edit</button>
+      </div>
+      <button type="submit" class="fs-save-btn" id="fsSave">Save</button>
+    </div>
+
+    <!-- Read-Only View Mode -->
+    <div class="fs-body" id="fsViewBody" hidden>
+      <div class="fs-card fs-view-hero">
+        <div class="fs-view-badges" id="fsViewBadges"></div>
+        <h3 class="fs-view-title" id="fsViewTitle"></h3>
+      </div>
+
+      <div class="fs-group">
+        <div class="fs-group-label">Schedule</div>
+        <div class="fs-card fs-view-list">
+          <div class="fs-view-row" id="fsViewStartRow">
+            <div class="fs-view-icon" aria-hidden="true"><svg class="i"><use href="#i-calendar-days"/></svg></div>
+            <div class="fs-view-text">
+              <div class="fs-view-meta">Start</div>
+              <div class="fs-view-val" id="fsViewStartText"></div>
+              <div class="fs-view-sub" id="fsViewStartTz"></div>
+            </div>
+          </div>
+
+          <div class="fs-view-divider" id="fsViewEndDivider" hidden aria-hidden="true"></div>
+
+          <div class="fs-view-row" id="fsViewEndRow" hidden>
+            <div class="fs-view-icon" aria-hidden="true"><svg class="i"><use href="#i-clock"/></svg></div>
+            <div class="fs-view-text">
+              <div class="fs-view-meta">End</div>
+              <div class="fs-view-val" id="fsViewEndText"></div>
+              <div class="fs-view-sub" id="fsViewEndTz"></div>
+            </div>
+          </div>
+
+          <div class="fs-view-duration" id="fsViewDuration" hidden></div>
+        </div>
+      </div>
+
+      <div class="fs-group" id="fsViewDetailsGroup">
+        <div class="fs-group-label">Details</div>
+        <div class="fs-card fs-view-list">
+          <div class="fs-view-row" id="fsViewCostRow" hidden>
+            <div class="fs-view-icon" aria-hidden="true"><svg class="i"><use href="#i-currency"/></svg></div>
+            <div class="fs-view-text">
+              <div class="fs-view-meta">Cost</div>
+              <div class="fs-view-val" id="fsViewCostText"></div>
+            </div>
+          </div>
+
+          <div class="fs-view-divider" id="fsViewDetailsDivider" hidden aria-hidden="true"></div>
+
+          <div class="fs-view-row" id="fsViewNotesRow" hidden>
+            <div class="fs-view-icon" aria-hidden="true"><svg class="i"><use href="#i-sticky-note"/></svg></div>
+            <div class="fs-view-text">
+              <div class="fs-view-meta">Notes</div>
+              <div class="fs-view-notes" id="fsViewNotesText"></div>
+            </div>
+          </div>
+
+          <div class="fs-view-empty" id="fsViewNoDetails" hidden>No cost or notes added.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Edit / Create Mode -->
+    <div class="fs-body" id="fsEditBody">
+      <!-- Title, Type & Status Card -->
+      <div class="fs-card fs-hero-card">
+        <div class="fs-title-wrap">
+          <input id="fsTitle" class="fs-title-input" required maxlength="200" autocomplete="off" placeholder="Add title...">
+        </div>
+        <div class="fs-card-divider" aria-hidden="true"></div>
+        <div class="fs-chip-section">
+          <span class="fs-label">Type</span>
+          <div class="chips" id="fsTypes" role="radiogroup" aria-label="Type"></div>
+        </div>
+        <div class="fs-chip-section">
+          <span class="fs-label">Status</span>
+          <div class="chips" id="fsStatuses" role="radiogroup" aria-label="Status"></div>
+        </div>
+      </div>
+
+      <!-- Schedule Card (Stacked Start & End) -->
+      <div class="fs-group">
+        <div class="fs-group-label">Schedule</div>
+        <div class="fs-card fs-schedule-card">
+          <div class="field">
+            <label for="fsStartDate">Start <span class="req" aria-hidden="true">*</span></label>
+            <div class="dt-box fs-dt-box">
+              <input type="date" id="fsStartDate" required aria-label="Start date">
+              <div class="sep" aria-hidden="true"></div>
+              <input type="time" id="fsStartTime" aria-label="Start time">
+              <div class="sep" aria-hidden="true"></div>
+              <div class="dtz-wrap" title="Start timezone">
+                <span class="dtz-badge" id="fsTzBadge" aria-hidden="true">TZ</span>
+                <svg class="dtz-arrow" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+                <select id="fsTz" class="dtz-select" aria-label="Start timezone"></select>
+              </div>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="fsEndDate">End</label>
+            <div class="dt-box fs-dt-box">
+              <input type="date" id="fsEndDate" aria-label="End date">
+              <div class="sep" aria-hidden="true"></div>
+              <input type="time" id="fsEndTime" aria-label="End time">
+              <div class="sep" aria-hidden="true"></div>
+              <div class="dtz-wrap" title="End timezone">
+                <span class="dtz-badge" id="fsEndTzBadge" aria-hidden="true">TZ</span>
+                <svg class="dtz-arrow" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+                <select id="fsEndTz" class="dtz-select" aria-label="End timezone"></select>
+              </div>
+            </div>
+          </div>
+
+          <div id="fsTzPreview" class="tz-info-banner" hidden></div>
+        </div>
+      </div>
+
+      <!-- Details & Cost Card -->
+      <div class="fs-group">
+        <div class="fs-group-label">Details</div>
+        <div class="fs-card fs-details-card">
+          <div class="cost-currency-box">
+            <label class="field" style="flex:1;min-width:0">
+              <span>Cost</span>
+              <input id="fsCost" type="number" min="0" step="any" placeholder="0">
+            </label>
+            <label class="field" style="width:104px;flex-shrink:0">
+              <span>Currency</span>
+              <select id="fsCurrency">
+                <option value="USD">USD</option>
+                <option value="EUR">EUR</option>
+                <option value="GBP">GBP</option>
+                <option value="ILS">ILS</option>
+              </select>
+            </label>
+          </div>
+
+          <label class="field">
+            <span>Notes</span>
+            <textarea id="fsNotes" maxlength="1000" rows="4" placeholder="Address, booking reference, details..."></textarea>
+          </label>
+        </div>
+      </div>
+
+      <div class="fs-delete-row" id="fsDeleteWrap" hidden>
+        <button type="button" class="btn danger" id="fsDelete"><svg class="i sm" aria-hidden="true"><use href="#i-trash"/></svg>Delete item</button>
+      </div>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="ratesDialog" class="small" aria-labelledby="ratesTitle">
+  <form id="ratesForm">
+    <div class="dlg-head"><h2 id="ratesTitle">Budget &amp; exchange rates</h2><button type="button" class="icon-btn" data-close aria-label="Close"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg></button></div>
+    <div class="dlg-body">
+      <label class="field"><span>Base display currency</span>
+        <select id="ratesBase">
+          <option value="USD">USD ($)</option>
+          <option value="EUR">EUR (€)</option>
+          <option value="ILS">ILS (₪)</option>
+          <option value="GBP">GBP (£)</option>
+        </select>
+      </label>
+      <p class="muted" style="font-size:12px">Units per 1 USD (used to calculate combined budget total):</p>
+      <div class="row2">
+        <label class="field"><span>EUR per 1 USD</span><input id="rateEUR" type="number" min="0.0001" step="any"></label>
+        <label class="field"><span>GBP per 1 USD</span><input id="rateGBP" type="number" min="0.0001" step="any"></label>
+      </div>
+      <label class="field"><span>ILS per 1 USD</span><input id="rateILS" type="number" min="0.0001" step="any"></label>
+    </div>
+    <div class="dlg-foot">
+      <button type="button" class="btn" data-close>Cancel</button>
+      <button type="submit" class="btn primary">Save rates</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="leaveDialog" class="small" aria-labelledby="leaveTitle">
+  <form id="leaveForm">
+    <div class="dlg-head"><h2 id="leaveTitle">Leave calculation settings</h2><button type="button" class="icon-btn" data-close aria-label="Close"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg></button></div>
+    <div class="dlg-body">
+      <label class="field"><span>Starting leave balance (hours)</span><input id="leaveStartBal" type="number" step="any" min="-500" max="1000" required></label>
+      <div class="row2">
+        <label class="field"><span>Monthly accrual (hours)</span><input id="leaveAccrual" type="number" step="any" min="0" max="200" required></label>
+        <label class="field"><span>Accrual months</span><input id="leaveMonths" type="number" step="1" min="0" max="24" required></label>
+      </div>
+      <label class="field"><span>Standard weekday hours</span><input id="leaveStdDay" type="number" step="any" min="0" max="24" required></label>
+    </div>
+    <div class="dlg-foot">
+      <button type="button" class="btn left" id="leaveResetDefaults">Defaults</button>
+      <button type="button" class="btn" data-close>Cancel</button>
+      <button type="submit" class="btn primary">Save</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="templatesDialog" class="small" aria-labelledby="templatesTitle">
+  <div class="dlg-head"><h2 id="templatesTitle">Packing templates</h2><button type="button" class="icon-btn" data-close aria-label="Close"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg></button></div>
+  <div class="dlg-body" id="templatesBody"></div>
+  <div class="dlg-foot"><button type="button" class="btn" data-close>Close</button></div>
+</dialog>
+
+<dialog id="confirmDialog" class="small" aria-labelledby="confirmTitle">
+  <form method="dialog">
+    <div class="dlg-body"><h2 id="confirmTitle" style="font-size:17px">Delete?</h2><p id="confirmText"></p></div>
+    <div class="dlg-foot">
+      <button class="btn" value="cancel">Cancel</button>
+      <button class="btn danger-solid" value="ok" id="confirmOk">Delete</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="tripDialog" class="small" aria-labelledby="tripTitle">
+  <form id="tripForm">
+    <div class="dlg-head">
+      <h2 id="tripTitle">Add trip</h2>
+      <button type="button" class="icon-btn" data-close aria-label="Close">
+        <svg class="i" aria-hidden="true"><use href="#i-x"/></svg>
+      </button>
+    </div>
+    <div class="dlg-body">
+      <input type="hidden" id="tripId">
+      <label class="field">
+        <span>Trip name</span>
+        <input id="tripName" type="text" placeholder="e.g. Summer Vacation" required maxlength="100">
+      </label>
+      <div class="row2">
+        <label class="field">
+          <span>Start date</span>
+          <input id="tripStartDate" type="date" required>
+        </label>
+        <label class="field">
+          <span>End date (optional)</span>
+          <input id="tripEndDate" type="date">
+        </label>
+      </div>
+      <p class="muted" style="font-size:12px;margin-top:6px">End date is optional and can be set or changed later.</p>
+    </div>
+    <div class="dlg-foot">
+      <button type="button" class="btn" data-close>Cancel</button>
+      <button type="submit" class="btn primary" id="tripSubmit">Save trip</button>
     </div>
   </form>
 </dialog>

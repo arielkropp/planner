@@ -1,7 +1,7 @@
 /* Work Log Table Rendering and Interactions */
 
 import { START, END } from "../../../shared/constants.js";
-import { fmtDate, validDate, parseDate } from "../../../shared/utils/date.js";
+import { fmtDate, validDate, parseDate, getTripStart, getTripEnd, hasTripEndDate } from "../../../shared/utils/date.js";
 import { $, esc, icon } from "../../../shared/utils/dom.js";
 import { uid, num } from "../../../shared/utils/format.js";
 import { getState, save } from "../../../shared/state/store.js";
@@ -68,14 +68,17 @@ export function renderWork(updateWorkStats) {
   if (!container) return;
 
   if (rows.length > 0) {
+    const tripStart = getTripStart();
+    const hasEnd = hasTripEndDate();
+    const maxAttr = hasEnd ? `max="${getTripEnd()}"` : "";
     container.innerHTML = rows.map(w => {
-      const pickerVal = validDate(w.date) ? w.date : START;
+      const pickerVal = validDate(w.date) ? w.date : tripStart;
       return `<tr id="work-row-${esc(w.id)}" data-id="${esc(w.id)}">
         <td class="date">
           <div class="fluent-dp">
             <input class="fluent-dp-input" data-field="date" type="text" value="${fmtDate(w.date)}" placeholder="dd/mm/yy" autocomplete="off" spellcheck="false" aria-label="Date">
             <button type="button" class="fluent-dp-btn date-picker-btn" tabindex="-1" aria-label="Open calendar" title="Open calendar">${icon("calendar", "sm")}</button>
-            <input type="date" class="fluent-dp-native" min="${START}" max="${END}" tabindex="-1" value="${esc(pickerVal)}">
+            <input type="date" class="fluent-dp-native" min="${tripStart}" ${maxAttr} tabindex="-1" value="${esc(pickerVal)}">
           </div>
         </td>
         <td class="num">

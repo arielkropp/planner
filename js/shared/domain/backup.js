@@ -7,8 +7,16 @@ import { confirmAsk } from "../components/dialog.js";
 
 export function downloadBackup() {
   const state = getState();
-  const cleanPacking = (state.packing || []).filter(p => !p._draft);
-  const exportState = { ...state, packing: cleanPacking };
+  const exportTrips = (state.trips || []).map(t => ({
+    ...t,
+    packing: (t.packing || []).filter(p => !p._draft)
+  }));
+  const exportState = {
+    version: 2,
+    activeTripId: state.activeTripId,
+    trips: exportTrips,
+    rates: state.rates
+  };
   const url = URL.createObjectURL(
     new Blob([JSON.stringify({ version: 2, state: exportState }, null, 2)], {
       type: "application/json"

@@ -18,11 +18,13 @@ import { initPacking, renderPacking } from "./screens/packing/index.js";
 import { initWork, renderWorkView } from "./screens/work/index.js";
 import { initBackupControls } from "./shell/backup-controls.js";
 import { initSettingsDrawer } from "./shell/settings-drawer.js";
+import { initTripControls, renderTripsList } from "../shared/components/trips-ui.js";
 
 function renderAll() {
   renderItinerary();
   renderPacking();
   renderWorkView();
+  renderTripsList();
 }
 
 // Wires the freshly mounted mobile DOM. `signal` aborts every document/window-level listener when the platform unmounts.
@@ -41,6 +43,7 @@ export function mount({ signal }) {
   initWork({ onRatesChanged: () => renderItinerary() });
   initBackupControls();
   initSettingsDrawer({ signal });
+  initTripControls();
 
   // Re-apply the itinerary view chosen before this platform was mounted
   setItineraryView(viewState.itineraryView, () => "itinerary");

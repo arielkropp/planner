@@ -2,7 +2,7 @@
 
 import { TYPES, TYPE_META, STATUSES, TIMEZONES, DEFAULT_TZ, START, END } from "../../../shared/constants.js";
 import { $, icon } from "../../../shared/utils/dom.js";
-import { defaultDate, validDate, fmtDateLong, fmtDay, toUtcMs, formatDurationMs, tzInfo } from "../../../shared/utils/date.js";
+import { defaultDate, validDate, fmtDateLong, fmtDay, toUtcMs, formatDurationMs, tzInfo, getTripStart, getTripEnd, hasTripEndDate } from "../../../shared/utils/date.js";
 import { uid } from "../../../shared/utils/format.js";
 import { getState, commit, save } from "../../../shared/state/store.js";
 import { isValidTimeInterval } from "../../../shared/state/validation.js";
@@ -144,10 +144,22 @@ export function openItemDialog(id, initialDate, defaultType) {
   $("itemTitle").classList.remove("is-invalid");
   $("itemTitle").closest(".title-status-box")?.classList.remove("is-invalid");
 
+  const tripStart = getTripStart();
+  const tripEnd = getTripEnd();
+  const hasEnd = hasTripEndDate();
+  ["itemStartDate", "itemEndDate"].forEach(id => {
+    const el = $(id);
+    if (el) {
+      el.min = tripStart;
+      if (hasEnd) el.max = tripEnd;
+      else el.removeAttribute("max");
+    }
+  });
+
   $("itemStartDate").value = a.date || defaultDate();
   $("itemStartTime").value = a.time || "";
   $("itemEndDate").value = a.endDate || "";
-  $("itemEndDate").min = $("itemStartDate").value || START;
+  $("itemEndDate").min = $("itemStartDate").value || tripStart;
   $("itemEndTime").value = a.endTime || "";
 
   populateTimezoneSelects();
@@ -233,7 +245,7 @@ export function initItemDialog(onItemChanged) {
 
   // Date and Time field listeners
   $("itemStartDate")?.addEventListener("change", () => {
-    $("itemEndDate").min = $("itemStartDate").value || START;
+    $("itemEndDate").min = $("itemStartDate").value || getTripStart();
   });
   $("itemStartDate")?.addEventListener("blur", () => {
     if (!validDate($("itemStartDate").value)) {
@@ -315,7 +327,12 @@ export function initItemDialog(onItemChanged) {
       $("itemTitle").reportValidity();
       return;
     }
-    const rangeMsg = `Please select a trip date between ${fmtDateLong(START)} and ${fmtDateLong(END)}.`;
+    const tripStart = getTripStart();
+    const tripEnd = getTripEnd();
+    const hasEnd = hasTripEndDate();
+    const rangeMsg = hasEnd
+      ? `Please select a trip date between ${fmtDateLong(tripStart)} and ${fmtDateLong(tripEnd)}.`
+      : `Please select a trip date on or after ${fmtDateLong(tripStart)}.`;
     if (!validDate(startDate)) {
       $("itemStartDate").setCustomValidity(rangeMsg);
       $("itemStartDate").classList.add("is-invalid");
