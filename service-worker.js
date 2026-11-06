@@ -1,4 +1,4 @@
-const CACHE_NAME = "trip-planner-521e0ec8ecee8e45b1dc09c25b5d53ff475bb255";
+const CACHE_NAME = "trip-planner-83154de70d0669cadd40795d8e3012bb08204f31";
 
 // The build replaces this line with the app shell, manifest and assets (see scripts/build.mjs)
 const STATIC_ASSETS = [
@@ -132,24 +132,24 @@ self.addEventListener("fetch", event => {
     return;
   }
 
-  // Cache-first for same-origin static assets, updating cache in background
+  // Cache matching from the active cache version for same-origin static assets
   event.respondWith(
-    caches.match(request).then(cachedResponse => {
-      if (cachedResponse) {
-        // Fetch update in background if online
-        fetch(request)
-          .then(networkResponse => {
-            if (networkResponse && networkResponse.ok) {
-              caches.open(CACHE_NAME).then(cache => cache.put(request, networkResponse));
-            }
-          })
-          .catch(() => {});
-        return cachedResponse;
-      }
+    caches.open(CACHE_NAME).then(cache => {
+      return cache.match(request).then(cachedResponse => {
+        if (cachedResponse) {
+          // Fetch update in background if online
+          fetch(request)
+            .then(networkResponse => {
+              if (networkResponse && networkResponse.ok) {
+                cache.put(request, networkResponse);
+              }
+            })
+            .catch(() => {});
+          return cachedResponse;
+        }
 
-      return fetch(request).then(networkResponse => {
-        if (!networkResponse || !networkResponse.ok) return networkResponse;
-        return caches.open(CACHE_NAME).then(cache => {
+        return fetch(request).then(networkResponse => {
+          if (!networkResponse || !networkResponse.ok) return networkResponse;
           cache.put(request, networkResponse.clone());
           return networkResponse;
         });

@@ -214,14 +214,18 @@
         </div>
 
         <div class="settings-group">
-          <div class="settings-group-head">
-            <div class="settings-group-label">Trips</div>
-            <button type="button" class="btn sm primary" id="addTripBtn">
-              <svg class="i sm" aria-hidden="true"><use href="#i-plus"/></svg>
-              <span>Add trip</span>
+          <div class="settings-group-label">Trips</div>
+          <div class="settings-card">
+            <div id="tripsList"></div>
+            <div class="settings-divider" id="tripsDivider" aria-hidden="true" hidden></div>
+            <button type="button" class="settings-row" id="addTripBtn">
+              <div class="settings-icon-well"><svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></div>
+              <div class="settings-text">
+                <div class="settings-name">Add trip</div>
+                <div class="settings-desc" id="addTripDesc">Create a new trip to track itinerary, packing list and work log</div>
+              </div>
+              <div class="settings-chevron"><svg class="i sm" aria-hidden="true"><use href="#i-right"/></svg></div>
             </button>
-          </div>
-          <div class="settings-card" id="tripsList">
           </div>
         </div>
 
@@ -755,14 +759,18 @@
         </div>
 
         <div class="settings-group">
-          <div class="settings-group-head">
-            <div class="settings-group-label">Trips</div>
-            <button type="button" class="btn sm primary" id="addTripBtn">
-              <svg class="i sm" aria-hidden="true"><use href="#i-plus"/></svg>
-              <span>Add trip</span>
+          <div class="settings-group-label">Trips</div>
+          <div class="settings-card">
+            <div id="tripsList"></div>
+            <div class="settings-divider" id="tripsDivider" aria-hidden="true" hidden></div>
+            <button type="button" class="settings-row" id="addTripBtn">
+              <div class="settings-icon-well"><svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></div>
+              <div class="settings-text">
+                <div class="settings-name">Add trip</div>
+                <div class="settings-desc" id="addTripDesc">Create a new trip to track itinerary, packing list and work log</div>
+              </div>
+              <div class="settings-chevron"><svg class="i sm" aria-hidden="true"><use href="#i-right"/></svg></div>
             </button>
-          </div>
-          <div class="settings-card" id="tripsList">
           </div>
         </div>
 
@@ -1150,7 +1158,18 @@
 
 <script>
   if ("serviceWorker" in navigator) {
+    let refreshing = false;
+    navigator.serviceWorker.addEventListener("controllerchange", () => {
+      if (!refreshing) {
+        refreshing = true;
+        window.location.reload();
+      }
+    });
+
     navigator.serviceWorker.register("./service-worker.js", { scope: "./" })
+      .then(reg => {
+        reg.update();
+      })
       .catch(error => console.error("Offline support could not be enabled:", error));
   }
 </script>

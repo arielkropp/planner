@@ -19,7 +19,11 @@ export function openAddTripDialog() {
     $("tripEndDate").min = todayIso();
   }
   if ($("tripSubmit")) $("tripSubmit").textContent = "Add trip";
-  dlg.showModal();
+  try {
+    dlg.showModal();
+  } catch (err) {
+    console.error("Could not open tripDialog:", err);
+  }
 }
 
 export function openEditTripDialog(tripId) {
@@ -30,37 +34,56 @@ export function openEditTripDialog(tripId) {
   const titleEl = $("tripTitle");
   if (titleEl) titleEl.textContent = "Edit trip";
   if ($("tripId")) $("tripId").value = trip.id;
-  if ($("tripName")) $("tripName").value = trip.name;
-  if ($("tripStartDate")) $("tripStartDate").value = trip.startDate;
+  if ($("tripName")) $("tripName").value = trip.name || "";
+  if ($("tripStartDate")) $("tripStartDate").value = trip.startDate || todayIso();
   if ($("tripEndDate")) {
     $("tripEndDate").value = trip.endDate || "";
-    $("tripEndDate").min = trip.startDate;
+    $("tripEndDate").min = trip.startDate || todayIso();
   }
   if ($("tripSubmit")) $("tripSubmit").textContent = "Save changes";
-  dlg.showModal();
+  try {
+    dlg.showModal();
+  } catch (err) {
+    console.error("Could not open tripDialog:", err);
+  }
 }
 
 export function renderTripsList() {
   const container = $("tripsList");
-  if (!container) return;
+  const divider = $("tripsDivider");
+  const addDesc = $("addTripDesc");
 
   const trips = getTrips();
   const activeTrip = getActiveTrip();
 
+  if (divider) {
+    divider.hidden = trips.length === 0;
+  }
+  if (addDesc) {
+    addDesc.textContent = trips.length === 0
+      ? "Create a trip to start planning your itinerary, packing list and work log"
+      : "Create another trip with its own itinerary, packing list and work log";
+  }
+
+  if (!container) return;
+
   if (trips.length === 0) {
-    container.innerHTML = `<div class="trip-empty-state">No trips found. Click "Add trip" above to create one.</div>`;
+    container.innerHTML = "";
     return;
   }
 
-  container.innerHTML = trips.map(t => {
+  container.innerHTML = trips.map((t, index) => {
     const isActive = (t.id === activeTrip?.id);
-    const datesText = t.endDate
-      ? `${fmtDate(t.startDate)} – ${fmtDate(t.endDate)}`
-      : `From ${fmtDate(t.startDate)} (Ongoing)`;
+    const startFmt = (typeof t.startDate === "string" && t.startDate.length >= 10) ? fmtDate(t.startDate) : "";
+    const endFmt = (typeof t.endDate === "string" && t.endDate.length >= 10) ? fmtDate(t.endDate) : "";
+    const datesText = endFmt
+      ? `${startFmt} – ${endFmt}`
+      : (startFmt ? `From ${startFmt} (Ongoing)` : "Dates not set");
     const agendaCount = t.agenda?.length || 0;
     const packCount = t.packing?.length || 0;
     const workCount = t.work?.length || 0;
     const statsText = `${agendaCount} event${agendaCount === 1 ? "" : "s"} · ${packCount} item${packCount === 1 ? "" : "s"} · ${workCount} work log${workCount === 1 ? "" : "s"}`;
+    const dividerHtml = index < trips.length - 1 ? `<div class="settings-divider" aria-hidden="true"></div>` : "";
 
     return `<div class="trip-row${isActive ? " is-active" : ""}" data-trip-id="${esc(t.id)}">
       <div class="settings-icon-well trip-icon">
@@ -78,73 +101,83 @@ export function renderTripsList() {
         <button type="button" class="icon-btn sm" data-action="edit" data-id="${esc(t.id)}" aria-label="Edit ${esc(t.name)}" title="Edit trip"><svg class="i sm" aria-hidden="true"><use href="#i-pencil"/></svg></button>
         ${trips.length > 1 ? `<button type="button" class="icon-btn sm danger" data-action="delete" data-id="${esc(t.id)}" aria-label="Delete ${esc(t.name)}" title="Delete trip"><svg class="i sm" aria-hidden="true"><use href="#i-trash"/></svg></button>` : ""}
       </div>
-    </div>`;
+    </div>${dividerHtml}`;
   }).join("");
 }
 
+let controlsBound = false;
+
 export function initTripControls() {
-  $("addTripBtn")?.addEventListener("click", () => openAddTripDialog());
+  if (controlsBound) return;
+  controlsBound = true;
 
-  const container = $("tripsList");
-  if (container) {
-    container.addEventListener("click", async e => {
-      const activateBtn = e.target.closest('[data-action="activate"]');
-      if (activateBtn) {
-        const id = activateBtn.dataset.id;
+  document.addEventListener("click", async e => {
+    const addBtn = e.target.closest("#addTripBtn, [data-action='add-trip']");
+    if (addBtn) {
+      e.preventDefault();
+      openAddTripDialog();
+      return;
+    }
+
+    const activateBtn = e.target.closest('[data-action="activate"]');
+    if (activateBtn) {
+      const id = activateBtn.dataset.id;
+      if (id) setActiveTrip(id);
+      return;
+    }
+
+    const editBtn = e.target.closest('[data-action="edit"]');
+    if (editBtn) {
+      const id = editBtn.dataset.id;
+      if (id) openEditTripDialog(id);
+      return;
+    }
+
+    const delBtn = e.target.closest('[data-action="delete"]');
+    if (delBtn) {
+      const id = delBtn.dataset.id;
+      const trip = getTrips().find(t => t.id === id);
+      if (!trip) return;
+      const confirmed = await confirmAsk(
+        "Delete trip?",
+        `Are you sure you want to delete "${trip.name}" and all of its itinerary, packing list, and work log data?`,
+        "Delete trip",
+        true
+      );
+      if (confirmed) {
+        deleteTrip(id);
+      }
+    }
+  });
+
+  document.addEventListener("keydown", e => {
+    if (e.key === "Enter" || e.key === " ") {
+      const activateTarget = e.target.closest('[data-action="activate"]');
+      if (activateTarget && activateTarget.tagName !== "BUTTON") {
+        e.preventDefault();
+        const id = activateTarget.dataset.id;
         if (id) setActiveTrip(id);
-        return;
       }
+    }
+  });
 
-      const editBtn = e.target.closest('[data-action="edit"]');
-      if (editBtn) {
-        const id = editBtn.dataset.id;
-        if (id) openEditTripDialog(id);
-        return;
-      }
+  document.addEventListener("change", e => {
+    if (e.target && e.target.id === "tripStartDate") {
+      const endInp = $("tripEndDate");
+      if (endInp) endInp.min = e.target.value || "";
+    }
+  });
 
-      const delBtn = e.target.closest('[data-action="delete"]');
-      if (delBtn) {
-        const id = delBtn.dataset.id;
-        const trip = getTrips().find(t => t.id === id);
-        if (!trip) return;
-        const confirmed = await confirmAsk(
-          "Delete trip?",
-          `Are you sure you want to delete "${trip.name}" and all of its itinerary, packing list, and work log data?`,
-          "Delete trip",
-          true
-        );
-        if (confirmed) {
-          deleteTrip(id);
-        }
-      }
-    });
-
-    container.addEventListener("keydown", e => {
-      if (e.key === "Enter" || e.key === " ") {
-        const activateTarget = e.target.closest('[data-action="activate"]');
-        if (activateTarget) {
-          e.preventDefault();
-          const id = activateTarget.dataset.id;
-          if (id) setActiveTrip(id);
-        }
-      }
-    });
-  }
-
-  const startInp = $("tripStartDate");
-  const endInp = $("tripEndDate");
-  if (startInp && endInp) {
-    startInp.addEventListener("change", () => {
-      endInp.min = startInp.value || "";
-    });
-  }
-
-  $("tripForm")?.addEventListener("submit", e => {
+  document.addEventListener("submit", e => {
+    const form = e.target.closest("#tripForm");
+    if (!form) return;
     e.preventDefault();
+
     const id = $("tripId")?.value;
     const name = $("tripName")?.value || "";
     const startDate = $("tripStartDate")?.value || "";
     const endDate = $("tripEndDate")?.value || "";
+    const endInp = $("tripEndDate");
 
     if (endDate && endDate < startDate) {
       if (endInp) {

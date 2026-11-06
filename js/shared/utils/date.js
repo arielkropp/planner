@@ -14,9 +14,15 @@ export const daysDiff = (d1, d2) => Math.round((toDate(d2) - toDate(d1)) / 86400
 
 export const dowOf = iso => toDate(iso).getUTCDay();
 
-export const fmtDate = iso => `${iso.slice(8, 10)}/${iso.slice(5, 7)}/${iso.slice(2, 4)}`;
+export const fmtDate = iso => {
+  if (typeof iso !== "string" || iso.length < 10) return "";
+  return `${iso.slice(8, 10)}/${iso.slice(5, 7)}/${iso.slice(2, 4)}`;
+};
 
-export const fmtDateLong = iso => `${iso.slice(8, 10)}/${iso.slice(5, 7)}/${iso.slice(0, 4)}`;
+export const fmtDateLong = iso => {
+  if (typeof iso !== "string" || iso.length < 10) return "";
+  return `${iso.slice(8, 10)}/${iso.slice(5, 7)}/${iso.slice(0, 4)}`;
+};
 
 export const fmtDay = iso => `${WD[dowOf(iso)]} ${fmtDate(iso)}`;
 
