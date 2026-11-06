@@ -1,0 +1,148 @@
+/* =========================================================
+   SETTINGS SCREEN (Android Material Design 3 style)
+   ========================================================= */
+
+.settings-screen {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 12px 0 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  font-family: var(--font-ui);
+}
+
+.settings-head {
+  padding: 4px 4px 8px;
+}
+
+.settings-title {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.5px;
+}
+
+.settings-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.settings-group-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  padding: 0 12px;
+}
+
+.settings-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.settings-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  padding: 16px;
+  border: none;
+  background: transparent;
+  color: inherit;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color 0.15s ease;
+}
+
+.settings-row:hover {
+  background-color: color-mix(in srgb, var(--ink) 4%, transparent);
+}
+
+.settings-row:active {
+  background-color: color-mix(in srgb, var(--ink) 8%, transparent);
+}
+
+.settings-row:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+
+.settings-icon-well {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: var(--accent);
+  display: grid;
+  place-items: center;
+}
+
+.settings-icon-well .i {
+  width: 22px;
+  height: 22px;
+}
+
+.settings-text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.settings-name {
+  font-size: 15.5px;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.3;
+}
+
+.settings-desc {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.35;
+}
+
+.settings-chevron {
+  flex-shrink: 0;
+  color: var(--faint);
+  display: grid;
+  place-items: center;
+}
+
+.settings-chevron .i {
+  width: 18px;
+  height: 18px;
+}
+
+.settings-divider {
+  height: 1px;
+  background: var(--line);
+  margin-left: 76px;
+}
+
+.settings-info-card {
+  padding: 14px 18px;
+  border-radius: 16px;
+  background: var(--surface-tonal);
+  border: 1px solid color-mix(in srgb, var(--line) 60%, transparent);
+}
+
+.settings-info-text {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--muted);
+}
+

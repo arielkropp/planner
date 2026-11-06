@@ -3,7 +3,6 @@
 
 import { initStore, paintStorageStatus } from "./shared/state/store.js";
 import { currentPlatform, watchPlatform } from "./shared/platform.js";
-import "./vendor/material-web.js";
 
 // Prevent browser from restoring scroll on refresh
 history.scrollRestoration = "manual";
@@ -29,7 +28,7 @@ async function syncPlatform() {
   if (active?.platform === platform) return;
 
   // Swapping would discard whatever is typed into an open dialog, so wait until it closes
-  if (active && document.querySelector("dialog[open], md-dialog[open]")) return;
+  if (active && document.querySelector("dialog[open]")) return;
 
   const { mount } = await loaders[platform]();
   const scrollY = window.scrollY;

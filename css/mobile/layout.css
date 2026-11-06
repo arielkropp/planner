@@ -25,11 +25,11 @@ nav {
   right: 0;
   bottom: 0;
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 0;
   background: var(--surface);
   border-top: 1px solid var(--line);
-  padding: 6px 2px calc(6px + env(safe-area-inset-bottom));
+  padding: 6px 4px calc(6px + env(safe-area-inset-bottom));
 }
 
 .nav-link {
@@ -41,14 +41,14 @@ nav {
   flex: none;
   flex-direction: column;
   gap: 3px;
-  padding: 5px 1px 3px;
+  padding: 5px 2px 3px;
   border-radius: 12px;
   color: var(--muted);
   text-decoration: none;
   font-family: var(--font-ui);
   font-weight: 500;
-  font-size: 10.5px;
-  line-height: 13px;
+  font-size: 11px;
+  line-height: 14px;
   justify-content: center;
   text-align: center;
   touch-action: manipulation;

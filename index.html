@@ -60,7 +60,6 @@
   <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></symbol>
   <symbol id="i-currency" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/></symbol>
   <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
-  <symbol id="i-sparkles" viewBox="0 0 24 24"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"/><path d="M18 3v4M20 5h-4"/></symbol>
   <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" x2="22" y1="12" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></symbol>
 </svg>
 
@@ -72,18 +71,11 @@
   <aside class="sidebar">
     <nav aria-label="Screens">
       <a class="nav-link" href="#itinerary"><svg class="i" aria-hidden="true"><use href="#i-calendar-days"/></svg><span>Itinerary</span></a>
-      <a class="nav-link" href="#itinerary2"><svg class="i" aria-hidden="true"><use href="#i-sparkles"/></svg><span>Itinerary 2</span></a>
       <a class="nav-link" href="#packing"><svg class="i" aria-hidden="true"><use href="#i-luggage"/></svg><span>Packing</span></a>
       <a class="nav-link" href="#work"><svg class="i" aria-hidden="true"><use href="#i-briefcase"/></svg><span>Work log</span></a>
+      <a class="nav-link" href="#settings"><svg class="i" aria-hidden="true"><use href="#i-settings"/></svg><span>Settings</span></a>
     </nav>
     <p class="save-note" id="saveStatus" role="status">Saved in this browser only. Back up before switching browsers or devices.</p>
-    <div class="utilities" id="utilities" role="group" aria-label="App actions">
-      <button class="util" id="theme" type="button" aria-label="Toggle dark mode" title="Toggle dark mode"><svg class="i" aria-hidden="true"><use href="#i-moon"/></svg><span class="sr-only">Theme</span></button>
-      <button class="util" id="openRatesUtil" type="button" aria-label="Budget and exchange rates" title="Budget and exchange rates"><svg class="i" aria-hidden="true"><use href="#i-currency"/></svg><span class="sr-only">Currency</span></button>
-      <button class="util" id="restore" type="button" aria-label="Restore backup" title="Restore backup"><svg class="i" aria-hidden="true"><use href="#i-upload"/></svg><span class="sr-only">Upload</span></button>
-      <button class="util" id="export" type="button" aria-label="Download backup" title="Download backup"><svg class="i" aria-hidden="true"><use href="#i-download"/></svg><span class="sr-only">Download</span></button>
-      <input id="import" type="file" accept=".json,application/json" hidden>
-    </div>
   </aside>
 
   <main>
@@ -98,8 +90,7 @@
             <button type="button" data-itinerary-view="month" aria-pressed="false">Month</button>
           </div>
           <div class="itinerary-actions">
-            <button class="icon-btn tonal" id="exportIcs" type="button" aria-label="Export calendar (.ics)" title="Export calendar (.ics)"><svg class="i" aria-hidden="true"><use href="#i-calendar-download-02"/></svg></button>
-            <button class="icon-btn solid" id="addItem" type="button" aria-label="Add itinerary item" title="Add itinerary item"><svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></button>
+            <button class="icon-btn tonal" id="theme" type="button" aria-label="Toggle dark mode" title="Toggle dark mode"><svg class="i" aria-hidden="true"><use href="#i-moon"/></svg></button>
           </div>
         </div>
       </div>
@@ -116,44 +107,10 @@
         </div>
         <div class="cal" id="tvBody"></div>
       </div>
+
+      <button class="fab fab-green" id="addItemFullscreen" type="button" aria-label="Add item (full screen)" title="Add item (full screen)"><svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></button>
+      <button class="fab" id="addItem" type="button" aria-label="Add itinerary item" title="Add itinerary item"><svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></button>
     </section>
-
-    <section data-screen="itinerary2" aria-label="Itinerary 2">
-      <div class="m3-itinerary-toolbar">
-        <md-tabs id="itinerary2Views" aria-label="Itinerary view">
-          <md-primary-tab data-itinerary-view="schedule" active>Schedule</md-primary-tab>
-          <md-primary-tab data-itinerary-view="week">Week</md-primary-tab>
-          <md-primary-tab data-itinerary-view="month">Month</md-primary-tab>
-        </md-tabs>
-        <div class="m3-toolbar-actions">
-          <md-filled-tonal-icon-button id="exportIcs2" type="button" aria-label="Export calendar (.ics)" title="Export calendar (.ics)">
-            <svg class="i" aria-hidden="true"><use href="#i-calendar-download-02"/></svg>
-          </md-filled-tonal-icon-button>
-        </div>
-      </div>
-
-      <div id="scheduleView2">
-        <div id="agendaList2" class="m3-schedule-list"></div>
-      </div>
-
-      <div id="calendarView2" hidden>
-        <div class="tv-bar" id="tvBar2" hidden>
-          <md-icon-button id="tvPrev2" type="button" aria-label="Previous">
-            <svg class="i" aria-hidden="true"><use href="#i-left"/></svg>
-          </md-icon-button>
-          <h2 class="tv-title" id="tvTitle2" tabindex="-1" aria-live="polite"></h2>
-          <md-icon-button id="tvNext2" type="button" aria-label="Next">
-            <svg class="i" aria-hidden="true"><use href="#i-right"/></svg>
-          </md-icon-button>
-        </div>
-        <div class="cal" id="tvBody2"></div>
-      </div>
-
-      <md-fab id="addItem2" class="m3-fab" label="Add item" aria-label="Add itinerary item" variant="primary">
-        <svg slot="icon" class="i" aria-hidden="true"><use href="#i-plus"/></svg>
-      </md-fab>
-    </section>
-
 
     <section data-screen="packing" aria-label="Packing" hidden>
       <progress id="packingProgress" aria-label="Packing progress" max="1" value="0"></progress>
@@ -249,6 +206,67 @@
         </table>
       </div>
     </section>
+
+    <section data-screen="settings" aria-label="Settings" hidden>
+      <div class="settings-screen">
+        <div class="settings-head">
+          <h1 class="settings-title">Settings</h1>
+        </div>
+
+        <div class="settings-group">
+          <div class="settings-group-label">Data &amp; Export</div>
+          <div class="settings-card">
+            <button type="button" class="settings-row" id="exportIcs">
+              <div class="settings-icon-well"><svg class="i" aria-hidden="true"><use href="#i-calendar-download-02"/></svg></div>
+              <div class="settings-text">
+                <div class="settings-name">Download ICS</div>
+                <div class="settings-desc">Export itinerary to calendar (.ics)</div>
+              </div>
+              <div class="settings-chevron"><svg class="i sm" aria-hidden="true"><use href="#i-download"/></svg></div>
+            </button>
+
+            <div class="settings-divider" aria-hidden="true"></div>
+
+            <button type="button" class="settings-row" id="export">
+              <div class="settings-icon-well"><svg class="i" aria-hidden="true"><use href="#i-download"/></svg></div>
+              <div class="settings-text">
+                <div class="settings-name">Download data</div>
+                <div class="settings-desc">Back up planner data as a JSON file</div>
+              </div>
+              <div class="settings-chevron"><svg class="i sm" aria-hidden="true"><use href="#i-right"/></svg></div>
+            </button>
+
+            <div class="settings-divider" aria-hidden="true"></div>
+
+            <button type="button" class="settings-row" id="restore">
+              <div class="settings-icon-well"><svg class="i" aria-hidden="true"><use href="#i-upload"/></svg></div>
+              <div class="settings-text">
+                <div class="settings-name">Upload data</div>
+                <div class="settings-desc">Restore planner data from a backup JSON file</div>
+              </div>
+              <div class="settings-chevron"><svg class="i sm" aria-hidden="true"><use href="#i-right"/></svg></div>
+            </button>
+            <input id="import" type="file" accept=".json,application/json" hidden>
+
+            <div class="settings-divider" aria-hidden="true"></div>
+
+            <button type="button" class="settings-row" id="openRatesUtil">
+              <div class="settings-icon-well"><svg class="i" aria-hidden="true"><use href="#i-currency"/></svg></div>
+              <div class="settings-text">
+                <div class="settings-name">Budget &amp; currency</div>
+                <div class="settings-desc">Set base currency and conversion rates</div>
+              </div>
+              <div class="settings-chevron"><svg class="i sm" aria-hidden="true"><use href="#i-right"/></svg></div>
+            </button>
+          </div>
+        </div>
+
+        <div class="settings-info-card">
+          <p class="settings-info-text">Data is stored in this browser only. Export a backup before switching browsers or devices.</p>
+        </div>
+      </div>
+    </section>
+
   </main>
 </div>
 
@@ -319,71 +337,168 @@
   </form>
 </dialog>
 
-<md-dialog id="itemDialog2" aria-labelledby="itemDialog2Title">
-  <div slot="headline" id="itemDialog2Title">Add item</div>
-  <form id="itemForm2" slot="content" method="dialog" novalidate class="m3-dialog-form">
-    <div class="m3-form-field">
-      <md-outlined-text-field id="itemTitle2" label="Title *" required placeholder="Hotel, train, museum tour..."></md-outlined-text-field>
+<dialog id="itemFullscreenDialog" class="fs-item-dialog" aria-labelledby="fsDialogTitle">
+  <form id="fsItemForm" novalidate>
+    <div class="fs-header">
+      <button type="button" class="icon-btn" data-close id="fsClose" aria-label="Close"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg></button>
+      <div class="fs-handle" aria-hidden="true"></div>
+      <h2 id="fsDialogTitle" class="sr-only">Item details</h2>
+      <div class="fs-header-actions" id="fsViewActions" hidden>
+        <button type="button" class="icon-btn danger" id="fsViewDelete" aria-label="Delete item" title="Delete item"><svg class="i" aria-hidden="true"><use href="#i-trash"/></svg></button>
+        <button type="button" class="fs-edit-btn" id="fsEditBtn"><svg class="i sm" aria-hidden="true"><use href="#i-pencil"/></svg>Edit</button>
+      </div>
+      <button type="submit" class="fs-save-btn" id="fsSave">Save</button>
     </div>
 
-    <div class="m3-form-field">
-      <div class="m3-field-label">Status</div>
-      <md-chip-set id="itemStatuses2" role="radiogroup" aria-label="Status">
-        <md-filter-chip data-status="To book" label="To book" selected></md-filter-chip>
-        <md-filter-chip data-status="Confirmed" label="Confirmed"></md-filter-chip>
-      </md-chip-set>
+    <!-- Read-Only View Mode -->
+    <div class="fs-body" id="fsViewBody" hidden>
+      <div class="fs-card fs-view-hero">
+        <div class="fs-view-badges" id="fsViewBadges"></div>
+        <h3 class="fs-view-title" id="fsViewTitle"></h3>
+      </div>
+
+      <div class="fs-group">
+        <div class="fs-group-label">Schedule</div>
+        <div class="fs-card fs-view-list">
+          <div class="fs-view-row" id="fsViewStartRow">
+            <div class="fs-view-icon" aria-hidden="true"><svg class="i"><use href="#i-calendar-days"/></svg></div>
+            <div class="fs-view-text">
+              <div class="fs-view-meta">Start</div>
+              <div class="fs-view-val" id="fsViewStartText"></div>
+              <div class="fs-view-sub" id="fsViewStartTz"></div>
+            </div>
+          </div>
+
+          <div class="fs-view-divider" id="fsViewEndDivider" hidden aria-hidden="true"></div>
+
+          <div class="fs-view-row" id="fsViewEndRow" hidden>
+            <div class="fs-view-icon" aria-hidden="true"><svg class="i"><use href="#i-clock"/></svg></div>
+            <div class="fs-view-text">
+              <div class="fs-view-meta">End</div>
+              <div class="fs-view-val" id="fsViewEndText"></div>
+              <div class="fs-view-sub" id="fsViewEndTz"></div>
+            </div>
+          </div>
+
+          <div class="fs-view-duration" id="fsViewDuration" hidden></div>
+        </div>
+      </div>
+
+      <div class="fs-group" id="fsViewDetailsGroup">
+        <div class="fs-group-label">Details</div>
+        <div class="fs-card fs-view-list">
+          <div class="fs-view-row" id="fsViewCostRow" hidden>
+            <div class="fs-view-icon" aria-hidden="true"><svg class="i"><use href="#i-currency"/></svg></div>
+            <div class="fs-view-text">
+              <div class="fs-view-meta">Cost</div>
+              <div class="fs-view-val" id="fsViewCostText"></div>
+            </div>
+          </div>
+
+          <div class="fs-view-divider" id="fsViewDetailsDivider" hidden aria-hidden="true"></div>
+
+          <div class="fs-view-row" id="fsViewNotesRow" hidden>
+            <div class="fs-view-icon" aria-hidden="true"><svg class="i"><use href="#i-sticky-note"/></svg></div>
+            <div class="fs-view-text">
+              <div class="fs-view-meta">Notes</div>
+              <div class="fs-view-notes" id="fsViewNotesText"></div>
+            </div>
+          </div>
+
+          <div class="fs-view-empty" id="fsViewNoDetails" hidden>No cost or notes added.</div>
+        </div>
+      </div>
     </div>
 
-    <div class="m3-form-row">
-      <md-outlined-text-field id="itemStartDate2" type="date" label="Start date *" required></md-outlined-text-field>
-      <md-outlined-text-field id="itemStartTime2" type="time" label="Start time"></md-outlined-text-field>
-    </div>
+    <!-- Edit / Create Mode -->
+    <div class="fs-body" id="fsEditBody">
+      <!-- Title, Type & Status Card -->
+      <div class="fs-card fs-hero-card">
+        <div class="fs-title-wrap">
+          <input id="fsTitle" class="fs-title-input" required maxlength="200" autocomplete="off" placeholder="Add title...">
+        </div>
+        <div class="fs-card-divider" aria-hidden="true"></div>
+        <div class="fs-chip-section">
+          <span class="fs-label">Type</span>
+          <div class="chips" id="fsTypes" role="radiogroup" aria-label="Type"></div>
+        </div>
+        <div class="fs-chip-section">
+          <span class="fs-label">Status</span>
+          <div class="chips" id="fsStatuses" role="radiogroup" aria-label="Status"></div>
+        </div>
+      </div>
 
-    <div class="m3-form-field">
-      <md-outlined-select id="itemTz2" label="Start timezone">
-      </md-outlined-select>
-    </div>
+      <!-- Schedule Card (Stacked Start & End) -->
+      <div class="fs-group">
+        <div class="fs-group-label">Schedule</div>
+        <div class="fs-card fs-schedule-card">
+          <div class="field">
+            <label for="fsStartDate">Start <span class="req" aria-hidden="true">*</span></label>
+            <div class="dt-box fs-dt-box">
+              <input type="date" id="fsStartDate" required aria-label="Start date">
+              <div class="sep" aria-hidden="true"></div>
+              <input type="time" id="fsStartTime" aria-label="Start time">
+              <div class="sep" aria-hidden="true"></div>
+              <div class="dtz-wrap" title="Start timezone">
+                <span class="dtz-badge" id="fsTzBadge" aria-hidden="true">TZ</span>
+                <svg class="dtz-arrow" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+                <select id="fsTz" class="dtz-select" aria-label="Start timezone"></select>
+              </div>
+            </div>
+          </div>
 
-    <div class="m3-form-row">
-      <md-outlined-text-field id="itemEndDate2" type="date" label="End date"></md-outlined-text-field>
-      <md-outlined-text-field id="itemEndTime2" type="time" label="End time"></md-outlined-text-field>
-    </div>
+          <div class="field">
+            <label for="fsEndDate">End</label>
+            <div class="dt-box fs-dt-box">
+              <input type="date" id="fsEndDate" aria-label="End date">
+              <div class="sep" aria-hidden="true"></div>
+              <input type="time" id="fsEndTime" aria-label="End time">
+              <div class="sep" aria-hidden="true"></div>
+              <div class="dtz-wrap" title="End timezone">
+                <span class="dtz-badge" id="fsEndTzBadge" aria-hidden="true">TZ</span>
+                <svg class="dtz-arrow" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+                <select id="fsEndTz" class="dtz-select" aria-label="End timezone"></select>
+              </div>
+            </div>
+          </div>
 
-    <div class="m3-form-field">
-      <md-outlined-select id="itemEndTz2" label="End timezone">
-      </md-outlined-select>
-    </div>
+          <div id="fsTzPreview" class="tz-info-banner" hidden></div>
+        </div>
+      </div>
 
-    <div id="itemTzPreview2" class="tz-info-banner" hidden></div>
+      <!-- Details & Cost Card -->
+      <div class="fs-group">
+        <div class="fs-group-label">Details</div>
+        <div class="fs-card fs-details-card">
+          <div class="cost-currency-box">
+            <label class="field" style="flex:1;min-width:0">
+              <span>Cost</span>
+              <input id="fsCost" type="number" min="0" step="any" placeholder="0">
+            </label>
+            <label class="field" style="width:104px;flex-shrink:0">
+              <span>Currency</span>
+              <select id="fsCurrency">
+                <option value="USD">USD</option>
+                <option value="EUR">EUR</option>
+                <option value="GBP">GBP</option>
+                <option value="ILS">ILS</option>
+              </select>
+            </label>
+          </div>
 
-    <div class="m3-form-field">
-      <div class="m3-field-label">Type</div>
-      <md-chip-set id="itemTypes2" role="radiogroup" aria-label="Type">
-      </md-chip-set>
-    </div>
+          <label class="field">
+            <span>Notes</span>
+            <textarea id="fsNotes" maxlength="1000" rows="4" placeholder="Address, booking reference, details..."></textarea>
+          </label>
+        </div>
+      </div>
 
-    <div class="m3-form-row">
-      <md-outlined-text-field id="itemCost2" type="number" step="any" min="0" label="Cost" placeholder="0" style="flex: 1.5;"></md-outlined-text-field>
-      <md-outlined-select id="itemCurrency2" label="Currency" style="flex: 1;">
-        <md-select-option value="USD" selected><div slot="headline">USD</div></md-select-option>
-        <md-select-option value="EUR"><div slot="headline">EUR</div></md-select-option>
-        <md-select-option value="GBP"><div slot="headline">GBP</div></md-select-option>
-        <md-select-option value="ILS"><div slot="headline">ILS</div></md-select-option>
-      </md-outlined-select>
-    </div>
-
-    <div class="m3-form-field">
-      <md-outlined-text-field id="itemNotes2" type="textarea" rows="3" label="Notes" placeholder="Address, details..."></md-outlined-text-field>
+      <div class="fs-delete-row" id="fsDeleteWrap" hidden>
+        <button type="button" class="btn danger" id="fsDelete"><svg class="i sm" aria-hidden="true"><use href="#i-trash"/></svg>Delete item</button>
+      </div>
     </div>
   </form>
-
-  <div slot="actions">
-    <md-text-button id="itemDelete2" style="--md-sys-color-primary: var(--crit); margin-right: auto;" hidden>Delete</md-text-button>
-    <md-text-button id="itemCancel2">Cancel</md-text-button>
-    <md-filled-button id="itemSave2">Save</md-filled-button>
-  </div>
-</md-dialog>
-
+</dialog>
 
 <dialog id="ratesDialog" class="small" aria-labelledby="ratesTitle">
   <form id="ratesForm">
@@ -452,21 +567,11 @@
   <aside class="sidebar">
     <nav aria-label="Screens">
       <a class="nav-link" href="#itinerary"><svg class="i" aria-hidden="true"><use href="#i-calendar-days"/></svg><span>Itinerary</span></a>
-      <a class="nav-link" href="#itinerary2"><svg class="i" aria-hidden="true"><use href="#i-sparkles"/></svg><span>Itinerary 2</span></a>
       <a class="nav-link" href="#packing"><svg class="i" aria-hidden="true"><use href="#i-luggage"/></svg><span>Packing</span></a>
       <a class="nav-link" href="#work"><svg class="i" aria-hidden="true"><use href="#i-briefcase"/></svg><span>Work log</span></a>
-      <button class="nav-link settings-toggle" id="mobileSettings" type="button" aria-label="Settings" aria-expanded="false" aria-controls="utilities">
-        <svg class="i" aria-hidden="true"><use href="#i-settings"/></svg><span>Settings</span>
-      </button>
+      <a class="nav-link" href="#settings" id="mobileSettings" aria-label="Settings"><svg class="i" aria-hidden="true"><use href="#i-settings"/></svg><span>Settings</span></a>
     </nav>
     <p class="save-note" id="saveStatus" role="status">Saved in this browser only. Back up before switching browsers or devices.</p>
-    <div class="utilities" id="utilities" role="group" aria-label="App actions">
-      <button class="util" id="theme" type="button" aria-label="Toggle dark mode" title="Toggle dark mode"><svg class="i" aria-hidden="true"><use href="#i-moon"/></svg><span class="sr-only">Theme</span></button>
-      <button class="util" id="openRatesUtil" type="button" aria-label="Budget and exchange rates" title="Budget and exchange rates"><svg class="i" aria-hidden="true"><use href="#i-currency"/></svg><span class="sr-only">Currency</span></button>
-      <button class="util" id="restore" type="button" aria-label="Restore backup" title="Restore backup"><svg class="i" aria-hidden="true"><use href="#i-upload"/></svg><span class="sr-only">Upload</span></button>
-      <button class="util" id="export" type="button" aria-label="Download backup" title="Download backup"><svg class="i" aria-hidden="true"><use href="#i-download"/></svg><span class="sr-only">Download</span></button>
-      <input id="import" type="file" accept=".json,application/json" hidden>
-    </div>
   </aside>
 
   <main>
@@ -481,8 +586,7 @@
             <button type="button" data-itinerary-view="month" aria-pressed="false">Month</button>
           </div>
           <div class="itinerary-actions">
-            <button class="icon-btn tonal" id="exportIcs" type="button" aria-label="Export calendar (.ics)" title="Export calendar (.ics)"><svg class="i" aria-hidden="true"><use href="#i-calendar-download-02"/></svg></button>
-            <button class="icon-btn solid" id="addItem" type="button" aria-label="Add itinerary item" title="Add itinerary item"><svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></button>
+            <button class="icon-btn tonal" id="theme" type="button" aria-label="Toggle dark mode" title="Toggle dark mode"><svg class="i" aria-hidden="true"><use href="#i-moon"/></svg></button>
           </div>
         </div>
       </div>
@@ -499,44 +603,10 @@
         </div>
         <div class="cal" id="tvBody"></div>
       </div>
+
+      <button class="fab fab-green" id="addItemFullscreen" type="button" aria-label="Add item (full screen)" title="Add item (full screen)"><svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></button>
+      <button class="fab" id="addItem" type="button" aria-label="Add itinerary item" title="Add itinerary item"><svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></button>
     </section>
-
-    <section data-screen="itinerary2" aria-label="Itinerary 2">
-      <div class="m3-itinerary-toolbar">
-        <md-tabs id="itinerary2Views" aria-label="Itinerary view">
-          <md-primary-tab data-itinerary-view="schedule" active>Schedule</md-primary-tab>
-          <md-primary-tab data-itinerary-view="week">Week</md-primary-tab>
-          <md-primary-tab data-itinerary-view="month">Month</md-primary-tab>
-        </md-tabs>
-        <div class="m3-toolbar-actions">
-          <md-filled-tonal-icon-button id="exportIcs2" type="button" aria-label="Export calendar (.ics)" title="Export calendar (.ics)">
-            <svg class="i" aria-hidden="true"><use href="#i-calendar-download-02"/></svg>
-          </md-filled-tonal-icon-button>
-        </div>
-      </div>
-
-      <div id="scheduleView2">
-        <div id="agendaList2" class="m3-schedule-list"></div>
-      </div>
-
-      <div id="calendarView2" hidden>
-        <div class="tv-bar" id="tvBar2" hidden>
-          <md-icon-button id="tvPrev2" type="button" aria-label="Previous">
-            <svg class="i" aria-hidden="true"><use href="#i-left"/></svg>
-          </md-icon-button>
-          <h2 class="tv-title" id="tvTitle2" tabindex="-1" aria-live="polite"></h2>
-          <md-icon-button id="tvNext2" type="button" aria-label="Next">
-            <svg class="i" aria-hidden="true"><use href="#i-right"/></svg>
-          </md-icon-button>
-        </div>
-        <div class="cal" id="tvBody2"></div>
-      </div>
-
-      <md-fab id="addItem2" class="m3-fab" label="Add item" aria-label="Add itinerary item" variant="primary">
-        <svg slot="icon" class="i" aria-hidden="true"><use href="#i-plus"/></svg>
-      </md-fab>
-    </section>
-
 
     <section data-screen="packing" aria-label="Packing" hidden>
       <progress id="packingProgress" aria-label="Packing progress" max="1" value="0"></progress>
@@ -632,6 +702,67 @@
         </table>
       </div>
     </section>
+
+    <section data-screen="settings" aria-label="Settings" hidden>
+      <div class="settings-screen">
+        <div class="settings-head">
+          <h1 class="settings-title">Settings</h1>
+        </div>
+
+        <div class="settings-group">
+          <div class="settings-group-label">Data &amp; Export</div>
+          <div class="settings-card">
+            <button type="button" class="settings-row" id="exportIcs">
+              <div class="settings-icon-well"><svg class="i" aria-hidden="true"><use href="#i-calendar-download-02"/></svg></div>
+              <div class="settings-text">
+                <div class="settings-name">Download ICS</div>
+                <div class="settings-desc">Export itinerary to calendar (.ics)</div>
+              </div>
+              <div class="settings-chevron"><svg class="i sm" aria-hidden="true"><use href="#i-download"/></svg></div>
+            </button>
+
+            <div class="settings-divider" aria-hidden="true"></div>
+
+            <button type="button" class="settings-row" id="export">
+              <div class="settings-icon-well"><svg class="i" aria-hidden="true"><use href="#i-download"/></svg></div>
+              <div class="settings-text">
+                <div class="settings-name">Download data</div>
+                <div class="settings-desc">Back up planner data as a JSON file</div>
+              </div>
+              <div class="settings-chevron"><svg class="i sm" aria-hidden="true"><use href="#i-right"/></svg></div>
+            </button>
+
+            <div class="settings-divider" aria-hidden="true"></div>
+
+            <button type="button" class="settings-row" id="restore">
+              <div class="settings-icon-well"><svg class="i" aria-hidden="true"><use href="#i-upload"/></svg></div>
+              <div class="settings-text">
+                <div class="settings-name">Upload data</div>
+                <div class="settings-desc">Restore planner data from a backup JSON file</div>
+              </div>
+              <div class="settings-chevron"><svg class="i sm" aria-hidden="true"><use href="#i-right"/></svg></div>
+            </button>
+            <input id="import" type="file" accept=".json,application/json" hidden>
+
+            <div class="settings-divider" aria-hidden="true"></div>
+
+            <button type="button" class="settings-row" id="openRatesUtil">
+              <div class="settings-icon-well"><svg class="i" aria-hidden="true"><use href="#i-currency"/></svg></div>
+              <div class="settings-text">
+                <div class="settings-name">Budget &amp; currency</div>
+                <div class="settings-desc">Set base currency and conversion rates</div>
+              </div>
+              <div class="settings-chevron"><svg class="i sm" aria-hidden="true"><use href="#i-right"/></svg></div>
+            </button>
+          </div>
+        </div>
+
+        <div class="settings-info-card">
+          <p class="settings-info-text">Data is stored in this browser only. Export a backup before switching browsers or devices.</p>
+        </div>
+      </div>
+    </section>
+
   </main>
 </div>
 
@@ -702,71 +833,168 @@
   </form>
 </dialog>
 
-<md-dialog id="itemDialog2" aria-labelledby="itemDialog2Title">
-  <div slot="headline" id="itemDialog2Title">Add item</div>
-  <form id="itemForm2" slot="content" method="dialog" novalidate class="m3-dialog-form">
-    <div class="m3-form-field">
-      <md-outlined-text-field id="itemTitle2" label="Title *" required placeholder="Hotel, train, museum tour..."></md-outlined-text-field>
+<dialog id="itemFullscreenDialog" class="fs-item-dialog" aria-labelledby="fsDialogTitle">
+  <form id="fsItemForm" novalidate>
+    <div class="fs-header">
+      <button type="button" class="icon-btn" data-close id="fsClose" aria-label="Close"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg></button>
+      <div class="fs-handle" aria-hidden="true"></div>
+      <h2 id="fsDialogTitle" class="sr-only">Item details</h2>
+      <div class="fs-header-actions" id="fsViewActions" hidden>
+        <button type="button" class="icon-btn danger" id="fsViewDelete" aria-label="Delete item" title="Delete item"><svg class="i" aria-hidden="true"><use href="#i-trash"/></svg></button>
+        <button type="button" class="fs-edit-btn" id="fsEditBtn"><svg class="i sm" aria-hidden="true"><use href="#i-pencil"/></svg>Edit</button>
+      </div>
+      <button type="submit" class="fs-save-btn" id="fsSave">Save</button>
     </div>
 
-    <div class="m3-form-field">
-      <div class="m3-field-label">Status</div>
-      <md-chip-set id="itemStatuses2" role="radiogroup" aria-label="Status">
-        <md-filter-chip data-status="To book" label="To book" selected></md-filter-chip>
-        <md-filter-chip data-status="Confirmed" label="Confirmed"></md-filter-chip>
-      </md-chip-set>
+    <!-- Read-Only View Mode -->
+    <div class="fs-body" id="fsViewBody" hidden>
+      <div class="fs-card fs-view-hero">
+        <div class="fs-view-badges" id="fsViewBadges"></div>
+        <h3 class="fs-view-title" id="fsViewTitle"></h3>
+      </div>
+
+      <div class="fs-group">
+        <div class="fs-group-label">Schedule</div>
+        <div class="fs-card fs-view-list">
+          <div class="fs-view-row" id="fsViewStartRow">
+            <div class="fs-view-icon" aria-hidden="true"><svg class="i"><use href="#i-calendar-days"/></svg></div>
+            <div class="fs-view-text">
+              <div class="fs-view-meta">Start</div>
+              <div class="fs-view-val" id="fsViewStartText"></div>
+              <div class="fs-view-sub" id="fsViewStartTz"></div>
+            </div>
+          </div>
+
+          <div class="fs-view-divider" id="fsViewEndDivider" hidden aria-hidden="true"></div>
+
+          <div class="fs-view-row" id="fsViewEndRow" hidden>
+            <div class="fs-view-icon" aria-hidden="true"><svg class="i"><use href="#i-clock"/></svg></div>
+            <div class="fs-view-text">
+              <div class="fs-view-meta">End</div>
+              <div class="fs-view-val" id="fsViewEndText"></div>
+              <div class="fs-view-sub" id="fsViewEndTz"></div>
+            </div>
+          </div>
+
+          <div class="fs-view-duration" id="fsViewDuration" hidden></div>
+        </div>
+      </div>
+
+      <div class="fs-group" id="fsViewDetailsGroup">
+        <div class="fs-group-label">Details</div>
+        <div class="fs-card fs-view-list">
+          <div class="fs-view-row" id="fsViewCostRow" hidden>
+            <div class="fs-view-icon" aria-hidden="true"><svg class="i"><use href="#i-currency"/></svg></div>
+            <div class="fs-view-text">
+              <div class="fs-view-meta">Cost</div>
+              <div class="fs-view-val" id="fsViewCostText"></div>
+            </div>
+          </div>
+
+          <div class="fs-view-divider" id="fsViewDetailsDivider" hidden aria-hidden="true"></div>
+
+          <div class="fs-view-row" id="fsViewNotesRow" hidden>
+            <div class="fs-view-icon" aria-hidden="true"><svg class="i"><use href="#i-sticky-note"/></svg></div>
+            <div class="fs-view-text">
+              <div class="fs-view-meta">Notes</div>
+              <div class="fs-view-notes" id="fsViewNotesText"></div>
+            </div>
+          </div>
+
+          <div class="fs-view-empty" id="fsViewNoDetails" hidden>No cost or notes added.</div>
+        </div>
+      </div>
     </div>
 
-    <div class="m3-form-row">
-      <md-outlined-text-field id="itemStartDate2" type="date" label="Start date *" required></md-outlined-text-field>
-      <md-outlined-text-field id="itemStartTime2" type="time" label="Start time"></md-outlined-text-field>
-    </div>
+    <!-- Edit / Create Mode -->
+    <div class="fs-body" id="fsEditBody">
+      <!-- Title, Type & Status Card -->
+      <div class="fs-card fs-hero-card">
+        <div class="fs-title-wrap">
+          <input id="fsTitle" class="fs-title-input" required maxlength="200" autocomplete="off" placeholder="Add title...">
+        </div>
+        <div class="fs-card-divider" aria-hidden="true"></div>
+        <div class="fs-chip-section">
+          <span class="fs-label">Type</span>
+          <div class="chips" id="fsTypes" role="radiogroup" aria-label="Type"></div>
+        </div>
+        <div class="fs-chip-section">
+          <span class="fs-label">Status</span>
+          <div class="chips" id="fsStatuses" role="radiogroup" aria-label="Status"></div>
+        </div>
+      </div>
 
-    <div class="m3-form-field">
-      <md-outlined-select id="itemTz2" label="Start timezone">
-      </md-outlined-select>
-    </div>
+      <!-- Schedule Card (Stacked Start & End) -->
+      <div class="fs-group">
+        <div class="fs-group-label">Schedule</div>
+        <div class="fs-card fs-schedule-card">
+          <div class="field">
+            <label for="fsStartDate">Start <span class="req" aria-hidden="true">*</span></label>
+            <div class="dt-box fs-dt-box">
+              <input type="date" id="fsStartDate" required aria-label="Start date">
+              <div class="sep" aria-hidden="true"></div>
+              <input type="time" id="fsStartTime" aria-label="Start time">
+              <div class="sep" aria-hidden="true"></div>
+              <div class="dtz-wrap" title="Start timezone">
+                <span class="dtz-badge" id="fsTzBadge" aria-hidden="true">TZ</span>
+                <svg class="dtz-arrow" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+                <select id="fsTz" class="dtz-select" aria-label="Start timezone"></select>
+              </div>
+            </div>
+          </div>
 
-    <div class="m3-form-row">
-      <md-outlined-text-field id="itemEndDate2" type="date" label="End date"></md-outlined-text-field>
-      <md-outlined-text-field id="itemEndTime2" type="time" label="End time"></md-outlined-text-field>
-    </div>
+          <div class="field">
+            <label for="fsEndDate">End</label>
+            <div class="dt-box fs-dt-box">
+              <input type="date" id="fsEndDate" aria-label="End date">
+              <div class="sep" aria-hidden="true"></div>
+              <input type="time" id="fsEndTime" aria-label="End time">
+              <div class="sep" aria-hidden="true"></div>
+              <div class="dtz-wrap" title="End timezone">
+                <span class="dtz-badge" id="fsEndTzBadge" aria-hidden="true">TZ</span>
+                <svg class="dtz-arrow" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+                <select id="fsEndTz" class="dtz-select" aria-label="End timezone"></select>
+              </div>
+            </div>
+          </div>
 
-    <div class="m3-form-field">
-      <md-outlined-select id="itemEndTz2" label="End timezone">
-      </md-outlined-select>
-    </div>
+          <div id="fsTzPreview" class="tz-info-banner" hidden></div>
+        </div>
+      </div>
 
-    <div id="itemTzPreview2" class="tz-info-banner" hidden></div>
+      <!-- Details & Cost Card -->
+      <div class="fs-group">
+        <div class="fs-group-label">Details</div>
+        <div class="fs-card fs-details-card">
+          <div class="cost-currency-box">
+            <label class="field" style="flex:1;min-width:0">
+              <span>Cost</span>
+              <input id="fsCost" type="number" min="0" step="any" placeholder="0">
+            </label>
+            <label class="field" style="width:104px;flex-shrink:0">
+              <span>Currency</span>
+              <select id="fsCurrency">
+                <option value="USD">USD</option>
+                <option value="EUR">EUR</option>
+                <option value="GBP">GBP</option>
+                <option value="ILS">ILS</option>
+              </select>
+            </label>
+          </div>
 
-    <div class="m3-form-field">
-      <div class="m3-field-label">Type</div>
-      <md-chip-set id="itemTypes2" role="radiogroup" aria-label="Type">
-      </md-chip-set>
-    </div>
+          <label class="field">
+            <span>Notes</span>
+            <textarea id="fsNotes" maxlength="1000" rows="4" placeholder="Address, booking reference, details..."></textarea>
+          </label>
+        </div>
+      </div>
 
-    <div class="m3-form-row">
-      <md-outlined-text-field id="itemCost2" type="number" step="any" min="0" label="Cost" placeholder="0" style="flex: 1.5;"></md-outlined-text-field>
-      <md-outlined-select id="itemCurrency2" label="Currency" style="flex: 1;">
-        <md-select-option value="USD" selected><div slot="headline">USD</div></md-select-option>
-        <md-select-option value="EUR"><div slot="headline">EUR</div></md-select-option>
-        <md-select-option value="GBP"><div slot="headline">GBP</div></md-select-option>
-        <md-select-option value="ILS"><div slot="headline">ILS</div></md-select-option>
-      </md-outlined-select>
-    </div>
-
-    <div class="m3-form-field">
-      <md-outlined-text-field id="itemNotes2" type="textarea" rows="3" label="Notes" placeholder="Address, details..."></md-outlined-text-field>
+      <div class="fs-delete-row" id="fsDeleteWrap" hidden>
+        <button type="button" class="btn danger" id="fsDelete"><svg class="i sm" aria-hidden="true"><use href="#i-trash"/></svg>Delete item</button>
+      </div>
     </div>
   </form>
-
-  <div slot="actions">
-    <md-text-button id="itemDelete2" style="--md-sys-color-primary: var(--crit); margin-right: auto;" hidden>Delete</md-text-button>
-    <md-text-button id="itemCancel2">Cancel</md-text-button>
-    <md-filled-button id="itemSave2">Save</md-filled-button>
-  </div>
-</md-dialog>
-
+</dialog>
 
 <dialog id="ratesDialog" class="small" aria-labelledby="ratesTitle">
   <form id="ratesForm">

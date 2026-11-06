@@ -5,7 +5,7 @@ import { viewState } from "../../../shared/state/view-state.js";
 import { renderAgenda, scrollAgendaToToday } from "./agenda.js";
 import { tv, renderCalendar, step } from "./calendar.js";
 import { openItemDialog, initItemDialog, requestCloseItemDialog } from "./dialog.js";
-import { exportIcsCalendar } from "../../../shared/domain/ics.js";
+import { openItemFullscreenDialog, initItemFullscreenDialog, requestCloseFsDialog } from "./dialog-fullscreen.js";
 
 const itineraryScrollPositions = new Map();
 
@@ -115,8 +115,14 @@ export function initItinerary(getCurrentRoute = () => "itinerary", { signal } = 
     else $("addItem")?.focus({ preventScroll: true });
   });
 
+  initItemFullscreenDialog(id => {
+    renderItinerary();
+    if (id) focusItem(id, getCurrentRoute);
+    else $("addItemFullscreen")?.focus({ preventScroll: true });
+  });
+
   $("addItem")?.addEventListener("click", () => openItemDialog());
-  $("exportIcs")?.addEventListener("click", exportIcsCalendar);
+  $("addItemFullscreen")?.addEventListener("click", () => openItemFullscreenDialog());
 
   $("itineraryViews")?.addEventListener("click", e => {
     const button = e.target.closest("[data-itinerary-view]");
@@ -126,7 +132,7 @@ export function initItinerary(getCurrentRoute = () => "itinerary", { signal } = 
 
   $("agendaList")?.addEventListener("click", e => {
     const b = e.target.closest(".ag-item");
-    if (b) openItemDialog(b.dataset.id);
+    if (b) openItemFullscreenDialog(b.dataset.id);
   });
 
   $("tvPrev")?.addEventListener("click", () => step(-1));
@@ -135,8 +141,8 @@ export function initItinerary(getCurrentRoute = () => "itinerary", { signal } = 
   $("tvBody")?.addEventListener("click", e => {
     const item = e.target.closest(".ev, .mchip[data-id]");
     const day = e.target.closest("[data-day]");
-    if (item) return openItemDialog(item.dataset.id);
-    if (day) openItemDialog(null, day.dataset.day);
+    if (item) return openItemFullscreenDialog(item.dataset.id);
+    if (day) openItemFullscreenDialog(null, day.dataset.day);
   });
 
   window.addEventListener("resize", () => {
@@ -152,4 +158,4 @@ export const itineraryRouteAdapter = {
   scrollToToday: scrollAgendaToToday
 };
 
-export { requestCloseItemDialog };
+export { requestCloseItemDialog, requestCloseFsDialog };

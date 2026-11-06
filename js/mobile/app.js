@@ -9,11 +9,11 @@ import {
   initItinerary,
   renderItinerary,
   requestCloseItemDialog,
+  requestCloseFsDialog,
   setItineraryView,
   updateItineraryLens,
   itineraryRouteAdapter
 } from "./screens/itinerary/index.js";
-import { initItinerary2, renderItinerary2 } from "./screens/itinerary2/index.js";
 import { initPacking, renderPacking } from "./screens/packing/index.js";
 import { initWork, renderWorkView } from "./screens/work/index.js";
 import { initBackupControls } from "./shell/backup-controls.js";
@@ -21,7 +21,6 @@ import { initSettingsDrawer } from "./shell/settings-drawer.js";
 
 function renderAll() {
   renderItinerary();
-  renderItinerary2();
   renderPacking();
   renderWorkView();
 }
@@ -31,13 +30,15 @@ export function mount({ signal }) {
   const unsubscribe = subscribe(renderAll);
   signal.addEventListener("abort", unsubscribe);
 
-  initDialogs({ itemDialog: () => requestCloseItemDialog() }, { signal });
+  initDialogs({
+    itemDialog: () => requestCloseItemDialog(),
+    itemFullscreenDialog: () => requestCloseFsDialog()
+  }, { signal });
   initTheme({ signal });
 
   initItinerary(getCurrentRoute, { signal });
-  initItinerary2(getCurrentRoute, { signal });
   initPacking();
-  initWork({ onRatesChanged: () => { renderItinerary(); renderItinerary2(); } });
+  initWork({ onRatesChanged: () => renderItinerary() });
   initBackupControls();
   initSettingsDrawer({ signal });
 

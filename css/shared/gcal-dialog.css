@@ -1,0 +1,427 @@
+/* =========================================================
+   HYBRID FULL-SCREEN ITEM DIALOG (VIEW + EDIT MODES)
+   ========================================================= */
+
+dialog#itemFullscreenDialog {
+  display: none;
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  max-width: 100vw;
+  height: 100dvh;
+  max-height: 100dvh;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: var(--bg);
+  color: var(--ink);
+  overflow: hidden;
+  z-index: 100;
+  box-sizing: border-box;
+  font-family: var(--font-ui);
+}
+
+dialog#itemFullscreenDialog[open] {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 761px) {
+  dialog#itemFullscreenDialog {
+    inset: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 560px;
+    max-width: calc(100vw - 40px);
+    height: auto;
+    max-height: 90dvh;
+    border-radius: 24px;
+    border: 1px solid var(--line);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.28);
+  }
+
+  dialog#itemFullscreenDialog::backdrop {
+    background: rgba(10, 14, 20, 0.55);
+    backdrop-filter: blur(2px);
+  }
+}
+
+.fs-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: max(10px, env(safe-area-inset-top)) 16px 10px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+  flex-shrink: 0;
+}
+
+.fs-header .icon-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  color: var(--ink);
+}
+
+.fs-header .icon-btn.danger {
+  color: var(--muted);
+}
+
+.fs-header .icon-btn.danger:hover {
+  color: var(--crit);
+  background: color-mix(in srgb, var(--crit) 10%, transparent);
+}
+
+.fs-header .icon-btn .i {
+  width: 22px;
+  height: 22px;
+}
+
+.fs-handle {
+  width: 36px;
+  height: 4px;
+  border-radius: 999px;
+  background: var(--line);
+  margin: 0 auto;
+}
+
+.fs-header-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.fs-edit-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface-tonal);
+  color: var(--ink);
+  padding: 8px 16px;
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 13.5px;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: background-color 0.15s ease, transform 0.1s ease;
+}
+
+.fs-edit-btn:hover {
+  background: color-mix(in srgb, var(--ink) 8%, var(--surface-tonal));
+}
+
+.fs-edit-btn:active {
+  transform: scale(0.96);
+}
+
+.fs-save-btn {
+  border: none;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  padding: 8px 22px;
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: filter 0.15s ease, transform 0.1s ease;
+}
+
+.fs-save-btn:hover {
+  filter: brightness(1.08);
+}
+
+.fs-save-btn:active {
+  transform: scale(0.96);
+}
+
+.fs-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 16px 16px calc(32px + env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.fs-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.fs-group-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0 8px;
+}
+
+.fs-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+/* =========================================================
+   READ-ONLY VIEW MODE
+   ========================================================= */
+
+.fs-view-hero {
+  gap: 10px;
+}
+
+.fs-view-badges {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.fs-view-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 11px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--c) 45%, transparent);
+  background: color-mix(in srgb, var(--c) 12%, transparent);
+  color: var(--c);
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.fs-view-badge .i {
+  width: 14px;
+  height: 14px;
+}
+
+.fs-view-title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+
+.fs-view-list {
+  gap: 12px;
+}
+
+.fs-view-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.fs-view-icon {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: var(--accent);
+  display: grid;
+  place-items: center;
+}
+
+.fs-view-icon .i {
+  width: 20px;
+  height: 20px;
+}
+
+.fs-view-text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.fs-view-meta {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.fs-view-val {
+  font-size: 15.5px;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.35;
+}
+
+.fs-view-sub {
+  font-size: 12.5px;
+  color: var(--muted);
+  line-height: 1.3;
+}
+
+.fs-view-divider {
+  height: 1px;
+  background: var(--line);
+  margin-left: 54px;
+}
+
+.fs-view-duration {
+  display: inline-flex;
+  align-self: flex-start;
+  margin-left: 54px;
+  padding: 4px 10px;
+  border-radius: 8px;
+  background: var(--surface-tonal);
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.fs-view-notes {
+  font-size: 14.5px;
+  color: var(--ink);
+  line-height: 1.5;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  margin-top: 2px;
+}
+
+.fs-view-empty {
+  font-size: 13.5px;
+  color: var(--muted);
+  font-style: italic;
+}
+
+/* =========================================================
+   EDIT / CREATE MODE
+   ========================================================= */
+
+.fs-title-wrap {
+  display: flex;
+  align-items: center;
+}
+
+input.fs-title-input {
+  width: 100%;
+  border: none !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  font-family: var(--font-ui);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--ink);
+  padding: 2px 0 4px !important;
+  outline: none !important;
+}
+
+input.fs-title-input::placeholder {
+  color: var(--faint);
+  font-weight: 500;
+}
+
+.fs-title-wrap:has(.is-invalid),
+.fs-title-wrap.is-invalid {
+  border-bottom: 2px solid var(--crit);
+}
+
+.fs-card-divider {
+  height: 1px;
+  background: var(--line);
+  margin: -2px 0;
+}
+
+.fs-chip-section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.fs-label {
+  font-size: 11.5px;
+  color: var(--muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.fs-hero-card .chips {
+  gap: 7px;
+}
+
+.fs-hero-card .chip-opt span {
+  padding: 5px 12px;
+  font-size: 12.5px;
+  gap: 5px;
+}
+
+.fs-hero-card .chip-opt .i {
+  width: 14px;
+  height: 14px;
+}
+
+/* Full-width Stacked Date/Time Rows */
+.fs-schedule-card .fs-dt-box {
+  height: 44px;
+  border-radius: 10px;
+}
+
+.fs-schedule-card .fs-dt-box input[type="date"],
+.fs-schedule-card .fs-dt-box input[type="time"] {
+  font-size: 14px;
+  padding: 0 8px;
+}
+
+.fs-schedule-card .fs-dt-box .dtz-wrap {
+  min-width: 48px;
+  padding: 0 10px;
+  gap: 4px;
+}
+
+.fs-schedule-card .fs-dt-box .dtz-badge {
+  font-size: 12px;
+}
+
+.fs-schedule-card .fs-dt-box .sep {
+  height: 22px;
+}
+
+/* Details Card Inputs */
+.fs-details-card input,
+.fs-details-card select {
+  height: 42px;
+  font-size: 14px;
+  border-radius: 10px;
+  padding: 0 12px;
+}
+
+.fs-details-card textarea {
+  font-size: 14px;
+  border-radius: 10px;
+  padding: 10px 12px;
+  min-height: 88px;
+}
+
+.fs-delete-row {
+  display: flex;
+  justify-content: flex-start;
+  padding: 2px 4px;
+}

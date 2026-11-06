@@ -229,6 +229,63 @@ ul {
   transform: scale(0.95);
 }
 
+/* Floating Action Button (Material Design 3 FAB) */
+.fab {
+  position: fixed;
+  z-index: 25;
+  display: inline-grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  border: none;
+  background: var(--accent);
+  color: var(--accent-ink);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.22), 0 2px 4px rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  transition: transform var(--motion-duration) var(--motion-spring),
+              box-shadow var(--motion-duration) var(--motion-spring),
+              background-color 0.15s ease;
+}
+
+.fab .i {
+  width: 28px;
+  height: 28px;
+  color: var(--accent-ink);
+}
+
+.fab:hover {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.28), 0 3px 6px rgba(0, 0, 0, 0.16);
+  filter: brightness(1.08);
+}
+
+.fab:active {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.22);
+  transform: scale(0.95);
+}
+
+.fab:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.fab.fab-green {
+  background: var(--ok);
+  color: #ffffff;
+}
+
+:root[data-theme="dark"] .fab.fab-green {
+  background: var(--ok);
+  color: #101317;
+}
+
+.fab.fab-green .i {
+  color: inherit;
+}
+
 .pill {
   display: inline-flex;
   align-items: center;

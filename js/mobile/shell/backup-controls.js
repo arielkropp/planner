@@ -1,9 +1,11 @@
-/* Backup Buttons in the Sidebar Utilities */
+/* Backup and Settings Controls */
 
 import { $ } from "../../shared/utils/dom.js";
 import { downloadBackup, restoreBackup } from "../../shared/domain/backup.js";
+import { exportIcsCalendar } from "../../shared/domain/ics.js";
 
 export function initBackupControls() {
+  $("exportIcs")?.addEventListener("click", exportIcsCalendar);
   $("export")?.addEventListener("click", downloadBackup);
   $("restore")?.addEventListener("click", () => $("import")?.click());
 

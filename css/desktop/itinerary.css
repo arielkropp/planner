@@ -20,6 +20,15 @@
   font-family: var(--font-ui);
 }
 
+.fab {
+  right: 32px;
+  bottom: 32px;
+}
+
+#addItemFullscreen {
+  right: 100px;
+}
+
 .itinerary-switcher {
   display: flex;
   align-items: center;
