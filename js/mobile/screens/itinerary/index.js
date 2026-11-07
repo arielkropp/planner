@@ -95,6 +95,7 @@ export function renderItinerary() {
 export function focusScheduleDate(date) {
   tv.cursor = date;
   setAgendaFocusDate(date);
+  itineraryScrollPositions.delete("schedule");
   setItineraryView("schedule");
   requestAnimationFrame(() => {
     const day = [...($("agendaList")?.querySelectorAll(".ag-day") || [])].find(

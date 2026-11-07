@@ -15,6 +15,10 @@ import {
 import { defaults, validateV2 } from "../js/shared/state/validation.js";
 import { fromAnyVersion } from "../js/shared/state/migrations.js";
 import { getTripStart, getTripEnd, hasTripEndDate, inTrip, validDate } from "../js/shared/utils/date.js";
+import { viewState } from "../js/shared/state/view-state.js";
+import { renderAgenda as renderDesktopAgenda } from "../js/desktop/screens/itinerary/agenda.js";
+import { renderAgenda as renderMobileAgenda } from "../js/mobile/screens/itinerary/agenda.js";
+import { renderCalendar as renderDesktopCalendar } from "../js/desktop/screens/itinerary/calendar.js";
 
 test("Trips: defaults initializes with a default trip as active", () => {
   const d = defaults();
@@ -218,4 +222,87 @@ test("Trips: validateV2 migrates legacy state without trips into default trip", 
   assert.equal(validated.packing[0].title, "Shoes");
   assert.equal(validated.work.length, 1);
   assert.equal(validated.work[0].hours, 5);
+});
+
+test("Trips: schedule view renders all days of an overnight flight on trips past default END", () => {
+  setState(defaults(), false);
+  addTrip({ name: "Future Trip", startDate: "2027-06-01", endDate: "2027-06-15" }, true);
+
+  getState().agenda.push({
+    id: "flight-overnight",
+    title: "TLV to JFK",
+    date: "2027-06-01",
+    endDate: "2027-06-02",
+    time: "23:30",
+    endTime: "05:30",
+    tz: "Asia/Jerusalem",
+    endTz: "America/New_York",
+    type: "Flight",
+    status: "Confirmed",
+    cost: null,
+    currency: "USD",
+    notes: ""
+  });
+
+  const container = { innerHTML: "" };
+  const prevDoc = globalThis.document;
+  globalThis.document = {
+    getElementById: id => (id === "agendaList" ? container : null)
+  };
+
+  try {
+    for (const render of [renderDesktopAgenda, renderMobileAgenda]) {
+      container.innerHTML = "";
+      render();
+      assert.match(container.innerHTML, /data-date="2027-06-01"/);
+      assert.match(container.innerHTML, /data-date="2027-06-02"/);
+      assert.match(container.innerHTML, /TLV to JFK \(Arrival\)/);
+    }
+  } finally {
+    globalThis.document = prevDoc;
+  }
+});
+
+test("Trips: calendar cursor clamps to active trip on load, trip edit, and renderCalendar", () => {
+  setState(defaults(), false);
+  const trip = addTrip({ name: "Autumn 2027", startDate: "2027-10-05", endDate: "2027-10-20" }, true);
+  assert.equal(viewState.calendar.cursor, "2027-10-05");
+
+  // Move cursor to end of trip, then shrink trip endDate
+  viewState.calendar.cursor = "2027-10-18";
+  updateTrip(trip.id, { endDate: "2027-10-12" });
+  assert.equal(viewState.calendar.cursor, "2027-10-05");
+
+  // Even if cursor is manually out of bounds before renderCalendar, renderCalendar clamps it
+  viewState.calendar.cursor = "2025-01-01";
+  renderDesktopCalendar();
+  assert.equal(viewState.calendar.cursor, "2027-10-05");
+});
+
+test("Trips: validateV2 preserves events and work logs outside START..END or adjusted trip bounds", () => {
+  const legacyFarFuture = {
+    version: 2,
+    agenda: [
+      {
+        id: "fl-1",
+        title: "Overnight Flight",
+        date: "2028-03-10",
+        endDate: "2028-03-11",
+        time: "22:00",
+        endTime: "06:00",
+        type: "Flight",
+        status: "Confirmed"
+      }
+    ],
+    packing: [],
+    work: [
+      { id: "w-far", date: "2028-03-12", hours: 7, note: "Remote day" }
+    ]
+  };
+
+  const validated = validateV2(legacyFarFuture);
+  assert.equal(validated.agenda[0].date, "2028-03-10");
+  assert.equal(validated.agenda[0].endDate, "2028-03-11");
+  assert.equal(validated.work.length, 1);
+  assert.equal(validated.work[0].date, "2028-03-12");
 });

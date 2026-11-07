@@ -1,6 +1,6 @@
 /* Itinerary Agenda Schedule List View */
 
-import { END, WD, TYPE_META } from "../../../shared/constants.js";
+import { WD, TYPE_META } from "../../../shared/constants.js";
 import { addDays, dowOf, fmtDate, todayIso, inTrip } from "../../../shared/utils/date.js";
 import { $, esc, icon } from "../../../shared/utils/dom.js";
 import { getState } from "../../../shared/state/store.js";
@@ -33,7 +33,7 @@ export function renderAgenda() {
   for (const a of items) {
     (groups[a.date] ||= []).push({ item: a, isCont: false });
     if (a.endDate && a.endDate > a.date) {
-      for (let d = addDays(a.date, 1); d <= a.endDate && d <= END; d = addDays(d, 1)) {
+      for (let d = addDays(a.date, 1); d <= a.endDate; d = addDays(d, 1)) {
         (groups[d] ||= []).push({ item: a, isCont: true });
       }
     }

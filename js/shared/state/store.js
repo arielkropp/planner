@@ -4,7 +4,7 @@ import { START, END, KEY, V1_KEY, SAVED_TEXT, DEFAULT_TZ, TIMEZONES } from "../c
 import { $ } from "../utils/dom.js";
 import { defaults, defaultBalance, attachActiveTripProxies } from "./validation.js";
 import { fromAnyVersion } from "./migrations.js";
-import { setTripDates, defaultDate, todayIso, validAnyDate } from "../utils/date.js";
+import { setTripDates, defaultDate, todayIso, validAnyDate, inTrip } from "../utils/date.js";
 import { uid } from "../utils/format.js";
 import { viewState } from "./view-state.js";
 
@@ -119,6 +119,9 @@ export function updateTrip(tripId, { name, startDate, endDate }) {
   }
   if (s.activeTripId === trip.id) {
     updateTripDateRange();
+    if (!inTrip(viewState.calendar.cursor)) {
+      viewState.calendar.cursor = defaultDate();
+    }
   }
   commit();
   return true;
@@ -147,6 +150,7 @@ export function setState(newState, shouldSave = true) {
     attachActiveTripProxies(s);
   }
   updateTripDateRange();
+  viewState.calendar.cursor = defaultDate();
   if (shouldSave) {
     commit();
   }
@@ -176,6 +180,7 @@ function notifySubscribers() {
 }
 
 export function save() {
+  updateTripDateRange();
   if (blocked || typeof localStorage === "undefined") return;
   try {
     localStorage.setItem(KEY, JSON.stringify(s));
@@ -196,6 +201,7 @@ export function initStore() {
   if (typeof localStorage === "undefined") {
     s = defaults();
     updateTripDateRange();
+    viewState.calendar.cursor = defaultDate();
     return s;
   }
 
@@ -204,6 +210,7 @@ export function initStore() {
     if (raw === null) {
       s = defaults();
       updateTripDateRange();
+      viewState.calendar.cursor = defaultDate();
       try {
         localStorage.setItem(KEY, JSON.stringify(s));
       } catch {}
@@ -212,6 +219,7 @@ export function initStore() {
       s = fromAnyVersion(parsed);
       attachActiveTripProxies(s);
       updateTripDateRange();
+      viewState.calendar.cursor = defaultDate();
 
       // Synchronize confirmed flight booking details if unmodified placeholders exist
       let updatedSeedFlights = false;
@@ -251,6 +259,7 @@ export function initStore() {
   } catch (error) {
     s = defaults();
     updateTripDateRange();
+    viewState.calendar.cursor = defaultDate();
     blocked = true;
     storageStatus.note = "Saving is paused because the existing data could not be loaded.";
     showError(`Could not load saved data: ${error.message} Your saved data has not been overwritten. Restore a backup to resume saving.`);
@@ -269,6 +278,9 @@ export function initStore() {
           s = incoming;
           attachActiveTripProxies(s);
           updateTripDateRange();
+          if (!inTrip(viewState.calendar.cursor)) {
+            viewState.calendar.cursor = defaultDate();
+          }
           blocked = false;
           notifySubscribers();
           setSaveNote("Synced changes from another open tab.");

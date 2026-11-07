@@ -17,6 +17,7 @@ export function openAddTripDialog() {
   if ($("tripEndDate")) {
     $("tripEndDate").value = "";
     $("tripEndDate").min = todayIso();
+    $("tripEndDate").setCustomValidity("");
   }
   if ($("tripSubmit")) $("tripSubmit").textContent = "Add trip";
   try {
@@ -39,6 +40,7 @@ export function openEditTripDialog(tripId) {
   if ($("tripEndDate")) {
     $("tripEndDate").value = trip.endDate || "";
     $("tripEndDate").min = trip.startDate || todayIso();
+    $("tripEndDate").setCustomValidity("");
   }
   if ($("tripSubmit")) $("tripSubmit").textContent = "Save changes";
   try {
@@ -161,10 +163,21 @@ export function initTripControls() {
     }
   });
 
+  document.addEventListener("input", e => {
+    if (e.target && (e.target.id === "tripStartDate" || e.target.id === "tripEndDate")) {
+      $("tripEndDate")?.setCustomValidity("");
+    }
+  });
+
   document.addEventListener("change", e => {
     if (e.target && e.target.id === "tripStartDate") {
       const endInp = $("tripEndDate");
-      if (endInp) endInp.min = e.target.value || "";
+      if (endInp) {
+        endInp.min = e.target.value || "";
+        endInp.setCustomValidity("");
+      }
+    } else if (e.target && e.target.id === "tripEndDate") {
+      e.target.setCustomValidity("");
     }
   });
 

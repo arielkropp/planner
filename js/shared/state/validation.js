@@ -147,8 +147,8 @@ export function validateTrip(t, defaultsObj = {}) {
     seenAgendaIds.add(aId);
 
     const title = (typeof a.title === "string" && a.title.trim()) ? a.title.slice(0, 200) : "Untitled";
-    const date = validAnyDate(a.date) && inTripBounds(a.date, startDate, endDate) ? a.date : startDate;
-    let itemEndDate = (a.endDate && validAnyDate(a.endDate) && a.endDate >= date && inTripBounds(a.endDate, startDate, endDate)) ? a.endDate : "";
+    const date = validAnyDate(a.date) ? a.date : startDate;
+    let itemEndDate = (a.endDate && validAnyDate(a.endDate) && a.endDate >= date) ? a.endDate : "";
     const time = (typeof a.time === "string" && /^([01]\d|2[0-3]):[0-5]\d$/.test(a.time)) ? a.time : "";
     let endTime = (typeof a.endTime === "string" && /^([01]\d|2[0-3]):[0-5]\d$/.test(a.endTime)) ? a.endTime : "";
     const rawTz = (typeof a.tz === "string" && a.tz.trim()) ? a.tz.trim().slice(0, 50) : DEFAULT_TZ;
@@ -198,7 +198,7 @@ export function validateTrip(t, defaultsObj = {}) {
   const dayTotals = new Map();
   const rawWork = Array.isArray(t.work) ? t.work : [];
   for (const w of rawWork) {
-    if (!w || typeof w !== "object" || !validAnyDate(w?.date) || !inTripBounds(w.date, startDate, endDate) || !Number.isFinite(Number(w?.hours))) {
+    if (!w || typeof w !== "object" || !validAnyDate(w?.date) || !Number.isFinite(Number(w?.hours))) {
       hadWarnings = true;
       continue;
     }
@@ -269,11 +269,28 @@ export function validateV2(st) {
         throw new Error(`Invalid "${key}" section in saved data.`);
       }
     }
+    let legacyStart = START;
+    let legacyEnd = END;
+    for (const a of st.agenda || []) {
+      if (validAnyDate(a?.date)) {
+        if (a.date < legacyStart) legacyStart = a.date;
+        if (a.date > legacyEnd) legacyEnd = a.date;
+      }
+      if (validAnyDate(a?.endDate) && a.endDate > legacyEnd) {
+        legacyEnd = a.endDate;
+      }
+    }
+    for (const w of st.work || []) {
+      if (validAnyDate(w?.date)) {
+        if (w.date < legacyStart) legacyStart = w.date;
+        if (w.date > legacyEnd) legacyEnd = w.date;
+      }
+    }
     const legacyTrip = validateTrip({
       id: "default-trip",
       name: "My Trip",
-      startDate: START,
-      endDate: END,
+      startDate: legacyStart,
+      endDate: legacyEnd,
       agenda: st.agenda,
       packing: st.packing,
       work: st.work,

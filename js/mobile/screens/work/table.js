@@ -1,6 +1,5 @@
 /* Work Log Table Rendering and Interactions */
 
-import { START, END } from "../../../shared/constants.js";
 import { fmtDate, validDate, parseDate, getTripStart, getTripEnd, hasTripEndDate } from "../../../shared/utils/date.js";
 import { $, esc, icon } from "../../../shared/utils/dom.js";
 import { uid, num } from "../../../shared/utils/format.js";

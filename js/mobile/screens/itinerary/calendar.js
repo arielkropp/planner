@@ -31,7 +31,8 @@ const clampDate = d => {
 };
 
 export function renderCalendar() {
-  const c = tv.cursor;
+  const c = clampDate(tv.cursor);
+  tv.cursor = c;
   const today = todayIso();
   let html = "";
   let title = "";

@@ -4,9 +4,7 @@ import {
   DEFAULT_NOV_BALANCE,
   DEFAULT_ACCRUAL,
   DEFAULT_ACCRUAL_MONTHS,
-  DEFAULT_STD_DAY,
-  START,
-  END
+  DEFAULT_STD_DAY
 } from "../constants.js";
 import { dowOf, todayIso, defaultDate, inTrip, TRIP_DAYS } from "../utils/date.js";
 import { defaultBalance } from "../state/validation.js";

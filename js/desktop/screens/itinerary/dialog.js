@@ -1,6 +1,6 @@
 /* Itinerary Item Dialog (Create & Edit) */
 
-import { TYPES, TYPE_META, STATUSES, TIMEZONES, DEFAULT_TZ, START, END } from "../../../shared/constants.js";
+import { TYPES, TYPE_META, STATUSES, TIMEZONES, DEFAULT_TZ } from "../../../shared/constants.js";
 import { $, icon } from "../../../shared/utils/dom.js";
 import { defaultDate, validDate, fmtDateLong, fmtDay, toUtcMs, formatDurationMs, tzInfo, getTripStart, getTripEnd, hasTripEndDate } from "../../../shared/utils/date.js";
 import { uid } from "../../../shared/utils/format.js";
@@ -193,7 +193,11 @@ export function initItemDialog(onItemChanged) {
   // Initialize dynamic date bounds
   ["itemStartDate", "itemEndDate"].forEach(id => {
     const el = $(id);
-    if (el) { el.min = START; el.max = END; }
+    if (el) {
+      el.min = getTripStart();
+      if (hasTripEndDate()) el.max = getTripEnd();
+      else el.removeAttribute("max");
+    }
   });
 
   // Populate type chips
