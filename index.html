@@ -308,11 +308,11 @@
             <div class="sep" aria-hidden="true"></div>
             <input type="time" id="itemStartTime" aria-label="Start time">
             <div class="sep" aria-hidden="true"></div>
-            <div class="dtz-wrap" title="Start timezone">
+            <button type="button" class="dtz-wrap" id="itemTzBtn" aria-label="Start timezone" title="Start timezone">
               <span class="dtz-badge" id="itemTzBadge" aria-hidden="true">TZ</span>
               <svg class="dtz-arrow" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-              <select id="itemTz" class="dtz-select" aria-label="Start timezone"></select>
-            </div>
+            </button>
+            <input type="hidden" id="itemTz">
           </div>
         </div>
         <div class="field">
@@ -322,11 +322,11 @@
             <div class="sep" aria-hidden="true"></div>
             <input type="time" id="itemEndTime" aria-label="End time">
             <div class="sep" aria-hidden="true"></div>
-            <div class="dtz-wrap" title="End timezone">
+            <button type="button" class="dtz-wrap" id="itemEndTzBtn" aria-label="End timezone" title="End timezone">
               <span class="dtz-badge" id="itemEndTzBadge" aria-hidden="true">TZ</span>
               <svg class="dtz-arrow" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-              <select id="itemEndTz" class="dtz-select" aria-label="End timezone"></select>
-            </div>
+            </button>
+            <input type="hidden" id="itemEndTz">
           </div>
         </div>
       </div>
@@ -455,11 +455,11 @@
               <div class="sep" aria-hidden="true"></div>
               <input type="time" id="fsStartTime" aria-label="Start time">
               <div class="sep" aria-hidden="true"></div>
-              <div class="dtz-wrap" title="Start timezone">
+              <button type="button" class="dtz-wrap" id="fsTzBtn" aria-label="Start timezone" title="Start timezone">
                 <span class="dtz-badge" id="fsTzBadge" aria-hidden="true">TZ</span>
                 <svg class="dtz-arrow" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-                <select id="fsTz" class="dtz-select" aria-label="Start timezone"></select>
-              </div>
+              </button>
+              <input type="hidden" id="fsTz">
             </div>
           </div>
 
@@ -470,11 +470,11 @@
               <div class="sep" aria-hidden="true"></div>
               <input type="time" id="fsEndTime" aria-label="End time">
               <div class="sep" aria-hidden="true"></div>
-              <div class="dtz-wrap" title="End timezone">
+              <button type="button" class="dtz-wrap" id="fsEndTzBtn" aria-label="End timezone" title="End timezone">
                 <span class="dtz-badge" id="fsEndTzBadge" aria-hidden="true">TZ</span>
                 <svg class="dtz-arrow" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-                <select id="fsEndTz" class="dtz-select" aria-label="End timezone"></select>
-              </div>
+              </button>
+              <input type="hidden" id="fsEndTz">
             </div>
           </div>
 
@@ -606,6 +606,33 @@
     <div class="dlg-foot">
       <button type="button" class="btn" data-close>Cancel</button>
       <button type="submit" class="btn primary" id="tripSubmit">Save trip</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="timezoneDialog" class="small tz-dialog" aria-labelledby="tzDialogTitle">
+  <form id="timezoneForm" onsubmit="event.preventDefault()">
+    <div class="dlg-head">
+      <h2 id="tzDialogTitle">Select timezone</h2>
+      <button type="button" class="icon-btn" data-close aria-label="Close">
+        <svg class="i" aria-hidden="true"><use href="#i-x"/></svg>
+      </button>
+    </div>
+    <div class="tz-search-header">
+      <div class="tz-search-box">
+        <svg class="i sm tz-search-icon" aria-hidden="true"><use href="#i-search"/></svg>
+        <input type="search" id="tzSearchInput" class="tz-search-input" placeholder="Search country or city..." autocomplete="off" spellcheck="false" aria-label="Search country or city">
+        <button type="button" class="icon-btn sm tz-search-clear" id="tzSearchClear" aria-label="Clear search" hidden>
+          <svg class="i sm" aria-hidden="true"><use href="#i-x"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="tz-body">
+      <div class="tz-results-list" id="tzResultsList" role="listbox" aria-label="Timezones"></div>
+      <p class="tz-empty-msg muted" id="tzEmptyMsg" hidden>No matching timezones found</p>
+    </div>
+    <div class="dlg-foot">
+      <button type="button" class="btn" data-close id="tzCancelBtn">Cancel</button>
     </div>
   </form>
 </dialog>
@@ -853,11 +880,11 @@
             <div class="sep" aria-hidden="true"></div>
             <input type="time" id="itemStartTime" aria-label="Start time">
             <div class="sep" aria-hidden="true"></div>
-            <div class="dtz-wrap" title="Start timezone">
+            <button type="button" class="dtz-wrap" id="itemTzBtn" aria-label="Start timezone" title="Start timezone">
               <span class="dtz-badge" id="itemTzBadge" aria-hidden="true">TZ</span>
               <svg class="dtz-arrow" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-              <select id="itemTz" class="dtz-select" aria-label="Start timezone"></select>
-            </div>
+            </button>
+            <input type="hidden" id="itemTz">
           </div>
         </div>
         <div class="field">
@@ -867,11 +894,11 @@
             <div class="sep" aria-hidden="true"></div>
             <input type="time" id="itemEndTime" aria-label="End time">
             <div class="sep" aria-hidden="true"></div>
-            <div class="dtz-wrap" title="End timezone">
+            <button type="button" class="dtz-wrap" id="itemEndTzBtn" aria-label="End timezone" title="End timezone">
               <span class="dtz-badge" id="itemEndTzBadge" aria-hidden="true">TZ</span>
               <svg class="dtz-arrow" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-              <select id="itemEndTz" class="dtz-select" aria-label="End timezone"></select>
-            </div>
+            </button>
+            <input type="hidden" id="itemEndTz">
           </div>
         </div>
       </div>
@@ -1000,11 +1027,11 @@
               <div class="sep" aria-hidden="true"></div>
               <input type="time" id="fsStartTime" aria-label="Start time">
               <div class="sep" aria-hidden="true"></div>
-              <div class="dtz-wrap" title="Start timezone">
+              <button type="button" class="dtz-wrap" id="fsTzBtn" aria-label="Start timezone" title="Start timezone">
                 <span class="dtz-badge" id="fsTzBadge" aria-hidden="true">TZ</span>
                 <svg class="dtz-arrow" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-                <select id="fsTz" class="dtz-select" aria-label="Start timezone"></select>
-              </div>
+              </button>
+              <input type="hidden" id="fsTz">
             </div>
           </div>
 
@@ -1015,11 +1042,11 @@
               <div class="sep" aria-hidden="true"></div>
               <input type="time" id="fsEndTime" aria-label="End time">
               <div class="sep" aria-hidden="true"></div>
-              <div class="dtz-wrap" title="End timezone">
+              <button type="button" class="dtz-wrap" id="fsEndTzBtn" aria-label="End timezone" title="End timezone">
                 <span class="dtz-badge" id="fsEndTzBadge" aria-hidden="true">TZ</span>
                 <svg class="dtz-arrow" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-                <select id="fsEndTz" class="dtz-select" aria-label="End timezone"></select>
-              </div>
+              </button>
+              <input type="hidden" id="fsEndTz">
             </div>
           </div>
 
@@ -1151,6 +1178,33 @@
     <div class="dlg-foot">
       <button type="button" class="btn" data-close>Cancel</button>
       <button type="submit" class="btn primary" id="tripSubmit">Save trip</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="timezoneDialog" class="small tz-dialog" aria-labelledby="tzDialogTitle">
+  <form id="timezoneForm" onsubmit="event.preventDefault()">
+    <div class="dlg-head">
+      <h2 id="tzDialogTitle">Select timezone</h2>
+      <button type="button" class="icon-btn" data-close aria-label="Close">
+        <svg class="i" aria-hidden="true"><use href="#i-x"/></svg>
+      </button>
+    </div>
+    <div class="tz-search-header">
+      <div class="tz-search-box">
+        <svg class="i sm tz-search-icon" aria-hidden="true"><use href="#i-search"/></svg>
+        <input type="search" id="tzSearchInput" class="tz-search-input" placeholder="Search country or city..." autocomplete="off" spellcheck="false" aria-label="Search country or city">
+        <button type="button" class="icon-btn sm tz-search-clear" id="tzSearchClear" aria-label="Clear search" hidden>
+          <svg class="i sm" aria-hidden="true"><use href="#i-x"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="tz-body">
+      <div class="tz-results-list" id="tzResultsList" role="listbox" aria-label="Timezones"></div>
+      <p class="tz-empty-msg muted" id="tzEmptyMsg" hidden>No matching timezones found</p>
+    </div>
+    <div class="dlg-foot">
+      <button type="button" class="btn" data-close id="tzCancelBtn">Cancel</button>
     </div>
   </form>
 </dialog>

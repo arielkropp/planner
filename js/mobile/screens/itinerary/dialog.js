@@ -7,6 +7,7 @@ import { uid } from "../../../shared/utils/format.js";
 import { getState, commit, save } from "../../../shared/state/store.js";
 import { isValidTimeInterval } from "../../../shared/state/validation.js";
 import { confirmAsk } from "../../../shared/components/dialog.js";
+import { openTimezoneDialog } from "../../../shared/components/timezone-picker.js";
 import { typeVar } from "./markup.js";
 
 let editingItem = null;
@@ -71,12 +72,6 @@ export function updateTzBadges() {
 }
 
 export function populateTimezoneSelects() {
-  const sTzEl = $("itemTz");
-  const eTzEl = $("itemEndTz");
-  if (!sTzEl || !eTzEl) return;
-  const opts = TIMEZONES.map(t => `<option value="${t.id}">${t.label}</option>`).join("");
-  if (sTzEl.innerHTML !== opts) sTzEl.innerHTML = opts;
-  if (eTzEl.innerHTML !== opts) eTzEl.innerHTML = opts;
   updateTzBadges();
 }
 
@@ -268,6 +263,30 @@ export function initItemDialog(onItemChanged) {
       if (dtBox) dtBox.classList.remove("is-invalid");
       const titleBox = el.closest(".title-status-box");
       if (titleBox) titleBox.classList.remove("is-invalid");
+    });
+  });
+
+  $("itemTzBtn")?.addEventListener("click", () => {
+    openTimezoneDialog({
+      currentTz: $("itemTz")?.value || DEFAULT_TZ,
+      onSelect: tzId => {
+        const input = $("itemTz");
+        if (!input) return;
+        input.value = tzId;
+        input.dispatchEvent(new Event("change"));
+      }
+    });
+  });
+
+  $("itemEndTzBtn")?.addEventListener("click", () => {
+    openTimezoneDialog({
+      currentTz: $("itemEndTz")?.value || $("itemTz")?.value || DEFAULT_TZ,
+      onSelect: tzId => {
+        const input = $("itemEndTz");
+        if (!input) return;
+        input.value = tzId;
+        input.dispatchEvent(new Event("change"));
+      }
     });
   });
 
