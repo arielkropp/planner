@@ -2,24 +2,23 @@
 
 import { $ } from "../utils/dom.js";
 import { esc } from "../utils/dom.js";
-import { TIMEZONES, searchTimezones } from "../data/timezones.js";
+import { TIMEZONES, searchTimezones, highlightMatch } from "../data/timezones.js";
 
 let activeCallback = null;
 let activeCurrentTz = "";
 let isInitialized = false;
 
-function renderItemHtml(tz, isSelected) {
-  const country = tz["country name"] || tz.countryName || "";
-  const regionCity = tz["region_city"] || tz.regionCity || tz.city || "";
-  const offset = tz["timezone"] || tz.timezone || "";
-  const titleHtml = regionCity
-    ? `<strong>${esc(country)}</strong> (${esc(regionCity)})`
-    : `<strong>${esc(country)}</strong>`;
+function renderItemHtml(result, isSelected) {
+  const { tz, matchedTerm, query } = result;
+  const highlightedTerm = highlightMatch(matchedTerm, query);
 
   return `<button type="button" class="tz-item${isSelected ? " selected active" : ""}" role="option" data-tz-id="${esc(tz.id)}" aria-selected="${isSelected ? "true" : "false"}">
     <div class="tz-item-main">
-      <div class="tz-item-title">${titleHtml}</div>
-      <div class="tz-item-meta">${esc(offset)}</div>
+      <div class="tz-item-header">
+        <strong class="tz-item-title">${esc(tz.title)}</strong>
+        <span class="tz-item-offset">${esc(tz.offset)}</span>
+      </div>
+      <div class="tz-item-term">${highlightedTerm}</div>
     </div>
     ${isSelected ? `<svg class="i sm tz-item-check" aria-hidden="true"><use href="#i-check"/></svg>` : ""}
   </button>`;
@@ -47,9 +46,9 @@ function updateList(query = "") {
   if (emptyEl) emptyEl.hidden = true;
   listEl.hidden = false;
 
-  const html = matches.map(tz => {
-    const isSelected = tz.id === activeCurrentTz;
-    return renderItemHtml(tz, isSelected);
+  const html = matches.map(result => {
+    const isSelected = result.tz.id === activeCurrentTz || result.tz.title === activeCurrentTz;
+    return renderItemHtml(result, isSelected);
   }).join("");
 
   listEl.innerHTML = html;

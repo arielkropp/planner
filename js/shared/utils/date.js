@@ -109,9 +109,18 @@ export const parseDate = text => {
   return validDate(iso) ? iso : null;
 };
 
-export const tzInfo = tzId =>
-  TIMEZONES.find(t => t.id === tzId)
-  || { id: tzId || DEFAULT_TZ, country: "", city: String(tzId || DEFAULT_TZ).split("/").pop().replace(/_/g, " "), label: tzId || DEFAULT_TZ };
+export const tzInfo = tzId => {
+  const found = TIMEZONES.find(t => t.id === tzId || t.title === tzId);
+  if (found) {
+    return {
+      ...found,
+      country: found.countryCode || found.country || "",
+      city: found.city || (found.searchTerms?.[0] ? found.searchTerms[0].split(",")[0].trim() : found.country),
+      label: found.label || found.title
+    };
+  }
+  return { id: tzId || DEFAULT_TZ, country: "", city: String(tzId || DEFAULT_TZ).split("/").pop().replace(/_/g, " "), label: tzId || DEFAULT_TZ };
+};
 
 const dtfCache = new Map();
 

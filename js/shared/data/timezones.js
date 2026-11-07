@@ -1,4329 +1,4921 @@
-/* Comprehensive Offline Timezone Database
-   Every country in the world is represented with country name, country code, region_city,
-   standard timezone offset, and daylight savings start/end properties. */
+/* Timezones Database */
 
 export const TIMEZONES = [
   {
-    "country name": "Afghanistan",
-    "country code": "AF",
-    "region_city": "Kabul",
-    "timezone": "GMT +04:30",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Afghanistan",
+    "title": "Afghanistan",
+    "offset": "GMT+4:30",
+    "utcOffsetStandard": "+04:30",
+    "utcOffsetDST": "+04:30",
+    "country": "Afghanistan",
     "countryCode": "AF",
-    "regionCity": "Kabul",
+    "searchTerms": [
+      "Kabul, Afghanistan"
+    ],
     "id": "Asia/Kabul",
     "city": "Kabul",
-    "country": "AF",
-    "label": "Afghanistan (Kabul)",
-    "aliases": []
+    "countryName": "Afghanistan",
+    "label": "Afghanistan"
   },
   {
-    "country name": "Albania",
-    "country code": "AL",
-    "region_city": "Tirana",
-    "timezone": "GMT +01:00",
-    "daylight savings start": "2026-03-29",
-    "Daylight savings end": "2026-10-25",
-    "countryName": "Albania",
+    "title": "Central European Time",
+    "offset": "GMT+1",
+    "utcOffsetStandard": "+01:00",
+    "utcOffsetDST": "+02:00",
+    "country": "Albania",
     "countryCode": "AL",
-    "regionCity": "Tirana",
+    "searchTerms": [
+      "Tirane, Albania"
+    ],
     "id": "Europe/Tirane",
-    "city": "Tirana",
-    "country": "AL",
-    "label": "Albania (Tirana)",
-    "aliases": []
+    "city": "Tirane",
+    "countryName": "Albania",
+    "label": "Albania (Central European Time)"
   },
   {
-    "country name": "Algeria",
-    "country code": "DZ",
-    "region_city": "Algiers",
-    "timezone": "GMT +01:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Algeria",
+    "title": "Central European Time",
+    "offset": "GMT+1",
+    "utcOffsetStandard": "+01:00",
+    "utcOffsetDST": "+01:00",
+    "country": "Algeria",
     "countryCode": "DZ",
-    "regionCity": "Algiers",
+    "searchTerms": [
+      "Algiers, Algeria"
+    ],
     "id": "Africa/Algiers",
     "city": "Algiers",
-    "country": "DZ",
-    "label": "Algeria (Algiers)",
-    "aliases": []
+    "countryName": "Algeria",
+    "label": "Algeria (Central European Time)"
   },
   {
-    "country name": "Andorra",
-    "country code": "AD",
-    "region_city": "Andorra la Vella",
-    "timezone": "GMT +01:00",
-    "daylight savings start": "2026-03-29",
-    "Daylight savings end": "2026-10-25",
-    "countryName": "Andorra",
+    "title": "Central European Time",
+    "offset": "GMT+1",
+    "utcOffsetStandard": "+01:00",
+    "utcOffsetDST": "+02:00",
+    "country": "Andorra",
     "countryCode": "AD",
-    "regionCity": "Andorra la Vella",
+    "searchTerms": [
+      "Andorra"
+    ],
     "id": "Europe/Andorra",
-    "city": "Andorra la Vella",
-    "country": "AD",
-    "label": "Andorra (Andorra la Vella)",
-    "aliases": []
+    "city": "Andorra",
+    "countryName": "Andorra",
+    "label": "Andorra (Central European Time)"
   },
   {
-    "country name": "Angola",
-    "country code": "AO",
-    "region_city": "Luanda",
-    "timezone": "GMT +01:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Angola",
+    "title": "West Africa Time",
+    "offset": "GMT+1",
+    "utcOffsetStandard": "+01:00",
+    "utcOffsetDST": "+01:00",
+    "country": "Angola",
     "countryCode": "AO",
-    "regionCity": "Luanda",
+    "searchTerms": [
+      "Luanda, Angola"
+    ],
     "id": "Africa/Luanda",
     "city": "Luanda",
-    "country": "AO",
-    "label": "Angola (Luanda)",
-    "aliases": []
+    "countryName": "Angola",
+    "label": "Angola (West Africa Time)"
   },
   {
-    "country name": "Antigua and Barbuda",
-    "country code": "AG",
-    "region_city": "St. John's",
-    "timezone": "GMT -04:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Antigua and Barbuda",
+    "title": "Anguilla",
+    "offset": "GMT-4",
+    "utcOffsetStandard": "-04:00",
+    "utcOffsetDST": "-04:00",
+    "country": "Anguilla",
+    "countryCode": "AI",
+    "searchTerms": [
+      "Anguilla"
+    ],
+    "id": "America/Anguilla",
+    "city": "Anguilla",
+    "countryName": "Anguilla",
+    "label": "Anguilla"
+  },
+  {
+    "title": "Antarctica (Casey)",
+    "offset": "GMT+8",
+    "utcOffsetStandard": "+08:00",
+    "utcOffsetDST": "+08:00",
+    "country": "Antarctica",
+    "countryCode": "AQ",
+    "searchTerms": [
+      "Casey, Antarctica"
+    ],
+    "id": "Antarctica/Casey",
+    "city": "Casey",
+    "countryName": "Antarctica",
+    "label": "Antarctica (Antarctica (Casey))"
+  },
+  {
+    "title": "Antarctica (Davis)",
+    "offset": "GMT+7",
+    "utcOffsetStandard": "+07:00",
+    "utcOffsetDST": "+07:00",
+    "country": "Antarctica",
+    "countryCode": "AQ",
+    "searchTerms": [
+      "Davis, Antarctica"
+    ],
+    "id": "Antarctica/Davis",
+    "city": "Davis",
+    "countryName": "Antarctica",
+    "label": "Antarctica (Antarctica (Davis))"
+  },
+  {
+    "title": "Antarctica (DumontDUrville)",
+    "offset": "GMT+10",
+    "utcOffsetStandard": "+10:00",
+    "utcOffsetDST": "+10:00",
+    "country": "Antarctica",
+    "countryCode": "AQ",
+    "searchTerms": [
+      "Dumont d'Urville, Antarctica"
+    ],
+    "id": "Antarctica/DumontDUrville",
+    "city": "Dumont d'Urville",
+    "countryName": "Antarctica",
+    "label": "Antarctica (Antarctica (DumontDUrville))"
+  },
+  {
+    "title": "Antarctica (Mawson)",
+    "offset": "GMT+5",
+    "utcOffsetStandard": "+05:00",
+    "utcOffsetDST": "+05:00",
+    "country": "Antarctica",
+    "countryCode": "AQ",
+    "searchTerms": [
+      "Mawson, Antarctica"
+    ],
+    "id": "Antarctica/Mawson",
+    "city": "Mawson",
+    "countryName": "Antarctica",
+    "label": "Antarctica (Antarctica (Mawson))"
+  },
+  {
+    "title": "Antarctica (McMurdo)",
+    "offset": "GMT+12",
+    "utcOffsetStandard": "+12:00",
+    "utcOffsetDST": "+13:00",
+    "country": "Antarctica",
+    "countryCode": "AQ",
+    "searchTerms": [
+      "McMurdo, Antarctica"
+    ],
+    "id": "Antarctica/McMurdo",
+    "city": "McMurdo",
+    "countryName": "Antarctica",
+    "label": "Antarctica (Antarctica (McMurdo))"
+  },
+  {
+    "title": "Antarctica (Palmer)",
+    "offset": "GMT-3",
+    "utcOffsetStandard": "-03:00",
+    "utcOffsetDST": "-03:00",
+    "country": "Antarctica",
+    "countryCode": "AQ",
+    "searchTerms": [
+      "Palmer, Antarctica"
+    ],
+    "id": "Antarctica/Palmer",
+    "city": "Palmer",
+    "countryName": "Antarctica",
+    "label": "Antarctica (Antarctica (Palmer))"
+  },
+  {
+    "title": "Antarctica (Rothera)",
+    "offset": "GMT-3",
+    "utcOffsetStandard": "-03:00",
+    "utcOffsetDST": "-03:00",
+    "country": "Antarctica",
+    "countryCode": "AQ",
+    "searchTerms": [
+      "Rothera, Antarctica"
+    ],
+    "id": "Antarctica/Rothera",
+    "city": "Rothera",
+    "countryName": "Antarctica",
+    "label": "Antarctica (Antarctica (Rothera))"
+  },
+  {
+    "title": "Antarctica (South Pole)",
+    "offset": "GMT+12",
+    "utcOffsetStandard": "+12:00",
+    "utcOffsetDST": "+13:00",
+    "country": "Antarctica",
+    "countryCode": "AQ",
+    "searchTerms": [
+      "South Pole, Antarctica"
+    ],
+    "id": "Antarctica/South_Pole",
+    "city": "South Pole",
+    "countryName": "Antarctica",
+    "label": "Antarctica (Antarctica (South Pole))"
+  },
+  {
+    "title": "Antarctica (Syowa)",
+    "offset": "GMT+3",
+    "utcOffsetStandard": "+03:00",
+    "utcOffsetDST": "+03:00",
+    "country": "Antarctica",
+    "countryCode": "AQ",
+    "searchTerms": [
+      "Syowa, Antarctica"
+    ],
+    "id": "Antarctica/Syowa",
+    "city": "Syowa",
+    "countryName": "Antarctica",
+    "label": "Antarctica (Antarctica (Syowa))"
+  },
+  {
+    "title": "Antarctica (Troll)",
+    "offset": "GMT+0",
+    "utcOffsetStandard": "+00:00",
+    "utcOffsetDST": "+02:00",
+    "country": "Antarctica",
+    "countryCode": "AQ",
+    "searchTerms": [
+      "Troll, Antarctica"
+    ],
+    "id": "Antarctica/Troll",
+    "city": "Troll",
+    "countryName": "Antarctica",
+    "label": "Antarctica (Antarctica (Troll))"
+  },
+  {
+    "title": "Antarctica (Vostok)",
+    "offset": "GMT+5",
+    "utcOffsetStandard": "+05:00",
+    "utcOffsetDST": "+05:00",
+    "country": "Antarctica",
+    "countryCode": "AQ",
+    "searchTerms": [
+      "Vostok, Antarctica"
+    ],
+    "id": "Antarctica/Vostok",
+    "city": "Vostok",
+    "countryName": "Antarctica",
+    "label": "Antarctica (Antarctica (Vostok))"
+  },
+  {
+    "title": "Antigua & Barbuda",
+    "offset": "GMT-4",
+    "utcOffsetStandard": "-04:00",
+    "utcOffsetDST": "-04:00",
+    "country": "Antigua & Barbuda",
     "countryCode": "AG",
-    "regionCity": "St. John's",
+    "searchTerms": [
+      "Antigua, Antigua & Barbuda"
+    ],
     "id": "America/Antigua",
-    "city": "St. John's",
-    "country": "AG",
-    "label": "Antigua and Barbuda (St. John's)",
-    "aliases": []
+    "city": "Antigua",
+    "countryName": "Antigua & Barbuda",
+    "label": "Antigua & Barbuda"
   },
   {
-    "country name": "Argentina",
-    "country code": "AR",
-    "region_city": "Buenos Aires",
-    "timezone": "GMT -03:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Argentina",
+    "title": "Argentina",
+    "offset": "GMT-3",
+    "utcOffsetStandard": "-03:00",
+    "utcOffsetDST": "-03:00",
+    "country": "Argentina",
     "countryCode": "AR",
-    "regionCity": "Buenos Aires",
+    "searchTerms": [
+      "Buenos Aires, Argentina",
+      "Catamarca, Argentina",
+      "Comodoro Rivadavia, Argentina",
+      "Cordoba, Argentina",
+      "Jujuy, Argentina",
+      "La Rioja, Argentina",
+      "Mendoza, Argentina",
+      "Rio Gallegos, Argentina",
+      "Rosario, Argentina",
+      "Salta, Argentina",
+      "San Juan, Argentina",
+      "San Luis, Argentina",
+      "Tucuman, Argentina",
+      "Ushuaia, Argentina"
+    ],
     "id": "America/Argentina/Buenos_Aires",
     "city": "Buenos Aires",
-    "country": "AR",
-    "label": "Argentina (Buenos Aires)",
-    "aliases": []
+    "countryName": "Argentina",
+    "label": "Argentina"
   },
   {
-    "country name": "Armenia",
-    "country code": "AM",
-    "region_city": "Yerevan",
-    "timezone": "GMT +04:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Armenia",
+    "title": "Armenia",
+    "offset": "GMT+4",
+    "utcOffsetStandard": "+04:00",
+    "utcOffsetDST": "+04:00",
+    "country": "Armenia",
     "countryCode": "AM",
-    "regionCity": "Yerevan",
+    "searchTerms": [
+      "Yerevan, Armenia"
+    ],
     "id": "Asia/Yerevan",
     "city": "Yerevan",
-    "country": "AM",
-    "label": "Armenia (Yerevan)",
-    "aliases": []
+    "countryName": "Armenia",
+    "label": "Armenia"
   },
   {
-    "country name": "Aruba",
-    "country code": "AW",
-    "region_city": "Oranjestad",
-    "timezone": "GMT -04:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Aruba",
+    "title": "Aruba",
+    "offset": "GMT-4",
+    "utcOffsetStandard": "-04:00",
+    "utcOffsetDST": "-04:00",
+    "country": "Aruba",
     "countryCode": "AW",
-    "regionCity": "Oranjestad",
+    "searchTerms": [
+      "Aruba"
+    ],
     "id": "America/Aruba",
-    "city": "Oranjestad",
-    "country": "AW",
-    "label": "Aruba (Oranjestad)",
-    "aliases": []
+    "city": "Aruba",
+    "countryName": "Aruba",
+    "label": "Aruba"
   },
   {
-    "country name": "Australia",
-    "country code": "AU",
-    "region_city": "Central (Adelaide)",
-    "timezone": "GMT +09:30",
-    "daylight savings start": "2026-10-04",
-    "Daylight savings end": "2026-04-05",
-    "countryName": "Australia",
+    "title": "Australian Central Time",
+    "offset": "GMT+9:30",
+    "utcOffsetStandard": "+09:30",
+    "utcOffsetDST": "+10:30",
+    "country": "Australia",
     "countryCode": "AU",
-    "regionCity": "Central (Adelaide)",
+    "searchTerms": [
+      "Adelaide, Australia",
+      "Broken Hill, Australia",
+      "Darwin, Australia"
+    ],
     "id": "Australia/Adelaide",
     "city": "Adelaide",
-    "country": "AU",
-    "label": "Australia (Central (Adelaide))",
-    "aliases": [
-      "adelaide"
-    ]
+    "countryName": "Australia",
+    "label": "Australia (Australian Central Time)"
   },
   {
-    "country name": "Australia",
-    "country code": "AU",
-    "region_city": "Eastern (Sydney)",
-    "timezone": "GMT +10:00",
-    "daylight savings start": "2026-10-04",
-    "Daylight savings end": "2026-04-05",
-    "countryName": "Australia",
+    "title": "Australian Central Western Time",
+    "offset": "GMT+8:45",
+    "utcOffsetStandard": "+08:45",
+    "utcOffsetDST": "+08:45",
+    "country": "Australia",
     "countryCode": "AU",
-    "regionCity": "Eastern (Sydney)",
-    "id": "Australia/Sydney",
-    "city": "Sydney",
-    "country": "AU",
-    "label": "Australia (Eastern (Sydney))",
-    "aliases": [
-      "sydney",
-      "canberra"
-    ]
+    "searchTerms": [
+      "Eucla, Australia"
+    ],
+    "id": "Australia/Eucla",
+    "city": "Eucla",
+    "countryName": "Australia",
+    "label": "Australia (Australian Central Western Time)"
   },
   {
-    "country name": "Australia",
-    "country code": "AU",
-    "region_city": "Lord Howe Island",
-    "timezone": "GMT +10:30",
-    "daylight savings start": "2026-10-04",
-    "Daylight savings end": "2026-04-05",
-    "countryName": "Australia",
+    "title": "Australian Eastern Time",
+    "offset": "GMT+10",
+    "utcOffsetStandard": "+10:00",
+    "utcOffsetDST": "+11:00",
+    "country": "Australia",
     "countryCode": "AU",
-    "regionCity": "Lord Howe Island",
-    "id": "Australia/Lord_Howe",
-    "city": "Lord Howe Island",
-    "country": "AU",
-    "label": "Australia (Lord Howe Island)",
-    "aliases": []
-  },
-  {
-    "country name": "Australia",
-    "country code": "AU",
-    "region_city": "Northern (Darwin)",
-    "timezone": "GMT +09:30",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Australia",
-    "countryCode": "AU",
-    "regionCity": "Northern (Darwin)",
-    "id": "Australia/Darwin",
-    "city": "Northern (Darwin)",
-    "country": "AU",
-    "label": "Australia (Northern (Darwin))",
-    "aliases": [
-      "darwin"
-    ]
-  },
-  {
-    "country name": "Australia",
-    "country code": "AU",
-    "region_city": "Queensland (Brisbane)",
-    "timezone": "GMT +10:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Australia",
-    "countryCode": "AU",
-    "regionCity": "Queensland (Brisbane)",
+    "searchTerms": [
+      "Brisbane, Australia",
+      "Canberra, Australia",
+      "Currie, Australia",
+      "Gold Coast, Australia",
+      "Hobart, Australia",
+      "Lindeman, Australia",
+      "Macquarie, Australia",
+      "Melbourne, Australia",
+      "Sydney, Australia"
+    ],
     "id": "Australia/Brisbane",
-    "city": "Queensland (Brisbane)",
-    "country": "AU",
-    "label": "Australia (Queensland (Brisbane))",
-    "aliases": [
-      "brisbane"
-    ]
+    "city": "Brisbane",
+    "countryName": "Australia",
+    "label": "Australia (Australian Eastern Time)"
   },
   {
-    "country name": "Australia",
-    "country code": "AU",
-    "region_city": "Tasmania (Hobart)",
-    "timezone": "GMT +10:00",
-    "daylight savings start": "2026-10-04",
-    "Daylight savings end": "2026-04-05",
-    "countryName": "Australia",
+    "title": "Australian Western Time",
+    "offset": "GMT+8",
+    "utcOffsetStandard": "+08:00",
+    "utcOffsetDST": "+08:00",
+    "country": "Australia",
     "countryCode": "AU",
-    "regionCity": "Tasmania (Hobart)",
-    "id": "Australia/Hobart",
-    "city": "Tasmania (Hobart)",
-    "country": "AU",
-    "label": "Australia (Tasmania (Hobart))",
-    "aliases": [
-      "hobart"
-    ]
-  },
-  {
-    "country name": "Australia",
-    "country code": "AU",
-    "region_city": "Victoria (Melbourne)",
-    "timezone": "GMT +10:00",
-    "daylight savings start": "2026-10-04",
-    "Daylight savings end": "2026-04-05",
-    "countryName": "Australia",
-    "countryCode": "AU",
-    "regionCity": "Victoria (Melbourne)",
-    "id": "Australia/Melbourne",
-    "city": "Victoria (Melbourne)",
-    "country": "AU",
-    "label": "Australia (Victoria (Melbourne))",
-    "aliases": [
-      "melbourne"
-    ]
-  },
-  {
-    "country name": "Australia",
-    "country code": "AU",
-    "region_city": "Western (Perth)",
-    "timezone": "GMT +08:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Australia",
-    "countryCode": "AU",
-    "regionCity": "Western (Perth)",
+    "searchTerms": [
+      "Perth, Australia"
+    ],
     "id": "Australia/Perth",
-    "city": "Western (Perth)",
-    "country": "AU",
-    "label": "Australia (Western (Perth))",
-    "aliases": [
-      "perth"
-    ]
+    "city": "Perth",
+    "countryName": "Australia",
+    "label": "Australia (Australian Western Time)"
   },
   {
-    "country name": "Austria",
-    "country code": "AT",
-    "region_city": "Vienna",
-    "timezone": "GMT +01:00",
-    "daylight savings start": "2026-03-29",
-    "Daylight savings end": "2026-10-25",
-    "countryName": "Austria",
+    "title": "Lord Howe Time",
+    "offset": "GMT+10:30",
+    "utcOffsetStandard": "+10:30",
+    "utcOffsetDST": "+11:00",
+    "country": "Australia",
+    "countryCode": "AU",
+    "searchTerms": [
+      "Lord Howe, Australia"
+    ],
+    "id": "Australia/Lord_Howe",
+    "city": "Lord Howe",
+    "countryName": "Australia",
+    "label": "Australia (Lord Howe Time)"
+  },
+  {
+    "title": "Central European Time",
+    "offset": "GMT+1",
+    "utcOffsetStandard": "+01:00",
+    "utcOffsetDST": "+02:00",
+    "country": "Austria",
     "countryCode": "AT",
-    "regionCity": "Vienna",
+    "searchTerms": [
+      "Vienna, Austria"
+    ],
     "id": "Europe/Vienna",
     "city": "Vienna",
-    "country": "AT",
-    "label": "Austria (Vienna)",
-    "aliases": []
+    "countryName": "Austria",
+    "label": "Austria (Central European Time)"
   },
   {
-    "country name": "Azerbaijan",
-    "country code": "AZ",
-    "region_city": "Baku",
-    "timezone": "GMT +04:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Azerbaijan",
+    "title": "Azerbaijan",
+    "offset": "GMT+4",
+    "utcOffsetStandard": "+04:00",
+    "utcOffsetDST": "+04:00",
+    "country": "Azerbaijan",
     "countryCode": "AZ",
-    "regionCity": "Baku",
+    "searchTerms": [
+      "Baku, Azerbaijan"
+    ],
     "id": "Asia/Baku",
     "city": "Baku",
-    "country": "AZ",
-    "label": "Azerbaijan (Baku)",
-    "aliases": []
+    "countryName": "Azerbaijan",
+    "label": "Azerbaijan"
   },
   {
-    "country name": "Bahamas",
-    "country code": "BS",
-    "region_city": "Nassau",
-    "timezone": "GMT -05:00",
-    "daylight savings start": "2026-03-08",
-    "Daylight savings end": "2026-11-01",
-    "countryName": "Bahamas",
+    "title": "Bahamas",
+    "offset": "GMT-5",
+    "utcOffsetStandard": "-05:00",
+    "utcOffsetDST": "-04:00",
+    "country": "Bahamas",
     "countryCode": "BS",
-    "regionCity": "Nassau",
+    "searchTerms": [
+      "Nassau, Bahamas"
+    ],
     "id": "America/Nassau",
     "city": "Nassau",
-    "country": "BS",
-    "label": "Bahamas (Nassau)",
-    "aliases": []
+    "countryName": "Bahamas",
+    "label": "Bahamas"
   },
   {
-    "country name": "Bahrain",
-    "country code": "BH",
-    "region_city": "Manama",
-    "timezone": "GMT +03:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Bahrain",
+    "title": "Bahrain",
+    "offset": "GMT+3",
+    "utcOffsetStandard": "+03:00",
+    "utcOffsetDST": "+03:00",
+    "country": "Bahrain",
     "countryCode": "BH",
-    "regionCity": "Manama",
+    "searchTerms": [
+      "Bahrain"
+    ],
     "id": "Asia/Bahrain",
-    "city": "Manama",
-    "country": "BH",
-    "label": "Bahrain (Manama)",
-    "aliases": []
+    "city": "Bahrain",
+    "countryName": "Bahrain",
+    "label": "Bahrain"
   },
   {
-    "country name": "Bangladesh",
-    "country code": "BD",
-    "region_city": "Dhaka",
-    "timezone": "GMT +06:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Bangladesh",
+    "title": "Bangladesh",
+    "offset": "GMT+6",
+    "utcOffsetStandard": "+06:00",
+    "utcOffsetDST": "+06:00",
+    "country": "Bangladesh",
     "countryCode": "BD",
-    "regionCity": "Dhaka",
+    "searchTerms": [
+      "Dhaka, Bangladesh"
+    ],
     "id": "Asia/Dhaka",
     "city": "Dhaka",
-    "country": "BD",
-    "label": "Bangladesh (Dhaka)",
-    "aliases": []
+    "countryName": "Bangladesh",
+    "label": "Bangladesh"
   },
   {
-    "country name": "Barbados",
-    "country code": "BB",
-    "region_city": "Bridgetown",
-    "timezone": "GMT -04:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Barbados",
+    "title": "Barbados",
+    "offset": "GMT-4",
+    "utcOffsetStandard": "-04:00",
+    "utcOffsetDST": "-04:00",
+    "country": "Barbados",
     "countryCode": "BB",
-    "regionCity": "Bridgetown",
+    "searchTerms": [
+      "Barbados"
+    ],
     "id": "America/Barbados",
-    "city": "Bridgetown",
-    "country": "BB",
-    "label": "Barbados (Bridgetown)",
-    "aliases": []
+    "city": "Barbados",
+    "countryName": "Barbados",
+    "label": "Barbados"
   },
   {
-    "country name": "Belarus",
-    "country code": "BY",
-    "region_city": "Minsk",
-    "timezone": "GMT +03:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Belarus",
+    "title": "Belarus",
+    "offset": "GMT+3",
+    "utcOffsetStandard": "+03:00",
+    "utcOffsetDST": "+03:00",
+    "country": "Belarus",
     "countryCode": "BY",
-    "regionCity": "Minsk",
+    "searchTerms": [
+      "Minsk, Belarus"
+    ],
     "id": "Europe/Minsk",
     "city": "Minsk",
-    "country": "BY",
-    "label": "Belarus (Minsk)",
-    "aliases": []
+    "countryName": "Belarus",
+    "label": "Belarus"
   },
   {
-    "country name": "Belgium",
-    "country code": "BE",
-    "region_city": "Brussels",
-    "timezone": "GMT +01:00",
-    "daylight savings start": "2026-03-29",
-    "Daylight savings end": "2026-10-25",
-    "countryName": "Belgium",
+    "title": "Central European Time",
+    "offset": "GMT+1",
+    "utcOffsetStandard": "+01:00",
+    "utcOffsetDST": "+02:00",
+    "country": "Belgium",
     "countryCode": "BE",
-    "regionCity": "Brussels",
+    "searchTerms": [
+      "Brussels, Belgium"
+    ],
     "id": "Europe/Brussels",
     "city": "Brussels",
-    "country": "BE",
-    "label": "Belgium (Brussels)",
-    "aliases": []
+    "countryName": "Belgium",
+    "label": "Belgium (Central European Time)"
   },
   {
-    "country name": "Belize",
-    "country code": "BZ",
-    "region_city": "Belmopan",
-    "timezone": "GMT -06:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Belize",
+    "title": "Belize",
+    "offset": "GMT-6",
+    "utcOffsetStandard": "-06:00",
+    "utcOffsetDST": "-06:00",
+    "country": "Belize",
     "countryCode": "BZ",
-    "regionCity": "Belmopan",
+    "searchTerms": [
+      "Belize"
+    ],
     "id": "America/Belize",
-    "city": "Belmopan",
-    "country": "BZ",
-    "label": "Belize (Belmopan)",
-    "aliases": []
+    "city": "Belize",
+    "countryName": "Belize",
+    "label": "Belize"
   },
   {
-    "country name": "Benin",
-    "country code": "BJ",
-    "region_city": "Porto-Novo",
-    "timezone": "GMT +01:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Benin",
+    "title": "West Africa Time",
+    "offset": "GMT+1",
+    "utcOffsetStandard": "+01:00",
+    "utcOffsetDST": "+01:00",
+    "country": "Benin",
     "countryCode": "BJ",
-    "regionCity": "Porto-Novo",
+    "searchTerms": [
+      "Porto-Novo, Benin"
+    ],
     "id": "Africa/Porto-Novo",
     "city": "Porto-Novo",
-    "country": "BJ",
-    "label": "Benin (Porto-Novo)",
-    "aliases": []
+    "countryName": "Benin",
+    "label": "Benin (West Africa Time)"
   },
   {
-    "country name": "Bermuda",
-    "country code": "BM",
-    "region_city": "Hamilton",
-    "timezone": "GMT -04:00",
-    "daylight savings start": "2026-03-08",
-    "Daylight savings end": "2026-11-01",
-    "countryName": "Bermuda",
+    "title": "Bermuda",
+    "offset": "GMT-4",
+    "utcOffsetStandard": "-04:00",
+    "utcOffsetDST": "-03:00",
+    "country": "Bermuda",
     "countryCode": "BM",
-    "regionCity": "Hamilton",
+    "searchTerms": [
+      "Bermuda"
+    ],
     "id": "Atlantic/Bermuda",
-    "city": "Hamilton",
-    "country": "BM",
-    "label": "Bermuda (Hamilton)",
-    "aliases": []
+    "city": "Bermuda",
+    "countryName": "Bermuda",
+    "label": "Bermuda"
   },
   {
-    "country name": "Bhutan",
-    "country code": "BT",
-    "region_city": "Thimphu",
-    "timezone": "GMT +06:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Bhutan",
+    "title": "Bhutan",
+    "offset": "GMT+6",
+    "utcOffsetStandard": "+06:00",
+    "utcOffsetDST": "+06:00",
+    "country": "Bhutan",
     "countryCode": "BT",
-    "regionCity": "Thimphu",
+    "searchTerms": [
+      "Thimphu, Bhutan"
+    ],
     "id": "Asia/Thimphu",
     "city": "Thimphu",
-    "country": "BT",
-    "label": "Bhutan (Thimphu)",
-    "aliases": []
+    "countryName": "Bhutan",
+    "label": "Bhutan"
   },
   {
-    "country name": "Bolivia",
-    "country code": "BO",
-    "region_city": "La Paz",
-    "timezone": "GMT -04:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Bolivia",
+    "title": "Bolivia",
+    "offset": "GMT-4",
+    "utcOffsetStandard": "-04:00",
+    "utcOffsetDST": "-04:00",
+    "country": "Bolivia",
     "countryCode": "BO",
-    "regionCity": "La Paz",
+    "searchTerms": [
+      "La Paz, Bolivia"
+    ],
     "id": "America/La_Paz",
     "city": "La Paz",
-    "country": "BO",
-    "label": "Bolivia (La Paz)",
-    "aliases": []
+    "countryName": "Bolivia",
+    "label": "Bolivia"
   },
   {
-    "country name": "Bosnia and Herzegovina",
-    "country code": "BA",
-    "region_city": "Sarajevo",
-    "timezone": "GMT +01:00",
-    "daylight savings start": "2026-03-29",
-    "Daylight savings end": "2026-10-25",
-    "countryName": "Bosnia and Herzegovina",
+    "title": "Central European Time",
+    "offset": "GMT+1",
+    "utcOffsetStandard": "+01:00",
+    "utcOffsetDST": "+02:00",
+    "country": "Bosnia and Herzegovina",
     "countryCode": "BA",
-    "regionCity": "Sarajevo",
+    "searchTerms": [
+      "Sarajevo, Bosnia and Herzegovina"
+    ],
     "id": "Europe/Sarajevo",
     "city": "Sarajevo",
-    "country": "BA",
-    "label": "Bosnia and Herzegovina (Sarajevo)",
-    "aliases": []
+    "countryName": "Bosnia and Herzegovina",
+    "label": "Bosnia and Herzegovina (Central European Time)"
   },
   {
-    "country name": "Botswana",
-    "country code": "BW",
-    "region_city": "Gaborone",
-    "timezone": "GMT +02:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Botswana",
+    "title": "Central Africa Time",
+    "offset": "GMT+2",
+    "utcOffsetStandard": "+02:00",
+    "utcOffsetDST": "+02:00",
+    "country": "Botswana",
     "countryCode": "BW",
-    "regionCity": "Gaborone",
+    "searchTerms": [
+      "Gaborone, Botswana"
+    ],
     "id": "Africa/Gaborone",
     "city": "Gaborone",
-    "country": "BW",
-    "label": "Botswana (Gaborone)",
-    "aliases": []
+    "countryName": "Botswana",
+    "label": "Botswana (Central Africa Time)"
   },
   {
-    "country name": "Brazil",
-    "country code": "BR",
-    "region_city": "Acre (Rio Branco)",
-    "timezone": "GMT -05:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Brazil",
+    "title": "Acre Time",
+    "offset": "GMT-5",
+    "utcOffsetStandard": "-05:00",
+    "utcOffsetDST": "-05:00",
+    "country": "Brazil",
     "countryCode": "BR",
-    "regionCity": "Acre (Rio Branco)",
-    "id": "America/Rio_Branco",
-    "city": "Acre (Rio Branco)",
-    "country": "BR",
-    "label": "Brazil (Acre (Rio Branco))",
-    "aliases": []
+    "searchTerms": [
+      "Eirunepe, Brazil",
+      "Porto Acre, Brazil",
+      "Rio Branco, Brazil"
+    ],
+    "id": "America/Eirunepe",
+    "city": "Eirunepe",
+    "countryName": "Brazil",
+    "label": "Brazil (Acre Time)"
   },
   {
-    "country name": "Brazil",
-    "country code": "BR",
-    "region_city": "Amazon (Manaus)",
-    "timezone": "GMT -04:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Brazil",
+    "title": "Amazon Time",
+    "offset": "GMT-4",
+    "utcOffsetStandard": "-04:00",
+    "utcOffsetDST": "-04:00",
+    "country": "Brazil",
     "countryCode": "BR",
-    "regionCity": "Amazon (Manaus)",
-    "id": "America/Manaus",
-    "city": "Amazon (Manaus)",
-    "country": "BR",
-    "label": "Brazil (Amazon (Manaus))",
-    "aliases": [
-      "manaus"
-    ]
+    "searchTerms": [
+      "Boa Vista, Brazil",
+      "Campo Grande, Brazil",
+      "Cuiaba, Brazil",
+      "Manaus, Brazil",
+      "Porto Velho, Brazil"
+    ],
+    "id": "America/Boa_Vista",
+    "city": "Boa Vista",
+    "countryName": "Brazil",
+    "label": "Brazil (Amazon Time)"
   },
   {
-    "country name": "Brazil",
-    "country code": "BR",
-    "region_city": "Brasília / São Paulo",
-    "timezone": "GMT -03:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Brazil",
+    "title": "Brasilia Time",
+    "offset": "GMT-3",
+    "utcOffsetStandard": "-03:00",
+    "utcOffsetDST": "-03:00",
+    "country": "Brazil",
     "countryCode": "BR",
-    "regionCity": "Brasília / São Paulo",
-    "id": "America/Sao_Paulo",
-    "city": "Brasília / São Paulo",
-    "country": "BR",
-    "label": "Brazil (Brasília / São Paulo)",
-    "aliases": [
-      "sao paulo",
-      "rio"
-    ]
+    "searchTerms": [
+      "Araguaina, Brazil",
+      "Bahia, Brazil",
+      "Belem, Brazil",
+      "Brasília, Brazil",
+      "Fortaleza, Brazil",
+      "Maceio, Brazil",
+      "Recife, Brazil",
+      "Rio de Janeiro, Brazil",
+      "Salvador, Brazil",
+      "Santarem, Brazil",
+      "Sao Paulo, Brazil",
+      "São Paulo, Brazil"
+    ],
+    "id": "America/Araguaina",
+    "city": "Araguaina",
+    "countryName": "Brazil",
+    "label": "Brazil (Brasilia Time)"
   },
   {
-    "country name": "Brazil",
-    "country code": "BR",
-    "region_city": "Fernando de Noronha",
-    "timezone": "GMT -02:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Brazil",
+    "title": "Fernando de Noronha Time",
+    "offset": "GMT-2",
+    "utcOffsetStandard": "-02:00",
+    "utcOffsetDST": "-02:00",
+    "country": "Brazil",
     "countryCode": "BR",
-    "regionCity": "Fernando de Noronha",
+    "searchTerms": [
+      "Fernando de Noronha, Brazil"
+    ],
     "id": "America/Noronha",
     "city": "Fernando de Noronha",
-    "country": "BR",
-    "label": "Brazil (Fernando de Noronha)",
-    "aliases": []
+    "countryName": "Brazil",
+    "label": "Brazil (Fernando de Noronha Time)"
   },
   {
-    "country name": "Brunei",
-    "country code": "BN",
-    "region_city": "Bandar Seri Begawan",
-    "timezone": "GMT +08:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Brunei",
+    "title": "British Indian Ocean Territory",
+    "offset": "GMT+6",
+    "utcOffsetStandard": "+06:00",
+    "utcOffsetDST": "+06:00",
+    "country": "British Indian Ocean Territory",
+    "countryCode": "IO",
+    "searchTerms": [
+      "Chagos Archipelago, British Indian Ocean Territory"
+    ],
+    "id": "Indian/Chagos",
+    "city": "Chagos Archipelago",
+    "countryName": "British Indian Ocean Territory",
+    "label": "British Indian Ocean Territory"
+  },
+  {
+    "title": "Brunei",
+    "offset": "GMT+8",
+    "utcOffsetStandard": "+08:00",
+    "utcOffsetDST": "+08:00",
+    "country": "Brunei",
     "countryCode": "BN",
-    "regionCity": "Bandar Seri Begawan",
+    "searchTerms": [
+      "Brunei"
+    ],
     "id": "Asia/Brunei",
-    "city": "Bandar Seri Begawan",
-    "country": "BN",
-    "label": "Brunei (Bandar Seri Begawan)",
-    "aliases": []
+    "city": "Brunei",
+    "countryName": "Brunei",
+    "label": "Brunei"
   },
   {
-    "country name": "Bulgaria",
-    "country code": "BG",
-    "region_city": "Sofia",
-    "timezone": "GMT +02:00",
-    "daylight savings start": "2026-03-29",
-    "Daylight savings end": "2026-10-25",
-    "countryName": "Bulgaria",
+    "title": "Eastern European Time",
+    "offset": "GMT+2",
+    "utcOffsetStandard": "+02:00",
+    "utcOffsetDST": "+03:00",
+    "country": "Bulgaria",
     "countryCode": "BG",
-    "regionCity": "Sofia",
+    "searchTerms": [
+      "Sofia, Bulgaria"
+    ],
     "id": "Europe/Sofia",
     "city": "Sofia",
-    "country": "BG",
-    "label": "Bulgaria (Sofia)",
-    "aliases": []
+    "countryName": "Bulgaria",
+    "label": "Bulgaria (Eastern European Time)"
   },
   {
-    "country name": "Burkina Faso",
-    "country code": "BF",
-    "region_city": "Ouagadougou",
-    "timezone": "GMT +00:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Burkina Faso",
+    "title": "Greenwich Mean Time",
+    "offset": "GMT+0",
+    "utcOffsetStandard": "+00:00",
+    "utcOffsetDST": "+00:00",
+    "country": "Burkina Faso",
     "countryCode": "BF",
-    "regionCity": "Ouagadougou",
+    "searchTerms": [
+      "Ouagadougou, Burkina Faso"
+    ],
     "id": "Africa/Ouagadougou",
     "city": "Ouagadougou",
-    "country": "BF",
-    "label": "Burkina Faso (Ouagadougou)",
-    "aliases": []
+    "countryName": "Burkina Faso",
+    "label": "Burkina Faso (Greenwich Mean Time)"
   },
   {
-    "country name": "Burundi",
-    "country code": "BI",
-    "region_city": "Gitega",
-    "timezone": "GMT +02:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Burundi",
+    "title": "Central Africa Time",
+    "offset": "GMT+2",
+    "utcOffsetStandard": "+02:00",
+    "utcOffsetDST": "+02:00",
+    "country": "Burundi",
     "countryCode": "BI",
-    "regionCity": "Gitega",
+    "searchTerms": [
+      "Bujumbura, Burundi"
+    ],
     "id": "Africa/Bujumbura",
-    "city": "Gitega",
-    "country": "BI",
-    "label": "Burundi (Gitega)",
-    "aliases": []
+    "city": "Bujumbura",
+    "countryName": "Burundi",
+    "label": "Burundi (Central Africa Time)"
   },
   {
-    "country name": "Cabo Verde",
-    "country code": "CV",
-    "region_city": "Praia",
-    "timezone": "GMT -01:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Cabo Verde",
-    "countryCode": "CV",
-    "regionCity": "Praia",
-    "id": "Atlantic/Cape_Verde",
-    "city": "Praia",
-    "country": "CV",
-    "label": "Cabo Verde (Praia)",
-    "aliases": [
-      "cape verde"
-    ]
-  },
-  {
-    "country name": "Cambodia",
-    "country code": "KH",
-    "region_city": "Phnom Penh",
-    "timezone": "GMT +07:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Cambodia",
+    "title": "Cambodia",
+    "offset": "GMT+7",
+    "utcOffsetStandard": "+07:00",
+    "utcOffsetDST": "+07:00",
+    "country": "Cambodia",
     "countryCode": "KH",
-    "regionCity": "Phnom Penh",
+    "searchTerms": [
+      "Phnom Penh, Cambodia"
+    ],
     "id": "Asia/Phnom_Penh",
     "city": "Phnom Penh",
-    "country": "KH",
-    "label": "Cambodia (Phnom Penh)",
-    "aliases": []
+    "countryName": "Cambodia",
+    "label": "Cambodia"
   },
   {
-    "country name": "Cameroon",
-    "country code": "CM",
-    "region_city": "Yaoundé",
-    "timezone": "GMT +01:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Cameroon",
+    "title": "West Africa Time",
+    "offset": "GMT+1",
+    "utcOffsetStandard": "+01:00",
+    "utcOffsetDST": "+01:00",
+    "country": "Cameroon",
     "countryCode": "CM",
-    "regionCity": "Yaoundé",
+    "searchTerms": [
+      "Douala, Cameroon"
+    ],
     "id": "Africa/Douala",
-    "city": "Yaoundé",
-    "country": "CM",
-    "label": "Cameroon (Yaoundé)",
-    "aliases": []
+    "city": "Douala",
+    "countryName": "Cameroon",
+    "label": "Cameroon (West Africa Time)"
   },
   {
-    "country name": "Canada",
-    "country code": "CA",
-    "region_city": "Atlantic (Halifax)",
-    "timezone": "GMT -04:00",
-    "daylight savings start": "2026-03-08",
-    "Daylight savings end": "2026-11-01",
-    "countryName": "Canada",
+    "title": "Atlantic Standard Time",
+    "offset": "GMT-4",
+    "utcOffsetStandard": "-04:00",
+    "utcOffsetDST": "-03:00",
+    "country": "Canada",
     "countryCode": "CA",
-    "regionCity": "Atlantic (Halifax)",
-    "id": "America/Halifax",
-    "city": "Atlantic (Halifax)",
-    "country": "CA",
-    "label": "Canada (Atlantic (Halifax))",
-    "aliases": [
-      "halifax"
-    ]
+    "searchTerms": [
+      "Blanc-Sablon, Canada",
+      "Glace Bay, Canada",
+      "Goose Bay, Canada",
+      "Halifax, Canada",
+      "Moncton, Canada"
+    ],
+    "id": "America/Blanc-Sablon",
+    "city": "Blanc-Sablon",
+    "countryName": "Canada",
+    "label": "Canada (Atlantic Standard Time)"
   },
   {
-    "country name": "Canada",
-    "country code": "CA",
-    "region_city": "Central (Winnipeg)",
-    "timezone": "GMT -06:00",
-    "daylight savings start": "2026-03-08",
-    "Daylight savings end": "2026-11-01",
-    "countryName": "Canada",
+    "title": "Central Standard Time",
+    "offset": "GMT-6",
+    "utcOffsetStandard": "-06:00",
+    "utcOffsetDST": "-05:00",
+    "country": "Canada",
     "countryCode": "CA",
-    "regionCity": "Central (Winnipeg)",
-    "id": "America/Winnipeg",
-    "city": "Winnipeg",
-    "country": "CA",
-    "label": "Canada (Central (Winnipeg))",
-    "aliases": [
-      "winnipeg"
-    ]
+    "searchTerms": [
+      "Rainy River, Canada",
+      "Rankin Inlet, Canada",
+      "Regina, Canada",
+      "Resolute, Canada",
+      "Saskatoon, Canada",
+      "Swift Current, Canada",
+      "Winnipeg, Canada"
+    ],
+    "id": "America/Rankin_Inlet",
+    "city": "Rainy River",
+    "countryName": "Canada",
+    "label": "Canada (Central Standard Time)"
   },
   {
-    "country name": "Canada",
-    "country code": "CA",
-    "region_city": "Eastern (Toronto)",
-    "timezone": "GMT -05:00",
-    "daylight savings start": "2026-03-08",
-    "Daylight savings end": "2026-11-01",
-    "countryName": "Canada",
+    "title": "Eastern Standard Time",
+    "offset": "GMT-5",
+    "utcOffsetStandard": "-05:00",
+    "utcOffsetDST": "-04:00",
+    "country": "Canada",
     "countryCode": "CA",
-    "regionCity": "Eastern (Toronto)",
-    "id": "America/Toronto",
-    "city": "Toronto",
-    "country": "CA",
-    "label": "Canada (Eastern (Toronto))",
-    "aliases": [
-      "toronto",
-      "montreal",
-      "ottawa"
-    ]
+    "searchTerms": [
+      "Atikokan, Canada",
+      "Coral Harbour, Canada",
+      "Iqaluit, Canada",
+      "Montreal, Canada",
+      "Nipigon, Canada",
+      "Ottawa, Canada",
+      "Pangnirtung, Canada",
+      "Quebec City, Canada",
+      "Thunder Bay, Canada",
+      "Toronto, Canada"
+    ],
+    "id": "America/Coral_Harbour",
+    "city": "Atikokan",
+    "countryName": "Canada",
+    "label": "Canada (Eastern Standard Time)"
   },
   {
-    "country name": "Canada",
-    "country code": "CA",
-    "region_city": "Mountain (Edmonton)",
-    "timezone": "GMT -07:00",
-    "daylight savings start": "2026-03-08",
-    "Daylight savings end": "2026-11-01",
-    "countryName": "Canada",
+    "title": "Mountain Standard Time",
+    "offset": "GMT-7",
+    "utcOffsetStandard": "-07:00",
+    "utcOffsetDST": "-06:00",
+    "country": "Canada",
     "countryCode": "CA",
-    "regionCity": "Mountain (Edmonton)",
-    "id": "America/Edmonton",
-    "city": "Edmonton",
-    "country": "CA",
-    "label": "Canada (Mountain (Edmonton))",
-    "aliases": [
-      "edmonton",
-      "calgary"
-    ]
+    "searchTerms": [
+      "Calgary, Canada",
+      "Cambridge Bay, Canada",
+      "Creston, Canada",
+      "Dawson Creek, Canada",
+      "Dawson, Canada",
+      "Edmonton, Canada",
+      "Fort Nelson, Canada",
+      "Inuvik, Canada",
+      "Whitehorse, Canada",
+      "Yellowknife, Canada"
+    ],
+    "id": "America/Cambridge_Bay",
+    "city": "Calgary",
+    "countryName": "Canada",
+    "label": "Canada (Mountain Standard Time)"
   },
   {
-    "country name": "Canada",
-    "country code": "CA",
-    "region_city": "Newfoundland (St. John's)",
-    "timezone": "GMT -03:30",
-    "daylight savings start": "2026-03-08",
-    "Daylight savings end": "2026-11-01",
-    "countryName": "Canada",
+    "title": "Newfoundland Time",
+    "offset": "GMT-3:30",
+    "utcOffsetStandard": "-03:30",
+    "utcOffsetDST": "-02:30",
+    "country": "Canada",
     "countryCode": "CA",
-    "regionCity": "Newfoundland (St. John's)",
+    "searchTerms": [
+      "St. John's, Canada"
+    ],
     "id": "America/St_Johns",
-    "city": "Newfoundland (St. John's)",
-    "country": "CA",
-    "label": "Canada (Newfoundland (St. John's))",
-    "aliases": [
-      "st johns"
-    ]
+    "city": "St. John's",
+    "countryName": "Canada",
+    "label": "Canada (Newfoundland Time)"
   },
   {
-    "country name": "Canada",
-    "country code": "CA",
-    "region_city": "Pacific (Vancouver)",
-    "timezone": "GMT -08:00",
-    "daylight savings start": "2026-03-08",
-    "Daylight savings end": "2026-11-01",
-    "countryName": "Canada",
+    "title": "Pacific Standard Time",
+    "offset": "GMT-8",
+    "utcOffsetStandard": "-08:00",
+    "utcOffsetDST": "-07:00",
+    "country": "Canada",
     "countryCode": "CA",
-    "regionCity": "Pacific (Vancouver)",
+    "searchTerms": [
+      "Vancouver, Canada",
+      "Victoria, Canada"
+    ],
     "id": "America/Vancouver",
     "city": "Vancouver",
-    "country": "CA",
-    "label": "Canada (Pacific (Vancouver))",
-    "aliases": [
-      "vancouver"
-    ]
+    "countryName": "Canada",
+    "label": "Canada (Pacific Standard Time)"
   },
   {
-    "country name": "Cayman Islands",
-    "country code": "KY",
-    "region_city": "George Town",
-    "timezone": "GMT -05:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Cayman Islands",
+    "title": "Cape Verde",
+    "offset": "GMT-1",
+    "utcOffsetStandard": "-01:00",
+    "utcOffsetDST": "-01:00",
+    "country": "Cape Verde",
+    "countryCode": "CV",
+    "searchTerms": [
+      "Cape Verde"
+    ],
+    "id": "Atlantic/Cape_Verde",
+    "city": "Cape Verde",
+    "countryName": "Cape Verde",
+    "label": "Cape Verde"
+  },
+  {
+    "title": "Caribbean NL",
+    "offset": "GMT-4",
+    "utcOffsetStandard": "-04:00",
+    "utcOffsetDST": "-04:00",
+    "country": "Caribbean NL",
+    "countryCode": "BQ",
+    "searchTerms": [
+      "Kralendijk, Caribbean NL"
+    ],
+    "id": "America/Kralendijk",
+    "city": "Kralendijk",
+    "countryName": "Caribbean NL",
+    "label": "Caribbean NL"
+  },
+  {
+    "title": "Cayman Islands",
+    "offset": "GMT-5",
+    "utcOffsetStandard": "-05:00",
+    "utcOffsetDST": "-05:00",
+    "country": "Cayman Islands",
     "countryCode": "KY",
-    "regionCity": "George Town",
+    "searchTerms": [
+      "Cayman, Cayman Islands"
+    ],
     "id": "America/Cayman",
-    "city": "George Town",
-    "country": "KY",
-    "label": "Cayman Islands (George Town)",
-    "aliases": []
+    "city": "Cayman",
+    "countryName": "Cayman Islands",
+    "label": "Cayman Islands"
   },
   {
-    "country name": "Central African Republic",
-    "country code": "CF",
-    "region_city": "Bangui",
-    "timezone": "GMT +01:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Central African Republic",
+    "title": "West Africa Time",
+    "offset": "GMT+1",
+    "utcOffsetStandard": "+01:00",
+    "utcOffsetDST": "+01:00",
+    "country": "Central African Rep.",
     "countryCode": "CF",
-    "regionCity": "Bangui",
+    "searchTerms": [
+      "Bangui, Central African Rep."
+    ],
     "id": "Africa/Bangui",
     "city": "Bangui",
-    "country": "CF",
-    "label": "Central African Republic (Bangui)",
-    "aliases": []
+    "countryName": "Central African Rep.",
+    "label": "Central African Rep. (West Africa Time)"
   },
   {
-    "country name": "Chad",
-    "country code": "TD",
-    "region_city": "N'Djamena",
-    "timezone": "GMT +01:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Chad",
+    "title": "West Africa Time",
+    "offset": "GMT+1",
+    "utcOffsetStandard": "+01:00",
+    "utcOffsetDST": "+01:00",
+    "country": "Chad",
     "countryCode": "TD",
-    "regionCity": "N'Djamena",
+    "searchTerms": [
+      "Ndjamena, Chad"
+    ],
     "id": "Africa/Ndjamena",
-    "city": "N'Djamena",
-    "country": "TD",
-    "label": "Chad (N'Djamena)",
-    "aliases": []
+    "city": "Ndjamena",
+    "countryName": "Chad",
+    "label": "Chad (West Africa Time)"
   },
   {
-    "country name": "Chile",
-    "country code": "CL",
-    "region_city": "Continental (Santiago)",
-    "timezone": "GMT -04:00",
-    "daylight savings start": "2026-09-06",
-    "Daylight savings end": "2026-04-05",
-    "countryName": "Chile",
+    "title": "Chile Standard Time",
+    "offset": "GMT-4",
+    "utcOffsetStandard": "-04:00",
+    "utcOffsetDST": "-03:00",
+    "country": "Chile",
     "countryCode": "CL",
-    "regionCity": "Continental (Santiago)",
+    "searchTerms": [
+      "Santiago, Chile"
+    ],
     "id": "America/Santiago",
-    "city": "Continental (Santiago)",
-    "country": "CL",
-    "label": "Chile (Continental (Santiago))",
-    "aliases": [
-      "santiago"
-    ]
+    "city": "Santiago",
+    "countryName": "Chile",
+    "label": "Chile (Chile Standard Time)"
   },
   {
-    "country name": "Chile",
-    "country code": "CL",
-    "region_city": "Easter Island",
-    "timezone": "GMT -06:00",
-    "daylight savings start": "2026-09-06",
-    "Daylight savings end": "2026-04-05",
-    "countryName": "Chile",
+    "title": "Easter Island Time",
+    "offset": "GMT-6",
+    "utcOffsetStandard": "-06:00",
+    "utcOffsetDST": "-05:00",
+    "country": "Chile",
     "countryCode": "CL",
-    "regionCity": "Easter Island",
+    "searchTerms": [
+      "Easter Island, Chile"
+    ],
     "id": "Pacific/Easter",
     "city": "Easter Island",
-    "country": "CL",
-    "label": "Chile (Easter Island)",
-    "aliases": []
+    "countryName": "Chile",
+    "label": "Chile (Easter Island Time)"
   },
   {
-    "country name": "China",
-    "country code": "CN",
-    "region_city": "Beijing / Shanghai",
-    "timezone": "GMT +08:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "China",
+    "title": "Magallanes Time",
+    "offset": "GMT-3",
+    "utcOffsetStandard": "-03:00",
+    "utcOffsetDST": "-03:00",
+    "country": "Chile",
+    "countryCode": "CL",
+    "searchTerms": [
+      "Coyhaique, Chile",
+      "Punta Arenas, Chile"
+    ],
+    "id": "America/Coyhaique",
+    "city": "Coyhaique",
+    "countryName": "Chile",
+    "label": "Chile (Magallanes Time)"
+  },
+  {
+    "title": "China",
+    "offset": "GMT+8",
+    "utcOffsetStandard": "+08:00",
+    "utcOffsetDST": "+08:00",
+    "country": "China",
     "countryCode": "CN",
-    "regionCity": "Beijing / Shanghai",
+    "searchTerms": [
+      "Beijing, China",
+      "Chengdu, China",
+      "Chongqing, China",
+      "Guangzhou, China",
+      "Harbin, China",
+      "Kashgar, China",
+      "Shanghai, China",
+      "Shenzhen, China",
+      "Urumqi, China"
+    ],
     "id": "Asia/Shanghai",
-    "city": "Beijing / Shanghai",
-    "country": "CN",
-    "label": "China (Beijing / Shanghai)",
-    "aliases": [
-      "beijing",
-      "shanghai"
-    ]
-  },
-  {
-    "country name": "China",
-    "country code": "CN",
-    "region_city": "Xinjiang (Ürümqi)",
-    "timezone": "GMT +06:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
+    "city": "Beijing",
     "countryName": "China",
-    "countryCode": "CN",
-    "regionCity": "Xinjiang (Ürümqi)",
-    "id": "Asia/Urumqi",
-    "city": "Xinjiang (Ürümqi)",
-    "country": "CN",
-    "label": "China (Xinjiang (Ürümqi))",
-    "aliases": []
+    "label": "China"
   },
   {
-    "country name": "Colombia",
-    "country code": "CO",
-    "region_city": "Bogota",
-    "timezone": "GMT -05:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Colombia",
+    "title": "Christmas Island",
+    "offset": "GMT+7",
+    "utcOffsetStandard": "+07:00",
+    "utcOffsetDST": "+07:00",
+    "country": "Christmas Island",
+    "countryCode": "CX",
+    "searchTerms": [
+      "Christmas, Christmas Island"
+    ],
+    "id": "Indian/Christmas",
+    "city": "Christmas",
+    "countryName": "Christmas Island",
+    "label": "Christmas Island"
+  },
+  {
+    "title": "Cocos (Keeling) Islands",
+    "offset": "GMT+6:30",
+    "utcOffsetStandard": "+06:30",
+    "utcOffsetDST": "+06:30",
+    "country": "Cocos (Keeling) Islands",
+    "countryCode": "CC",
+    "searchTerms": [
+      "Cocos, Cocos (Keeling) Islands"
+    ],
+    "id": "Indian/Cocos",
+    "city": "Cocos",
+    "countryName": "Cocos (Keeling) Islands",
+    "label": "Cocos (Keeling) Islands"
+  },
+  {
+    "title": "Colombia",
+    "offset": "GMT-5",
+    "utcOffsetStandard": "-05:00",
+    "utcOffsetDST": "-05:00",
+    "country": "Colombia",
     "countryCode": "CO",
-    "regionCity": "Bogota",
+    "searchTerms": [
+      "Bogota, Colombia"
+    ],
     "id": "America/Bogota",
     "city": "Bogota",
-    "country": "CO",
-    "label": "Colombia (Bogota)",
-    "aliases": []
+    "countryName": "Colombia",
+    "label": "Colombia"
   },
   {
-    "country name": "Comoros",
-    "country code": "KM",
-    "region_city": "Moroni",
-    "timezone": "GMT +03:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Comoros",
+    "title": "East Africa Time",
+    "offset": "GMT+3",
+    "utcOffsetStandard": "+03:00",
+    "utcOffsetDST": "+03:00",
+    "country": "Comoros",
     "countryCode": "KM",
-    "regionCity": "Moroni",
+    "searchTerms": [
+      "Comoro, Comoros"
+    ],
     "id": "Indian/Comoro",
-    "city": "Moroni",
-    "country": "KM",
-    "label": "Comoros (Moroni)",
-    "aliases": []
+    "city": "Comoro",
+    "countryName": "Comoros",
+    "label": "Comoros (East Africa Time)"
   },
   {
-    "country name": "Congo, Democratic Republic of the",
-    "country code": "CD",
-    "region_city": "Kinshasa (West)",
-    "timezone": "GMT +01:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Congo, Democratic Republic of the",
-    "countryCode": "CD",
-    "regionCity": "Kinshasa (West)",
-    "id": "Africa/Kinshasa",
-    "city": "Kinshasa (West)",
-    "country": "CD",
-    "label": "Congo, Democratic Republic of the (Kinshasa (West))",
-    "aliases": [
-      "drc",
-      "dr congo"
-    ]
+    "title": "Cook Islands",
+    "offset": "GMT-10",
+    "utcOffsetStandard": "-10:00",
+    "utcOffsetDST": "-10:00",
+    "country": "Cook Islands",
+    "countryCode": "CK",
+    "searchTerms": [
+      "Rarotonga, Cook Islands"
+    ],
+    "id": "Pacific/Rarotonga",
+    "city": "Rarotonga",
+    "countryName": "Cook Islands",
+    "label": "Cook Islands"
   },
   {
-    "country name": "Congo, Democratic Republic of the",
-    "country code": "CD",
-    "region_city": "Lubumbashi (East)",
-    "timezone": "GMT +02:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Congo, Democratic Republic of the",
-    "countryCode": "CD",
-    "regionCity": "Lubumbashi (East)",
-    "id": "Africa/Lubumbashi",
-    "city": "Lubumbashi (East)",
-    "country": "CD",
-    "label": "Congo, Democratic Republic of the (Lubumbashi (East))",
-    "aliases": [
-      "drc",
-      "dr congo"
-    ]
-  },
-  {
-    "country name": "Congo, Republic of the",
-    "country code": "CG",
-    "region_city": "Brazzaville",
-    "timezone": "GMT +01:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Congo, Republic of the",
-    "countryCode": "CG",
-    "regionCity": "Brazzaville",
-    "id": "Africa/Brazzaville",
-    "city": "Brazzaville",
-    "country": "CG",
-    "label": "Congo, Republic of the (Brazzaville)",
-    "aliases": [
-      "congo"
-    ]
-  },
-  {
-    "country name": "Costa Rica",
-    "country code": "CR",
-    "region_city": "San José",
-    "timezone": "GMT -06:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Costa Rica",
+    "title": "Costa Rica",
+    "offset": "GMT-6",
+    "utcOffsetStandard": "-06:00",
+    "utcOffsetDST": "-06:00",
+    "country": "Costa Rica",
     "countryCode": "CR",
-    "regionCity": "San José",
+    "searchTerms": [
+      "Costa Rica"
+    ],
     "id": "America/Costa_Rica",
-    "city": "San José",
-    "country": "CR",
-    "label": "Costa Rica (San José)",
-    "aliases": []
+    "city": "Costa Rica",
+    "countryName": "Costa Rica",
+    "label": "Costa Rica"
   },
   {
-    "country name": "Côte d'Ivoire",
-    "country code": "CI",
-    "region_city": "Abidjan",
-    "timezone": "GMT +00:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Côte d'Ivoire",
-    "countryCode": "CI",
-    "regionCity": "Abidjan",
-    "id": "Africa/Abidjan",
-    "city": "Abidjan",
-    "country": "CI",
-    "label": "Côte d'Ivoire (Abidjan)",
-    "aliases": [
-      "ivory coast"
-    ]
-  },
-  {
-    "country name": "Croatia",
-    "country code": "HR",
-    "region_city": "Zagreb",
-    "timezone": "GMT +01:00",
-    "daylight savings start": "2026-03-29",
-    "Daylight savings end": "2026-10-25",
-    "countryName": "Croatia",
+    "title": "Central European Time",
+    "offset": "GMT+1",
+    "utcOffsetStandard": "+01:00",
+    "utcOffsetDST": "+02:00",
+    "country": "Croatia",
     "countryCode": "HR",
-    "regionCity": "Zagreb",
+    "searchTerms": [
+      "Zagreb, Croatia"
+    ],
     "id": "Europe/Zagreb",
     "city": "Zagreb",
-    "country": "HR",
-    "label": "Croatia (Zagreb)",
-    "aliases": []
+    "countryName": "Croatia",
+    "label": "Croatia (Central European Time)"
   },
   {
-    "country name": "Cuba",
-    "country code": "CU",
-    "region_city": "Havana",
-    "timezone": "GMT -05:00",
-    "daylight savings start": "2026-03-08",
-    "Daylight savings end": "2026-11-01",
-    "countryName": "Cuba",
+    "title": "Cuba",
+    "offset": "GMT-5",
+    "utcOffsetStandard": "-05:00",
+    "utcOffsetDST": "-04:00",
+    "country": "Cuba",
     "countryCode": "CU",
-    "regionCity": "Havana",
+    "searchTerms": [
+      "Havana, Cuba"
+    ],
     "id": "America/Havana",
     "city": "Havana",
-    "country": "CU",
-    "label": "Cuba (Havana)",
-    "aliases": []
+    "countryName": "Cuba",
+    "label": "Cuba"
   },
   {
-    "country name": "Curaçao",
-    "country code": "CW",
-    "region_city": "Willemstad",
-    "timezone": "GMT -04:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Curaçao",
+    "title": "Curaçao",
+    "offset": "GMT-4",
+    "utcOffsetStandard": "-04:00",
+    "utcOffsetDST": "-04:00",
+    "country": "Curaçao",
     "countryCode": "CW",
-    "regionCity": "Willemstad",
+    "searchTerms": [
+      "Curacao, Curaçao"
+    ],
     "id": "America/Curacao",
-    "city": "Willemstad",
-    "country": "CW",
-    "label": "Curaçao (Willemstad)",
-    "aliases": []
+    "city": "Curacao",
+    "countryName": "Curaçao",
+    "label": "Curaçao"
   },
   {
-    "country name": "Cyprus",
-    "country code": "CY",
-    "region_city": "Nicosia",
-    "timezone": "GMT +02:00",
-    "daylight savings start": "2026-03-29",
-    "Daylight savings end": "2026-10-25",
-    "countryName": "Cyprus",
+    "title": "Eastern European Time",
+    "offset": "GMT+2",
+    "utcOffsetStandard": "+02:00",
+    "utcOffsetDST": "+03:00",
+    "country": "Cyprus",
     "countryCode": "CY",
-    "regionCity": "Nicosia",
-    "id": "Asia/Nicosia",
-    "city": "Nicosia",
-    "country": "CY",
-    "label": "Cyprus (Nicosia)",
-    "aliases": []
+    "searchTerms": [
+      "Famagusta, Cyprus",
+      "Nicosia, Cyprus"
+    ],
+    "id": "Asia/Famagusta",
+    "city": "Famagusta",
+    "countryName": "Cyprus",
+    "label": "Cyprus (Eastern European Time)"
   },
   {
-    "country name": "Czech Republic",
-    "country code": "CZ",
-    "region_city": "Prague",
-    "timezone": "GMT +01:00",
-    "daylight savings start": "2026-03-29",
-    "Daylight savings end": "2026-10-25",
-    "countryName": "Czech Republic",
+    "title": "Central European Time",
+    "offset": "GMT+1",
+    "utcOffsetStandard": "+01:00",
+    "utcOffsetDST": "+02:00",
+    "country": "Czech Republic",
     "countryCode": "CZ",
-    "regionCity": "Prague",
+    "searchTerms": [
+      "Prague, Czech Republic"
+    ],
     "id": "Europe/Prague",
     "city": "Prague",
-    "country": "CZ",
-    "label": "Czech Republic (Prague)",
-    "aliases": [
-      "czechia"
-    ]
+    "countryName": "Czech Republic",
+    "label": "Czech Republic (Central European Time)"
   },
   {
-    "country name": "Denmark",
-    "country code": "DK",
-    "region_city": "Copenhagen",
-    "timezone": "GMT +01:00",
-    "daylight savings start": "2026-03-29",
-    "Daylight savings end": "2026-10-25",
-    "countryName": "Denmark",
+    "title": "Greenwich Mean Time",
+    "offset": "GMT+0",
+    "utcOffsetStandard": "+00:00",
+    "utcOffsetDST": "+00:00",
+    "country": "Côte d'Ivoire",
+    "countryCode": "CI",
+    "searchTerms": [
+      "Abidjan, Côte d'Ivoire"
+    ],
+    "id": "Africa/Abidjan",
+    "city": "Abidjan",
+    "countryName": "Côte d'Ivoire",
+    "label": "Côte d'Ivoire (Greenwich Mean Time)"
+  },
+  {
+    "title": "Central European Time",
+    "offset": "GMT+1",
+    "utcOffsetStandard": "+01:00",
+    "utcOffsetDST": "+02:00",
+    "country": "Denmark",
     "countryCode": "DK",
-    "regionCity": "Copenhagen",
+    "searchTerms": [
+      "Copenhagen, Denmark"
+    ],
     "id": "Europe/Copenhagen",
     "city": "Copenhagen",
-    "country": "DK",
-    "label": "Denmark (Copenhagen)",
-    "aliases": []
+    "countryName": "Denmark",
+    "label": "Denmark (Central European Time)"
   },
   {
-    "country name": "Djibouti",
-    "country code": "DJ",
-    "region_city": "Djibouti",
-    "timezone": "GMT +03:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Djibouti",
+    "title": "East Africa Time",
+    "offset": "GMT+3",
+    "utcOffsetStandard": "+03:00",
+    "utcOffsetDST": "+03:00",
+    "country": "Djibouti",
     "countryCode": "DJ",
-    "regionCity": "Djibouti",
+    "searchTerms": [
+      "Djibouti"
+    ],
     "id": "Africa/Djibouti",
     "city": "Djibouti",
-    "country": "DJ",
-    "label": "Djibouti (Djibouti)",
-    "aliases": []
+    "countryName": "Djibouti",
+    "label": "Djibouti (East Africa Time)"
   },
   {
-    "country name": "Dominica",
-    "country code": "DM",
-    "region_city": "Roseau",
-    "timezone": "GMT -04:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Dominica",
+    "title": "Dominica",
+    "offset": "GMT-4",
+    "utcOffsetStandard": "-04:00",
+    "utcOffsetDST": "-04:00",
+    "country": "Dominica",
     "countryCode": "DM",
-    "regionCity": "Roseau",
+    "searchTerms": [
+      "Dominica"
+    ],
     "id": "America/Dominica",
-    "city": "Roseau",
-    "country": "DM",
-    "label": "Dominica (Roseau)",
-    "aliases": []
+    "city": "Dominica",
+    "countryName": "Dominica",
+    "label": "Dominica"
   },
   {
-    "country name": "Dominican Republic",
-    "country code": "DO",
-    "region_city": "Santo Domingo",
-    "timezone": "GMT -04:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Dominican Republic",
+    "title": "Dominican Republic",
+    "offset": "GMT-4",
+    "utcOffsetStandard": "-04:00",
+    "utcOffsetDST": "-04:00",
+    "country": "Dominican Republic",
     "countryCode": "DO",
-    "regionCity": "Santo Domingo",
+    "searchTerms": [
+      "Santo Domingo, Dominican Republic"
+    ],
     "id": "America/Santo_Domingo",
     "city": "Santo Domingo",
-    "country": "DO",
-    "label": "Dominican Republic (Santo Domingo)",
-    "aliases": []
+    "countryName": "Dominican Republic",
+    "label": "Dominican Republic"
   },
   {
-    "country name": "East Timor",
-    "country code": "TL",
-    "region_city": "Dili",
-    "timezone": "GMT +09:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "East Timor",
+    "title": "Central Africa Time",
+    "offset": "GMT+2",
+    "utcOffsetStandard": "+02:00",
+    "utcOffsetDST": "+02:00",
+    "country": "DR Congo",
+    "countryCode": "CD",
+    "searchTerms": [
+      "Lubumbashi, DR Congo"
+    ],
+    "id": "Africa/Lubumbashi",
+    "city": "Lubumbashi",
+    "countryName": "DR Congo",
+    "label": "DR Congo (Central Africa Time)"
+  },
+  {
+    "title": "West Africa Time",
+    "offset": "GMT+1",
+    "utcOffsetStandard": "+01:00",
+    "utcOffsetDST": "+01:00",
+    "country": "DR Congo",
+    "countryCode": "CD",
+    "searchTerms": [
+      "Kinshasa, DR Congo"
+    ],
+    "id": "Africa/Kinshasa",
+    "city": "Kinshasa",
+    "countryName": "DR Congo",
+    "label": "DR Congo (West Africa Time)"
+  },
+  {
+    "title": "East Timor",
+    "offset": "GMT+9",
+    "utcOffsetStandard": "+09:00",
+    "utcOffsetDST": "+09:00",
+    "country": "East Timor",
     "countryCode": "TL",
-    "regionCity": "Dili",
+    "searchTerms": [
+      "Dili, East Timor"
+    ],
     "id": "Asia/Dili",
     "city": "Dili",
-    "country": "TL",
-    "label": "East Timor (Dili)",
-    "aliases": [
-      "timor-leste"
-    ]
+    "countryName": "East Timor",
+    "label": "East Timor"
   },
   {
-    "country name": "Ecuador",
-    "country code": "EC",
-    "region_city": "Continental (Quito)",
-    "timezone": "GMT -05:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Ecuador",
+    "title": "Ecuador Time",
+    "offset": "GMT-5",
+    "utcOffsetStandard": "-05:00",
+    "utcOffsetDST": "-05:00",
+    "country": "Ecuador",
     "countryCode": "EC",
-    "regionCity": "Continental (Quito)",
+    "searchTerms": [
+      "Guayaquil, Ecuador"
+    ],
     "id": "America/Guayaquil",
-    "city": "Continental (Quito)",
-    "country": "EC",
-    "label": "Ecuador (Continental (Quito))",
-    "aliases": [
-      "quito"
-    ]
-  },
-  {
-    "country name": "Ecuador",
-    "country code": "EC",
-    "region_city": "Galápagos",
-    "timezone": "GMT -06:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
+    "city": "Guayaquil",
     "countryName": "Ecuador",
-    "countryCode": "EC",
-    "regionCity": "Galápagos",
-    "id": "Pacific/Galapagos",
-    "city": "Galápagos",
-    "country": "EC",
-    "label": "Ecuador (Galápagos)",
-    "aliases": []
+    "label": "Ecuador (Ecuador Time)"
   },
   {
-    "country name": "Egypt",
-    "country code": "EG",
-    "region_city": "Cairo",
-    "timezone": "GMT +02:00",
-    "daylight savings start": "2026-04-24",
-    "Daylight savings end": "2026-10-30",
-    "countryName": "Egypt",
+    "title": "Galapagos Time",
+    "offset": "GMT-6",
+    "utcOffsetStandard": "-06:00",
+    "utcOffsetDST": "-06:00",
+    "country": "Ecuador",
+    "countryCode": "EC",
+    "searchTerms": [
+      "Galapagos Islands, Ecuador"
+    ],
+    "id": "Pacific/Galapagos",
+    "city": "Galapagos Islands",
+    "countryName": "Ecuador",
+    "label": "Ecuador (Galapagos Time)"
+  },
+  {
+    "title": "Eastern European Time",
+    "offset": "GMT+2",
+    "utcOffsetStandard": "+02:00",
+    "utcOffsetDST": "+03:00",
+    "country": "Egypt",
     "countryCode": "EG",
-    "regionCity": "Cairo",
+    "searchTerms": [
+      "Cairo, Egypt"
+    ],
     "id": "Africa/Cairo",
     "city": "Cairo",
-    "country": "EG",
-    "label": "Egypt (Cairo)",
-    "aliases": []
+    "countryName": "Egypt",
+    "label": "Egypt (Eastern European Time)"
   },
   {
-    "country name": "El Salvador",
-    "country code": "SV",
-    "region_city": "San Salvador",
-    "timezone": "GMT -06:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "El Salvador",
+    "title": "El Salvador",
+    "offset": "GMT-6",
+    "utcOffsetStandard": "-06:00",
+    "utcOffsetDST": "-06:00",
+    "country": "El Salvador",
     "countryCode": "SV",
-    "regionCity": "San Salvador",
+    "searchTerms": [
+      "El Salvador"
+    ],
     "id": "America/El_Salvador",
-    "city": "San Salvador",
-    "country": "SV",
-    "label": "El Salvador (San Salvador)",
-    "aliases": []
+    "city": "El Salvador",
+    "countryName": "El Salvador",
+    "label": "El Salvador"
   },
   {
-    "country name": "Equatorial Guinea",
-    "country code": "GQ",
-    "region_city": "Malabo",
-    "timezone": "GMT +01:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Equatorial Guinea",
+    "title": "West Africa Time",
+    "offset": "GMT+1",
+    "utcOffsetStandard": "+01:00",
+    "utcOffsetDST": "+01:00",
+    "country": "Equatorial Guinea",
     "countryCode": "GQ",
-    "regionCity": "Malabo",
+    "searchTerms": [
+      "Malabo, Equatorial Guinea"
+    ],
     "id": "Africa/Malabo",
     "city": "Malabo",
-    "country": "GQ",
-    "label": "Equatorial Guinea (Malabo)",
-    "aliases": []
+    "countryName": "Equatorial Guinea",
+    "label": "Equatorial Guinea (West Africa Time)"
   },
   {
-    "country name": "Eritrea",
-    "country code": "ER",
-    "region_city": "Asmara",
-    "timezone": "GMT +03:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Eritrea",
+    "title": "East Africa Time",
+    "offset": "GMT+3",
+    "utcOffsetStandard": "+03:00",
+    "utcOffsetDST": "+03:00",
+    "country": "Eritrea",
     "countryCode": "ER",
-    "regionCity": "Asmara",
+    "searchTerms": [
+      "Asmara, Eritrea"
+    ],
     "id": "Africa/Asmara",
     "city": "Asmara",
-    "country": "ER",
-    "label": "Eritrea (Asmara)",
-    "aliases": []
+    "countryName": "Eritrea",
+    "label": "Eritrea (East Africa Time)"
   },
   {
-    "country name": "Estonia",
-    "country code": "EE",
-    "region_city": "Tallinn",
-    "timezone": "GMT +02:00",
-    "daylight savings start": "2026-03-29",
-    "Daylight savings end": "2026-10-25",
-    "countryName": "Estonia",
+    "title": "Eastern European Time",
+    "offset": "GMT+2",
+    "utcOffsetStandard": "+02:00",
+    "utcOffsetDST": "+03:00",
+    "country": "Estonia",
     "countryCode": "EE",
-    "regionCity": "Tallinn",
+    "searchTerms": [
+      "Tallinn, Estonia"
+    ],
     "id": "Europe/Tallinn",
     "city": "Tallinn",
-    "country": "EE",
-    "label": "Estonia (Tallinn)",
-    "aliases": []
+    "countryName": "Estonia",
+    "label": "Estonia (Eastern European Time)"
   },
   {
-    "country name": "Eswatini",
-    "country code": "SZ",
-    "region_city": "Mbabane",
-    "timezone": "GMT +02:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Eswatini",
+    "title": "South Africa Standard Time",
+    "offset": "GMT+2",
+    "utcOffsetStandard": "+02:00",
+    "utcOffsetDST": "+02:00",
+    "country": "Eswatini (Swaziland)",
     "countryCode": "SZ",
-    "regionCity": "Mbabane",
+    "searchTerms": [
+      "Mbabane, Eswatini (Swaziland)"
+    ],
     "id": "Africa/Mbabane",
     "city": "Mbabane",
-    "country": "SZ",
-    "label": "Eswatini (Mbabane)",
-    "aliases": [
-      "swaziland"
-    ]
+    "countryName": "Eswatini (Swaziland)",
+    "label": "Eswatini (Swaziland) (South Africa Standard Time)"
   },
   {
-    "country name": "Ethiopia",
-    "country code": "ET",
-    "region_city": "Addis Ababa",
-    "timezone": "GMT +03:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Ethiopia",
+    "title": "East Africa Time",
+    "offset": "GMT+3",
+    "utcOffsetStandard": "+03:00",
+    "utcOffsetDST": "+03:00",
+    "country": "Ethiopia",
     "countryCode": "ET",
-    "regionCity": "Addis Ababa",
+    "searchTerms": [
+      "Addis Ababa, Ethiopia"
+    ],
     "id": "Africa/Addis_Ababa",
     "city": "Addis Ababa",
-    "country": "ET",
-    "label": "Ethiopia (Addis Ababa)",
-    "aliases": []
+    "countryName": "Ethiopia",
+    "label": "Ethiopia (East Africa Time)"
   },
   {
-    "country name": "Fiji",
-    "country code": "FJ",
-    "region_city": "Suva",
-    "timezone": "GMT +12:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Fiji",
+    "title": "Falkland Islands",
+    "offset": "GMT-3",
+    "utcOffsetStandard": "-03:00",
+    "utcOffsetDST": "-03:00",
+    "country": "Falkland Islands",
+    "countryCode": "FK",
+    "searchTerms": [
+      "Stanley, Falkland Islands"
+    ],
+    "id": "Atlantic/Stanley",
+    "city": "Stanley",
+    "countryName": "Falkland Islands",
+    "label": "Falkland Islands"
+  },
+  {
+    "title": "Greenwich Mean Time",
+    "offset": "GMT+0",
+    "utcOffsetStandard": "+00:00",
+    "utcOffsetDST": "+01:00",
+    "country": "Faroe Islands",
+    "countryCode": "FO",
+    "searchTerms": [
+      "Faroe, Faroe Islands"
+    ],
+    "id": "Atlantic/Faroe",
+    "city": "Faroe",
+    "countryName": "Faroe Islands",
+    "label": "Faroe Islands (Greenwich Mean Time)"
+  },
+  {
+    "title": "Fiji",
+    "offset": "GMT+12",
+    "utcOffsetStandard": "+12:00",
+    "utcOffsetDST": "+12:00",
+    "country": "Fiji",
     "countryCode": "FJ",
-    "regionCity": "Suva",
+    "searchTerms": [
+      "Fiji"
+    ],
     "id": "Pacific/Fiji",
-    "city": "Suva",
-    "country": "FJ",
-    "label": "Fiji (Suva)",
-    "aliases": []
+    "city": "Fiji",
+    "countryName": "Fiji",
+    "label": "Fiji"
   },
   {
-    "country name": "Finland",
-    "country code": "FI",
-    "region_city": "Helsinki",
-    "timezone": "GMT +02:00",
-    "daylight savings start": "2026-03-29",
-    "Daylight savings end": "2026-10-25",
-    "countryName": "Finland",
+    "title": "Eastern European Time",
+    "offset": "GMT+2",
+    "utcOffsetStandard": "+02:00",
+    "utcOffsetDST": "+03:00",
+    "country": "Finland",
     "countryCode": "FI",
-    "regionCity": "Helsinki",
+    "searchTerms": [
+      "Helsinki, Finland"
+    ],
     "id": "Europe/Helsinki",
     "city": "Helsinki",
-    "country": "FI",
-    "label": "Finland (Helsinki)",
-    "aliases": []
+    "countryName": "Finland",
+    "label": "Finland (Eastern European Time)"
   },
   {
-    "country name": "France",
-    "country code": "FR",
-    "region_city": "Paris",
-    "timezone": "GMT +01:00",
-    "daylight savings start": "2026-03-29",
-    "Daylight savings end": "2026-10-25",
-    "countryName": "France",
+    "title": "Central European Time",
+    "offset": "GMT+1",
+    "utcOffsetStandard": "+01:00",
+    "utcOffsetDST": "+02:00",
+    "country": "France",
     "countryCode": "FR",
-    "regionCity": "Paris",
+    "searchTerms": [
+      "Lyon, France",
+      "Marseille, France",
+      "Nice, France",
+      "Paris, France"
+    ],
     "id": "Europe/Paris",
-    "city": "Paris",
-    "country": "FR",
-    "label": "France (Paris)",
-    "aliases": []
+    "city": "Lyon",
+    "countryName": "France",
+    "label": "France (Central European Time)"
   },
   {
-    "country name": "French Polynesia",
-    "country code": "PF",
-    "region_city": "Tahiti",
-    "timezone": "GMT -10:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "French Polynesia",
+    "title": "French Guiana",
+    "offset": "GMT-3",
+    "utcOffsetStandard": "-03:00",
+    "utcOffsetDST": "-03:00",
+    "country": "French Guiana",
+    "countryCode": "GF",
+    "searchTerms": [
+      "Cayenne, French Guiana"
+    ],
+    "id": "America/Cayenne",
+    "city": "Cayenne",
+    "countryName": "French Guiana",
+    "label": "French Guiana"
+  },
+  {
+    "title": "Gambier Time",
+    "offset": "GMT-9",
+    "utcOffsetStandard": "-09:00",
+    "utcOffsetDST": "-09:00",
+    "country": "French Polynesia",
     "countryCode": "PF",
-    "regionCity": "Tahiti",
+    "searchTerms": [
+      "Gambier Islands, French Polynesia"
+    ],
+    "id": "Pacific/Gambier",
+    "city": "Gambier Islands",
+    "countryName": "French Polynesia",
+    "label": "French Polynesia (Gambier Time)"
+  },
+  {
+    "title": "Marquesas Time",
+    "offset": "GMT-9:30",
+    "utcOffsetStandard": "-09:30",
+    "utcOffsetDST": "-09:30",
+    "country": "French Polynesia",
+    "countryCode": "PF",
+    "searchTerms": [
+      "Marquesas Islands, French Polynesia"
+    ],
+    "id": "Pacific/Marquesas",
+    "city": "Marquesas Islands",
+    "countryName": "French Polynesia",
+    "label": "French Polynesia (Marquesas Time)"
+  },
+  {
+    "title": "Tahiti Time",
+    "offset": "GMT-10",
+    "utcOffsetStandard": "-10:00",
+    "utcOffsetDST": "-10:00",
+    "country": "French Polynesia",
+    "countryCode": "PF",
+    "searchTerms": [
+      "Tahiti, French Polynesia"
+    ],
     "id": "Pacific/Tahiti",
     "city": "Tahiti",
-    "country": "PF",
-    "label": "French Polynesia (Tahiti)",
-    "aliases": []
+    "countryName": "French Polynesia",
+    "label": "French Polynesia (Tahiti Time)"
   },
   {
-    "country name": "Gabon",
-    "country code": "GA",
-    "region_city": "Libreville",
-    "timezone": "GMT +01:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Gabon",
+    "title": "French S. Terr.",
+    "offset": "GMT+5",
+    "utcOffsetStandard": "+05:00",
+    "utcOffsetDST": "+05:00",
+    "country": "French S. Terr.",
+    "countryCode": "TF",
+    "searchTerms": [
+      "Kerguelen Islands, French S. Terr."
+    ],
+    "id": "Indian/Kerguelen",
+    "city": "Kerguelen Islands",
+    "countryName": "French S. Terr.",
+    "label": "French S. Terr."
+  },
+  {
+    "title": "West Africa Time",
+    "offset": "GMT+1",
+    "utcOffsetStandard": "+01:00",
+    "utcOffsetDST": "+01:00",
+    "country": "Gabon",
     "countryCode": "GA",
-    "regionCity": "Libreville",
+    "searchTerms": [
+      "Libreville, Gabon"
+    ],
     "id": "Africa/Libreville",
     "city": "Libreville",
-    "country": "GA",
-    "label": "Gabon (Libreville)",
-    "aliases": []
+    "countryName": "Gabon",
+    "label": "Gabon (West Africa Time)"
   },
   {
-    "country name": "Gambia",
-    "country code": "GM",
-    "region_city": "Banjul",
-    "timezone": "GMT +00:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Gambia",
+    "title": "Greenwich Mean Time",
+    "offset": "GMT+0",
+    "utcOffsetStandard": "+00:00",
+    "utcOffsetDST": "+00:00",
+    "country": "Gambia",
     "countryCode": "GM",
-    "regionCity": "Banjul",
+    "searchTerms": [
+      "Banjul, Gambia"
+    ],
     "id": "Africa/Banjul",
     "city": "Banjul",
-    "country": "GM",
-    "label": "Gambia (Banjul)",
-    "aliases": []
+    "countryName": "Gambia",
+    "label": "Gambia (Greenwich Mean Time)"
   },
   {
-    "country name": "Georgia",
-    "country code": "GE",
-    "region_city": "Tbilisi",
-    "timezone": "GMT +04:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Georgia",
+    "title": "Georgia",
+    "offset": "GMT+4",
+    "utcOffsetStandard": "+04:00",
+    "utcOffsetDST": "+04:00",
+    "country": "Georgia",
     "countryCode": "GE",
-    "regionCity": "Tbilisi",
+    "searchTerms": [
+      "Tbilisi, Georgia"
+    ],
     "id": "Asia/Tbilisi",
     "city": "Tbilisi",
-    "country": "GE",
-    "label": "Georgia (Tbilisi)",
-    "aliases": []
+    "countryName": "Georgia",
+    "label": "Georgia"
   },
   {
-    "country name": "Germany",
-    "country code": "DE",
-    "region_city": "Berlin",
-    "timezone": "GMT +01:00",
-    "daylight savings start": "2026-03-29",
-    "Daylight savings end": "2026-10-25",
-    "countryName": "Germany",
+    "title": "Central European Time",
+    "offset": "GMT+1",
+    "utcOffsetStandard": "+01:00",
+    "utcOffsetDST": "+02:00",
+    "country": "Germany",
     "countryCode": "DE",
-    "regionCity": "Berlin",
+    "searchTerms": [
+      "Berlin, Germany",
+      "Busingen, Germany",
+      "Frankfurt, Germany",
+      "Hamburg, Germany",
+      "Munich, Germany"
+    ],
     "id": "Europe/Berlin",
     "city": "Berlin",
-    "country": "DE",
-    "label": "Germany (Berlin)",
-    "aliases": [
-      "munich",
-      "frankfurt"
-    ]
+    "countryName": "Germany",
+    "label": "Germany (Central European Time)"
   },
   {
-    "country name": "Ghana",
-    "country code": "GH",
-    "region_city": "Accra",
-    "timezone": "GMT +00:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Ghana",
+    "title": "Greenwich Mean Time",
+    "offset": "GMT+0",
+    "utcOffsetStandard": "+00:00",
+    "utcOffsetDST": "+00:00",
+    "country": "Ghana",
     "countryCode": "GH",
-    "regionCity": "Accra",
+    "searchTerms": [
+      "Accra, Ghana"
+    ],
     "id": "Africa/Accra",
     "city": "Accra",
-    "country": "GH",
-    "label": "Ghana (Accra)",
-    "aliases": []
+    "countryName": "Ghana",
+    "label": "Ghana (Greenwich Mean Time)"
   },
   {
-    "country name": "Greece",
-    "country code": "GR",
-    "region_city": "Athens",
-    "timezone": "GMT +02:00",
-    "daylight savings start": "2026-03-29",
-    "Daylight savings end": "2026-10-25",
-    "countryName": "Greece",
+    "title": "Central European Time",
+    "offset": "GMT+1",
+    "utcOffsetStandard": "+01:00",
+    "utcOffsetDST": "+02:00",
+    "country": "Gibraltar",
+    "countryCode": "GI",
+    "searchTerms": [
+      "Gibraltar"
+    ],
+    "id": "Europe/Gibraltar",
+    "city": "Gibraltar",
+    "countryName": "Gibraltar",
+    "label": "Gibraltar (Central European Time)"
+  },
+  {
+    "title": "Eastern European Time",
+    "offset": "GMT+2",
+    "utcOffsetStandard": "+02:00",
+    "utcOffsetDST": "+03:00",
+    "country": "Greece",
     "countryCode": "GR",
-    "regionCity": "Athens",
+    "searchTerms": [
+      "Athens, Greece"
+    ],
     "id": "Europe/Athens",
     "city": "Athens",
-    "country": "GR",
-    "label": "Greece (Athens)",
-    "aliases": []
+    "countryName": "Greece",
+    "label": "Greece (Eastern European Time)"
   },
   {
-    "country name": "Greenland",
-    "country code": "GL",
-    "region_city": "Nuuk",
-    "timezone": "GMT -02:00",
-    "daylight savings start": "2026-03-29",
-    "Daylight savings end": "2026-10-25",
-    "countryName": "Greenland",
+    "title": "Atlantic Standard Time",
+    "offset": "GMT-4",
+    "utcOffsetStandard": "-04:00",
+    "utcOffsetDST": "-03:00",
+    "country": "Greenland",
     "countryCode": "GL",
-    "regionCity": "Nuuk",
-    "id": "America/Nuuk",
+    "searchTerms": [
+      "Thule, Greenland"
+    ],
+    "id": "America/Thule",
+    "city": "Thule",
+    "countryName": "Greenland",
+    "label": "Greenland (Atlantic Standard Time)"
+  },
+  {
+    "title": "Greenland Time",
+    "offset": "GMT-2",
+    "utcOffsetStandard": "-02:00",
+    "utcOffsetDST": "-01:00",
+    "country": "Greenland",
+    "countryCode": "GL",
+    "searchTerms": [
+      "Nuuk, Greenland",
+      "Scoresbysund, Greenland"
+    ],
+    "id": "America/Scoresbysund",
     "city": "Nuuk",
-    "country": "GL",
-    "label": "Greenland (Nuuk)",
-    "aliases": []
+    "countryName": "Greenland",
+    "label": "Greenland (Greenland Time)"
   },
   {
-    "country name": "Grenada",
-    "country code": "GD",
-    "region_city": "St. George's",
-    "timezone": "GMT -04:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Grenada",
+    "title": "Greenwich Mean Time",
+    "offset": "GMT+0",
+    "utcOffsetStandard": "+00:00",
+    "utcOffsetDST": "+00:00",
+    "country": "Greenland",
+    "countryCode": "GL",
+    "searchTerms": [
+      "Danmarkshavn, Greenland"
+    ],
+    "id": "America/Danmarkshavn",
+    "city": "Danmarkshavn",
+    "countryName": "Greenland",
+    "label": "Greenland (Greenwich Mean Time)"
+  },
+  {
+    "title": "Grenada",
+    "offset": "GMT-4",
+    "utcOffsetStandard": "-04:00",
+    "utcOffsetDST": "-04:00",
+    "country": "Grenada",
     "countryCode": "GD",
-    "regionCity": "St. George's",
+    "searchTerms": [
+      "Grenada"
+    ],
     "id": "America/Grenada",
-    "city": "St. George's",
-    "country": "GD",
-    "label": "Grenada (St. George's)",
-    "aliases": []
+    "city": "Grenada",
+    "countryName": "Grenada",
+    "label": "Grenada"
   },
   {
-    "country name": "Guam",
-    "country code": "GU",
-    "region_city": "Hagåtña",
-    "timezone": "GMT +10:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Guam",
+    "title": "Guadeloupe",
+    "offset": "GMT-4",
+    "utcOffsetStandard": "-04:00",
+    "utcOffsetDST": "-04:00",
+    "country": "Guadeloupe",
+    "countryCode": "GP",
+    "searchTerms": [
+      "Guadeloupe"
+    ],
+    "id": "America/Guadeloupe",
+    "city": "Guadeloupe",
+    "countryName": "Guadeloupe",
+    "label": "Guadeloupe"
+  },
+  {
+    "title": "Guam",
+    "offset": "GMT+10",
+    "utcOffsetStandard": "+10:00",
+    "utcOffsetDST": "+10:00",
+    "country": "Guam",
     "countryCode": "GU",
-    "regionCity": "Hagåtña",
+    "searchTerms": [
+      "Guam"
+    ],
     "id": "Pacific/Guam",
-    "city": "Hagåtña",
-    "country": "GU",
-    "label": "Guam (Hagåtña)",
-    "aliases": []
+    "city": "Guam",
+    "countryName": "Guam",
+    "label": "Guam"
   },
   {
-    "country name": "Guatemala",
-    "country code": "GT",
-    "region_city": "Guatemala City",
-    "timezone": "GMT -06:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Guatemala",
+    "title": "Guatemala",
+    "offset": "GMT-6",
+    "utcOffsetStandard": "-06:00",
+    "utcOffsetDST": "-06:00",
+    "country": "Guatemala",
     "countryCode": "GT",
-    "regionCity": "Guatemala City",
+    "searchTerms": [
+      "Guatemala"
+    ],
     "id": "America/Guatemala",
-    "city": "Guatemala City",
-    "country": "GT",
-    "label": "Guatemala (Guatemala City)",
-    "aliases": []
+    "city": "Guatemala",
+    "countryName": "Guatemala",
+    "label": "Guatemala"
   },
   {
-    "country name": "Guinea",
-    "country code": "GN",
-    "region_city": "Conakry",
-    "timezone": "GMT +00:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Guinea",
+    "title": "Greenwich Mean Time",
+    "offset": "GMT+0",
+    "utcOffsetStandard": "+00:00",
+    "utcOffsetDST": "+01:00",
+    "country": "Guernsey",
+    "countryCode": "GG",
+    "searchTerms": [
+      "Guernsey"
+    ],
+    "id": "Europe/Guernsey",
+    "city": "Guernsey",
+    "countryName": "Guernsey",
+    "label": "Guernsey (Greenwich Mean Time)"
+  },
+  {
+    "title": "Greenwich Mean Time",
+    "offset": "GMT+0",
+    "utcOffsetStandard": "+00:00",
+    "utcOffsetDST": "+00:00",
+    "country": "Guinea",
     "countryCode": "GN",
-    "regionCity": "Conakry",
+    "searchTerms": [
+      "Conakry, Guinea"
+    ],
     "id": "Africa/Conakry",
     "city": "Conakry",
-    "country": "GN",
-    "label": "Guinea (Conakry)",
-    "aliases": []
+    "countryName": "Guinea",
+    "label": "Guinea (Greenwich Mean Time)"
   },
   {
-    "country name": "Guinea-Bissau",
-    "country code": "GW",
-    "region_city": "Bissau",
-    "timezone": "GMT +00:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Guinea-Bissau",
+    "title": "Greenwich Mean Time",
+    "offset": "GMT+0",
+    "utcOffsetStandard": "+00:00",
+    "utcOffsetDST": "+00:00",
+    "country": "Guinea-Bissau",
     "countryCode": "GW",
-    "regionCity": "Bissau",
+    "searchTerms": [
+      "Bissau, Guinea-Bissau"
+    ],
     "id": "Africa/Bissau",
     "city": "Bissau",
-    "country": "GW",
-    "label": "Guinea-Bissau (Bissau)",
-    "aliases": []
+    "countryName": "Guinea-Bissau",
+    "label": "Guinea-Bissau (Greenwich Mean Time)"
   },
   {
-    "country name": "Guyana",
-    "country code": "GY",
-    "region_city": "Georgetown",
-    "timezone": "GMT -04:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Guyana",
+    "title": "Guyana",
+    "offset": "GMT-4",
+    "utcOffsetStandard": "-04:00",
+    "utcOffsetDST": "-04:00",
+    "country": "Guyana",
     "countryCode": "GY",
-    "regionCity": "Georgetown",
+    "searchTerms": [
+      "Guyana"
+    ],
     "id": "America/Guyana",
-    "city": "Georgetown",
-    "country": "GY",
-    "label": "Guyana (Georgetown)",
-    "aliases": []
+    "city": "Guyana",
+    "countryName": "Guyana",
+    "label": "Guyana"
   },
   {
-    "country name": "Haiti",
-    "country code": "HT",
-    "region_city": "Port-au-Prince",
-    "timezone": "GMT -05:00",
-    "daylight savings start": "2026-03-08",
-    "Daylight savings end": "2026-11-01",
-    "countryName": "Haiti",
+    "title": "Haiti",
+    "offset": "GMT-5",
+    "utcOffsetStandard": "-05:00",
+    "utcOffsetDST": "-04:00",
+    "country": "Haiti",
     "countryCode": "HT",
-    "regionCity": "Port-au-Prince",
+    "searchTerms": [
+      "Port-au-Prince, Haiti"
+    ],
     "id": "America/Port-au-Prince",
     "city": "Port-au-Prince",
-    "country": "HT",
-    "label": "Haiti (Port-au-Prince)",
-    "aliases": []
+    "countryName": "Haiti",
+    "label": "Haiti"
   },
   {
-    "country name": "Honduras",
-    "country code": "HN",
-    "region_city": "Tegucigalpa",
-    "timezone": "GMT -06:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Honduras",
+    "title": "Honduras",
+    "offset": "GMT-6",
+    "utcOffsetStandard": "-06:00",
+    "utcOffsetDST": "-06:00",
+    "country": "Honduras",
     "countryCode": "HN",
-    "regionCity": "Tegucigalpa",
+    "searchTerms": [
+      "Tegucigalpa, Honduras"
+    ],
     "id": "America/Tegucigalpa",
     "city": "Tegucigalpa",
-    "country": "HN",
-    "label": "Honduras (Tegucigalpa)",
-    "aliases": []
+    "countryName": "Honduras",
+    "label": "Honduras"
   },
   {
-    "country name": "Hong Kong",
-    "country code": "HK",
-    "region_city": "Hong Kong",
-    "timezone": "GMT +08:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Hong Kong",
+    "title": "Hong Kong",
+    "offset": "GMT+8",
+    "utcOffsetStandard": "+08:00",
+    "utcOffsetDST": "+08:00",
+    "country": "Hong Kong",
     "countryCode": "HK",
-    "regionCity": "Hong Kong",
+    "searchTerms": [
+      "Hong Kong"
+    ],
     "id": "Asia/Hong_Kong",
     "city": "Hong Kong",
-    "country": "HK",
-    "label": "Hong Kong (Hong Kong)",
-    "aliases": []
+    "countryName": "Hong Kong",
+    "label": "Hong Kong"
   },
   {
-    "country name": "Hungary",
-    "country code": "HU",
-    "region_city": "Budapest",
-    "timezone": "GMT +01:00",
-    "daylight savings start": "2026-03-29",
-    "Daylight savings end": "2026-10-25",
-    "countryName": "Hungary",
+    "title": "Central European Time",
+    "offset": "GMT+1",
+    "utcOffsetStandard": "+01:00",
+    "utcOffsetDST": "+02:00",
+    "country": "Hungary",
     "countryCode": "HU",
-    "regionCity": "Budapest",
+    "searchTerms": [
+      "Budapest, Hungary"
+    ],
     "id": "Europe/Budapest",
     "city": "Budapest",
-    "country": "HU",
-    "label": "Hungary (Budapest)",
-    "aliases": []
+    "countryName": "Hungary",
+    "label": "Hungary (Central European Time)"
   },
   {
-    "country name": "Iceland",
-    "country code": "IS",
-    "region_city": "Reykjavik",
-    "timezone": "GMT +00:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Iceland",
+    "title": "Greenwich Mean Time",
+    "offset": "GMT+0",
+    "utcOffsetStandard": "+00:00",
+    "utcOffsetDST": "+00:00",
+    "country": "Iceland",
     "countryCode": "IS",
-    "regionCity": "Reykjavik",
+    "searchTerms": [
+      "Reykjavik, Iceland"
+    ],
     "id": "Atlantic/Reykjavik",
     "city": "Reykjavik",
-    "country": "IS",
-    "label": "Iceland (Reykjavik)",
-    "aliases": []
+    "countryName": "Iceland",
+    "label": "Iceland (Greenwich Mean Time)"
   },
   {
-    "country name": "India",
-    "country code": "IN",
-    "region_city": "New Delhi",
-    "timezone": "GMT +05:30",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "India",
+    "title": "India",
+    "offset": "GMT+5:30",
+    "utcOffsetStandard": "+05:30",
+    "utcOffsetDST": "+05:30",
+    "country": "India",
     "countryCode": "IN",
-    "regionCity": "New Delhi",
+    "searchTerms": [
+      "Bengaluru, India",
+      "Chennai, India",
+      "Kolkata, India",
+      "Mumbai, India",
+      "New Delhi, India"
+    ],
     "id": "Asia/Kolkata",
     "city": "Delhi",
-    "country": "IN",
-    "label": "India (New Delhi)",
-    "aliases": [
-      "delhi",
-      "mumbai",
-      "bangalore"
-    ]
+    "countryName": "India",
+    "label": "India"
   },
   {
-    "country name": "Indonesia",
-    "country code": "ID",
-    "region_city": "Central (Makassar)",
-    "timezone": "GMT +08:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Indonesia",
+    "title": "Central Indonesia Time",
+    "offset": "GMT+8",
+    "utcOffsetStandard": "+08:00",
+    "utcOffsetDST": "+08:00",
+    "country": "Indonesia",
     "countryCode": "ID",
-    "regionCity": "Central (Makassar)",
+    "searchTerms": [
+      "Makassar, Indonesia"
+    ],
     "id": "Asia/Makassar",
     "city": "Makassar",
-    "country": "ID",
-    "label": "Indonesia (Central (Makassar))",
-    "aliases": []
+    "countryName": "Indonesia",
+    "label": "Indonesia (Central Indonesia Time)"
   },
   {
-    "country name": "Indonesia",
-    "country code": "ID",
-    "region_city": "Eastern (Jayapura)",
-    "timezone": "GMT +09:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Indonesia",
+    "title": "Eastern Indonesia Time",
+    "offset": "GMT+9",
+    "utcOffsetStandard": "+09:00",
+    "utcOffsetDST": "+09:00",
+    "country": "Indonesia",
     "countryCode": "ID",
-    "regionCity": "Eastern (Jayapura)",
+    "searchTerms": [
+      "Jayapura, Indonesia"
+    ],
     "id": "Asia/Jayapura",
     "city": "Jayapura",
-    "country": "ID",
-    "label": "Indonesia (Eastern (Jayapura))",
-    "aliases": []
-  },
-  {
-    "country name": "Indonesia",
-    "country code": "ID",
-    "region_city": "Western (Jakarta)",
-    "timezone": "GMT +07:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
     "countryName": "Indonesia",
-    "countryCode": "ID",
-    "regionCity": "Western (Jakarta)",
-    "id": "Asia/Jakarta",
-    "city": "Western (Jakarta)",
-    "country": "ID",
-    "label": "Indonesia (Western (Jakarta))",
-    "aliases": [
-      "jakarta",
-      "bali"
-    ]
+    "label": "Indonesia (Eastern Indonesia Time)"
   },
   {
-    "country name": "Iran",
-    "country code": "IR",
-    "region_city": "Tehran",
-    "timezone": "GMT +03:30",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Iran",
+    "title": "Western Indonesia Time",
+    "offset": "GMT+7",
+    "utcOffsetStandard": "+07:00",
+    "utcOffsetDST": "+07:00",
+    "country": "Indonesia",
+    "countryCode": "ID",
+    "searchTerms": [
+      "Jakarta, Indonesia",
+      "Pontianak, Indonesia"
+    ],
+    "id": "Asia/Jakarta",
+    "city": "Jakarta",
+    "countryName": "Indonesia",
+    "label": "Indonesia (Western Indonesia Time)"
+  },
+  {
+    "title": "Iran",
+    "offset": "GMT+3:30",
+    "utcOffsetStandard": "+03:30",
+    "utcOffsetDST": "+03:30",
+    "country": "Iran",
     "countryCode": "IR",
-    "regionCity": "Tehran",
+    "searchTerms": [
+      "Tehran, Iran"
+    ],
     "id": "Asia/Tehran",
     "city": "Tehran",
-    "country": "IR",
-    "label": "Iran (Tehran)",
-    "aliases": []
+    "countryName": "Iran",
+    "label": "Iran"
   },
   {
-    "country name": "Iraq",
-    "country code": "IQ",
-    "region_city": "Baghdad",
-    "timezone": "GMT +03:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Iraq",
+    "title": "Iraq",
+    "offset": "GMT+3",
+    "utcOffsetStandard": "+03:00",
+    "utcOffsetDST": "+03:00",
+    "country": "Iraq",
     "countryCode": "IQ",
-    "regionCity": "Baghdad",
+    "searchTerms": [
+      "Baghdad, Iraq"
+    ],
     "id": "Asia/Baghdad",
     "city": "Baghdad",
-    "country": "IQ",
-    "label": "Iraq (Baghdad)",
-    "aliases": []
+    "countryName": "Iraq",
+    "label": "Iraq"
   },
   {
-    "country name": "Ireland",
-    "country code": "IE",
-    "region_city": "Dublin",
-    "timezone": "GMT +00:00",
-    "daylight savings start": "2026-03-29",
-    "Daylight savings end": "2026-10-25",
-    "countryName": "Ireland",
+    "title": "Greenwich Mean Time",
+    "offset": "GMT+0",
+    "utcOffsetStandard": "+00:00",
+    "utcOffsetDST": "+01:00",
+    "country": "Ireland",
     "countryCode": "IE",
-    "regionCity": "Dublin",
+    "searchTerms": [
+      "Dublin, Ireland"
+    ],
     "id": "Europe/Dublin",
     "city": "Dublin",
-    "country": "IE",
-    "label": "Ireland (Dublin)",
-    "aliases": []
+    "countryName": "Ireland",
+    "label": "Ireland (Greenwich Mean Time)"
   },
   {
-    "country name": "Israel",
-    "country code": "IL",
-    "region_city": "Jerusalem",
-    "timezone": "GMT +02:00",
-    "daylight savings start": "2026-03-27",
-    "Daylight savings end": "2026-10-25",
-    "countryName": "Israel",
+    "title": "Greenwich Mean Time",
+    "offset": "GMT+0",
+    "utcOffsetStandard": "+00:00",
+    "utcOffsetDST": "+01:00",
+    "country": "Isle of Man",
+    "countryCode": "IM",
+    "searchTerms": [
+      "Isle of Man"
+    ],
+    "id": "Europe/Isle_of_Man",
+    "city": "Isle of Man",
+    "countryName": "Isle of Man",
+    "label": "Isle of Man (Greenwich Mean Time)"
+  },
+  {
+    "title": "Israel",
+    "offset": "GMT+2",
+    "utcOffsetStandard": "+02:00",
+    "utcOffsetDST": "+03:00",
+    "country": "Israel",
     "countryCode": "IL",
-    "regionCity": "Jerusalem",
+    "searchTerms": [
+      "Jerusalem, Israel",
+      "Tel Aviv, Israel"
+    ],
     "id": "Asia/Jerusalem",
     "city": "Tel Aviv",
-    "country": "IL",
-    "label": "Israel (Jerusalem)",
-    "aliases": [
-      "tel aviv",
-      "jerusalem"
-    ]
+    "countryName": "Israel",
+    "label": "Israel"
   },
   {
-    "country name": "Italy",
-    "country code": "IT",
-    "region_city": "Rome",
-    "timezone": "GMT +01:00",
-    "daylight savings start": "2026-03-29",
-    "Daylight savings end": "2026-10-25",
-    "countryName": "Italy",
+    "title": "Central European Time",
+    "offset": "GMT+1",
+    "utcOffsetStandard": "+01:00",
+    "utcOffsetDST": "+02:00",
+    "country": "Italy",
     "countryCode": "IT",
-    "regionCity": "Rome",
+    "searchTerms": [
+      "Florence, Italy",
+      "Milan, Italy",
+      "Naples, Italy",
+      "Rome, Italy"
+    ],
     "id": "Europe/Rome",
-    "city": "Rome",
-    "country": "IT",
-    "label": "Italy (Rome)",
-    "aliases": [
-      "milan",
-      "venice"
-    ]
+    "city": "Florence",
+    "countryName": "Italy",
+    "label": "Italy (Central European Time)"
   },
   {
-    "country name": "Jamaica",
-    "country code": "JM",
-    "region_city": "Kingston",
-    "timezone": "GMT -05:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Jamaica",
+    "title": "Jamaica",
+    "offset": "GMT-5",
+    "utcOffsetStandard": "-05:00",
+    "utcOffsetDST": "-05:00",
+    "country": "Jamaica",
     "countryCode": "JM",
-    "regionCity": "Kingston",
+    "searchTerms": [
+      "Jamaica"
+    ],
     "id": "America/Jamaica",
-    "city": "Kingston",
-    "country": "JM",
-    "label": "Jamaica (Kingston)",
-    "aliases": []
+    "city": "Jamaica",
+    "countryName": "Jamaica",
+    "label": "Jamaica"
   },
   {
-    "country name": "Japan",
-    "country code": "JP",
-    "region_city": "Tokyo",
-    "timezone": "GMT +09:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Japan",
+    "title": "Japan",
+    "offset": "GMT+9",
+    "utcOffsetStandard": "+09:00",
+    "utcOffsetDST": "+09:00",
+    "country": "Japan",
     "countryCode": "JP",
-    "regionCity": "Tokyo",
+    "searchTerms": [
+      "Kyoto, Japan",
+      "Osaka, Japan",
+      "Tokyo, Japan",
+      "Yokohama, Japan"
+    ],
     "id": "Asia/Tokyo",
-    "city": "Tokyo",
-    "country": "JP",
-    "label": "Japan (Tokyo)",
-    "aliases": [
-      "osaka",
-      "kyoto"
-    ]
+    "city": "Kyoto",
+    "countryName": "Japan",
+    "label": "Japan"
   },
   {
-    "country name": "Jordan",
-    "country code": "JO",
-    "region_city": "Amman",
-    "timezone": "GMT +03:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Jordan",
+    "title": "Greenwich Mean Time",
+    "offset": "GMT+0",
+    "utcOffsetStandard": "+00:00",
+    "utcOffsetDST": "+01:00",
+    "country": "Jersey",
+    "countryCode": "JE",
+    "searchTerms": [
+      "Jersey"
+    ],
+    "id": "Europe/Jersey",
+    "city": "Jersey",
+    "countryName": "Jersey",
+    "label": "Jersey (Greenwich Mean Time)"
+  },
+  {
+    "title": "Jordan",
+    "offset": "GMT+3",
+    "utcOffsetStandard": "+03:00",
+    "utcOffsetDST": "+03:00",
+    "country": "Jordan",
     "countryCode": "JO",
-    "regionCity": "Amman",
+    "searchTerms": [
+      "Amman, Jordan"
+    ],
     "id": "Asia/Amman",
     "city": "Amman",
-    "country": "JO",
-    "label": "Jordan (Amman)",
-    "aliases": []
+    "countryName": "Jordan",
+    "label": "Jordan"
   },
   {
-    "country name": "Kazakhstan",
-    "country code": "KZ",
-    "region_city": "Almaty",
-    "timezone": "GMT +05:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Kazakhstan",
+    "title": "Kazakhstan",
+    "offset": "GMT+5",
+    "utcOffsetStandard": "+05:00",
+    "utcOffsetDST": "+05:00",
+    "country": "Kazakhstan",
     "countryCode": "KZ",
-    "regionCity": "Almaty",
+    "searchTerms": [
+      "Almaty, Kazakhstan",
+      "Aqtau, Kazakhstan",
+      "Aqtobe, Kazakhstan",
+      "Atyrau, Kazakhstan",
+      "Oral, Kazakhstan",
+      "Qostanay, Kazakhstan",
+      "Qyzylorda, Kazakhstan"
+    ],
     "id": "Asia/Almaty",
     "city": "Almaty",
-    "country": "KZ",
-    "label": "Kazakhstan (Almaty)",
-    "aliases": [
-      "astana"
-    ]
-  },
-  {
-    "country name": "Kazakhstan",
-    "country code": "KZ",
-    "region_city": "Oral (West)",
-    "timezone": "GMT +05:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
     "countryName": "Kazakhstan",
-    "countryCode": "KZ",
-    "regionCity": "Oral (West)",
-    "id": "Asia/Oral",
-    "city": "Oral (West)",
-    "country": "KZ",
-    "label": "Kazakhstan (Oral (West))",
-    "aliases": []
+    "label": "Kazakhstan"
   },
   {
-    "country name": "Kenya",
-    "country code": "KE",
-    "region_city": "Nairobi",
-    "timezone": "GMT +03:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Kenya",
+    "title": "East Africa Time",
+    "offset": "GMT+3",
+    "utcOffsetStandard": "+03:00",
+    "utcOffsetDST": "+03:00",
+    "country": "Kenya",
     "countryCode": "KE",
-    "regionCity": "Nairobi",
+    "searchTerms": [
+      "Nairobi, Kenya"
+    ],
     "id": "Africa/Nairobi",
     "city": "Nairobi",
-    "country": "KE",
-    "label": "Kenya (Nairobi)",
-    "aliases": []
+    "countryName": "Kenya",
+    "label": "Kenya (East Africa Time)"
   },
   {
-    "country name": "Kiribati",
-    "country code": "KI",
-    "region_city": "Gilbert Islands (Tarawa)",
-    "timezone": "GMT +12:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Kiribati",
+    "title": "Gilbert Islands Time",
+    "offset": "GMT+12",
+    "utcOffsetStandard": "+12:00",
+    "utcOffsetDST": "+12:00",
+    "country": "Kiribati",
     "countryCode": "KI",
-    "regionCity": "Gilbert Islands (Tarawa)",
+    "searchTerms": [
+      "Tarawa, Kiribati"
+    ],
     "id": "Pacific/Tarawa",
-    "city": "Gilbert Islands (Tarawa)",
-    "country": "KI",
-    "label": "Kiribati (Gilbert Islands (Tarawa))",
-    "aliases": []
-  },
-  {
-    "country name": "Kiribati",
-    "country code": "KI",
-    "region_city": "Line Islands (Kiritimati)",
-    "timezone": "GMT +14:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
+    "city": "Tarawa",
     "countryName": "Kiribati",
+    "label": "Kiribati (Gilbert Islands Time)"
+  },
+  {
+    "title": "Line Islands Time",
+    "offset": "GMT+14",
+    "utcOffsetStandard": "+14:00",
+    "utcOffsetDST": "+14:00",
+    "country": "Kiribati",
     "countryCode": "KI",
-    "regionCity": "Line Islands (Kiritimati)",
+    "searchTerms": [
+      "Kiritimati, Kiribati"
+    ],
     "id": "Pacific/Kiritimati",
-    "city": "Line Islands (Kiritimati)",
-    "country": "KI",
-    "label": "Kiribati (Line Islands (Kiritimati))",
-    "aliases": []
+    "city": "Kiritimati",
+    "countryName": "Kiribati",
+    "label": "Kiribati (Line Islands Time)"
   },
   {
-    "country name": "Kosovo",
-    "country code": "XK",
-    "region_city": "Pristina",
-    "timezone": "GMT +01:00",
-    "daylight savings start": "2026-03-29",
-    "Daylight savings end": "2026-10-25",
-    "countryName": "Kosovo",
-    "countryCode": "XK",
-    "regionCity": "Pristina",
-    "id": "Europe/Belgrade",
-    "city": "Pristina",
-    "country": "XK",
-    "label": "Kosovo (Pristina)",
-    "aliases": []
+    "title": "Phoenix Islands Time",
+    "offset": "GMT+13",
+    "utcOffsetStandard": "+13:00",
+    "utcOffsetDST": "+13:00",
+    "country": "Kiribati",
+    "countryCode": "KI",
+    "searchTerms": [
+      "Enderbury, Kiribati",
+      "Kanton, Kiribati"
+    ],
+    "id": "Pacific/Enderbury",
+    "city": "Enderbury",
+    "countryName": "Kiribati",
+    "label": "Kiribati (Phoenix Islands Time)"
   },
   {
-    "country name": "Kuwait",
-    "country code": "KW",
-    "region_city": "Kuwait City",
-    "timezone": "GMT +03:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Kuwait",
+    "title": "Kuwait",
+    "offset": "GMT+3",
+    "utcOffsetStandard": "+03:00",
+    "utcOffsetDST": "+03:00",
+    "country": "Kuwait",
     "countryCode": "KW",
-    "regionCity": "Kuwait City",
+    "searchTerms": [
+      "Kuwait"
+    ],
     "id": "Asia/Kuwait",
-    "city": "Kuwait City",
-    "country": "KW",
-    "label": "Kuwait (Kuwait City)",
-    "aliases": []
+    "city": "Kuwait",
+    "countryName": "Kuwait",
+    "label": "Kuwait"
   },
   {
-    "country name": "Kyrgyzstan",
-    "country code": "KG",
-    "region_city": "Bishkek",
-    "timezone": "GMT +06:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Kyrgyzstan",
+    "title": "Kyrgyzstan",
+    "offset": "GMT+6",
+    "utcOffsetStandard": "+06:00",
+    "utcOffsetDST": "+06:00",
+    "country": "Kyrgyzstan",
     "countryCode": "KG",
-    "regionCity": "Bishkek",
+    "searchTerms": [
+      "Bishkek, Kyrgyzstan"
+    ],
     "id": "Asia/Bishkek",
     "city": "Bishkek",
-    "country": "KG",
-    "label": "Kyrgyzstan (Bishkek)",
-    "aliases": []
+    "countryName": "Kyrgyzstan",
+    "label": "Kyrgyzstan"
   },
   {
-    "country name": "Laos",
-    "country code": "LA",
-    "region_city": "Vientiane",
-    "timezone": "GMT +07:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Laos",
+    "title": "Laos",
+    "offset": "GMT+7",
+    "utcOffsetStandard": "+07:00",
+    "utcOffsetDST": "+07:00",
+    "country": "Laos",
     "countryCode": "LA",
-    "regionCity": "Vientiane",
+    "searchTerms": [
+      "Vientiane, Laos"
+    ],
     "id": "Asia/Vientiane",
     "city": "Vientiane",
-    "country": "LA",
-    "label": "Laos (Vientiane)",
-    "aliases": []
+    "countryName": "Laos",
+    "label": "Laos"
   },
   {
-    "country name": "Latvia",
-    "country code": "LV",
-    "region_city": "Riga",
-    "timezone": "GMT +02:00",
-    "daylight savings start": "2026-03-29",
-    "Daylight savings end": "2026-10-25",
-    "countryName": "Latvia",
+    "title": "Eastern European Time",
+    "offset": "GMT+2",
+    "utcOffsetStandard": "+02:00",
+    "utcOffsetDST": "+03:00",
+    "country": "Latvia",
     "countryCode": "LV",
-    "regionCity": "Riga",
+    "searchTerms": [
+      "Riga, Latvia"
+    ],
     "id": "Europe/Riga",
     "city": "Riga",
-    "country": "LV",
-    "label": "Latvia (Riga)",
-    "aliases": []
+    "countryName": "Latvia",
+    "label": "Latvia (Eastern European Time)"
   },
   {
-    "country name": "Lebanon",
-    "country code": "LB",
-    "region_city": "Beirut",
-    "timezone": "GMT +02:00",
-    "daylight savings start": "2026-03-29",
-    "Daylight savings end": "2026-10-25",
-    "countryName": "Lebanon",
+    "title": "Eastern European Time",
+    "offset": "GMT+2",
+    "utcOffsetStandard": "+02:00",
+    "utcOffsetDST": "+03:00",
+    "country": "Lebanon",
     "countryCode": "LB",
-    "regionCity": "Beirut",
+    "searchTerms": [
+      "Beirut, Lebanon"
+    ],
     "id": "Asia/Beirut",
     "city": "Beirut",
-    "country": "LB",
-    "label": "Lebanon (Beirut)",
-    "aliases": []
+    "countryName": "Lebanon",
+    "label": "Lebanon (Eastern European Time)"
   },
   {
-    "country name": "Lesotho",
-    "country code": "LS",
-    "region_city": "Maseru",
-    "timezone": "GMT +02:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Lesotho",
+    "title": "South Africa Standard Time",
+    "offset": "GMT+2",
+    "utcOffsetStandard": "+02:00",
+    "utcOffsetDST": "+02:00",
+    "country": "Lesotho",
     "countryCode": "LS",
-    "regionCity": "Maseru",
+    "searchTerms": [
+      "Maseru, Lesotho"
+    ],
     "id": "Africa/Maseru",
     "city": "Maseru",
-    "country": "LS",
-    "label": "Lesotho (Maseru)",
-    "aliases": []
+    "countryName": "Lesotho",
+    "label": "Lesotho (South Africa Standard Time)"
   },
   {
-    "country name": "Liberia",
-    "country code": "LR",
-    "region_city": "Monrovia",
-    "timezone": "GMT +00:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Liberia",
+    "title": "Greenwich Mean Time",
+    "offset": "GMT+0",
+    "utcOffsetStandard": "+00:00",
+    "utcOffsetDST": "+00:00",
+    "country": "Liberia",
     "countryCode": "LR",
-    "regionCity": "Monrovia",
+    "searchTerms": [
+      "Monrovia, Liberia"
+    ],
     "id": "Africa/Monrovia",
     "city": "Monrovia",
-    "country": "LR",
-    "label": "Liberia (Monrovia)",
-    "aliases": []
+    "countryName": "Liberia",
+    "label": "Liberia (Greenwich Mean Time)"
   },
   {
-    "country name": "Libya",
-    "country code": "LY",
-    "region_city": "Tripoli",
-    "timezone": "GMT +02:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Libya",
+    "title": "Eastern European Time",
+    "offset": "GMT+2",
+    "utcOffsetStandard": "+02:00",
+    "utcOffsetDST": "+02:00",
+    "country": "Libya",
     "countryCode": "LY",
-    "regionCity": "Tripoli",
+    "searchTerms": [
+      "Tripoli, Libya"
+    ],
     "id": "Africa/Tripoli",
     "city": "Tripoli",
-    "country": "LY",
-    "label": "Libya (Tripoli)",
-    "aliases": []
+    "countryName": "Libya",
+    "label": "Libya (Eastern European Time)"
   },
   {
-    "country name": "Liechtenstein",
-    "country code": "LI",
-    "region_city": "Vaduz",
-    "timezone": "GMT +01:00",
-    "daylight savings start": "2026-03-29",
-    "Daylight savings end": "2026-10-25",
-    "countryName": "Liechtenstein",
+    "title": "Central European Time",
+    "offset": "GMT+1",
+    "utcOffsetStandard": "+01:00",
+    "utcOffsetDST": "+02:00",
+    "country": "Liechtenstein",
     "countryCode": "LI",
-    "regionCity": "Vaduz",
+    "searchTerms": [
+      "Vaduz, Liechtenstein"
+    ],
     "id": "Europe/Vaduz",
     "city": "Vaduz",
-    "country": "LI",
-    "label": "Liechtenstein (Vaduz)",
-    "aliases": []
+    "countryName": "Liechtenstein",
+    "label": "Liechtenstein (Central European Time)"
   },
   {
-    "country name": "Lithuania",
-    "country code": "LT",
-    "region_city": "Vilnius",
-    "timezone": "GMT +02:00",
-    "daylight savings start": "2026-03-29",
-    "Daylight savings end": "2026-10-25",
-    "countryName": "Lithuania",
+    "title": "Eastern European Time",
+    "offset": "GMT+2",
+    "utcOffsetStandard": "+02:00",
+    "utcOffsetDST": "+03:00",
+    "country": "Lithuania",
     "countryCode": "LT",
-    "regionCity": "Vilnius",
+    "searchTerms": [
+      "Vilnius, Lithuania"
+    ],
     "id": "Europe/Vilnius",
     "city": "Vilnius",
-    "country": "LT",
-    "label": "Lithuania (Vilnius)",
-    "aliases": []
+    "countryName": "Lithuania",
+    "label": "Lithuania (Eastern European Time)"
   },
   {
-    "country name": "Luxembourg",
-    "country code": "LU",
-    "region_city": "Luxembourg",
-    "timezone": "GMT +01:00",
-    "daylight savings start": "2026-03-29",
-    "Daylight savings end": "2026-10-25",
-    "countryName": "Luxembourg",
+    "title": "Central European Time",
+    "offset": "GMT+1",
+    "utcOffsetStandard": "+01:00",
+    "utcOffsetDST": "+02:00",
+    "country": "Luxembourg",
     "countryCode": "LU",
-    "regionCity": "Luxembourg",
+    "searchTerms": [
+      "Luxembourg"
+    ],
     "id": "Europe/Luxembourg",
     "city": "Luxembourg",
-    "country": "LU",
-    "label": "Luxembourg (Luxembourg)",
-    "aliases": []
+    "countryName": "Luxembourg",
+    "label": "Luxembourg (Central European Time)"
   },
   {
-    "country name": "Macao",
-    "country code": "MO",
-    "region_city": "Macao",
-    "timezone": "GMT +08:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Macao",
+    "title": "Macau",
+    "offset": "GMT+8",
+    "utcOffsetStandard": "+08:00",
+    "utcOffsetDST": "+08:00",
+    "country": "Macau",
     "countryCode": "MO",
-    "regionCity": "Macao",
+    "searchTerms": [
+      "Macau"
+    ],
     "id": "Asia/Macau",
-    "city": "Macao",
-    "country": "MO",
-    "label": "Macao (Macao)",
-    "aliases": []
+    "city": "Macau",
+    "countryName": "Macau",
+    "label": "Macau"
   },
   {
-    "country name": "Madagascar",
-    "country code": "MG",
-    "region_city": "Antananarivo",
-    "timezone": "GMT +03:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Madagascar",
+    "title": "East Africa Time",
+    "offset": "GMT+3",
+    "utcOffsetStandard": "+03:00",
+    "utcOffsetDST": "+03:00",
+    "country": "Madagascar",
     "countryCode": "MG",
-    "regionCity": "Antananarivo",
+    "searchTerms": [
+      "Antananarivo, Madagascar"
+    ],
     "id": "Indian/Antananarivo",
     "city": "Antananarivo",
-    "country": "MG",
-    "label": "Madagascar (Antananarivo)",
-    "aliases": []
+    "countryName": "Madagascar",
+    "label": "Madagascar (East Africa Time)"
   },
   {
-    "country name": "Malawi",
-    "country code": "MW",
-    "region_city": "Lilongwe",
-    "timezone": "GMT +02:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Malawi",
+    "title": "Central Africa Time",
+    "offset": "GMT+2",
+    "utcOffsetStandard": "+02:00",
+    "utcOffsetDST": "+02:00",
+    "country": "Malawi",
     "countryCode": "MW",
-    "regionCity": "Lilongwe",
+    "searchTerms": [
+      "Blantyre, Malawi"
+    ],
     "id": "Africa/Blantyre",
-    "city": "Lilongwe",
-    "country": "MW",
-    "label": "Malawi (Lilongwe)",
-    "aliases": []
+    "city": "Blantyre",
+    "countryName": "Malawi",
+    "label": "Malawi (Central Africa Time)"
   },
   {
-    "country name": "Malaysia",
-    "country code": "MY",
-    "region_city": "Kuala Lumpur",
-    "timezone": "GMT +08:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Malaysia",
+    "title": "Malaysia",
+    "offset": "GMT+8",
+    "utcOffsetStandard": "+08:00",
+    "utcOffsetDST": "+08:00",
+    "country": "Malaysia",
     "countryCode": "MY",
-    "regionCity": "Kuala Lumpur",
+    "searchTerms": [
+      "Kuala Lumpur, Malaysia",
+      "Kuching, Malaysia"
+    ],
     "id": "Asia/Kuala_Lumpur",
     "city": "Kuala Lumpur",
-    "country": "MY",
-    "label": "Malaysia (Kuala Lumpur)",
-    "aliases": []
+    "countryName": "Malaysia",
+    "label": "Malaysia"
   },
   {
-    "country name": "Maldives",
-    "country code": "MV",
-    "region_city": "Malé",
-    "timezone": "GMT +05:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Maldives",
+    "title": "Maldives",
+    "offset": "GMT+5",
+    "utcOffsetStandard": "+05:00",
+    "utcOffsetDST": "+05:00",
+    "country": "Maldives",
     "countryCode": "MV",
-    "regionCity": "Malé",
+    "searchTerms": [
+      "Maldives"
+    ],
     "id": "Indian/Maldives",
-    "city": "Malé",
-    "country": "MV",
-    "label": "Maldives (Malé)",
-    "aliases": []
+    "city": "Maldives",
+    "countryName": "Maldives",
+    "label": "Maldives"
   },
   {
-    "country name": "Mali",
-    "country code": "ML",
-    "region_city": "Bamako",
-    "timezone": "GMT +00:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Mali",
+    "title": "Greenwich Mean Time",
+    "offset": "GMT+0",
+    "utcOffsetStandard": "+00:00",
+    "utcOffsetDST": "+00:00",
+    "country": "Mali",
     "countryCode": "ML",
-    "regionCity": "Bamako",
+    "searchTerms": [
+      "Bamako, Mali",
+      "Timbuktu, Mali"
+    ],
     "id": "Africa/Bamako",
     "city": "Bamako",
-    "country": "ML",
-    "label": "Mali (Bamako)",
-    "aliases": []
+    "countryName": "Mali",
+    "label": "Mali (Greenwich Mean Time)"
   },
   {
-    "country name": "Malta",
-    "country code": "MT",
-    "region_city": "Valletta",
-    "timezone": "GMT +01:00",
-    "daylight savings start": "2026-03-29",
-    "Daylight savings end": "2026-10-25",
-    "countryName": "Malta",
+    "title": "Central European Time",
+    "offset": "GMT+1",
+    "utcOffsetStandard": "+01:00",
+    "utcOffsetDST": "+02:00",
+    "country": "Malta",
     "countryCode": "MT",
-    "regionCity": "Valletta",
+    "searchTerms": [
+      "Malta"
+    ],
     "id": "Europe/Malta",
-    "city": "Valletta",
-    "country": "MT",
-    "label": "Malta (Valletta)",
-    "aliases": []
+    "city": "Malta",
+    "countryName": "Malta",
+    "label": "Malta (Central European Time)"
   },
   {
-    "country name": "Marshall Islands",
-    "country code": "MH",
-    "region_city": "Majuro",
-    "timezone": "GMT +12:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Marshall Islands",
+    "title": "Marshall Islands",
+    "offset": "GMT+12",
+    "utcOffsetStandard": "+12:00",
+    "utcOffsetDST": "+12:00",
+    "country": "Marshall Islands",
     "countryCode": "MH",
-    "regionCity": "Majuro",
-    "id": "Pacific/Majuro",
-    "city": "Majuro",
-    "country": "MH",
-    "label": "Marshall Islands (Majuro)",
-    "aliases": []
+    "searchTerms": [
+      "Kwajalein, Marshall Islands",
+      "Majuro, Marshall Islands"
+    ],
+    "id": "Pacific/Kwajalein",
+    "city": "Kwajalein",
+    "countryName": "Marshall Islands",
+    "label": "Marshall Islands"
   },
   {
-    "country name": "Mauritania",
-    "country code": "MR",
-    "region_city": "Nouakchott",
-    "timezone": "GMT +00:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Mauritania",
+    "title": "Martinique",
+    "offset": "GMT-4",
+    "utcOffsetStandard": "-04:00",
+    "utcOffsetDST": "-04:00",
+    "country": "Martinique",
+    "countryCode": "MQ",
+    "searchTerms": [
+      "Martinique"
+    ],
+    "id": "America/Martinique",
+    "city": "Martinique",
+    "countryName": "Martinique",
+    "label": "Martinique"
+  },
+  {
+    "title": "Greenwich Mean Time",
+    "offset": "GMT+0",
+    "utcOffsetStandard": "+00:00",
+    "utcOffsetDST": "+00:00",
+    "country": "Mauritania",
     "countryCode": "MR",
-    "regionCity": "Nouakchott",
+    "searchTerms": [
+      "Nouakchott, Mauritania"
+    ],
     "id": "Africa/Nouakchott",
     "city": "Nouakchott",
-    "country": "MR",
-    "label": "Mauritania (Nouakchott)",
-    "aliases": []
+    "countryName": "Mauritania",
+    "label": "Mauritania (Greenwich Mean Time)"
   },
   {
-    "country name": "Mauritius",
-    "country code": "MU",
-    "region_city": "Port Louis",
-    "timezone": "GMT +04:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Mauritius",
+    "title": "Mauritius",
+    "offset": "GMT+4",
+    "utcOffsetStandard": "+04:00",
+    "utcOffsetDST": "+04:00",
+    "country": "Mauritius",
     "countryCode": "MU",
-    "regionCity": "Port Louis",
+    "searchTerms": [
+      "Mauritius"
+    ],
     "id": "Indian/Mauritius",
-    "city": "Port Louis",
-    "country": "MU",
-    "label": "Mauritius (Port Louis)",
-    "aliases": []
+    "city": "Mauritius",
+    "countryName": "Mauritius",
+    "label": "Mauritius"
   },
   {
-    "country name": "Mexico",
-    "country code": "MX",
-    "region_city": "Central (Mexico City)",
-    "timezone": "GMT -06:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Mexico",
-    "countryCode": "MX",
-    "regionCity": "Central (Mexico City)",
-    "id": "America/Mexico_City",
-    "city": "Mexico City",
-    "country": "MX",
-    "label": "Mexico (Central (Mexico City))",
-    "aliases": [
-      "mexico city"
-    ]
+    "title": "East Africa Time",
+    "offset": "GMT+3",
+    "utcOffsetStandard": "+03:00",
+    "utcOffsetDST": "+03:00",
+    "country": "Mayotte",
+    "countryCode": "YT",
+    "searchTerms": [
+      "Mayotte"
+    ],
+    "id": "Indian/Mayotte",
+    "city": "Mayotte",
+    "countryName": "Mayotte",
+    "label": "Mayotte (East Africa Time)"
   },
   {
-    "country name": "Mexico",
-    "country code": "MX",
-    "region_city": "Eastern (Cancún)",
-    "timezone": "GMT -05:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Mexico",
+    "title": "Central Standard Time",
+    "offset": "GMT-6",
+    "utcOffsetStandard": "-06:00",
+    "utcOffsetDST": "-05:00",
+    "country": "Mexico",
     "countryCode": "MX",
-    "regionCity": "Eastern (Cancún)",
+    "searchTerms": [
+      "Bahia Banderas, Mexico",
+      "Chihuahua, Mexico",
+      "Guadalajara, Mexico",
+      "Matamoros, Mexico",
+      "Merida, Mexico",
+      "Mexico City",
+      "Mexico City, Mexico",
+      "Monterrey, Mexico",
+      "Ojinaga, Mexico"
+    ],
+    "id": "America/Bahia_Banderas",
+    "city": "Bahia Banderas",
+    "countryName": "Mexico",
+    "label": "Mexico (Central Standard Time)"
+  },
+  {
+    "title": "Eastern Standard Time",
+    "offset": "GMT-5",
+    "utcOffsetStandard": "-05:00",
+    "utcOffsetDST": "-05:00",
+    "country": "Mexico",
+    "countryCode": "MX",
+    "searchTerms": [
+      "Cancun, Mexico"
+    ],
     "id": "America/Cancun",
-    "city": "Cancún",
-    "country": "MX",
-    "label": "Mexico (Eastern (Cancún))",
-    "aliases": [
-      "cancun"
-    ]
+    "city": "Cancun",
+    "countryName": "Mexico",
+    "label": "Mexico (Eastern Standard Time)"
   },
   {
-    "country name": "Mexico",
-    "country code": "MX",
-    "region_city": "Mountain (Hermosillo)",
-    "timezone": "GMT -07:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Mexico",
+    "title": "Mountain Standard Time",
+    "offset": "GMT-7",
+    "utcOffsetStandard": "-07:00",
+    "utcOffsetDST": "-06:00",
+    "country": "Mexico",
     "countryCode": "MX",
-    "regionCity": "Mountain (Hermosillo)",
-    "id": "America/Hermosillo",
-    "city": "Hermosillo",
-    "country": "MX",
-    "label": "Mexico (Mountain (Hermosillo))",
-    "aliases": [
-      "hermosillo"
-    ]
+    "searchTerms": [
+      "Chihuahua, Mexico",
+      "Ciudad Juarez, Mexico",
+      "Hermosillo, Mexico",
+      "Mazatlan, Mexico"
+    ],
+    "id": "America/Chihuahua",
+    "city": "Chihuahua",
+    "countryName": "Mexico",
+    "label": "Mexico (Mountain Standard Time)"
   },
   {
-    "country name": "Mexico",
-    "country code": "MX",
-    "region_city": "Pacific (Tijuana)",
-    "timezone": "GMT -08:00",
-    "daylight savings start": "2026-03-08",
-    "Daylight savings end": "2026-11-01",
-    "countryName": "Mexico",
+    "title": "Pacific Standard Time",
+    "offset": "GMT-8",
+    "utcOffsetStandard": "-08:00",
+    "utcOffsetDST": "-07:00",
+    "country": "Mexico",
     "countryCode": "MX",
-    "regionCity": "Pacific (Tijuana)",
+    "searchTerms": [
+      "Ensenada, Mexico",
+      "Mexicali, Mexico",
+      "Santa Isabel, Mexico",
+      "Tijuana, Mexico"
+    ],
     "id": "America/Tijuana",
-    "city": "Tijuana",
-    "country": "MX",
-    "label": "Mexico (Pacific (Tijuana))",
-    "aliases": [
-      "tijuana"
-    ]
+    "city": "Ensenada",
+    "countryName": "Mexico",
+    "label": "Mexico (Pacific Standard Time)"
   },
   {
-    "country name": "Micronesia",
-    "country code": "FM",
-    "region_city": "Chuuk",
-    "timezone": "GMT +10:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Micronesia",
+    "title": "Chuuk Time",
+    "offset": "GMT+10",
+    "utcOffsetStandard": "+10:00",
+    "utcOffsetDST": "+10:00",
+    "country": "Micronesia",
     "countryCode": "FM",
-    "regionCity": "Chuuk",
-    "id": "Pacific/Chuuk",
+    "searchTerms": [
+      "Chuuk, Micronesia",
+      "Truk, Micronesia",
+      "Yap, Micronesia"
+    ],
+    "id": "Pacific/Truk",
     "city": "Chuuk",
-    "country": "FM",
-    "label": "Micronesia (Chuuk)",
-    "aliases": []
-  },
-  {
-    "country name": "Micronesia",
-    "country code": "FM",
-    "region_city": "Pohnpei",
-    "timezone": "GMT +11:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
     "countryName": "Micronesia",
-    "countryCode": "FM",
-    "regionCity": "Pohnpei",
-    "id": "Pacific/Pohnpei",
-    "city": "Pohnpei",
-    "country": "FM",
-    "label": "Micronesia (Pohnpei)",
-    "aliases": []
+    "label": "Micronesia (Chuuk Time)"
   },
   {
-    "country name": "Moldova",
-    "country code": "MD",
-    "region_city": "Chisinau",
-    "timezone": "GMT +02:00",
-    "daylight savings start": "2026-03-29",
-    "Daylight savings end": "2026-10-25",
-    "countryName": "Moldova",
+    "title": "Pohnpei Time",
+    "offset": "GMT+11",
+    "utcOffsetStandard": "+11:00",
+    "utcOffsetDST": "+11:00",
+    "country": "Micronesia",
+    "countryCode": "FM",
+    "searchTerms": [
+      "Kosrae, Micronesia",
+      "Pohnpei, Micronesia",
+      "Ponape, Micronesia"
+    ],
+    "id": "Pacific/Kosrae",
+    "city": "Kosrae",
+    "countryName": "Micronesia",
+    "label": "Micronesia (Pohnpei Time)"
+  },
+  {
+    "title": "Eastern European Time",
+    "offset": "GMT+2",
+    "utcOffsetStandard": "+02:00",
+    "utcOffsetDST": "+03:00",
+    "country": "Moldova",
     "countryCode": "MD",
-    "regionCity": "Chisinau",
+    "searchTerms": [
+      "Chisinau, Moldova",
+      "Tiraspol, Moldova"
+    ],
     "id": "Europe/Chisinau",
     "city": "Chisinau",
-    "country": "MD",
-    "label": "Moldova (Chisinau)",
-    "aliases": []
+    "countryName": "Moldova",
+    "label": "Moldova (Eastern European Time)"
   },
   {
-    "country name": "Monaco",
-    "country code": "MC",
-    "region_city": "Monaco",
-    "timezone": "GMT +01:00",
-    "daylight savings start": "2026-03-29",
-    "Daylight savings end": "2026-10-25",
-    "countryName": "Monaco",
+    "title": "Central European Time",
+    "offset": "GMT+1",
+    "utcOffsetStandard": "+01:00",
+    "utcOffsetDST": "+02:00",
+    "country": "Monaco",
     "countryCode": "MC",
-    "regionCity": "Monaco",
+    "searchTerms": [
+      "Monaco"
+    ],
     "id": "Europe/Monaco",
     "city": "Monaco",
-    "country": "MC",
-    "label": "Monaco (Monaco)",
-    "aliases": []
+    "countryName": "Monaco",
+    "label": "Monaco (Central European Time)"
   },
   {
-    "country name": "Mongolia",
-    "country code": "MN",
-    "region_city": "Hovd",
-    "timezone": "GMT +07:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Mongolia",
+    "title": "Hovd Time",
+    "offset": "GMT+7",
+    "utcOffsetStandard": "+07:00",
+    "utcOffsetDST": "+07:00",
+    "country": "Mongolia",
     "countryCode": "MN",
-    "regionCity": "Hovd",
+    "searchTerms": [
+      "Hovd, Mongolia"
+    ],
     "id": "Asia/Hovd",
     "city": "Hovd",
-    "country": "MN",
-    "label": "Mongolia (Hovd)",
-    "aliases": []
-  },
-  {
-    "country name": "Mongolia",
-    "country code": "MN",
-    "region_city": "Ulaanbaatar",
-    "timezone": "GMT +08:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
     "countryName": "Mongolia",
-    "countryCode": "MN",
-    "regionCity": "Ulaanbaatar",
-    "id": "Asia/Ulaanbaatar",
-    "city": "Ulaanbaatar",
-    "country": "MN",
-    "label": "Mongolia (Ulaanbaatar)",
-    "aliases": []
+    "label": "Mongolia (Hovd Time)"
   },
   {
-    "country name": "Montenegro",
-    "country code": "ME",
-    "region_city": "Podgorica",
-    "timezone": "GMT +01:00",
-    "daylight savings start": "2026-03-29",
-    "Daylight savings end": "2026-10-25",
-    "countryName": "Montenegro",
+    "title": "Ulaanbaatar Time",
+    "offset": "GMT+8",
+    "utcOffsetStandard": "+08:00",
+    "utcOffsetDST": "+08:00",
+    "country": "Mongolia",
+    "countryCode": "MN",
+    "searchTerms": [
+      "Choibalsan, Mongolia",
+      "Ulaanbaatar, Mongolia"
+    ],
+    "id": "Asia/Ulaanbaatar",
+    "city": "Choibalsan",
+    "countryName": "Mongolia",
+    "label": "Mongolia (Ulaanbaatar Time)"
+  },
+  {
+    "title": "Central European Time",
+    "offset": "GMT+1",
+    "utcOffsetStandard": "+01:00",
+    "utcOffsetDST": "+02:00",
+    "country": "Montenegro",
     "countryCode": "ME",
-    "regionCity": "Podgorica",
+    "searchTerms": [
+      "Podgorica, Montenegro"
+    ],
     "id": "Europe/Podgorica",
     "city": "Podgorica",
-    "country": "ME",
-    "label": "Montenegro (Podgorica)",
-    "aliases": []
+    "countryName": "Montenegro",
+    "label": "Montenegro (Central European Time)"
   },
   {
-    "country name": "Morocco",
-    "country code": "MA",
-    "region_city": "Casablanca / Rabat",
-    "timezone": "GMT +01:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Morocco",
+    "title": "Montserrat",
+    "offset": "GMT-4",
+    "utcOffsetStandard": "-04:00",
+    "utcOffsetDST": "-04:00",
+    "country": "Montserrat",
+    "countryCode": "MS",
+    "searchTerms": [
+      "Montserrat"
+    ],
+    "id": "America/Montserrat",
+    "city": "Montserrat",
+    "countryName": "Montserrat",
+    "label": "Montserrat"
+  },
+  {
+    "title": "Morocco",
+    "offset": "GMT+1",
+    "utcOffsetStandard": "+01:00",
+    "utcOffsetDST": "+00:00",
+    "country": "Morocco",
     "countryCode": "MA",
-    "regionCity": "Casablanca / Rabat",
+    "searchTerms": [
+      "Casablanca, Morocco"
+    ],
     "id": "Africa/Casablanca",
-    "city": "Casablanca / Rabat",
-    "country": "MA",
-    "label": "Morocco (Casablanca / Rabat)",
-    "aliases": [
-      "marrakech"
-    ]
+    "city": "Casablanca",
+    "countryName": "Morocco",
+    "label": "Morocco"
   },
   {
-    "country name": "Mozambique",
-    "country code": "MZ",
-    "region_city": "Maputo",
-    "timezone": "GMT +02:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Mozambique",
+    "title": "Central Africa Time",
+    "offset": "GMT+2",
+    "utcOffsetStandard": "+02:00",
+    "utcOffsetDST": "+02:00",
+    "country": "Mozambique",
     "countryCode": "MZ",
-    "regionCity": "Maputo",
+    "searchTerms": [
+      "Maputo, Mozambique"
+    ],
     "id": "Africa/Maputo",
     "city": "Maputo",
-    "country": "MZ",
-    "label": "Mozambique (Maputo)",
-    "aliases": []
+    "countryName": "Mozambique",
+    "label": "Mozambique (Central Africa Time)"
   },
   {
-    "country name": "Myanmar",
-    "country code": "MM",
-    "region_city": "Yangon / Naypyidaw",
-    "timezone": "GMT +06:30",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Myanmar",
+    "title": "Myanmar",
+    "offset": "GMT+6:30",
+    "utcOffsetStandard": "+06:30",
+    "utcOffsetDST": "+06:30",
+    "country": "Myanmar",
     "countryCode": "MM",
-    "regionCity": "Yangon / Naypyidaw",
+    "searchTerms": [
+      "Yangon, Myanmar"
+    ],
     "id": "Asia/Yangon",
-    "city": "Yangon / Naypyidaw",
-    "country": "MM",
-    "label": "Myanmar (Yangon / Naypyidaw)",
-    "aliases": [
-      "burma"
-    ]
+    "city": "Yangon",
+    "countryName": "Myanmar",
+    "label": "Myanmar"
   },
   {
-    "country name": "Namibia",
-    "country code": "NA",
-    "region_city": "Windhoek",
-    "timezone": "GMT +02:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Namibia",
+    "title": "Central Africa Time",
+    "offset": "GMT+2",
+    "utcOffsetStandard": "+02:00",
+    "utcOffsetDST": "+02:00",
+    "country": "Namibia",
     "countryCode": "NA",
-    "regionCity": "Windhoek",
+    "searchTerms": [
+      "Windhoek, Namibia"
+    ],
     "id": "Africa/Windhoek",
     "city": "Windhoek",
-    "country": "NA",
-    "label": "Namibia (Windhoek)",
-    "aliases": []
+    "countryName": "Namibia",
+    "label": "Namibia (Central Africa Time)"
   },
   {
-    "country name": "Nauru",
-    "country code": "NR",
-    "region_city": "Yaren",
-    "timezone": "GMT +12:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Nauru",
+    "title": "Nauru",
+    "offset": "GMT+12",
+    "utcOffsetStandard": "+12:00",
+    "utcOffsetDST": "+12:00",
+    "country": "Nauru",
     "countryCode": "NR",
-    "regionCity": "Yaren",
+    "searchTerms": [
+      "Nauru"
+    ],
     "id": "Pacific/Nauru",
-    "city": "Yaren",
-    "country": "NR",
-    "label": "Nauru (Yaren)",
-    "aliases": []
+    "city": "Nauru",
+    "countryName": "Nauru",
+    "label": "Nauru"
   },
   {
-    "country name": "Nepal",
-    "country code": "NP",
-    "region_city": "Kathmandu",
-    "timezone": "GMT +05:45",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Nepal",
+    "title": "Nepal",
+    "offset": "GMT+5:45",
+    "utcOffsetStandard": "+05:45",
+    "utcOffsetDST": "+05:45",
+    "country": "Nepal",
     "countryCode": "NP",
-    "regionCity": "Kathmandu",
+    "searchTerms": [
+      "Kathmandu, Nepal"
+    ],
     "id": "Asia/Kathmandu",
     "city": "Kathmandu",
-    "country": "NP",
-    "label": "Nepal (Kathmandu)",
-    "aliases": []
+    "countryName": "Nepal",
+    "label": "Nepal"
   },
   {
-    "country name": "Netherlands",
-    "country code": "NL",
-    "region_city": "Amsterdam",
-    "timezone": "GMT +01:00",
-    "daylight savings start": "2026-03-29",
-    "Daylight savings end": "2026-10-25",
-    "countryName": "Netherlands",
+    "title": "Central European Time",
+    "offset": "GMT+1",
+    "utcOffsetStandard": "+01:00",
+    "utcOffsetDST": "+02:00",
+    "country": "Netherlands",
     "countryCode": "NL",
-    "regionCity": "Amsterdam",
+    "searchTerms": [
+      "Amsterdam, Netherlands"
+    ],
     "id": "Europe/Amsterdam",
     "city": "Amsterdam",
-    "country": "NL",
-    "label": "Netherlands (Amsterdam)",
-    "aliases": [
-      "holland"
-    ]
+    "countryName": "Netherlands",
+    "label": "Netherlands (Central European Time)"
   },
   {
-    "country name": "New Caledonia",
-    "country code": "NC",
-    "region_city": "Nouméa",
-    "timezone": "GMT +11:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "New Caledonia",
+    "title": "New Caledonia",
+    "offset": "GMT+11",
+    "utcOffsetStandard": "+11:00",
+    "utcOffsetDST": "+11:00",
+    "country": "New Caledonia",
     "countryCode": "NC",
-    "regionCity": "Nouméa",
+    "searchTerms": [
+      "Noumea, New Caledonia"
+    ],
     "id": "Pacific/Noumea",
-    "city": "Nouméa",
-    "country": "NC",
-    "label": "New Caledonia (Nouméa)",
-    "aliases": []
+    "city": "Noumea",
+    "countryName": "New Caledonia",
+    "label": "New Caledonia"
   },
   {
-    "country name": "New Zealand",
-    "country code": "NZ",
-    "region_city": "Auckland / Wellington",
-    "timezone": "GMT +12:00",
-    "daylight savings start": "2026-09-27",
-    "Daylight savings end": "2026-04-05",
-    "countryName": "New Zealand",
+    "title": "Chatham Islands Time",
+    "offset": "GMT+12:45",
+    "utcOffsetStandard": "+12:45",
+    "utcOffsetDST": "+13:45",
+    "country": "New Zealand",
     "countryCode": "NZ",
-    "regionCity": "Auckland / Wellington",
-    "id": "Pacific/Auckland",
-    "city": "Auckland / Wellington",
-    "country": "NZ",
-    "label": "New Zealand (Auckland / Wellington)",
-    "aliases": [
-      "wellington",
-      "auckland"
-    ]
-  },
-  {
-    "country name": "New Zealand",
-    "country code": "NZ",
-    "region_city": "Chatham Islands",
-    "timezone": "GMT +12:45",
-    "daylight savings start": "2026-09-27",
-    "Daylight savings end": "2026-04-05",
-    "countryName": "New Zealand",
-    "countryCode": "NZ",
-    "regionCity": "Chatham Islands",
+    "searchTerms": [
+      "Chatham, New Zealand"
+    ],
     "id": "Pacific/Chatham",
-    "city": "Chatham Islands",
-    "country": "NZ",
-    "label": "New Zealand (Chatham Islands)",
-    "aliases": []
+    "city": "Chatham",
+    "countryName": "New Zealand",
+    "label": "New Zealand (Chatham Islands Time)"
   },
   {
-    "country name": "Nicaragua",
-    "country code": "NI",
-    "region_city": "Managua",
-    "timezone": "GMT -06:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Nicaragua",
+    "title": "New Zealand Time",
+    "offset": "GMT+12",
+    "utcOffsetStandard": "+12:00",
+    "utcOffsetDST": "+13:00",
+    "country": "New Zealand",
+    "countryCode": "NZ",
+    "searchTerms": [
+      "Auckland, New Zealand"
+    ],
+    "id": "Pacific/Auckland",
+    "city": "Auckland",
+    "countryName": "New Zealand",
+    "label": "New Zealand (New Zealand Time)"
+  },
+  {
+    "title": "Nicaragua",
+    "offset": "GMT-6",
+    "utcOffsetStandard": "-06:00",
+    "utcOffsetDST": "-06:00",
+    "country": "Nicaragua",
     "countryCode": "NI",
-    "regionCity": "Managua",
+    "searchTerms": [
+      "Managua, Nicaragua"
+    ],
     "id": "America/Managua",
     "city": "Managua",
-    "country": "NI",
-    "label": "Nicaragua (Managua)",
-    "aliases": []
+    "countryName": "Nicaragua",
+    "label": "Nicaragua"
   },
   {
-    "country name": "Niger",
-    "country code": "NE",
-    "region_city": "Niamey",
-    "timezone": "GMT +01:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Niger",
+    "title": "West Africa Time",
+    "offset": "GMT+1",
+    "utcOffsetStandard": "+01:00",
+    "utcOffsetDST": "+01:00",
+    "country": "Niger",
     "countryCode": "NE",
-    "regionCity": "Niamey",
+    "searchTerms": [
+      "Niamey, Niger"
+    ],
     "id": "Africa/Niamey",
     "city": "Niamey",
-    "country": "NE",
-    "label": "Niger (Niamey)",
-    "aliases": []
+    "countryName": "Niger",
+    "label": "Niger (West Africa Time)"
   },
   {
-    "country name": "Nigeria",
-    "country code": "NG",
-    "region_city": "Lagos / Abuja",
-    "timezone": "GMT +01:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Nigeria",
+    "title": "West Africa Time",
+    "offset": "GMT+1",
+    "utcOffsetStandard": "+01:00",
+    "utcOffsetDST": "+01:00",
+    "country": "Nigeria",
     "countryCode": "NG",
-    "regionCity": "Lagos / Abuja",
+    "searchTerms": [
+      "Lagos, Nigeria"
+    ],
     "id": "Africa/Lagos",
-    "city": "Lagos / Abuja",
-    "country": "NG",
-    "label": "Nigeria (Lagos / Abuja)",
-    "aliases": [
-      "abuja",
-      "lagos"
-    ]
+    "city": "Lagos",
+    "countryName": "Nigeria",
+    "label": "Nigeria (West Africa Time)"
   },
   {
-    "country name": "North Korea",
-    "country code": "KP",
-    "region_city": "Pyongyang",
-    "timezone": "GMT +09:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "North Korea",
+    "title": "Niue",
+    "offset": "GMT-11",
+    "utcOffsetStandard": "-11:00",
+    "utcOffsetDST": "-11:00",
+    "country": "Niue",
+    "countryCode": "NU",
+    "searchTerms": [
+      "Niue"
+    ],
+    "id": "Pacific/Niue",
+    "city": "Niue",
+    "countryName": "Niue",
+    "label": "Niue"
+  },
+  {
+    "title": "Norfolk Island",
+    "offset": "GMT+11",
+    "utcOffsetStandard": "+11:00",
+    "utcOffsetDST": "+12:00",
+    "country": "Norfolk Island",
+    "countryCode": "NF",
+    "searchTerms": [
+      "Norfolk, Norfolk Island"
+    ],
+    "id": "Pacific/Norfolk",
+    "city": "Norfolk",
+    "countryName": "Norfolk Island",
+    "label": "Norfolk Island"
+  },
+  {
+    "title": "North Korea",
+    "offset": "GMT+9",
+    "utcOffsetStandard": "+09:00",
+    "utcOffsetDST": "+09:00",
+    "country": "North Korea",
     "countryCode": "KP",
-    "regionCity": "Pyongyang",
+    "searchTerms": [
+      "Pyongyang, North Korea"
+    ],
     "id": "Asia/Pyongyang",
     "city": "Pyongyang",
-    "country": "KP",
-    "label": "North Korea (Pyongyang)",
-    "aliases": []
+    "countryName": "North Korea",
+    "label": "North Korea"
   },
   {
-    "country name": "North Macedonia",
-    "country code": "MK",
-    "region_city": "Skopje",
-    "timezone": "GMT +01:00",
-    "daylight savings start": "2026-03-29",
-    "Daylight savings end": "2026-10-25",
-    "countryName": "North Macedonia",
+    "title": "Central European Time",
+    "offset": "GMT+1",
+    "utcOffsetStandard": "+01:00",
+    "utcOffsetDST": "+02:00",
+    "country": "North Macedonia",
     "countryCode": "MK",
-    "regionCity": "Skopje",
+    "searchTerms": [
+      "Skopje, North Macedonia"
+    ],
     "id": "Europe/Skopje",
     "city": "Skopje",
-    "country": "MK",
-    "label": "North Macedonia (Skopje)",
-    "aliases": [
-      "macedonia"
-    ]
+    "countryName": "North Macedonia",
+    "label": "North Macedonia (Central European Time)"
   },
   {
-    "country name": "Norway",
-    "country code": "NO",
-    "region_city": "Oslo",
-    "timezone": "GMT +01:00",
-    "daylight savings start": "2026-03-29",
-    "Daylight savings end": "2026-10-25",
-    "countryName": "Norway",
+    "title": "Northern Mariana Islands",
+    "offset": "GMT+10",
+    "utcOffsetStandard": "+10:00",
+    "utcOffsetDST": "+10:00",
+    "country": "Northern Mariana Islands",
+    "countryCode": "MP",
+    "searchTerms": [
+      "Saipan, Northern Mariana Islands"
+    ],
+    "id": "Pacific/Saipan",
+    "city": "Saipan",
+    "countryName": "Northern Mariana Islands",
+    "label": "Northern Mariana Islands"
+  },
+  {
+    "title": "Central European Time",
+    "offset": "GMT+1",
+    "utcOffsetStandard": "+01:00",
+    "utcOffsetDST": "+02:00",
+    "country": "Norway",
     "countryCode": "NO",
-    "regionCity": "Oslo",
+    "searchTerms": [
+      "Oslo, Norway"
+    ],
     "id": "Europe/Oslo",
     "city": "Oslo",
-    "country": "NO",
-    "label": "Norway (Oslo)",
-    "aliases": []
+    "countryName": "Norway",
+    "label": "Norway (Central European Time)"
   },
   {
-    "country name": "Oman",
-    "country code": "OM",
-    "region_city": "Muscat",
-    "timezone": "GMT +04:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Oman",
+    "title": "Oman",
+    "offset": "GMT+4",
+    "utcOffsetStandard": "+04:00",
+    "utcOffsetDST": "+04:00",
+    "country": "Oman",
     "countryCode": "OM",
-    "regionCity": "Muscat",
+    "searchTerms": [
+      "Muscat, Oman"
+    ],
     "id": "Asia/Muscat",
     "city": "Muscat",
-    "country": "OM",
-    "label": "Oman (Muscat)",
-    "aliases": []
+    "countryName": "Oman",
+    "label": "Oman"
   },
   {
-    "country name": "Pakistan",
-    "country code": "PK",
-    "region_city": "Islamabad",
-    "timezone": "GMT +05:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Pakistan",
+    "title": "Pakistan",
+    "offset": "GMT+5",
+    "utcOffsetStandard": "+05:00",
+    "utcOffsetDST": "+05:00",
+    "country": "Pakistan",
     "countryCode": "PK",
-    "regionCity": "Islamabad",
+    "searchTerms": [
+      "Karachi, Pakistan"
+    ],
     "id": "Asia/Karachi",
-    "city": "Islamabad",
-    "country": "PK",
-    "label": "Pakistan (Islamabad)",
-    "aliases": [
-      "karachi",
-      "lahore"
-    ]
+    "city": "Karachi",
+    "countryName": "Pakistan",
+    "label": "Pakistan"
   },
   {
-    "country name": "Palau",
-    "country code": "PW",
-    "region_city": "Ngerulmud",
-    "timezone": "GMT +09:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Palau",
+    "title": "Palau",
+    "offset": "GMT+9",
+    "utcOffsetStandard": "+09:00",
+    "utcOffsetDST": "+09:00",
+    "country": "Palau",
     "countryCode": "PW",
-    "regionCity": "Ngerulmud",
+    "searchTerms": [
+      "Palau"
+    ],
     "id": "Pacific/Palau",
-    "city": "Ngerulmud",
-    "country": "PW",
-    "label": "Palau (Ngerulmud)",
-    "aliases": []
+    "city": "Palau",
+    "countryName": "Palau",
+    "label": "Palau"
   },
   {
-    "country name": "Palestine",
-    "country code": "PS",
-    "region_city": "Gaza / Ramallah",
-    "timezone": "GMT +02:00",
-    "daylight savings start": "2026-03-28",
-    "Daylight savings end": "2026-10-24",
-    "countryName": "Palestine",
+    "title": "Eastern European Time",
+    "offset": "GMT+2",
+    "utcOffsetStandard": "+02:00",
+    "utcOffsetDST": "+03:00",
+    "country": "Palestine",
     "countryCode": "PS",
-    "regionCity": "Gaza / Ramallah",
+    "searchTerms": [
+      "Gaza, Palestine",
+      "Hebron, Palestine"
+    ],
     "id": "Asia/Gaza",
-    "city": "Gaza / Ramallah",
-    "country": "PS",
-    "label": "Palestine (Gaza / Ramallah)",
-    "aliases": [
-      "ramallah",
-      "gaza"
-    ]
+    "city": "Gaza",
+    "countryName": "Palestine",
+    "label": "Palestine (Eastern European Time)"
   },
   {
-    "country name": "Panama",
-    "country code": "PA",
-    "region_city": "Panama City",
-    "timezone": "GMT -05:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Panama",
+    "title": "Panama",
+    "offset": "GMT-5",
+    "utcOffsetStandard": "-05:00",
+    "utcOffsetDST": "-05:00",
+    "country": "Panama",
     "countryCode": "PA",
-    "regionCity": "Panama City",
+    "searchTerms": [
+      "Panama"
+    ],
     "id": "America/Panama",
-    "city": "Panama City",
-    "country": "PA",
-    "label": "Panama (Panama City)",
-    "aliases": []
+    "city": "Panama",
+    "countryName": "Panama",
+    "label": "Panama"
   },
   {
-    "country name": "Papua New Guinea",
-    "country code": "PG",
-    "region_city": "Bougainville",
-    "timezone": "GMT +11:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Papua New Guinea",
+    "title": "Bougainville Time",
+    "offset": "GMT+11",
+    "utcOffsetStandard": "+11:00",
+    "utcOffsetDST": "+11:00",
+    "country": "Papua New Guinea",
     "countryCode": "PG",
-    "regionCity": "Bougainville",
+    "searchTerms": [
+      "Bougainville, Papua New Guinea"
+    ],
     "id": "Pacific/Bougainville",
     "city": "Bougainville",
-    "country": "PG",
-    "label": "Papua New Guinea (Bougainville)",
-    "aliases": []
+    "countryName": "Papua New Guinea",
+    "label": "Papua New Guinea (Bougainville Time)"
   },
   {
-    "country name": "Papua New Guinea",
-    "country code": "PG",
-    "region_city": "Port Moresby",
-    "timezone": "GMT +10:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Papua New Guinea",
+    "title": "Papua New Guinea Time",
+    "offset": "GMT+10",
+    "utcOffsetStandard": "+10:00",
+    "utcOffsetDST": "+10:00",
+    "country": "Papua New Guinea",
     "countryCode": "PG",
-    "regionCity": "Port Moresby",
+    "searchTerms": [
+      "Port Moresby, Papua New Guinea"
+    ],
     "id": "Pacific/Port_Moresby",
     "city": "Port Moresby",
-    "country": "PG",
-    "label": "Papua New Guinea (Port Moresby)",
-    "aliases": []
+    "countryName": "Papua New Guinea",
+    "label": "Papua New Guinea (Papua New Guinea Time)"
   },
   {
-    "country name": "Paraguay",
-    "country code": "PY",
-    "region_city": "Asunción",
-    "timezone": "GMT -03:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Paraguay",
+    "title": "Paraguay",
+    "offset": "GMT-3",
+    "utcOffsetStandard": "-03:00",
+    "utcOffsetDST": "-03:00",
+    "country": "Paraguay",
     "countryCode": "PY",
-    "regionCity": "Asunción",
+    "searchTerms": [
+      "Asuncion, Paraguay"
+    ],
     "id": "America/Asuncion",
-    "city": "Asunción",
-    "country": "PY",
-    "label": "Paraguay (Asunción)",
-    "aliases": []
+    "city": "Asuncion",
+    "countryName": "Paraguay",
+    "label": "Paraguay"
   },
   {
-    "country name": "Peru",
-    "country code": "PE",
-    "region_city": "Lima",
-    "timezone": "GMT -05:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Peru",
+    "title": "Peru",
+    "offset": "GMT-5",
+    "utcOffsetStandard": "-05:00",
+    "utcOffsetDST": "-05:00",
+    "country": "Peru",
     "countryCode": "PE",
-    "regionCity": "Lima",
+    "searchTerms": [
+      "Lima, Peru"
+    ],
     "id": "America/Lima",
     "city": "Lima",
-    "country": "PE",
-    "label": "Peru (Lima)",
-    "aliases": []
+    "countryName": "Peru",
+    "label": "Peru"
   },
   {
-    "country name": "Philippines",
-    "country code": "PH",
-    "region_city": "Manila",
-    "timezone": "GMT +08:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Philippines",
+    "title": "Philippines",
+    "offset": "GMT+8",
+    "utcOffsetStandard": "+08:00",
+    "utcOffsetDST": "+08:00",
+    "country": "Philippines",
     "countryCode": "PH",
-    "regionCity": "Manila",
+    "searchTerms": [
+      "Manila, Philippines"
+    ],
     "id": "Asia/Manila",
     "city": "Manila",
-    "country": "PH",
-    "label": "Philippines (Manila)",
-    "aliases": []
+    "countryName": "Philippines",
+    "label": "Philippines"
   },
   {
-    "country name": "Poland",
-    "country code": "PL",
-    "region_city": "Warsaw",
-    "timezone": "GMT +01:00",
-    "daylight savings start": "2026-03-29",
-    "Daylight savings end": "2026-10-25",
-    "countryName": "Poland",
+    "title": "Pitcairn",
+    "offset": "GMT-8",
+    "utcOffsetStandard": "-08:00",
+    "utcOffsetDST": "-08:00",
+    "country": "Pitcairn",
+    "countryCode": "PN",
+    "searchTerms": [
+      "Pitcairn Islands"
+    ],
+    "id": "Pacific/Pitcairn",
+    "city": "Pitcairn Islands",
+    "countryName": "Pitcairn",
+    "label": "Pitcairn"
+  },
+  {
+    "title": "Central European Time",
+    "offset": "GMT+1",
+    "utcOffsetStandard": "+01:00",
+    "utcOffsetDST": "+02:00",
+    "country": "Poland",
     "countryCode": "PL",
-    "regionCity": "Warsaw",
+    "searchTerms": [
+      "Warsaw, Poland"
+    ],
     "id": "Europe/Warsaw",
     "city": "Warsaw",
-    "country": "PL",
-    "label": "Poland (Warsaw)",
-    "aliases": [
-      "krakow"
-    ]
+    "countryName": "Poland",
+    "label": "Poland (Central European Time)"
   },
   {
-    "country name": "Portugal",
-    "country code": "PT",
-    "region_city": "Azores",
-    "timezone": "GMT -01:00",
-    "daylight savings start": "2026-03-29",
-    "Daylight savings end": "2026-10-25",
-    "countryName": "Portugal",
+    "title": "Azores Time",
+    "offset": "GMT-1",
+    "utcOffsetStandard": "-01:00",
+    "utcOffsetDST": "+00:00",
+    "country": "Portugal",
     "countryCode": "PT",
-    "regionCity": "Azores",
+    "searchTerms": [
+      "Azores, Portugal"
+    ],
     "id": "Atlantic/Azores",
     "city": "Azores",
-    "country": "PT",
-    "label": "Portugal (Azores)",
-    "aliases": []
+    "countryName": "Portugal",
+    "label": "Portugal (Azores Time)"
   },
   {
-    "country name": "Portugal",
-    "country code": "PT",
-    "region_city": "Continental (Lisbon)",
-    "timezone": "GMT +00:00",
-    "daylight savings start": "2026-03-29",
-    "Daylight savings end": "2026-10-25",
-    "countryName": "Portugal",
+    "title": "Western European Time",
+    "offset": "GMT+0",
+    "utcOffsetStandard": "+00:00",
+    "utcOffsetDST": "+01:00",
+    "country": "Portugal",
     "countryCode": "PT",
-    "regionCity": "Continental (Lisbon)",
+    "searchTerms": [
+      "Lisbon, Portugal",
+      "Madeira, Portugal"
+    ],
     "id": "Europe/Lisbon",
-    "city": "Continental (Lisbon)",
-    "country": "PT",
-    "label": "Portugal (Continental (Lisbon))",
-    "aliases": [
-      "lisbon",
-      "porto"
-    ]
-  },
-  {
-    "country name": "Portugal",
-    "country code": "PT",
-    "region_city": "Madeira",
-    "timezone": "GMT +00:00",
-    "daylight savings start": "2026-03-29",
-    "Daylight savings end": "2026-10-25",
+    "city": "Lisbon",
     "countryName": "Portugal",
-    "countryCode": "PT",
-    "regionCity": "Madeira",
-    "id": "Atlantic/Madeira",
-    "city": "Madeira",
-    "country": "PT",
-    "label": "Portugal (Madeira)",
-    "aliases": []
+    "label": "Portugal (Western European Time)"
   },
   {
-    "country name": "Puerto Rico",
-    "country code": "PR",
-    "region_city": "San Juan",
-    "timezone": "GMT -04:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Puerto Rico",
+    "title": "Puerto Rico",
+    "offset": "GMT-4",
+    "utcOffsetStandard": "-04:00",
+    "utcOffsetDST": "-04:00",
+    "country": "Puerto Rico",
     "countryCode": "PR",
-    "regionCity": "San Juan",
+    "searchTerms": [
+      "Puerto Rico"
+    ],
     "id": "America/Puerto_Rico",
-    "city": "San Juan",
-    "country": "PR",
-    "label": "Puerto Rico (San Juan)",
-    "aliases": []
+    "city": "Puerto Rico",
+    "countryName": "Puerto Rico",
+    "label": "Puerto Rico"
   },
   {
-    "country name": "Qatar",
-    "country code": "QA",
-    "region_city": "Doha",
-    "timezone": "GMT +03:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Qatar",
+    "title": "Qatar",
+    "offset": "GMT+3",
+    "utcOffsetStandard": "+03:00",
+    "utcOffsetDST": "+03:00",
+    "country": "Qatar",
     "countryCode": "QA",
-    "regionCity": "Doha",
+    "searchTerms": [
+      "Qatar"
+    ],
     "id": "Asia/Qatar",
-    "city": "Doha",
-    "country": "QA",
-    "label": "Qatar (Doha)",
-    "aliases": []
+    "city": "Qatar",
+    "countryName": "Qatar",
+    "label": "Qatar"
   },
   {
-    "country name": "Romania",
-    "country code": "RO",
-    "region_city": "Bucharest",
-    "timezone": "GMT +02:00",
-    "daylight savings start": "2026-03-29",
-    "Daylight savings end": "2026-10-25",
-    "countryName": "Romania",
+    "title": "West Africa Time",
+    "offset": "GMT+1",
+    "utcOffsetStandard": "+01:00",
+    "utcOffsetDST": "+01:00",
+    "country": "Republic of the Congo",
+    "countryCode": "CG",
+    "searchTerms": [
+      "Brazzaville, Republic of the Congo"
+    ],
+    "id": "Africa/Brazzaville",
+    "city": "Brazzaville",
+    "countryName": "Republic of the Congo",
+    "label": "Republic of the Congo (West Africa Time)"
+  },
+  {
+    "title": "Eastern European Time",
+    "offset": "GMT+2",
+    "utcOffsetStandard": "+02:00",
+    "utcOffsetDST": "+03:00",
+    "country": "Romania",
     "countryCode": "RO",
-    "regionCity": "Bucharest",
+    "searchTerms": [
+      "Bucharest, Romania"
+    ],
     "id": "Europe/Bucharest",
     "city": "Bucharest",
-    "country": "RO",
-    "label": "Romania (Bucharest)",
-    "aliases": []
+    "countryName": "Romania",
+    "label": "Romania (Eastern European Time)"
   },
   {
-    "country name": "Russia",
-    "country code": "RU",
-    "region_city": "Irkutsk",
-    "timezone": "GMT +08:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Russia",
+    "title": "Irkutsk Time",
+    "offset": "GMT+8",
+    "utcOffsetStandard": "+08:00",
+    "utcOffsetDST": "+08:00",
+    "country": "Russia",
     "countryCode": "RU",
-    "regionCity": "Irkutsk",
+    "searchTerms": [
+      "Irkutsk, Russia"
+    ],
     "id": "Asia/Irkutsk",
     "city": "Irkutsk",
-    "country": "RU",
-    "label": "Russia (Irkutsk)",
-    "aliases": []
+    "countryName": "Russia",
+    "label": "Russia (Irkutsk Time)"
   },
   {
-    "country name": "Russia",
-    "country code": "RU",
-    "region_city": "Kaliningrad",
-    "timezone": "GMT +02:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Russia",
+    "title": "Kaliningrad Time",
+    "offset": "GMT+2",
+    "utcOffsetStandard": "+02:00",
+    "utcOffsetDST": "+02:00",
+    "country": "Russia",
     "countryCode": "RU",
-    "regionCity": "Kaliningrad",
+    "searchTerms": [
+      "Kaliningrad, Russia"
+    ],
     "id": "Europe/Kaliningrad",
     "city": "Kaliningrad",
-    "country": "RU",
-    "label": "Russia (Kaliningrad)",
-    "aliases": []
+    "countryName": "Russia",
+    "label": "Russia (Kaliningrad Time)"
   },
   {
-    "country name": "Russia",
-    "country code": "RU",
-    "region_city": "Kamchatka",
-    "timezone": "GMT +12:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Russia",
+    "title": "Kamchatka Time",
+    "offset": "GMT+12",
+    "utcOffsetStandard": "+12:00",
+    "utcOffsetDST": "+12:00",
+    "country": "Russia",
     "countryCode": "RU",
-    "regionCity": "Kamchatka",
-    "id": "Asia/Kamchatka",
-    "city": "Kamchatka",
-    "country": "RU",
-    "label": "Russia (Kamchatka)",
-    "aliases": []
+    "searchTerms": [
+      "Anadyr, Russia",
+      "Kamchatka, Russia"
+    ],
+    "id": "Asia/Anadyr",
+    "city": "Anadyr",
+    "countryName": "Russia",
+    "label": "Russia (Kamchatka Time)"
   },
   {
-    "country name": "Russia",
-    "country code": "RU",
-    "region_city": "Krasnoyarsk",
-    "timezone": "GMT +07:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Russia",
+    "title": "Krasnoyarsk Time",
+    "offset": "GMT+7",
+    "utcOffsetStandard": "+07:00",
+    "utcOffsetDST": "+07:00",
+    "country": "Russia",
     "countryCode": "RU",
-    "regionCity": "Krasnoyarsk",
-    "id": "Asia/Krasnoyarsk",
-    "city": "Krasnoyarsk",
-    "country": "RU",
-    "label": "Russia (Krasnoyarsk)",
-    "aliases": []
+    "searchTerms": [
+      "Barnaul, Russia",
+      "Krasnoyarsk, Russia",
+      "Novokuznetsk, Russia",
+      "Novosibirsk, Russia",
+      "Tomsk, Russia"
+    ],
+    "id": "Asia/Barnaul",
+    "city": "Barnaul",
+    "countryName": "Russia",
+    "label": "Russia (Krasnoyarsk Time)"
   },
   {
-    "country name": "Russia",
-    "country code": "RU",
-    "region_city": "Magadan",
-    "timezone": "GMT +11:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Russia",
+    "title": "Magadan Time",
+    "offset": "GMT+11",
+    "utcOffsetStandard": "+11:00",
+    "utcOffsetDST": "+11:00",
+    "country": "Russia",
     "countryCode": "RU",
-    "regionCity": "Magadan",
+    "searchTerms": [
+      "Magadan, Russia",
+      "Sakhalin, Russia",
+      "Srednekolymsk, Russia"
+    ],
     "id": "Asia/Magadan",
     "city": "Magadan",
-    "country": "RU",
-    "label": "Russia (Magadan)",
-    "aliases": []
+    "countryName": "Russia",
+    "label": "Russia (Magadan Time)"
   },
   {
-    "country name": "Russia",
-    "country code": "RU",
-    "region_city": "Moscow",
-    "timezone": "GMT +03:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Russia",
+    "title": "Moscow Time",
+    "offset": "GMT+3",
+    "utcOffsetStandard": "+03:00",
+    "utcOffsetDST": "+03:00",
+    "country": "Russia",
     "countryCode": "RU",
-    "regionCity": "Moscow",
-    "id": "Europe/Moscow",
-    "city": "Moscow",
-    "country": "RU",
-    "label": "Russia (Moscow)",
-    "aliases": [
-      "saint petersburg"
-    ]
+    "searchTerms": [
+      "Kirov, Russia",
+      "Moscow, Russia",
+      "Simferopol, Russia",
+      "Volgograd, Russia"
+    ],
+    "id": "Europe/Kirov",
+    "city": "Kirov",
+    "countryName": "Russia",
+    "label": "Russia (Moscow Time)"
   },
   {
-    "country name": "Russia",
-    "country code": "RU",
-    "region_city": "Omsk",
-    "timezone": "GMT +06:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Russia",
+    "title": "Omsk Time",
+    "offset": "GMT+6",
+    "utcOffsetStandard": "+06:00",
+    "utcOffsetDST": "+06:00",
+    "country": "Russia",
     "countryCode": "RU",
-    "regionCity": "Omsk",
+    "searchTerms": [
+      "Omsk, Russia"
+    ],
     "id": "Asia/Omsk",
     "city": "Omsk",
-    "country": "RU",
-    "label": "Russia (Omsk)",
-    "aliases": []
+    "countryName": "Russia",
+    "label": "Russia (Omsk Time)"
   },
   {
-    "country name": "Russia",
-    "country code": "RU",
-    "region_city": "Samara",
-    "timezone": "GMT +04:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Russia",
+    "title": "Samara Time",
+    "offset": "GMT+4",
+    "utcOffsetStandard": "+04:00",
+    "utcOffsetDST": "+04:00",
+    "country": "Russia",
     "countryCode": "RU",
-    "regionCity": "Samara",
-    "id": "Europe/Samara",
-    "city": "Samara",
-    "country": "RU",
-    "label": "Russia (Samara)",
-    "aliases": []
+    "searchTerms": [
+      "Astrakhan, Russia",
+      "Samara, Russia",
+      "Saratov, Russia",
+      "Ulyanovsk, Russia"
+    ],
+    "id": "Europe/Astrakhan",
+    "city": "Astrakhan",
+    "countryName": "Russia",
+    "label": "Russia (Samara Time)"
   },
   {
-    "country name": "Russia",
-    "country code": "RU",
-    "region_city": "Vladivostok",
-    "timezone": "GMT +10:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Russia",
+    "title": "Vladivostok Time",
+    "offset": "GMT+10",
+    "utcOffsetStandard": "+10:00",
+    "utcOffsetDST": "+10:00",
+    "country": "Russia",
     "countryCode": "RU",
-    "regionCity": "Vladivostok",
-    "id": "Asia/Vladivostok",
-    "city": "Vladivostok",
-    "country": "RU",
-    "label": "Russia (Vladivostok)",
-    "aliases": []
+    "searchTerms": [
+      "Ust-Nera, Russia",
+      "Vladivostok, Russia"
+    ],
+    "id": "Asia/Ust-Nera",
+    "city": "Ust-Nera",
+    "countryName": "Russia",
+    "label": "Russia (Vladivostok Time)"
   },
   {
-    "country name": "Russia",
-    "country code": "RU",
-    "region_city": "Yakutsk",
-    "timezone": "GMT +09:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Russia",
+    "title": "Yakutsk Time",
+    "offset": "GMT+9",
+    "utcOffsetStandard": "+09:00",
+    "utcOffsetDST": "+09:00",
+    "country": "Russia",
     "countryCode": "RU",
-    "regionCity": "Yakutsk",
-    "id": "Asia/Yakutsk",
-    "city": "Yakutsk",
-    "country": "RU",
-    "label": "Russia (Yakutsk)",
-    "aliases": []
+    "searchTerms": [
+      "Chita, Russia",
+      "Khandyga, Russia",
+      "Yakutsk, Russia"
+    ],
+    "id": "Asia/Chita",
+    "city": "Chita",
+    "countryName": "Russia",
+    "label": "Russia (Yakutsk Time)"
   },
   {
-    "country name": "Russia",
-    "country code": "RU",
-    "region_city": "Yekaterinburg",
-    "timezone": "GMT +05:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Russia",
+    "title": "Yekaterinburg Time",
+    "offset": "GMT+5",
+    "utcOffsetStandard": "+05:00",
+    "utcOffsetDST": "+05:00",
+    "country": "Russia",
     "countryCode": "RU",
-    "regionCity": "Yekaterinburg",
+    "searchTerms": [
+      "Yekaterinburg, Russia"
+    ],
     "id": "Asia/Yekaterinburg",
     "city": "Yekaterinburg",
-    "country": "RU",
-    "label": "Russia (Yekaterinburg)",
-    "aliases": []
+    "countryName": "Russia",
+    "label": "Russia (Yekaterinburg Time)"
   },
   {
-    "country name": "Rwanda",
-    "country code": "RW",
-    "region_city": "Kigali",
-    "timezone": "GMT +02:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Rwanda",
+    "title": "Central Africa Time",
+    "offset": "GMT+2",
+    "utcOffsetStandard": "+02:00",
+    "utcOffsetDST": "+02:00",
+    "country": "Rwanda",
     "countryCode": "RW",
-    "regionCity": "Kigali",
+    "searchTerms": [
+      "Kigali, Rwanda"
+    ],
     "id": "Africa/Kigali",
     "city": "Kigali",
-    "country": "RW",
-    "label": "Rwanda (Kigali)",
-    "aliases": []
+    "countryName": "Rwanda",
+    "label": "Rwanda (Central Africa Time)"
   },
   {
-    "country name": "Saint Kitts and Nevis",
-    "country code": "KN",
-    "region_city": "Basseterre",
-    "timezone": "GMT -04:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Saint Kitts and Nevis",
-    "countryCode": "KN",
-    "regionCity": "Basseterre",
-    "id": "America/St_Kitts",
-    "city": "Basseterre",
-    "country": "KN",
-    "label": "Saint Kitts and Nevis (Basseterre)",
-    "aliases": []
+    "title": "Réunion",
+    "offset": "GMT+4",
+    "utcOffsetStandard": "+04:00",
+    "utcOffsetDST": "+04:00",
+    "country": "Réunion",
+    "countryCode": "RE",
+    "searchTerms": [
+      "Reunion, Réunion"
+    ],
+    "id": "Indian/Reunion",
+    "city": "Reunion",
+    "countryName": "Réunion",
+    "label": "Réunion"
   },
   {
-    "country name": "Saint Lucia",
-    "country code": "LC",
-    "region_city": "Castries",
-    "timezone": "GMT -04:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Saint Lucia",
-    "countryCode": "LC",
-    "regionCity": "Castries",
-    "id": "America/St_Lucia",
-    "city": "Castries",
-    "country": "LC",
-    "label": "Saint Lucia (Castries)",
-    "aliases": []
+    "title": "Samoa (American)",
+    "offset": "GMT-11",
+    "utcOffsetStandard": "-11:00",
+    "utcOffsetDST": "-11:00",
+    "country": "Samoa (American)",
+    "countryCode": "AS",
+    "searchTerms": [
+      "Pago Pago, Samoa (American)"
+    ],
+    "id": "Pacific/Pago_Pago",
+    "city": "Pago Pago",
+    "countryName": "Samoa (American)",
+    "label": "Samoa (American)"
   },
   {
-    "country name": "Saint Vincent and the Grenadines",
-    "country code": "VC",
-    "region_city": "Kingstown",
-    "timezone": "GMT -04:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Saint Vincent and the Grenadines",
-    "countryCode": "VC",
-    "regionCity": "Kingstown",
-    "id": "America/St_Vincent",
-    "city": "Kingstown",
-    "country": "VC",
-    "label": "Saint Vincent and the Grenadines (Kingstown)",
-    "aliases": []
-  },
-  {
-    "country name": "Samoa",
-    "country code": "WS",
-    "region_city": "Apia",
-    "timezone": "GMT +13:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Samoa",
+    "title": "Samoa (western)",
+    "offset": "GMT+13",
+    "utcOffsetStandard": "+13:00",
+    "utcOffsetDST": "+13:00",
+    "country": "Samoa (western)",
     "countryCode": "WS",
-    "regionCity": "Apia",
+    "searchTerms": [
+      "Apia, Samoa (western)"
+    ],
     "id": "Pacific/Apia",
     "city": "Apia",
-    "country": "WS",
-    "label": "Samoa (Apia)",
-    "aliases": []
+    "countryName": "Samoa (western)",
+    "label": "Samoa (western)"
   },
   {
-    "country name": "San Marino",
-    "country code": "SM",
-    "region_city": "San Marino",
-    "timezone": "GMT +01:00",
-    "daylight savings start": "2026-03-29",
-    "Daylight savings end": "2026-10-25",
-    "countryName": "San Marino",
+    "title": "Central European Time",
+    "offset": "GMT+1",
+    "utcOffsetStandard": "+01:00",
+    "utcOffsetDST": "+02:00",
+    "country": "San Marino",
     "countryCode": "SM",
-    "regionCity": "San Marino",
+    "searchTerms": [
+      "San Marino"
+    ],
     "id": "Europe/San_Marino",
     "city": "San Marino",
-    "country": "SM",
-    "label": "San Marino (San Marino)",
-    "aliases": []
+    "countryName": "San Marino",
+    "label": "San Marino (Central European Time)"
   },
   {
-    "country name": "São Tomé and Príncipe",
-    "country code": "ST",
-    "region_city": "São Tomé",
-    "timezone": "GMT +00:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "São Tomé and Príncipe",
+    "title": "Greenwich Mean Time",
+    "offset": "GMT+0",
+    "utcOffsetStandard": "+00:00",
+    "utcOffsetDST": "+00:00",
+    "country": "Sao Tome & Principe",
     "countryCode": "ST",
-    "regionCity": "São Tomé",
+    "searchTerms": [
+      "Sao Tome, Sao Tome & Principe"
+    ],
     "id": "Africa/Sao_Tome",
-    "city": "São Tomé",
-    "country": "ST",
-    "label": "São Tomé and Príncipe (São Tomé)",
-    "aliases": []
+    "city": "Sao Tome",
+    "countryName": "Sao Tome & Principe",
+    "label": "Sao Tome & Principe (Greenwich Mean Time)"
   },
   {
-    "country name": "Saudi Arabia",
-    "country code": "SA",
-    "region_city": "Riyadh",
-    "timezone": "GMT +03:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Saudi Arabia",
+    "title": "Saudi Arabia",
+    "offset": "GMT+3",
+    "utcOffsetStandard": "+03:00",
+    "utcOffsetDST": "+03:00",
+    "country": "Saudi Arabia",
     "countryCode": "SA",
-    "regionCity": "Riyadh",
+    "searchTerms": [
+      "Riyadh, Saudi Arabia"
+    ],
     "id": "Asia/Riyadh",
     "city": "Riyadh",
-    "country": "SA",
-    "label": "Saudi Arabia (Riyadh)",
-    "aliases": [
-      "jeddah",
-      "mecca"
-    ]
+    "countryName": "Saudi Arabia",
+    "label": "Saudi Arabia"
   },
   {
-    "country name": "Senegal",
-    "country code": "SN",
-    "region_city": "Dakar",
-    "timezone": "GMT +00:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Senegal",
+    "title": "Greenwich Mean Time",
+    "offset": "GMT+0",
+    "utcOffsetStandard": "+00:00",
+    "utcOffsetDST": "+00:00",
+    "country": "Senegal",
     "countryCode": "SN",
-    "regionCity": "Dakar",
+    "searchTerms": [
+      "Dakar, Senegal"
+    ],
     "id": "Africa/Dakar",
     "city": "Dakar",
-    "country": "SN",
-    "label": "Senegal (Dakar)",
-    "aliases": []
+    "countryName": "Senegal",
+    "label": "Senegal (Greenwich Mean Time)"
   },
   {
-    "country name": "Serbia",
-    "country code": "RS",
-    "region_city": "Belgrade",
-    "timezone": "GMT +01:00",
-    "daylight savings start": "2026-03-29",
-    "Daylight savings end": "2026-10-25",
-    "countryName": "Serbia",
+    "title": "Central European Time",
+    "offset": "GMT+1",
+    "utcOffsetStandard": "+01:00",
+    "utcOffsetDST": "+02:00",
+    "country": "Serbia",
     "countryCode": "RS",
-    "regionCity": "Belgrade",
+    "searchTerms": [
+      "Belgrade, Serbia"
+    ],
     "id": "Europe/Belgrade",
     "city": "Belgrade",
-    "country": "RS",
-    "label": "Serbia (Belgrade)",
-    "aliases": []
+    "countryName": "Serbia",
+    "label": "Serbia (Central European Time)"
   },
   {
-    "country name": "Seychelles",
-    "country code": "SC",
-    "region_city": "Victoria",
-    "timezone": "GMT +04:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Seychelles",
+    "title": "Seychelles",
+    "offset": "GMT+4",
+    "utcOffsetStandard": "+04:00",
+    "utcOffsetDST": "+04:00",
+    "country": "Seychelles",
     "countryCode": "SC",
-    "regionCity": "Victoria",
+    "searchTerms": [
+      "Mahe, Seychelles"
+    ],
     "id": "Indian/Mahe",
-    "city": "Victoria",
-    "country": "SC",
-    "label": "Seychelles (Victoria)",
-    "aliases": []
+    "city": "Mahe",
+    "countryName": "Seychelles",
+    "label": "Seychelles"
   },
   {
-    "country name": "Sierra Leone",
-    "country code": "SL",
-    "region_city": "Freetown",
-    "timezone": "GMT +00:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Sierra Leone",
+    "title": "Greenwich Mean Time",
+    "offset": "GMT+0",
+    "utcOffsetStandard": "+00:00",
+    "utcOffsetDST": "+00:00",
+    "country": "Sierra Leone",
     "countryCode": "SL",
-    "regionCity": "Freetown",
+    "searchTerms": [
+      "Freetown, Sierra Leone"
+    ],
     "id": "Africa/Freetown",
     "city": "Freetown",
-    "country": "SL",
-    "label": "Sierra Leone (Freetown)",
-    "aliases": []
+    "countryName": "Sierra Leone",
+    "label": "Sierra Leone (Greenwich Mean Time)"
   },
   {
-    "country name": "Singapore",
-    "country code": "SG",
-    "region_city": "Singapore",
-    "timezone": "GMT +08:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Singapore",
+    "title": "Singapore",
+    "offset": "GMT+8",
+    "utcOffsetStandard": "+08:00",
+    "utcOffsetDST": "+08:00",
+    "country": "Singapore",
     "countryCode": "SG",
-    "regionCity": "Singapore",
+    "searchTerms": [
+      "Singapore"
+    ],
     "id": "Asia/Singapore",
     "city": "Singapore",
-    "country": "SG",
-    "label": "Singapore (Singapore)",
-    "aliases": []
+    "countryName": "Singapore",
+    "label": "Singapore"
   },
   {
-    "country name": "Slovakia",
-    "country code": "SK",
-    "region_city": "Bratislava",
-    "timezone": "GMT +01:00",
-    "daylight savings start": "2026-03-29",
-    "Daylight savings end": "2026-10-25",
-    "countryName": "Slovakia",
+    "title": "Central European Time",
+    "offset": "GMT+1",
+    "utcOffsetStandard": "+01:00",
+    "utcOffsetDST": "+02:00",
+    "country": "Slovakia",
     "countryCode": "SK",
-    "regionCity": "Bratislava",
+    "searchTerms": [
+      "Bratislava, Slovakia"
+    ],
     "id": "Europe/Bratislava",
     "city": "Bratislava",
-    "country": "SK",
-    "label": "Slovakia (Bratislava)",
-    "aliases": []
+    "countryName": "Slovakia",
+    "label": "Slovakia (Central European Time)"
   },
   {
-    "country name": "Slovenia",
-    "country code": "SI",
-    "region_city": "Ljubljana",
-    "timezone": "GMT +01:00",
-    "daylight savings start": "2026-03-29",
-    "Daylight savings end": "2026-10-25",
-    "countryName": "Slovenia",
+    "title": "Central European Time",
+    "offset": "GMT+1",
+    "utcOffsetStandard": "+01:00",
+    "utcOffsetDST": "+02:00",
+    "country": "Slovenia",
     "countryCode": "SI",
-    "regionCity": "Ljubljana",
+    "searchTerms": [
+      "Ljubljana, Slovenia"
+    ],
     "id": "Europe/Ljubljana",
     "city": "Ljubljana",
-    "country": "SI",
-    "label": "Slovenia (Ljubljana)",
-    "aliases": []
+    "countryName": "Slovenia",
+    "label": "Slovenia (Central European Time)"
   },
   {
-    "country name": "Solomon Islands",
-    "country code": "SB",
-    "region_city": "Honiara",
-    "timezone": "GMT +11:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Solomon Islands",
+    "title": "Solomon Islands",
+    "offset": "GMT+11",
+    "utcOffsetStandard": "+11:00",
+    "utcOffsetDST": "+11:00",
+    "country": "Solomon Islands",
     "countryCode": "SB",
-    "regionCity": "Honiara",
+    "searchTerms": [
+      "Guadalcanal, Solomon Islands"
+    ],
     "id": "Pacific/Guadalcanal",
-    "city": "Honiara",
-    "country": "SB",
-    "label": "Solomon Islands (Honiara)",
-    "aliases": []
+    "city": "Guadalcanal",
+    "countryName": "Solomon Islands",
+    "label": "Solomon Islands"
   },
   {
-    "country name": "Somalia",
-    "country code": "SO",
-    "region_city": "Mogadishu",
-    "timezone": "GMT +03:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Somalia",
+    "title": "East Africa Time",
+    "offset": "GMT+3",
+    "utcOffsetStandard": "+03:00",
+    "utcOffsetDST": "+03:00",
+    "country": "Somalia",
     "countryCode": "SO",
-    "regionCity": "Mogadishu",
+    "searchTerms": [
+      "Mogadishu, Somalia"
+    ],
     "id": "Africa/Mogadishu",
     "city": "Mogadishu",
-    "country": "SO",
-    "label": "Somalia (Mogadishu)",
-    "aliases": []
+    "countryName": "Somalia",
+    "label": "Somalia (East Africa Time)"
   },
   {
-    "country name": "South Africa",
-    "country code": "ZA",
-    "region_city": "Johannesburg / Pretoria",
-    "timezone": "GMT +02:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "South Africa",
+    "title": "South Africa Standard Time",
+    "offset": "GMT+2",
+    "utcOffsetStandard": "+02:00",
+    "utcOffsetDST": "+02:00",
+    "country": "South Africa",
     "countryCode": "ZA",
-    "regionCity": "Johannesburg / Pretoria",
+    "searchTerms": [
+      "Johannesburg, South Africa"
+    ],
     "id": "Africa/Johannesburg",
-    "city": "Johannesburg / Pretoria",
-    "country": "ZA",
-    "label": "South Africa (Johannesburg / Pretoria)",
-    "aliases": [
-      "cape town",
-      "durban"
-    ]
+    "city": "Johannesburg",
+    "countryName": "South Africa",
+    "label": "South Africa (South Africa Standard Time)"
   },
   {
-    "country name": "South Korea",
-    "country code": "KR",
-    "region_city": "Seoul",
-    "timezone": "GMT +09:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "South Korea",
+    "title": "South Georgia & the South Sandwich Islands",
+    "offset": "GMT-2",
+    "utcOffsetStandard": "-02:00",
+    "utcOffsetDST": "-02:00",
+    "country": "South Georgia & the South Sandwich Islands",
+    "countryCode": "GS",
+    "searchTerms": [
+      "South Georgia, South Georgia & the South Sandwich Islands"
+    ],
+    "id": "Atlantic/South_Georgia",
+    "city": "South Georgia",
+    "countryName": "South Georgia & the South Sandwich Islands",
+    "label": "South Georgia & the South Sandwich Islands"
+  },
+  {
+    "title": "South Korea",
+    "offset": "GMT+9",
+    "utcOffsetStandard": "+09:00",
+    "utcOffsetDST": "+09:00",
+    "country": "South Korea",
     "countryCode": "KR",
-    "regionCity": "Seoul",
+    "searchTerms": [
+      "Seoul, South Korea"
+    ],
     "id": "Asia/Seoul",
     "city": "Seoul",
-    "country": "KR",
-    "label": "South Korea (Seoul)",
-    "aliases": [
-      "korea"
-    ]
+    "countryName": "South Korea",
+    "label": "South Korea"
   },
   {
-    "country name": "South Sudan",
-    "country code": "SS",
-    "region_city": "Juba",
-    "timezone": "GMT +02:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "South Sudan",
+    "title": "Central Africa Time",
+    "offset": "GMT+2",
+    "utcOffsetStandard": "+02:00",
+    "utcOffsetDST": "+02:00",
+    "country": "South Sudan",
     "countryCode": "SS",
-    "regionCity": "Juba",
+    "searchTerms": [
+      "Juba, South Sudan"
+    ],
     "id": "Africa/Juba",
     "city": "Juba",
-    "country": "SS",
-    "label": "South Sudan (Juba)",
-    "aliases": []
+    "countryName": "South Sudan",
+    "label": "South Sudan (Central Africa Time)"
   },
   {
-    "country name": "Spain",
-    "country code": "ES",
-    "region_city": "Canary Islands",
-    "timezone": "GMT +00:00",
-    "daylight savings start": "2026-03-29",
-    "Daylight savings end": "2026-10-25",
-    "countryName": "Spain",
+    "title": "Central European Time",
+    "offset": "GMT+1",
+    "utcOffsetStandard": "+01:00",
+    "utcOffsetDST": "+02:00",
+    "country": "Spain",
     "countryCode": "ES",
-    "regionCity": "Canary Islands",
+    "searchTerms": [
+      "Barcelona, Spain",
+      "Ceuta, Spain",
+      "Madrid, Spain",
+      "Seville, Spain",
+      "Valencia, Spain"
+    ],
+    "id": "Africa/Ceuta",
+    "city": "Barcelona",
+    "countryName": "Spain",
+    "label": "Spain (Central European Time)"
+  },
+  {
+    "title": "Western European Time",
+    "offset": "GMT+0",
+    "utcOffsetStandard": "+00:00",
+    "utcOffsetDST": "+01:00",
+    "country": "Spain",
+    "countryCode": "ES",
+    "searchTerms": [
+      "Canary Islands, Spain"
+    ],
     "id": "Atlantic/Canary",
     "city": "Canary Islands",
-    "country": "ES",
-    "label": "Spain (Canary Islands)",
-    "aliases": []
-  },
-  {
-    "country name": "Spain",
-    "country code": "ES",
-    "region_city": "Peninsular (Madrid)",
-    "timezone": "GMT +01:00",
-    "daylight savings start": "2026-03-29",
-    "Daylight savings end": "2026-10-25",
     "countryName": "Spain",
-    "countryCode": "ES",
-    "regionCity": "Peninsular (Madrid)",
-    "id": "Europe/Madrid",
-    "city": "Peninsular (Madrid)",
-    "country": "ES",
-    "label": "Spain (Peninsular (Madrid))",
-    "aliases": [
-      "barcelona"
-    ]
+    "label": "Spain (Western European Time)"
   },
   {
-    "country name": "Sri Lanka",
-    "country code": "LK",
-    "region_city": "Colombo",
-    "timezone": "GMT +05:30",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Sri Lanka",
+    "title": "Sri Lanka",
+    "offset": "GMT+5:30",
+    "utcOffsetStandard": "+05:30",
+    "utcOffsetDST": "+05:30",
+    "country": "Sri Lanka",
     "countryCode": "LK",
-    "regionCity": "Colombo",
+    "searchTerms": [
+      "Colombo, Sri Lanka"
+    ],
     "id": "Asia/Colombo",
     "city": "Colombo",
-    "country": "LK",
-    "label": "Sri Lanka (Colombo)",
-    "aliases": []
+    "countryName": "Sri Lanka",
+    "label": "Sri Lanka"
   },
   {
-    "country name": "Sudan",
-    "country code": "SD",
-    "region_city": "Khartoum",
-    "timezone": "GMT +02:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Sudan",
+    "title": "St Barthelemy",
+    "offset": "GMT-4",
+    "utcOffsetStandard": "-04:00",
+    "utcOffsetDST": "-04:00",
+    "country": "St Barthelemy",
+    "countryCode": "BL",
+    "searchTerms": [
+      "St Barthelemy"
+    ],
+    "id": "America/St_Barthelemy",
+    "city": "St Barthelemy",
+    "countryName": "St Barthelemy",
+    "label": "St Barthelemy"
+  },
+  {
+    "title": "Greenwich Mean Time",
+    "offset": "GMT+0",
+    "utcOffsetStandard": "+00:00",
+    "utcOffsetDST": "+00:00",
+    "country": "St Helena",
+    "countryCode": "SH",
+    "searchTerms": [
+      "St Helena"
+    ],
+    "id": "Atlantic/St_Helena",
+    "city": "St Helena",
+    "countryName": "St Helena",
+    "label": "St Helena (Greenwich Mean Time)"
+  },
+  {
+    "title": "St Kitts & Nevis",
+    "offset": "GMT-4",
+    "utcOffsetStandard": "-04:00",
+    "utcOffsetDST": "-04:00",
+    "country": "St Kitts & Nevis",
+    "countryCode": "KN",
+    "searchTerms": [
+      "St Kitts, St Kitts & Nevis"
+    ],
+    "id": "America/St_Kitts",
+    "city": "St Kitts",
+    "countryName": "St Kitts & Nevis",
+    "label": "St Kitts & Nevis"
+  },
+  {
+    "title": "St Lucia",
+    "offset": "GMT-4",
+    "utcOffsetStandard": "-04:00",
+    "utcOffsetDST": "-04:00",
+    "country": "St Lucia",
+    "countryCode": "LC",
+    "searchTerms": [
+      "St Lucia"
+    ],
+    "id": "America/St_Lucia",
+    "city": "St Lucia",
+    "countryName": "St Lucia",
+    "label": "St Lucia"
+  },
+  {
+    "title": "St Maarten (Dutch)",
+    "offset": "GMT-4",
+    "utcOffsetStandard": "-04:00",
+    "utcOffsetDST": "-04:00",
+    "country": "St Maarten (Dutch)",
+    "countryCode": "SX",
+    "searchTerms": [
+      "Lower Princes, St Maarten (Dutch)"
+    ],
+    "id": "America/Lower_Princes",
+    "city": "Lower Princes",
+    "countryName": "St Maarten (Dutch)",
+    "label": "St Maarten (Dutch)"
+  },
+  {
+    "title": "St Martin (French)",
+    "offset": "GMT-4",
+    "utcOffsetStandard": "-04:00",
+    "utcOffsetDST": "-04:00",
+    "country": "St Martin (French)",
+    "countryCode": "MF",
+    "searchTerms": [
+      "Marigot, St Martin (French)"
+    ],
+    "id": "America/Marigot",
+    "city": "Marigot",
+    "countryName": "St Martin (French)",
+    "label": "St Martin (French)"
+  },
+  {
+    "title": "St Pierre & Miquelon",
+    "offset": "GMT-3",
+    "utcOffsetStandard": "-03:00",
+    "utcOffsetDST": "-02:00",
+    "country": "St Pierre & Miquelon",
+    "countryCode": "PM",
+    "searchTerms": [
+      "Miquelon, St Pierre & Miquelon"
+    ],
+    "id": "America/Miquelon",
+    "city": "Miquelon",
+    "countryName": "St Pierre & Miquelon",
+    "label": "St Pierre & Miquelon"
+  },
+  {
+    "title": "St Vincent",
+    "offset": "GMT-4",
+    "utcOffsetStandard": "-04:00",
+    "utcOffsetDST": "-04:00",
+    "country": "St Vincent",
+    "countryCode": "VC",
+    "searchTerms": [
+      "St Vincent"
+    ],
+    "id": "America/St_Vincent",
+    "city": "St Vincent",
+    "countryName": "St Vincent",
+    "label": "St Vincent"
+  },
+  {
+    "title": "Central Africa Time",
+    "offset": "GMT+2",
+    "utcOffsetStandard": "+02:00",
+    "utcOffsetDST": "+02:00",
+    "country": "Sudan",
     "countryCode": "SD",
-    "regionCity": "Khartoum",
+    "searchTerms": [
+      "Khartoum, Sudan"
+    ],
     "id": "Africa/Khartoum",
     "city": "Khartoum",
-    "country": "SD",
-    "label": "Sudan (Khartoum)",
-    "aliases": []
+    "countryName": "Sudan",
+    "label": "Sudan (Central Africa Time)"
   },
   {
-    "country name": "Suriname",
-    "country code": "SR",
-    "region_city": "Paramaribo",
-    "timezone": "GMT -03:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Suriname",
+    "title": "Suriname",
+    "offset": "GMT-3",
+    "utcOffsetStandard": "-03:00",
+    "utcOffsetDST": "-03:00",
+    "country": "Suriname",
     "countryCode": "SR",
-    "regionCity": "Paramaribo",
+    "searchTerms": [
+      "Paramaribo, Suriname"
+    ],
     "id": "America/Paramaribo",
     "city": "Paramaribo",
-    "country": "SR",
-    "label": "Suriname (Paramaribo)",
-    "aliases": []
+    "countryName": "Suriname",
+    "label": "Suriname"
   },
   {
-    "country name": "Sweden",
-    "country code": "SE",
-    "region_city": "Stockholm",
-    "timezone": "GMT +01:00",
-    "daylight savings start": "2026-03-29",
-    "Daylight savings end": "2026-10-25",
-    "countryName": "Sweden",
+    "title": "Central European Time",
+    "offset": "GMT+1",
+    "utcOffsetStandard": "+01:00",
+    "utcOffsetDST": "+02:00",
+    "country": "Svalbard & Jan Mayen",
+    "countryCode": "SJ",
+    "searchTerms": [
+      "Jan Mayen, Svalbard & Jan Mayen",
+      "Longyearbyen, Svalbard & Jan Mayen"
+    ],
+    "id": "Arctic/Longyearbyen",
+    "city": "Jan Mayen",
+    "countryName": "Svalbard & Jan Mayen",
+    "label": "Svalbard & Jan Mayen (Central European Time)"
+  },
+  {
+    "title": "Central European Time",
+    "offset": "GMT+1",
+    "utcOffsetStandard": "+01:00",
+    "utcOffsetDST": "+02:00",
+    "country": "Sweden",
     "countryCode": "SE",
-    "regionCity": "Stockholm",
+    "searchTerms": [
+      "Stockholm, Sweden"
+    ],
     "id": "Europe/Stockholm",
     "city": "Stockholm",
-    "country": "SE",
-    "label": "Sweden (Stockholm)",
-    "aliases": []
+    "countryName": "Sweden",
+    "label": "Sweden (Central European Time)"
   },
   {
-    "country name": "Switzerland",
-    "country code": "CH",
-    "region_city": "Bern",
-    "timezone": "GMT +01:00",
-    "daylight savings start": "2026-03-29",
-    "Daylight savings end": "2026-10-25",
-    "countryName": "Switzerland",
+    "title": "Central European Time",
+    "offset": "GMT+1",
+    "utcOffsetStandard": "+01:00",
+    "utcOffsetDST": "+02:00",
+    "country": "Switzerland",
     "countryCode": "CH",
-    "regionCity": "Bern",
+    "searchTerms": [
+      "Zurich, Switzerland"
+    ],
     "id": "Europe/Zurich",
-    "city": "Bern",
-    "country": "CH",
-    "label": "Switzerland (Bern)",
-    "aliases": [
-      "zurich",
-      "geneva"
-    ]
+    "city": "Zurich",
+    "countryName": "Switzerland",
+    "label": "Switzerland (Central European Time)"
   },
   {
-    "country name": "Syria",
-    "country code": "SY",
-    "region_city": "Damascus",
-    "timezone": "GMT +03:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Syria",
+    "title": "Syria",
+    "offset": "GMT+3",
+    "utcOffsetStandard": "+03:00",
+    "utcOffsetDST": "+03:00",
+    "country": "Syria",
     "countryCode": "SY",
-    "regionCity": "Damascus",
+    "searchTerms": [
+      "Damascus, Syria"
+    ],
     "id": "Asia/Damascus",
     "city": "Damascus",
-    "country": "SY",
-    "label": "Syria (Damascus)",
-    "aliases": []
+    "countryName": "Syria",
+    "label": "Syria"
   },
   {
-    "country name": "Taiwan",
-    "country code": "TW",
-    "region_city": "Taipei",
-    "timezone": "GMT +08:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Taiwan",
+    "title": "Taiwan",
+    "offset": "GMT+8",
+    "utcOffsetStandard": "+08:00",
+    "utcOffsetDST": "+08:00",
+    "country": "Taiwan",
     "countryCode": "TW",
-    "regionCity": "Taipei",
+    "searchTerms": [
+      "Taipei, Taiwan"
+    ],
     "id": "Asia/Taipei",
     "city": "Taipei",
-    "country": "TW",
-    "label": "Taiwan (Taipei)",
-    "aliases": []
+    "countryName": "Taiwan",
+    "label": "Taiwan"
   },
   {
-    "country name": "Tajikistan",
-    "country code": "TJ",
-    "region_city": "Dushanbe",
-    "timezone": "GMT +05:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Tajikistan",
+    "title": "Tajikistan",
+    "offset": "GMT+5",
+    "utcOffsetStandard": "+05:00",
+    "utcOffsetDST": "+05:00",
+    "country": "Tajikistan",
     "countryCode": "TJ",
-    "regionCity": "Dushanbe",
+    "searchTerms": [
+      "Dushanbe, Tajikistan"
+    ],
     "id": "Asia/Dushanbe",
     "city": "Dushanbe",
-    "country": "TJ",
-    "label": "Tajikistan (Dushanbe)",
-    "aliases": []
+    "countryName": "Tajikistan",
+    "label": "Tajikistan"
   },
   {
-    "country name": "Tanzania",
-    "country code": "TZ",
-    "region_city": "Dar es Salaam / Dodoma",
-    "timezone": "GMT +03:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Tanzania",
+    "title": "East Africa Time",
+    "offset": "GMT+3",
+    "utcOffsetStandard": "+03:00",
+    "utcOffsetDST": "+03:00",
+    "country": "Tanzania",
     "countryCode": "TZ",
-    "regionCity": "Dar es Salaam / Dodoma",
+    "searchTerms": [
+      "Dar es Salaam, Tanzania"
+    ],
     "id": "Africa/Dar_es_Salaam",
-    "city": "Dar es Salaam / Dodoma",
-    "country": "TZ",
-    "label": "Tanzania (Dar es Salaam / Dodoma)",
-    "aliases": [
-      "zanzibar"
-    ]
+    "city": "Dar es Salaam",
+    "countryName": "Tanzania",
+    "label": "Tanzania (East Africa Time)"
   },
   {
-    "country name": "Thailand",
-    "country code": "TH",
-    "region_city": "Bangkok",
-    "timezone": "GMT +07:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Thailand",
+    "title": "Thailand",
+    "offset": "GMT+7",
+    "utcOffsetStandard": "+07:00",
+    "utcOffsetDST": "+07:00",
+    "country": "Thailand",
     "countryCode": "TH",
-    "regionCity": "Bangkok",
+    "searchTerms": [
+      "Bangkok, Thailand"
+    ],
     "id": "Asia/Bangkok",
     "city": "Bangkok",
-    "country": "TH",
-    "label": "Thailand (Bangkok)",
-    "aliases": [
-      "phuket"
-    ]
+    "countryName": "Thailand",
+    "label": "Thailand"
   },
   {
-    "country name": "Togo",
-    "country code": "TG",
-    "region_city": "Lomé",
-    "timezone": "GMT +00:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Togo",
+    "title": "Greenwich Mean Time",
+    "offset": "GMT+0",
+    "utcOffsetStandard": "+00:00",
+    "utcOffsetDST": "+00:00",
+    "country": "Togo",
     "countryCode": "TG",
-    "regionCity": "Lomé",
+    "searchTerms": [
+      "Lome, Togo"
+    ],
     "id": "Africa/Lome",
-    "city": "Lomé",
-    "country": "TG",
-    "label": "Togo (Lomé)",
-    "aliases": []
+    "city": "Lome",
+    "countryName": "Togo",
+    "label": "Togo (Greenwich Mean Time)"
   },
   {
-    "country name": "Tonga",
-    "country code": "TO",
-    "region_city": "Nuku'alofa",
-    "timezone": "GMT +13:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Tonga",
+    "title": "Tokelau",
+    "offset": "GMT+13",
+    "utcOffsetStandard": "+13:00",
+    "utcOffsetDST": "+13:00",
+    "country": "Tokelau",
+    "countryCode": "TK",
+    "searchTerms": [
+      "Fakaofo, Tokelau"
+    ],
+    "id": "Pacific/Fakaofo",
+    "city": "Fakaofo",
+    "countryName": "Tokelau",
+    "label": "Tokelau"
+  },
+  {
+    "title": "Tonga",
+    "offset": "GMT+13",
+    "utcOffsetStandard": "+13:00",
+    "utcOffsetDST": "+13:00",
+    "country": "Tonga",
     "countryCode": "TO",
-    "regionCity": "Nuku'alofa",
+    "searchTerms": [
+      "Tongatapu"
+    ],
     "id": "Pacific/Tongatapu",
-    "city": "Nuku'alofa",
-    "country": "TO",
-    "label": "Tonga (Nuku'alofa)",
-    "aliases": []
+    "city": "Tongatapu",
+    "countryName": "Tonga",
+    "label": "Tonga"
   },
   {
-    "country name": "Trinidad and Tobago",
-    "country code": "TT",
-    "region_city": "Port of Spain",
-    "timezone": "GMT -04:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Trinidad and Tobago",
+    "title": "Trinidad & Tobago",
+    "offset": "GMT-4",
+    "utcOffsetStandard": "-04:00",
+    "utcOffsetDST": "-04:00",
+    "country": "Trinidad & Tobago",
     "countryCode": "TT",
-    "regionCity": "Port of Spain",
+    "searchTerms": [
+      "Port of Spain, Trinidad & Tobago"
+    ],
     "id": "America/Port_of_Spain",
     "city": "Port of Spain",
-    "country": "TT",
-    "label": "Trinidad and Tobago (Port of Spain)",
-    "aliases": []
+    "countryName": "Trinidad & Tobago",
+    "label": "Trinidad & Tobago"
   },
   {
-    "country name": "Tunisia",
-    "country code": "TN",
-    "region_city": "Tunis",
-    "timezone": "GMT +01:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Tunisia",
+    "title": "Central European Time",
+    "offset": "GMT+1",
+    "utcOffsetStandard": "+01:00",
+    "utcOffsetDST": "+01:00",
+    "country": "Tunisia",
     "countryCode": "TN",
-    "regionCity": "Tunis",
+    "searchTerms": [
+      "Tunis, Tunisia"
+    ],
     "id": "Africa/Tunis",
     "city": "Tunis",
-    "country": "TN",
-    "label": "Tunisia (Tunis)",
-    "aliases": []
+    "countryName": "Tunisia",
+    "label": "Tunisia (Central European Time)"
   },
   {
-    "country name": "Turkey",
-    "country code": "TR",
-    "region_city": "Istanbul / Ankara",
-    "timezone": "GMT +03:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Turkey",
+    "title": "Turkey",
+    "offset": "GMT+3",
+    "utcOffsetStandard": "+03:00",
+    "utcOffsetDST": "+03:00",
+    "country": "Turkey",
     "countryCode": "TR",
-    "regionCity": "Istanbul / Ankara",
+    "searchTerms": [
+      "Istanbul, Turkey"
+    ],
     "id": "Europe/Istanbul",
-    "city": "Istanbul / Ankara",
-    "country": "TR",
-    "label": "Turkey (Istanbul / Ankara)",
-    "aliases": [
-      "türkiye",
-      "istanbul",
-      "ankara"
-    ]
+    "city": "Istanbul",
+    "countryName": "Turkey",
+    "label": "Turkey"
   },
   {
-    "country name": "Turkmenistan",
-    "country code": "TM",
-    "region_city": "Ashgabat",
-    "timezone": "GMT +05:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Turkmenistan",
+    "title": "Turkmenistan",
+    "offset": "GMT+5",
+    "utcOffsetStandard": "+05:00",
+    "utcOffsetDST": "+05:00",
+    "country": "Turkmenistan",
     "countryCode": "TM",
-    "regionCity": "Ashgabat",
+    "searchTerms": [
+      "Ashgabat, Turkmenistan"
+    ],
     "id": "Asia/Ashgabat",
     "city": "Ashgabat",
-    "country": "TM",
-    "label": "Turkmenistan (Ashgabat)",
-    "aliases": []
+    "countryName": "Turkmenistan",
+    "label": "Turkmenistan"
   },
   {
-    "country name": "Tuvalu",
-    "country code": "TV",
-    "region_city": "Funafuti",
-    "timezone": "GMT +12:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Tuvalu",
+    "title": "Turks & Caicos Is",
+    "offset": "GMT-5",
+    "utcOffsetStandard": "-05:00",
+    "utcOffsetDST": "-04:00",
+    "country": "Turks & Caicos Is",
+    "countryCode": "TC",
+    "searchTerms": [
+      "Grand Turk, Turks & Caicos Is"
+    ],
+    "id": "America/Grand_Turk",
+    "city": "Grand Turk",
+    "countryName": "Turks & Caicos Is",
+    "label": "Turks & Caicos Is"
+  },
+  {
+    "title": "Tuvalu",
+    "offset": "GMT+12",
+    "utcOffsetStandard": "+12:00",
+    "utcOffsetDST": "+12:00",
+    "country": "Tuvalu",
     "countryCode": "TV",
-    "regionCity": "Funafuti",
+    "searchTerms": [
+      "Funafuti, Tuvalu"
+    ],
     "id": "Pacific/Funafuti",
     "city": "Funafuti",
-    "country": "TV",
-    "label": "Tuvalu (Funafuti)",
-    "aliases": []
+    "countryName": "Tuvalu",
+    "label": "Tuvalu"
   },
   {
-    "country name": "Uganda",
-    "country code": "UG",
-    "region_city": "Kampala",
-    "timezone": "GMT +03:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Uganda",
+    "title": "East Africa Time",
+    "offset": "GMT+3",
+    "utcOffsetStandard": "+03:00",
+    "utcOffsetDST": "+03:00",
+    "country": "Uganda",
     "countryCode": "UG",
-    "regionCity": "Kampala",
+    "searchTerms": [
+      "Kampala, Uganda"
+    ],
     "id": "Africa/Kampala",
     "city": "Kampala",
-    "country": "UG",
-    "label": "Uganda (Kampala)",
-    "aliases": []
+    "countryName": "Uganda",
+    "label": "Uganda (East Africa Time)"
   },
   {
-    "country name": "Ukraine",
-    "country code": "UA",
-    "region_city": "Kyiv",
-    "timezone": "GMT +02:00",
-    "daylight savings start": "2026-03-29",
-    "Daylight savings end": "2026-10-25",
-    "countryName": "Ukraine",
+    "title": "Eastern European Time",
+    "offset": "GMT+2",
+    "utcOffsetStandard": "+02:00",
+    "utcOffsetDST": "+03:00",
+    "country": "Ukraine",
     "countryCode": "UA",
-    "regionCity": "Kyiv",
+    "searchTerms": [
+      "Kyiv, Ukraine",
+      "Uzhgorod, Ukraine",
+      "Zaporozhye, Ukraine"
+    ],
     "id": "Europe/Kyiv",
     "city": "Kyiv",
-    "country": "UA",
-    "label": "Ukraine (Kyiv)",
-    "aliases": []
+    "countryName": "Ukraine",
+    "label": "Ukraine (Eastern European Time)"
   },
   {
-    "country name": "United Arab Emirates",
-    "country code": "AE",
-    "region_city": "Dubai / Abu Dhabi",
-    "timezone": "GMT +04:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "United Arab Emirates",
+    "title": "United Arab Emirates",
+    "offset": "GMT+4",
+    "utcOffsetStandard": "+04:00",
+    "utcOffsetDST": "+04:00",
+    "country": "United Arab Emirates",
     "countryCode": "AE",
-    "regionCity": "Dubai / Abu Dhabi",
+    "searchTerms": [
+      "Dubai, United Arab Emirates"
+    ],
     "id": "Asia/Dubai",
-    "city": "Dubai / Abu Dhabi",
-    "country": "AE",
-    "label": "United Arab Emirates (Dubai / Abu Dhabi)",
-    "aliases": [
-      "uae",
-      "dubai",
-      "abu dhabi"
-    ]
+    "city": "Dubai",
+    "countryName": "United Arab Emirates",
+    "label": "United Arab Emirates"
   },
   {
-    "country name": "United Kingdom",
-    "country code": "GB",
-    "region_city": "London",
-    "timezone": "GMT +00:00",
-    "daylight savings start": "2026-03-29",
-    "Daylight savings end": "2026-10-25",
-    "countryName": "United Kingdom",
+    "title": "Greenwich Mean Time",
+    "offset": "GMT+0",
+    "utcOffsetStandard": "+00:00",
+    "utcOffsetDST": "+01:00",
+    "country": "United Kingdom",
     "countryCode": "GB",
-    "regionCity": "London",
+    "searchTerms": [
+      "Belfast, United Kingdom",
+      "Birmingham, United Kingdom",
+      "Edinburgh, United Kingdom",
+      "Glasgow, United Kingdom",
+      "London, United Kingdom",
+      "Manchester, United Kingdom"
+    ],
     "id": "Europe/London",
-    "city": "London",
-    "country": "GB",
-    "label": "United Kingdom (London)",
-    "aliases": [
-      "uk",
-      "britain",
-      "england",
-      "scotland"
-    ]
+    "city": "Belfast",
+    "countryName": "United Kingdom",
+    "label": "United Kingdom (Greenwich Mean Time)"
   },
   {
-    "country name": "United States",
-    "country code": "US",
-    "region_city": "Alaska (Anchorage)",
-    "timezone": "GMT -09:00",
-    "daylight savings start": "2026-03-08",
-    "Daylight savings end": "2026-11-01",
-    "countryName": "United States",
+    "title": "Alaska Standard Time",
+    "offset": "GMT-9",
+    "utcOffsetStandard": "-09:00",
+    "utcOffsetDST": "-08:00",
+    "country": "United States",
     "countryCode": "US",
-    "regionCity": "Alaska (Anchorage)",
+    "searchTerms": [
+      "Anchorage, United States",
+      "Juneau, United States",
+      "Metlakatla, United States",
+      "Nome, United States",
+      "Sitka, United States",
+      "Yakutat, United States"
+    ],
     "id": "America/Anchorage",
-    "city": "Alaska (Anchorage)",
-    "country": "US",
-    "label": "United States (Alaska (Anchorage))",
-    "aliases": [
-      "america",
-      "usa",
-      "anchorage"
-    ]
+    "city": "Anchorage",
+    "countryName": "United States",
+    "label": "United States (Alaska Standard Time)"
   },
   {
-    "country name": "United States",
-    "country code": "US",
-    "region_city": "Arizona (Phoenix)",
-    "timezone": "GMT -07:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "United States",
+    "title": "Central Standard Time",
+    "offset": "GMT-6",
+    "utcOffsetStandard": "-06:00",
+    "utcOffsetDST": "-05:00",
+    "country": "United States",
     "countryCode": "US",
-    "regionCity": "Arizona (Phoenix)",
-    "id": "America/Phoenix",
-    "city": "Arizona (Phoenix)",
-    "country": "US",
-    "label": "United States (Arizona (Phoenix))",
-    "aliases": [
-      "america",
-      "usa",
-      "phoenix"
-    ]
+    "searchTerms": [
+      "Austin, United States",
+      "Beulah, United States",
+      "Center, United States",
+      "Chicago, United States",
+      "Dallas, United States",
+      "Houston, United States",
+      "Knox IN, United States",
+      "Knox, United States",
+      "Menominee, United States",
+      "Minneapolis, United States",
+      "New Orleans, United States",
+      "New Salem, United States",
+      "Tell City, United States"
+    ],
+    "id": "America/North_Dakota/Beulah",
+    "city": "Austin",
+    "countryName": "United States",
+    "label": "United States (Central Standard Time)"
   },
   {
-    "country name": "United States",
-    "country code": "US",
-    "region_city": "Central (Chicago)",
-    "timezone": "GMT -06:00",
-    "daylight savings start": "2026-03-08",
-    "Daylight savings end": "2026-11-01",
-    "countryName": "United States",
+    "title": "Eastern Standard Time",
+    "offset": "GMT-5",
+    "utcOffsetStandard": "-05:00",
+    "utcOffsetDST": "-04:00",
+    "country": "United States",
     "countryCode": "US",
-    "regionCity": "Central (Chicago)",
-    "id": "America/Chicago",
-    "city": "Chicago",
-    "country": "US",
-    "label": "United States (Central (Chicago))",
-    "aliases": [
-      "america",
-      "usa",
-      "chicago"
-    ]
+    "searchTerms": [
+      "Atlanta, United States",
+      "Boston, United States",
+      "Detroit, United States",
+      "Fort Wayne, United States",
+      "Indianapolis, United States",
+      "Louisville, United States",
+      "Marengo, United States",
+      "Miami, United States",
+      "Monticello, United States",
+      "New York, United States",
+      "Petersburg, United States",
+      "Philadelphia, United States",
+      "Vevay, United States",
+      "Vincennes, United States",
+      "Washington, D.C., United States",
+      "Winamac, United States"
+    ],
+    "id": "America/Detroit",
+    "city": "Atlanta",
+    "countryName": "United States",
+    "label": "United States (Eastern Standard Time)"
   },
   {
-    "country name": "United States",
-    "country code": "US",
-    "region_city": "Eastern (New York)",
-    "timezone": "GMT -05:00",
-    "daylight savings start": "2026-03-08",
-    "Daylight savings end": "2026-11-01",
-    "countryName": "United States",
+    "title": "Hawaii Standard Time",
+    "offset": "GMT-10",
+    "utcOffsetStandard": "-10:00",
+    "utcOffsetDST": "-10:00",
+    "country": "United States",
     "countryCode": "US",
-    "regionCity": "Eastern (New York)",
-    "id": "America/New_York",
-    "city": "New York",
-    "country": "US",
-    "label": "United States (Eastern (New York))",
-    "aliases": [
-      "america",
-      "usa",
-      "new york"
-    ]
-  },
-  {
-    "country name": "United States",
-    "country code": "US",
-    "region_city": "Hawaii (Honolulu)",
-    "timezone": "GMT -10:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "United States",
-    "countryCode": "US",
-    "regionCity": "Hawaii (Honolulu)",
+    "searchTerms": [
+      "Honolulu, United States"
+    ],
     "id": "Pacific/Honolulu",
-    "city": "Hawaii (Honolulu)",
-    "country": "US",
-    "label": "United States (Hawaii (Honolulu))",
-    "aliases": [
-      "america",
-      "usa",
-      "honolulu"
-    ]
+    "city": "Honolulu",
+    "countryName": "United States",
+    "label": "United States (Hawaii Standard Time)"
   },
   {
-    "country name": "United States",
-    "country code": "US",
-    "region_city": "Mountain (Denver)",
-    "timezone": "GMT -07:00",
-    "daylight savings start": "2026-03-08",
-    "Daylight savings end": "2026-11-01",
-    "countryName": "United States",
+    "title": "Hawaii-Aleutian Time",
+    "offset": "GMT-10",
+    "utcOffsetStandard": "-10:00",
+    "utcOffsetDST": "-09:00",
+    "country": "United States",
     "countryCode": "US",
-    "regionCity": "Mountain (Denver)",
-    "id": "America/Denver",
-    "city": "Denver",
-    "country": "US",
-    "label": "United States (Mountain (Denver))",
-    "aliases": [
-      "america",
-      "usa",
-      "denver"
-    ]
+    "searchTerms": [
+      "Adak, United States",
+      "Atka, United States"
+    ],
+    "id": "America/Adak",
+    "city": "Adak",
+    "countryName": "United States",
+    "label": "United States (Hawaii-Aleutian Time)"
   },
   {
-    "country name": "United States",
-    "country code": "US",
-    "region_city": "Pacific (Los Angeles)",
-    "timezone": "GMT -08:00",
-    "daylight savings start": "2026-03-08",
-    "Daylight savings end": "2026-11-01",
-    "countryName": "United States",
+    "title": "Mountain Standard Time",
+    "offset": "GMT-7",
+    "utcOffsetStandard": "-07:00",
+    "utcOffsetDST": "-06:00",
+    "country": "United States",
     "countryCode": "US",
-    "regionCity": "Pacific (Los Angeles)",
+    "searchTerms": [
+      "Albuquerque, United States",
+      "Boise, United States",
+      "Denver, United States",
+      "Phoenix, United States",
+      "Salt Lake City, United States",
+      "Shiprock, United States"
+    ],
+    "id": "America/Boise",
+    "city": "Albuquerque",
+    "countryName": "United States",
+    "label": "United States (Mountain Standard Time)"
+  },
+  {
+    "title": "Pacific Standard Time",
+    "offset": "GMT-8",
+    "utcOffsetStandard": "-08:00",
+    "utcOffsetDST": "-07:00",
+    "country": "United States",
+    "countryCode": "US",
+    "searchTerms": [
+      "Las Vegas, United States",
+      "Los Angeles, United States",
+      "Portland, United States",
+      "San Diego, United States",
+      "San Francisco, United States",
+      "Seattle, United States"
+    ],
     "id": "America/Los_Angeles",
-    "city": "Los Angeles",
-    "country": "US",
-    "label": "United States (Pacific (Los Angeles))",
-    "aliases": [
-      "america",
-      "usa",
-      "los angeles",
-      "san francisco",
-      "seattle"
-    ]
+    "city": "Las Vegas",
+    "countryName": "United States",
+    "label": "United States (Pacific Standard Time)"
   },
   {
-    "country name": "Uruguay",
-    "country code": "UY",
-    "region_city": "Montevideo",
-    "timezone": "GMT -03:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Uruguay",
+    "title": "Uruguay",
+    "offset": "GMT-3",
+    "utcOffsetStandard": "-03:00",
+    "utcOffsetDST": "-03:00",
+    "country": "Uruguay",
     "countryCode": "UY",
-    "regionCity": "Montevideo",
+    "searchTerms": [
+      "Montevideo, Uruguay"
+    ],
     "id": "America/Montevideo",
     "city": "Montevideo",
-    "country": "UY",
-    "label": "Uruguay (Montevideo)",
-    "aliases": []
+    "countryName": "Uruguay",
+    "label": "Uruguay"
   },
   {
-    "country name": "Uzbekistan",
-    "country code": "UZ",
-    "region_city": "Tashkent",
-    "timezone": "GMT +05:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Uzbekistan",
+    "title": "Hawaii Standard Time",
+    "offset": "GMT-10",
+    "utcOffsetStandard": "-10:00",
+    "utcOffsetDST": "-10:00",
+    "country": "US minor outlying islands",
+    "countryCode": "UM",
+    "searchTerms": [
+      "Johnston Atoll, US minor outlying islands"
+    ],
+    "id": "Pacific/Honolulu",
+    "city": "Johnston Atoll",
+    "countryName": "US minor outlying islands",
+    "label": "US minor outlying islands (Hawaii Standard Time)"
+  },
+  {
+    "title": "Samoa Standard Time",
+    "offset": "GMT-11",
+    "utcOffsetStandard": "-11:00",
+    "utcOffsetDST": "-11:00",
+    "country": "US minor outlying islands",
+    "countryCode": "UM",
+    "searchTerms": [
+      "Midway Atoll, US minor outlying islands"
+    ],
+    "id": "Pacific/Midway",
+    "city": "Midway Atoll",
+    "countryName": "US minor outlying islands",
+    "label": "US minor outlying islands (Samoa Standard Time)"
+  },
+  {
+    "title": "Wake Island Time",
+    "offset": "GMT+12",
+    "utcOffsetStandard": "+12:00",
+    "utcOffsetDST": "+12:00",
+    "country": "US minor outlying islands",
+    "countryCode": "UM",
+    "searchTerms": [
+      "Wake Island, US minor outlying islands"
+    ],
+    "id": "Pacific/Wake",
+    "city": "Wake Island",
+    "countryName": "US minor outlying islands",
+    "label": "US minor outlying islands (Wake Island Time)"
+  },
+  {
+    "title": "Uzbekistan",
+    "offset": "GMT+5",
+    "utcOffsetStandard": "+05:00",
+    "utcOffsetDST": "+05:00",
+    "country": "Uzbekistan",
     "countryCode": "UZ",
-    "regionCity": "Tashkent",
-    "id": "Asia/Tashkent",
-    "city": "Tashkent",
-    "country": "UZ",
-    "label": "Uzbekistan (Tashkent)",
-    "aliases": []
+    "searchTerms": [
+      "Samarkand, Uzbekistan",
+      "Tashkent, Uzbekistan"
+    ],
+    "id": "Asia/Samarkand",
+    "city": "Samarkand",
+    "countryName": "Uzbekistan",
+    "label": "Uzbekistan"
   },
   {
-    "country name": "Vanuatu",
-    "country code": "VU",
-    "region_city": "Port Vila",
-    "timezone": "GMT +11:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Vanuatu",
+    "title": "Vanuatu",
+    "offset": "GMT+11",
+    "utcOffsetStandard": "+11:00",
+    "utcOffsetDST": "+11:00",
+    "country": "Vanuatu",
     "countryCode": "VU",
-    "regionCity": "Port Vila",
+    "searchTerms": [
+      "Efate, Vanuatu"
+    ],
     "id": "Pacific/Efate",
-    "city": "Port Vila",
-    "country": "VU",
-    "label": "Vanuatu (Port Vila)",
-    "aliases": []
+    "city": "Efate",
+    "countryName": "Vanuatu",
+    "label": "Vanuatu"
   },
   {
-    "country name": "Vatican City",
-    "country code": "VA",
-    "region_city": "Vatican City",
-    "timezone": "GMT +01:00",
-    "daylight savings start": "2026-03-29",
-    "Daylight savings end": "2026-10-25",
-    "countryName": "Vatican City",
+    "title": "Central European Time",
+    "offset": "GMT+1",
+    "utcOffsetStandard": "+01:00",
+    "utcOffsetDST": "+02:00",
+    "country": "Vatican City",
     "countryCode": "VA",
-    "regionCity": "Vatican City",
+    "searchTerms": [
+      "Vatican, Vatican City"
+    ],
     "id": "Europe/Vatican",
-    "city": "Vatican City",
-    "country": "VA",
-    "label": "Vatican City (Vatican City)",
-    "aliases": [
-      "holy see"
-    ]
+    "city": "Vatican",
+    "countryName": "Vatican City",
+    "label": "Vatican City (Central European Time)"
   },
   {
-    "country name": "Venezuela",
-    "country code": "VE",
-    "region_city": "Caracas",
-    "timezone": "GMT -04:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Venezuela",
+    "title": "Venezuela",
+    "offset": "GMT-4",
+    "utcOffsetStandard": "-04:00",
+    "utcOffsetDST": "-04:00",
+    "country": "Venezuela",
     "countryCode": "VE",
-    "regionCity": "Caracas",
+    "searchTerms": [
+      "Caracas, Venezuela"
+    ],
     "id": "America/Caracas",
     "city": "Caracas",
-    "country": "VE",
-    "label": "Venezuela (Caracas)",
-    "aliases": []
+    "countryName": "Venezuela",
+    "label": "Venezuela"
   },
   {
-    "country name": "Vietnam",
-    "country code": "VN",
-    "region_city": "Hanoi",
-    "timezone": "GMT +07:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Vietnam",
+    "title": "Vietnam",
+    "offset": "GMT+7",
+    "utcOffsetStandard": "+07:00",
+    "utcOffsetDST": "+07:00",
+    "country": "Vietnam",
     "countryCode": "VN",
-    "regionCity": "Hanoi",
+    "searchTerms": [
+      "Ho Chi Minh City, Vietnam"
+    ],
     "id": "Asia/Ho_Chi_Minh",
-    "city": "Hanoi",
-    "country": "VN",
-    "label": "Vietnam (Hanoi)",
-    "aliases": [
-      "saigon",
-      "ho chi minh"
-    ]
+    "city": "Ho Chi Minh City",
+    "countryName": "Vietnam",
+    "label": "Vietnam"
   },
   {
-    "country name": "Yemen",
-    "country code": "YE",
-    "region_city": "Sanaa",
-    "timezone": "GMT +03:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Yemen",
+    "title": "Virgin Islands (UK)",
+    "offset": "GMT-4",
+    "utcOffsetStandard": "-04:00",
+    "utcOffsetDST": "-04:00",
+    "country": "Virgin Islands (UK)",
+    "countryCode": "VG",
+    "searchTerms": [
+      "Tortola, Virgin Islands (UK)"
+    ],
+    "id": "America/Tortola",
+    "city": "Tortola",
+    "countryName": "Virgin Islands (UK)",
+    "label": "Virgin Islands (UK)"
+  },
+  {
+    "title": "Virgin Islands (US)",
+    "offset": "GMT-4",
+    "utcOffsetStandard": "-04:00",
+    "utcOffsetDST": "-04:00",
+    "country": "Virgin Islands (US)",
+    "countryCode": "VI",
+    "searchTerms": [
+      "St Thomas, Virgin Islands (US)",
+      "Virgin, Virgin Islands (US)"
+    ],
+    "id": "America/St_Thomas",
+    "city": "St Thomas",
+    "countryName": "Virgin Islands (US)",
+    "label": "Virgin Islands (US)"
+  },
+  {
+    "title": "Wallis & Futuna",
+    "offset": "GMT+12",
+    "utcOffsetStandard": "+12:00",
+    "utcOffsetDST": "+12:00",
+    "country": "Wallis & Futuna",
+    "countryCode": "WF",
+    "searchTerms": [
+      "Wallis, Wallis & Futuna"
+    ],
+    "id": "Pacific/Wallis",
+    "city": "Wallis",
+    "countryName": "Wallis & Futuna",
+    "label": "Wallis & Futuna"
+  },
+  {
+    "title": "Western Sahara",
+    "offset": "GMT+1",
+    "utcOffsetStandard": "+01:00",
+    "utcOffsetDST": "+00:00",
+    "country": "Western Sahara",
+    "countryCode": "EH",
+    "searchTerms": [
+      "El Aaiun, Western Sahara"
+    ],
+    "id": "Africa/El_Aaiun",
+    "city": "El Aaiun",
+    "countryName": "Western Sahara",
+    "label": "Western Sahara"
+  },
+  {
+    "title": "Yemen",
+    "offset": "GMT+3",
+    "utcOffsetStandard": "+03:00",
+    "utcOffsetDST": "+03:00",
+    "country": "Yemen",
     "countryCode": "YE",
-    "regionCity": "Sanaa",
+    "searchTerms": [
+      "Aden, Yemen"
+    ],
     "id": "Asia/Aden",
-    "city": "Sanaa",
-    "country": "YE",
-    "label": "Yemen (Sanaa)",
-    "aliases": []
+    "city": "Aden",
+    "countryName": "Yemen",
+    "label": "Yemen"
   },
   {
-    "country name": "Zambia",
-    "country code": "ZM",
-    "region_city": "Lusaka",
-    "timezone": "GMT +02:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Zambia",
+    "title": "Central Africa Time",
+    "offset": "GMT+2",
+    "utcOffsetStandard": "+02:00",
+    "utcOffsetDST": "+02:00",
+    "country": "Zambia",
     "countryCode": "ZM",
-    "regionCity": "Lusaka",
+    "searchTerms": [
+      "Lusaka, Zambia"
+    ],
     "id": "Africa/Lusaka",
     "city": "Lusaka",
-    "country": "ZM",
-    "label": "Zambia (Lusaka)",
-    "aliases": []
+    "countryName": "Zambia",
+    "label": "Zambia (Central Africa Time)"
   },
   {
-    "country name": "Zimbabwe",
-    "country code": "ZW",
-    "region_city": "Harare",
-    "timezone": "GMT +02:00",
-    "daylight savings start": "",
-    "Daylight savings end": "",
-    "countryName": "Zimbabwe",
+    "title": "Central Africa Time",
+    "offset": "GMT+2",
+    "utcOffsetStandard": "+02:00",
+    "utcOffsetDST": "+02:00",
+    "country": "Zimbabwe",
     "countryCode": "ZW",
-    "regionCity": "Harare",
+    "searchTerms": [
+      "Harare, Zimbabwe"
+    ],
     "id": "Africa/Harare",
     "city": "Harare",
-    "country": "ZW",
-    "label": "Zimbabwe (Harare)",
-    "aliases": []
+    "countryName": "Zimbabwe",
+    "label": "Zimbabwe (Central Africa Time)"
+  },
+  {
+    "title": "Eastern European Time",
+    "offset": "GMT+2",
+    "utcOffsetStandard": "+02:00",
+    "utcOffsetDST": "+03:00",
+    "country": "Åland Islands",
+    "countryCode": "AX",
+    "searchTerms": [
+      "Mariehamn, Åland Islands"
+    ],
+    "id": "Europe/Mariehamn",
+    "city": "Mariehamn",
+    "countryName": "Åland Islands",
+    "label": "Åland Islands (Eastern European Time)"
   }
 ];
 
 export function findTimezone(id) {
   if (!id) return null;
-  return TIMEZONES.find(t => t.id === id || t["country code"] === id) || null;
-}
-
-export function hasDaylightSavings(tz) {
-  if (!tz) return false;
-  return Boolean(tz["daylight savings start"] || tz.daylightSavingsStart);
+  return TIMEZONES.find(t => t.id === id || t.title === id || t.countryCode === id) || null;
 }
 
 export function searchTimezones(query) {
-  if (!query || typeof query !== "string") return TIMEZONES;
-  const q = query.trim().toLowerCase();
-  if (!q) return TIMEZONES;
-  const qNoSpace = q.replace(/\s+/g, "");
+  if (!query || typeof query !== "string") {
+    return TIMEZONES.map(tz => ({
+      tz,
+      matchedTerm: tz.searchTerms[0] || tz.country,
+      query: ""
+    }));
+  }
 
-  return TIMEZONES.filter(tz => {
-    const c = (tz["country name"] || tz.countryName || "").toLowerCase();
-    const rc = (tz["region_city"] || tz.regionCity || "").toLowerCase();
-    const cc = (tz["country code"] || tz.countryCode || "").toLowerCase();
-    const tzStr = (tz["timezone"] || tz.timezone || "").toLowerCase().replace(/\s+/g, "");
-    const aliases = tz.aliases || [];
-    return c.includes(q)
-      || rc.includes(q)
-      || cc === q
-      || tzStr.includes(qNoSpace)
-      || aliases.some(a => a.toLowerCase().includes(q));
-  });
+  const q = query.trim().toLowerCase();
+  if (!q) {
+    return TIMEZONES.map(tz => ({
+      tz,
+      matchedTerm: tz.searchTerms[0] || tz.country,
+      query: ""
+    }));
+  }
+
+  const qNoSpace = q.replace(/\s+/g, "");
+  const results = [];
+
+  for (const tz of TIMEZONES) {
+    let matchedInTerms = false;
+    for (const term of tz.searchTerms) {
+      if (term.toLowerCase().includes(q)) {
+        results.push({
+          tz,
+          matchedTerm: term,
+          query
+        });
+        matchedInTerms = true;
+      }
+    }
+
+    if (!matchedInTerms) {
+      const titleMatch = tz.title.toLowerCase().includes(q);
+      const countryMatch = tz.country.toLowerCase().includes(q);
+      const codeMatch = tz.countryCode.toLowerCase() === q;
+      const offsetMatch = tz.offset.toLowerCase().replace(/\s+/g, "").includes(qNoSpace);
+
+      if (titleMatch || countryMatch || codeMatch || offsetMatch) {
+        results.push({
+          tz,
+          matchedTerm: tz.searchTerms[0] || tz.country,
+          query
+        });
+      }
+    }
+  }
+
+  return results;
+}
+
+export function highlightMatch(text, query) {
+  if (!text) return "";
+  if (!query || typeof query !== "string") return escapeHtml(text);
+  const q = query.trim();
+  if (!q) return escapeHtml(text);
+
+  const lowerText = text.toLowerCase();
+  const lowerQ = q.toLowerCase();
+  let result = "";
+  let lastIdx = 0;
+  let found = lowerText.indexOf(lowerQ, lastIdx);
+
+  if (found === -1) {
+    return escapeHtml(text);
+  }
+
+  while (found !== -1) {
+    result += escapeHtml(text.slice(lastIdx, found));
+    result += `<strong>${escapeHtml(text.slice(found, found + q.length))}</strong>`;
+    lastIdx = found + q.length;
+    found = lowerText.indexOf(lowerQ, lastIdx);
+  }
+  result += escapeHtml(text.slice(lastIdx));
+  return result;
+}
+
+function escapeHtml(s) {
+  return String(s)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
 }
