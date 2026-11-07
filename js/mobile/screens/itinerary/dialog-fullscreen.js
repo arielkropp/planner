@@ -37,15 +37,38 @@ export function isFsDirty() {
   return currentMode === "edit" && $("itemFullscreenDialog")?.open && getFsSnapshot() !== fsInitialSnapshot;
 }
 
+function focusFsTitle() {
+  const titleInput = $("fsTitle");
+  if (!titleInput) return;
+  titleInput.focus({ preventScroll: true });
+  try {
+    const len = titleInput.value.length;
+    titleInput.setSelectionRange(len, len);
+  } catch {}
+}
+
 export function setFsMode(mode) {
   currentMode = mode;
   const isView = mode === "view";
   if ($("fsViewBody")) $("fsViewBody").hidden = !isView;
   if ($("fsEditBody")) $("fsEditBody").hidden = isView;
   if ($("fsViewActions")) $("fsViewActions").hidden = !isView;
+  if ($("fsEditActions")) $("fsEditActions").hidden = isView;
   if ($("fsSave")) $("fsSave").hidden = isView;
+  if ($("fsDelete")) $("fsDelete").hidden = isView || !editingItem;
   if ($("fsDialogTitle")) {
     $("fsDialogTitle").textContent = isView ? "Item details" : (editingItem ? "Edit item" : "Add item");
+  }
+  const closeBtn = $("fsClose");
+  if (closeBtn) {
+    const canGoBack = !isView && Boolean(editingItem);
+    closeBtn.setAttribute("aria-label", canGoBack ? "Back to item details" : "Close");
+    closeBtn.setAttribute("title", canGoBack ? "Back" : "Close");
+    const useEl = closeBtn.querySelector("use");
+    if (useEl) useEl.setAttribute("href", canGoBack ? "#i-left" : "#i-x");
+  }
+  if (!isView && $("itemFullscreenDialog")?.open) {
+    focusFsTitle();
   }
 }
 
@@ -59,7 +82,17 @@ export async function requestCloseFsDialog() {
       "Discard",
       true
     );
-    if (!discard) return;
+    if (!discard) {
+      focusFsTitle();
+      return;
+    }
+  }
+  if (currentMode === "edit" && editingItem) {
+    populateFsForm(editingItem);
+    renderFsView(editingItem);
+    setFsMode("view");
+    $("fsEditBtn")?.focus({ preventScroll: true });
+    return;
   }
   d.close();
 }
@@ -183,27 +216,7 @@ function renderFsView(a) {
   if ($("fsViewNoDetails")) $("fsViewNoDetails").hidden = hasCost || hasNotes;
 }
 
-export function openItemFullscreenDialog(id, initialDate, defaultType) {
-  const agenda = getState().agenda || [];
-  editingItem = id ? agenda.find(a => a.id === id) : null;
-  const a = editingItem || {
-    title: "",
-    date: initialDate || defaultDate(),
-    endDate: "",
-    time: "",
-    endTime: "",
-    tz: DEFAULT_TZ,
-    endTz: DEFAULT_TZ,
-    type: defaultType || "Activity",
-    status: "To book",
-    cost: null,
-    currency: "USD",
-    confirmation: "",
-    bookBy: "",
-    url: "",
-    notes: ""
-  };
-
+function populateFsForm(a) {
   $("fsItemForm")?.classList.remove("was-validated");
   $("fsTitle").value = a.title;
   $("fsTitle").title = a.title || "";
@@ -250,8 +263,32 @@ export function openItemFullscreenDialog(id, initialDate, defaultType) {
   $("fsItemForm").elements.fsType.value = a.type;
   $("fsItemForm").elements.fsStatus.value = a.status;
   $("fsNotes").value = a.notes || "";
-  $("fsDeleteWrap").hidden = !editingItem;
+  if ($("fsDelete")) $("fsDelete").hidden = !editingItem;
   fsInitialSnapshot = getFsSnapshot();
+}
+
+export function openItemFullscreenDialog(id, initialDate, defaultType) {
+  const agenda = getState().agenda || [];
+  editingItem = id ? agenda.find(a => a.id === id) : null;
+  const a = editingItem || {
+    title: "",
+    date: initialDate || defaultDate(),
+    endDate: "",
+    time: "",
+    endTime: "",
+    tz: DEFAULT_TZ,
+    endTz: DEFAULT_TZ,
+    type: defaultType || "Activity",
+    status: "To book",
+    cost: null,
+    currency: "USD",
+    confirmation: "",
+    bookBy: "",
+    url: "",
+    notes: ""
+  };
+
+  populateFsForm(a);
 
   if (editingItem) {
     renderFsView(editingItem);
@@ -261,7 +298,11 @@ export function openItemFullscreenDialog(id, initialDate, defaultType) {
   }
 
   $("itemFullscreenDialog").showModal();
-  $("fsClose")?.focus({ preventScroll: true });
+  if (editingItem) {
+    $("fsClose")?.focus({ preventScroll: true });
+  } else {
+    focusFsTitle();
+  }
 }
 
 export function initItemFullscreenDialog(onItemChanged) {
@@ -383,7 +424,7 @@ export function initItemFullscreenDialog(onItemChanged) {
 
   // Dialog cancel
   $("itemFullscreenDialog")?.addEventListener("cancel", e => {
-    if (isFsDirty()) {
+    if ((currentMode === "edit" && editingItem) || isFsDirty()) {
       e.preventDefault();
       requestCloseFsDialog();
     }

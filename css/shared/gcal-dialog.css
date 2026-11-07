@@ -419,9 +419,3 @@ input.fs-title-input::placeholder {
   padding: 10px 12px;
   min-height: 88px;
 }
-
-.fs-delete-row {
-  display: flex;
-  justify-content: flex-start;
-  padding: 2px 4px;
-}

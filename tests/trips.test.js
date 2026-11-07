@@ -19,6 +19,11 @@ import { viewState } from "../js/shared/state/view-state.js";
 import { renderAgenda as renderDesktopAgenda } from "../js/desktop/screens/itinerary/agenda.js";
 import { renderAgenda as renderMobileAgenda } from "../js/mobile/screens/itinerary/agenda.js";
 import { renderCalendar as renderDesktopCalendar } from "../js/desktop/screens/itinerary/calendar.js";
+import {
+  openItemFullscreenDialog,
+  setFsMode,
+  requestCloseFsDialog
+} from "../js/desktop/screens/itinerary/dialog-fullscreen.js";
 
 test("Trips: defaults initializes with a default trip as active", () => {
   const d = defaults();
@@ -305,4 +310,109 @@ test("Trips: validateV2 preserves events and work logs outside START..END or adj
   assert.equal(validated.agenda[0].endDate, "2028-03-11");
   assert.equal(validated.work.length, 1);
   assert.equal(validated.work[0].date, "2028-03-12");
+});
+
+test("Fullscreen item dialog: view > edit auto-focuses title, shows delete next to save, and returns to view without saving", async () => {
+  setState(defaults(), false);
+  addTrip({ name: "Test Trip", startDate: "2027-06-01", endDate: "2027-06-10" }, true);
+  getState().agenda.push({
+    id: "ev-1",
+    title: "Museum visit",
+    date: "2027-06-02",
+    endDate: "",
+    time: "10:00",
+    endTime: "12:00",
+    tz: "Europe/Paris",
+    endTz: "Europe/Paris",
+    type: "Activity",
+    status: "Confirmed",
+    cost: 25,
+    currency: "EUR",
+    notes: "Louvre"
+  });
+
+  let focusedId = null;
+  const closeUse = {
+    href: "#i-x",
+    setAttribute(k, v) { if (k === "href") this.href = v; }
+  };
+  const makeEl = id => ({
+    id,
+    value: "",
+    textContent: "",
+    innerHTML: "",
+    hidden: false,
+    open: false,
+    dataset: {},
+    attrs: {},
+    classList: { remove() {}, add() {}, toggle() {} },
+    setCustomValidity() {},
+    removeAttribute() {},
+    setAttribute(k, v) { this.attrs[k] = v; },
+    closest() { return { classList: { remove() {}, add() {}, toggle() {} }, setAttribute() {} }; },
+    querySelector(sel) { return sel === "use" ? closeUse : null; },
+    focus() { focusedId = id; },
+    setSelectionRange() {},
+    showModal() { this.open = true; },
+    close() { this.open = false; }
+  });
+
+  const elements = new Map();
+  const getEl = id => {
+    if (!elements.has(id)) elements.set(id, makeEl(id));
+    return elements.get(id);
+  };
+  getEl("fsItemForm").elements = {
+    fsType: { value: "Activity" },
+    fsStatus: { value: "Confirmed" }
+  };
+
+  const prevDoc = globalThis.document;
+  globalThis.document = { getElementById: getEl };
+
+  try {
+    // 1. Open existing event -> starts in view mode
+    openItemFullscreenDialog("ev-1");
+    assert.equal(getEl("itemFullscreenDialog").open, true);
+    assert.equal(getEl("fsViewBody").hidden, false);
+    assert.equal(getEl("fsEditBody").hidden, true);
+    assert.equal(getEl("fsViewActions").hidden, false);
+    assert.equal(getEl("fsEditActions").hidden, true);
+    assert.equal(closeUse.href, "#i-x");
+
+    // 2. Click Edit -> switches to edit mode, auto-focuses title, shows delete next to save, shows back icon
+    setFsMode("edit");
+    assert.equal(getEl("fsViewBody").hidden, true);
+    assert.equal(getEl("fsEditBody").hidden, false);
+    assert.equal(getEl("fsViewActions").hidden, true);
+    assert.equal(getEl("fsEditActions").hidden, false);
+    assert.equal(getEl("fsSave").hidden, false);
+    assert.equal(getEl("fsDelete").hidden, false);
+    assert.equal(focusedId, "fsTitle");
+    assert.equal(closeUse.href, "#i-left");
+
+    // 3. Go back without saving -> stays open and returns to view screen
+    await requestCloseFsDialog();
+    assert.equal(getEl("itemFullscreenDialog").open, true);
+    assert.equal(getEl("fsViewBody").hidden, false);
+    assert.equal(getEl("fsEditBody").hidden, true);
+    assert.equal(getEl("fsViewActions").hidden, false);
+    assert.equal(getEl("fsEditActions").hidden, true);
+    assert.equal(closeUse.href, "#i-x");
+
+    // 4. Closing from view screen closes the dialog
+    await requestCloseFsDialog();
+    assert.equal(getEl("itemFullscreenDialog").open, false);
+
+    // 5. Creating a new event auto-focuses title and hides delete button
+    focusedId = null;
+    openItemFullscreenDialog();
+    assert.equal(getEl("itemFullscreenDialog").open, true);
+    assert.equal(getEl("fsEditBody").hidden, false);
+    assert.equal(getEl("fsDelete").hidden, true);
+    assert.equal(focusedId, "fsTitle");
+    assert.equal(closeUse.href, "#i-x");
+  } finally {
+    globalThis.document = prevDoc;
+  }
 });

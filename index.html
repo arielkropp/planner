@@ -356,14 +356,17 @@
 <dialog id="itemFullscreenDialog" class="fs-item-dialog" aria-labelledby="fsDialogTitle">
   <form id="fsItemForm" novalidate>
     <div class="fs-header">
-      <button type="button" class="icon-btn" data-close id="fsClose" aria-label="Close"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg></button>
+      <button type="button" class="icon-btn" data-close id="fsClose" aria-label="Close" title="Close"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg></button>
       <div class="fs-handle" aria-hidden="true"></div>
       <h2 id="fsDialogTitle" class="sr-only">Item details</h2>
       <div class="fs-header-actions" id="fsViewActions" hidden>
         <button type="button" class="icon-btn danger" id="fsViewDelete" aria-label="Delete item" title="Delete item"><svg class="i" aria-hidden="true"><use href="#i-trash"/></svg></button>
         <button type="button" class="fs-edit-btn" id="fsEditBtn"><svg class="i sm" aria-hidden="true"><use href="#i-pencil"/></svg>Edit</button>
       </div>
-      <button type="submit" class="fs-save-btn" id="fsSave">Save</button>
+      <div class="fs-header-actions" id="fsEditActions">
+        <button type="button" class="icon-btn danger" id="fsDelete" aria-label="Delete item" title="Delete item" hidden><svg class="i" aria-hidden="true"><use href="#i-trash"/></svg></button>
+        <button type="submit" class="fs-save-btn" id="fsSave">Save</button>
+      </div>
     </div>
 
     <!-- Read-Only View Mode -->
@@ -507,10 +510,6 @@
             <textarea id="fsNotes" maxlength="1000" rows="4" placeholder="Address, booking reference, details..."></textarea>
           </label>
         </div>
-      </div>
-
-      <div class="fs-delete-row" id="fsDeleteWrap" hidden>
-        <button type="button" class="btn danger" id="fsDelete"><svg class="i sm" aria-hidden="true"><use href="#i-trash"/></svg>Delete item</button>
       </div>
     </div>
   </form>
@@ -928,14 +927,17 @@
 <dialog id="itemFullscreenDialog" class="fs-item-dialog" aria-labelledby="fsDialogTitle">
   <form id="fsItemForm" novalidate>
     <div class="fs-header">
-      <button type="button" class="icon-btn" data-close id="fsClose" aria-label="Close"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg></button>
+      <button type="button" class="icon-btn" data-close id="fsClose" aria-label="Close" title="Close"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg></button>
       <div class="fs-handle" aria-hidden="true"></div>
       <h2 id="fsDialogTitle" class="sr-only">Item details</h2>
       <div class="fs-header-actions" id="fsViewActions" hidden>
         <button type="button" class="icon-btn danger" id="fsViewDelete" aria-label="Delete item" title="Delete item"><svg class="i" aria-hidden="true"><use href="#i-trash"/></svg></button>
         <button type="button" class="fs-edit-btn" id="fsEditBtn"><svg class="i sm" aria-hidden="true"><use href="#i-pencil"/></svg>Edit</button>
       </div>
-      <button type="submit" class="fs-save-btn" id="fsSave">Save</button>
+      <div class="fs-header-actions" id="fsEditActions">
+        <button type="button" class="icon-btn danger" id="fsDelete" aria-label="Delete item" title="Delete item" hidden><svg class="i" aria-hidden="true"><use href="#i-trash"/></svg></button>
+        <button type="submit" class="fs-save-btn" id="fsSave">Save</button>
+      </div>
     </div>
 
     <!-- Read-Only View Mode -->
@@ -1079,10 +1081,6 @@
             <textarea id="fsNotes" maxlength="1000" rows="4" placeholder="Address, booking reference, details..."></textarea>
           </label>
         </div>
-      </div>
-
-      <div class="fs-delete-row" id="fsDeleteWrap" hidden>
-        <button type="button" class="btn danger" id="fsDelete"><svg class="i sm" aria-hidden="true"><use href="#i-trash"/></svg>Delete item</button>
       </div>
     </div>
   </form>

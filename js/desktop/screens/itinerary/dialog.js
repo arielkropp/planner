@@ -182,6 +182,7 @@ export function openItemDialog(id, initialDate, defaultType) {
   itemInitialSnapshot = getItemFormSnapshot();
 
   $("itemDialog").showModal();
+  $("itemTitle")?.focus({ preventScroll: true });
 }
 
 export function initItemDialog(onItemChanged) {
