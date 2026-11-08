@@ -72,6 +72,7 @@
   <symbol id="i-suitcase" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="7" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></symbol>
   <symbol id="i-backpack" viewBox="0 0 24 24"><path d="M4 10a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Z"/><path d="M9 6V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/><path d="M8 21v-5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v5"/><path d="M8 10h8"/><path d="M9 18h6"/></symbol>
   <symbol id="i-mountain" viewBox="0 0 24 24"><path d="m8 3 4 8 5-5 5 15H2L8 3z"/></symbol>
+  <symbol id="i-laptop" viewBox="0 0 24 24"><path d="M20 16V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v9m16 0H4m16 0 1.28 2.55a1 1 0 0 1-.9 1.45H3.62a1 1 0 0 1-.9-1.45L4 16"/></symbol>
 </svg>
 
 <div id="app"></div>
@@ -83,8 +84,7 @@
     <nav aria-label="Screens">
       <a class="nav-link" href="#itinerary"><svg class="i" aria-hidden="true"><use href="#i-calendar-days"/></svg><span>Itinerary</span></a>
       <a class="nav-link" href="#packing"><svg class="i" aria-hidden="true"><use href="#i-luggage"/></svg><span>Packing</span></a>
-      <a class="nav-link" href="#work"><svg class="i" aria-hidden="true"><use href="#i-briefcase"/></svg><span>Work log</span></a>
-      <a class="nav-link" href="#work2"><svg class="i" aria-hidden="true"><use href="#i-briefcase"/></svg><span>Work Log 2</span></a>
+      <a class="nav-link" href="#work"><svg class="i" aria-hidden="true"><use href="#i-laptop"/></svg><span>Work log</span></a>
       <a class="nav-link" href="#settings"><svg class="i" aria-hidden="true"><use href="#i-settings"/></svg><span>Settings</span></a>
     </nav>
     <p class="save-note" id="saveStatus" role="status">Saved in this browser only. Back up before switching browsers or devices.</p>
@@ -160,77 +160,29 @@
     </section>
 
     <section data-screen="work" aria-label="Work log" hidden>
-      <div class="work-toolbar">
-        <div class="stat-bar" aria-live="polite" aria-atomic="true">
-          <div class="stat-seg">
-            <span class="label">Logged</span>
-            <span class="val"><span id="workLogged">0</span><span class="unit">h</span></span>
-          </div>
-          <div class="stat-sep" aria-hidden="true"></div>
-          <div class="stat-seg">
-            <span class="label">Balance</span>
-            <span class="val crit" id="balanceWrap"><span id="balance">−87.3</span><span class="unit">h</span></span>
-          </div>
-          <div class="stat-sep" aria-hidden="true"></div>
-          <label class="stat-seg" for="balPre">
-            <span class="label">Pre-trip</span>
-            <span class="val has-input">
-              <input id="balPre" type="number" inputmode="decimal" min="0" max="300" step="any" value="0" aria-label="Pre-trip leave hours">
-              <span class="unit">h</span>
-            </span>
-          </label>
-        </div>
-        <div class="work-actions">
-          <button class="btn sm" id="openLeaveSettings" type="button">Leave settings</button>
-          <button class="icon-btn solid" id="addWork" type="button" aria-label="Add work row" title="Add work row"><svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></button>
-        </div>
-      </div>
-      <div class="work-tz-bar" style="margin-bottom:12px; display:flex; align-items:center; gap:8px; font-size:12px; color:var(--muted); background:color-mix(in srgb, var(--ink) 4%, var(--surface)); border:1px solid var(--line); border-radius:8px; padding:7px 12px;">
-        <svg class="i sm" aria-hidden="true" style="color:var(--accent);flex-shrink:0"><use href="#i-globe"/></svg>
-        <span>Workdays default to Monday–Friday. Set your standard hours in Leave settings.</span>
-      </div>
-      <p class="status-msg" id="workStatusMsg" role="status" aria-live="polite" hidden></p>
-
-      <details class="coverage-wrap" id="workCoverageDetails">
-        <summary><span id="workCoverageSummary">Workday coverage &amp; balance breakdown</span><svg class="i sm coverage-chevron" aria-hidden="true"><use href="#i-right"/></svg></summary>
-        <div class="coverage-body">
-          <div class="coverage-grid" id="workCoverageGrid"></div>
-          <div class="leave-breakdown" id="leaveBreakdown"></div>
-        </div>
-      </details>
-
-      <div class="table-wrap">
-        <table id="workTable">
-          <thead><tr><th class="col-date">Date</th><th class="col-hours">Hrs</th><th class="col-note">Note</th><th class="actions col-actions"><span class="sr-only">Actions</span></th></tr></thead>
-          <tbody id="workRows"></tbody>
-        </table>
-      </div>
-    </section>
-
-    <section data-screen="work2" aria-label="Work Log 2" hidden>
       <div class="itinerary-toolbar">
         <div class="itinerary-switcher">
-          <div class="work2-stat-capsule" role="status" aria-label="Work log hours summary">
-            <span class="work2-stat-pill">Logged <strong id="work2Logged">0</strong> hrs</span>
-            <span class="work2-stat-divider" aria-hidden="true"></span>
-            <span class="work2-stat-pill">Target <strong id="work2Target">42</strong> hrs</span>
+          <div class="work-stat-capsule" role="status" aria-label="Work log hours summary">
+            <span class="work-stat-pill">Logged <strong id="workLogged">0</strong> hrs</span>
+            <span class="work-stat-divider" aria-hidden="true"></span>
+            <span class="work-stat-pill">Target <strong id="workTarget">42</strong> hrs</span>
           </div>
           <div class="itinerary-actions">
-            <button class="icon-btn tonal" id="work2Theme" type="button" aria-label="Toggle dark mode" title="Toggle dark mode"><svg class="i" aria-hidden="true"><use href="#i-moon"/></svg></button>
+            <button class="icon-btn tonal" id="workTheme" type="button" aria-label="Toggle dark mode" title="Toggle dark mode"><svg class="i" aria-hidden="true"><use href="#i-moon"/></svg></button>
           </div>
         </div>
       </div>
 
-      <div class="work2-card">
-        <div class="work2-header-row">
-          <div class="work2-col-desc">Description</div>
-          <div class="work2-col-date">Date</div>
-          <div class="work2-col-hrs">Hrs</div>
+      <div class="work-card">
+        <div class="work-header-row">
+          <div class="work-col-desc">Description</div>
+          <div class="work-col-date">Date</div>
+          <div class="work-col-hrs">Hrs</div>
         </div>
-        <div id="work2List" class="work2-list"></div>
+        <div id="workList" class="work-list"></div>
       </div>
 
-      <button class="fab" id="addWork2Item" type="button" aria-label="Add work log entry" title="Add work log entry">
+      <button class="fab" id="addWorkItem" type="button" aria-label="Add work log entry" title="Add work log entry">
         <svg class="i" aria-hidden="true"><use href="#i-plus"/></svg>
       </button>
     </section>
@@ -261,7 +213,7 @@
           <div class="settings-group-label">Work Log</div>
           <div class="settings-card">
             <div class="settings-row static-row">
-              <div class="settings-icon-well"><svg class="i" aria-hidden="true"><use href="#i-briefcase"/></svg></div>
+              <div class="settings-icon-well"><svg class="i" aria-hidden="true"><use href="#i-laptop"/></svg></div>
               <div class="settings-text">
                 <label class="settings-name" for="workTargetInput">Work log target</label>
                 <div class="settings-desc">Target hours for active trip</div>
@@ -759,8 +711,7 @@
     <nav aria-label="Screens">
       <a class="nav-link" href="#itinerary"><svg class="i" aria-hidden="true"><use href="#i-calendar-days"/></svg><span>Itinerary</span></a>
       <a class="nav-link" href="#packing"><svg class="i" aria-hidden="true"><use href="#i-luggage"/></svg><span>Packing</span></a>
-      <a class="nav-link" href="#work"><svg class="i" aria-hidden="true"><use href="#i-briefcase"/></svg><span>Work log</span></a>
-      <a class="nav-link" href="#work2"><svg class="i" aria-hidden="true"><use href="#i-briefcase"/></svg><span>Work Log 2</span></a>
+      <a class="nav-link" href="#work"><svg class="i" aria-hidden="true"><use href="#i-laptop"/></svg><span>Work log</span></a>
       <a class="nav-link" href="#settings" id="mobileSettings" aria-label="Settings"><svg class="i" aria-hidden="true"><use href="#i-settings"/></svg><span>Settings</span></a>
     </nav>
     <p class="save-note" id="saveStatus" role="status">Saved in this browser only. Back up before switching browsers or devices.</p>
@@ -836,77 +787,29 @@
     </section>
 
     <section data-screen="work" aria-label="Work log" hidden>
-      <div class="work-toolbar">
-        <div class="stat-bar" aria-live="polite" aria-atomic="true">
-          <div class="stat-seg">
-            <span class="label">Logged</span>
-            <span class="val"><span id="workLogged">0</span><span class="unit">h</span></span>
-          </div>
-          <div class="stat-sep" aria-hidden="true"></div>
-          <div class="stat-seg">
-            <span class="label">Balance</span>
-            <span class="val crit" id="balanceWrap"><span id="balance">−87.3</span><span class="unit">h</span></span>
-          </div>
-          <div class="stat-sep" aria-hidden="true"></div>
-          <label class="stat-seg" for="balPre">
-            <span class="label">Pre-trip</span>
-            <span class="val has-input">
-              <input id="balPre" type="number" inputmode="decimal" min="0" max="300" step="any" value="0" aria-label="Pre-trip leave hours">
-              <span class="unit">h</span>
-            </span>
-          </label>
-        </div>
-        <div class="work-actions">
-          <button class="btn sm" id="openLeaveSettings" type="button">Leave</button>
-          <button class="icon-btn solid" id="addWork" type="button" aria-label="Add work row" title="Add work row"><svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></button>
-        </div>
-      </div>
-      <div class="work-tz-bar" style="margin-bottom:12px; display:flex; align-items:center; gap:8px; font-size:12px; color:var(--muted); background:color-mix(in srgb, var(--ink) 4%, var(--surface)); border:1px solid var(--line); border-radius:8px; padding:7px 12px;">
-        <svg class="i sm" aria-hidden="true" style="color:var(--accent);flex-shrink:0"><use href="#i-globe"/></svg>
-        <span>Workdays default to Monday–Friday. Set your standard hours in Leave settings.</span>
-      </div>
-      <p class="status-msg" id="workStatusMsg" role="status" aria-live="polite" hidden></p>
-
-      <details class="coverage-wrap" id="workCoverageDetails">
-        <summary><span id="workCoverageSummary">Workday coverage &amp; balance breakdown</span><svg class="i sm coverage-chevron" aria-hidden="true"><use href="#i-right"/></svg></summary>
-        <div class="coverage-body">
-          <div class="coverage-grid" id="workCoverageGrid"></div>
-          <div class="leave-breakdown" id="leaveBreakdown"></div>
-        </div>
-      </details>
-
-      <div class="table-wrap">
-        <table id="workTable">
-          <thead><tr><th class="col-date">Date</th><th class="col-hours">Hrs</th><th class="col-note">Note</th><th class="actions col-actions"><span class="sr-only">Actions</span></th></tr></thead>
-          <tbody id="workRows"></tbody>
-        </table>
-      </div>
-    </section>
-
-    <section data-screen="work2" aria-label="Work Log 2" hidden>
       <div class="itinerary-toolbar">
         <div class="itinerary-switcher">
-          <div class="work2-stat-capsule" role="status" aria-label="Work log hours summary">
-            <span class="work2-stat-pill">Logged <strong id="work2Logged">0</strong> hrs</span>
-            <span class="work2-stat-divider" aria-hidden="true"></span>
-            <span class="work2-stat-pill">Target <strong id="work2Target">42</strong> hrs</span>
+          <div class="work-stat-capsule" role="status" aria-label="Work log hours summary">
+            <span class="work-stat-pill">Logged <strong id="workLogged">0</strong> hrs</span>
+            <span class="work-stat-divider" aria-hidden="true"></span>
+            <span class="work-stat-pill">Target <strong id="workTarget">42</strong> hrs</span>
           </div>
           <div class="itinerary-actions">
-            <button class="icon-btn tonal" id="work2Theme" type="button" aria-label="Toggle dark mode" title="Toggle dark mode"><svg class="i" aria-hidden="true"><use href="#i-moon"/></svg></button>
+            <button class="icon-btn tonal" id="workTheme" type="button" aria-label="Toggle dark mode" title="Toggle dark mode"><svg class="i" aria-hidden="true"><use href="#i-moon"/></svg></button>
           </div>
         </div>
       </div>
 
-      <div class="work2-card">
-        <div class="work2-header-row">
-          <div class="work2-col-desc">Description</div>
-          <div class="work2-col-date">Date</div>
-          <div class="work2-col-hrs">Hrs</div>
+      <div class="work-card">
+        <div class="work-header-row">
+          <div class="work-col-desc">Description</div>
+          <div class="work-col-date">Date</div>
+          <div class="work-col-hrs">Hrs</div>
         </div>
-        <div id="work2List" class="work2-list"></div>
+        <div id="workList" class="work-list"></div>
       </div>
 
-      <button class="fab" id="addWork2Item" type="button" aria-label="Add work log entry" title="Add work log entry">
+      <button class="fab" id="addWorkItem" type="button" aria-label="Add work log entry" title="Add work log entry">
         <svg class="i" aria-hidden="true"><use href="#i-plus"/></svg>
       </button>
     </section>
@@ -937,7 +840,7 @@
           <div class="settings-group-label">Work Log</div>
           <div class="settings-card">
             <div class="settings-row static-row">
-              <div class="settings-icon-well"><svg class="i" aria-hidden="true"><use href="#i-briefcase"/></svg></div>
+              <div class="settings-icon-well"><svg class="i" aria-hidden="true"><use href="#i-laptop"/></svg></div>
               <div class="settings-text">
                 <label class="settings-name" for="workTargetInput">Work log target</label>
                 <div class="settings-desc">Target hours for active trip</div>

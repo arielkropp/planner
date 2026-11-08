@@ -15,8 +15,7 @@ import {
   itineraryRouteAdapter
 } from "./screens/itinerary/index.js";
 import { initPacking, renderPacking, updatePackLens } from "./screens/packing/index.js";
-import { initWork, renderWorkView } from "./screens/work/index.js";
-import { initWork2, renderWork2 } from "./screens/work2/index.js";
+import { initWork, renderWork } from "./screens/work/index.js";
 import { initBackupControls } from "./shell/backup-controls.js";
 import { initSettingsDrawer } from "./shell/settings-drawer.js";
 import { initTripControls, renderTripsList } from "../shared/components/trips-ui.js";
@@ -24,8 +23,7 @@ import { initTripControls, renderTripsList } from "../shared/components/trips-ui
 function renderAll() {
   renderItinerary();
   renderPacking();
-  renderWorkView();
-  renderWork2();
+  renderWork();
   renderTripsList();
 }
 
@@ -42,8 +40,7 @@ export function mount({ signal }) {
 
   initItinerary(getCurrentRoute, { signal });
   initPacking({ signal });
-  initWork({ onRatesChanged: () => renderItinerary() });
-  initWork2({ signal });
+  initWork({ signal });
   initBackupControls();
   initSettingsDrawer({ signal });
   initTripControls();

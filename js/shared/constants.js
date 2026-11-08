@@ -96,5 +96,5 @@ export const PACK_TEMPLATES = [
 
 export const WD = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 export const FULL_MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-export const SCREENS = { itinerary: "Itinerary", packing: "Packing list", work: "Work log", work2: "Work Log 2", settings: "Settings" };
+export const SCREENS = { itinerary: "Itinerary", packing: "Packing list", work: "Work log", settings: "Settings" };
 

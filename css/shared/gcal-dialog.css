@@ -3,8 +3,7 @@
    ========================================================= */
 
 dialog#itemFullscreenDialog,
-dialog#packItemDialog.fs-item-dialog,
-dialog#work2ItemDialog.fs-item-dialog {
+dialog#packItemDialog.fs-item-dialog {
   display: none;
   position: fixed;
   inset: 0;
@@ -25,15 +24,13 @@ dialog#work2ItemDialog.fs-item-dialog {
 }
 
 dialog#itemFullscreenDialog[open],
-dialog#packItemDialog.fs-item-dialog[open],
-dialog#work2ItemDialog.fs-item-dialog[open] {
+dialog#packItemDialog.fs-item-dialog[open] {
   display: flex;
   flex-direction: column;
 }
 
 dialog#itemFullscreenDialog form,
-dialog#packItemDialog.fs-item-dialog form,
-dialog#work2ItemDialog.fs-item-dialog form {
+dialog#packItemDialog.fs-item-dialog form {
   display: flex;
   flex-direction: column;
   flex: 1 1 auto;
@@ -44,8 +41,7 @@ dialog#work2ItemDialog.fs-item-dialog form {
 
 @media (min-width: 761px) {
   dialog#itemFullscreenDialog,
-  dialog#packItemDialog.fs-item-dialog,
-  dialog#work2ItemDialog.fs-item-dialog {
+  dialog#packItemDialog.fs-item-dialog {
     inset: auto;
     top: 50%;
     left: 50%;
@@ -61,8 +57,7 @@ dialog#work2ItemDialog.fs-item-dialog form {
   }
 
   dialog#itemFullscreenDialog::backdrop,
-  dialog#packItemDialog.fs-item-dialog::backdrop,
-  dialog#work2ItemDialog.fs-item-dialog::backdrop {
+  dialog#packItemDialog.fs-item-dialog::backdrop {
     background: rgba(10, 14, 20, 0.55);
     backdrop-filter: blur(2px);
   }

@@ -1,4 +1,4 @@
-const CACHE_NAME = "trip-planner-663fb33e3ccaac8a994f1625d500c6d249ef0344";
+const CACHE_NAME = "trip-planner-4ce3ca0f399f610a2cfc0676414d14023609f118";
 
 // The build replaces this line with the app shell, manifest and assets (see scripts/build.mjs)
 const STATIC_ASSETS = [
@@ -11,7 +11,6 @@ const STATIC_ASSETS = [
   "./css/desktop/main.css",
   "./css/desktop/packing.css",
   "./css/desktop/work.css",
-  "./css/desktop/work2.css",
   "./css/mobile/dialogs.css",
   "./css/mobile/itinerary.css",
   "./css/mobile/layout.css",
@@ -19,7 +18,6 @@ const STATIC_ASSETS = [
   "./css/mobile/packing.css",
   "./css/mobile/screens.css",
   "./css/mobile/work.css",
-  "./css/mobile/work2.css",
   "./css/shared/base.css",
   "./css/shared/gcal-dialog.css",
   "./css/shared/main.css",
@@ -35,11 +33,7 @@ const STATIC_ASSETS = [
   "./js/desktop/screens/itinerary/index.js",
   "./js/desktop/screens/itinerary/markup.js",
   "./js/desktop/screens/packing/index.js",
-  "./js/desktop/screens/work/coverage.js",
-  "./js/desktop/screens/work/dialogs.js",
   "./js/desktop/screens/work/index.js",
-  "./js/desktop/screens/work/table.js",
-  "./js/desktop/screens/work2/index.js",
   "./js/desktop/shell/backup-controls.js",
   "./js/mobile/app.js",
   "./js/mobile/screens/itinerary/agenda.js",
@@ -49,11 +43,7 @@ const STATIC_ASSETS = [
   "./js/mobile/screens/itinerary/index.js",
   "./js/mobile/screens/itinerary/markup.js",
   "./js/mobile/screens/packing/index.js",
-  "./js/mobile/screens/work/coverage.js",
-  "./js/mobile/screens/work/dialogs.js",
   "./js/mobile/screens/work/index.js",
-  "./js/mobile/screens/work/table.js",
-  "./js/mobile/screens/work2/index.js",
   "./js/mobile/shell/backup-controls.js",
   "./js/mobile/shell/settings-drawer.js",
   "./js/shared/components/dialog.js",
@@ -70,7 +60,7 @@ const STATIC_ASSETS = [
   "./js/shared/router.js",
   "./js/shared/screens/packing/index.js",
   "./js/shared/screens/packing/storage.js",
-  "./js/shared/screens/work2/index.js",
+  "./js/shared/screens/work/index.js",
   "./js/shared/state/migrations.js",
   "./js/shared/state/store.js",
   "./js/shared/state/validation.js",
