@@ -40,7 +40,13 @@ export function isFsDirty() {
 function focusFsTitle() {
   const titleInput = $("fsTitle");
   if (!titleInput) return;
-  titleInput.focus({ preventScroll: true });
+  try {
+    titleInput.focus({ preventScroll: true });
+  } catch {
+    try {
+      titleInput.focus();
+    } catch {}
+  }
   try {
     const len = titleInput.value.length;
     titleInput.setSelectionRange(len, len);
@@ -91,7 +97,9 @@ export async function requestCloseFsDialog() {
     populateFsForm(editingItem);
     renderFsView(editingItem);
     setFsMode("view");
-    $("fsEditBtn")?.focus({ preventScroll: true });
+    try {
+      $("fsEditBtn")?.focus({ preventScroll: true });
+    } catch {}
     return;
   }
   d.close();
@@ -260,8 +268,12 @@ function populateFsForm(a) {
 
   $("fsCost").value = (a.cost > 0) ? a.cost : "";
   $("fsCurrency").value = a.currency || "USD";
-  $("fsItemForm").elements.fsType.value = a.type;
-  $("fsItemForm").elements.fsStatus.value = a.status;
+  if ($("fsItemForm")?.elements?.fsType) {
+    $("fsItemForm").elements.fsType.value = a.type;
+  }
+  if ($("fsItemForm")?.elements?.fsStatus) {
+    $("fsItemForm").elements.fsStatus.value = a.status;
+  }
   $("fsNotes").value = a.notes || "";
   if ($("fsDelete")) $("fsDelete").hidden = !editingItem;
   fsInitialSnapshot = getFsSnapshot();
@@ -299,7 +311,9 @@ export function openItemFullscreenDialog(id, initialDate, defaultType) {
 
   $("itemFullscreenDialog").showModal();
   if (editingItem) {
-    $("fsClose")?.focus({ preventScroll: true });
+    try {
+      $("fsClose")?.focus({ preventScroll: true });
+    } catch {}
   } else {
     focusFsTitle();
   }

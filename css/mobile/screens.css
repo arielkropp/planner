@@ -48,10 +48,6 @@
   bottom: calc(76px + env(safe-area-inset-bottom));
 }
 
-#addItemFullscreen {
-  right: calc(max(16px, env(safe-area-inset-right)) + 68px);
-}
-
 .itinerary-switcher .seg button {
   width: auto;
   min-width: 0;

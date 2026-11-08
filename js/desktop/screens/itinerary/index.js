@@ -109,20 +109,13 @@ export function focusItem(id, getCurrentRoute = () => "itinerary") {
 }
 
 export function initItinerary(getCurrentRoute = () => "itinerary", { signal } = {}) {
-  initItemDialog(id => {
+  initItemFullscreenDialog(id => {
     renderItinerary();
     if (id) focusItem(id, getCurrentRoute);
     else $("addItem")?.focus({ preventScroll: true });
   });
 
-  initItemFullscreenDialog(id => {
-    renderItinerary();
-    if (id) focusItem(id, getCurrentRoute);
-    else $("addItemFullscreen")?.focus({ preventScroll: true });
-  });
-
-  $("addItem")?.addEventListener("click", () => openItemDialog());
-  $("addItemFullscreen")?.addEventListener("click", () => openItemFullscreenDialog());
+  $("addItem")?.addEventListener("click", () => openItemFullscreenDialog());
 
   $("itineraryViews")?.addEventListener("click", e => {
     const button = e.target.closest("[data-itinerary-view]");
@@ -139,7 +132,7 @@ export function initItinerary(getCurrentRoute = () => "itinerary", { signal } = 
   $("tvNext")?.addEventListener("click", () => step(1));
 
   $("tvBody")?.addEventListener("click", e => {
-    const item = e.target.closest(".ev, .mchip[data-id]");
+    const item = e.target.closest(".ev, .mchip[data-id], .ag-item");
     const day = e.target.closest("[data-day]");
     if (item) return openItemFullscreenDialog(item.dataset.id);
     if (day) openItemFullscreenDialog(null, day.dataset.day);
