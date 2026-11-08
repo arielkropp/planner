@@ -56,6 +56,13 @@ export const PACK_CATEGORY_META = {
 
 export const PACK_CATEGORIES = Object.keys(PACK_CATEGORY_META);
 
+export const PACK_BAGS = [
+  { id: "suitcase", label: "Suitcase", icon: "i-suitcase" },
+  { id: "backpack", label: "Backpack", icon: "i-backpack" },
+  { id: "trolley", label: "Trolley", icon: "i-luggage" },
+  { id: "hiking-bag", label: "Hiking bag", icon: "i-mountain" }
+];
+
 export function getPackingItems() {
   const state = getState();
   return (state && Array.isArray(state.packing)) ? state.packing : [];

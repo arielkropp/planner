@@ -207,6 +207,12 @@
   border-color: #303742;
 }
 
+.pack-pill.bag {
+  background: var(--surface-tonal);
+  color: var(--muted);
+  border-color: var(--line);
+}
+
 .pack-pill.to-buy {
   background: #FFF0E0;
   color: #B44D12;

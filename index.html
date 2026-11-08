@@ -68,6 +68,9 @@
   <symbol id="i-package" viewBox="0 0 24 24"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></symbol>
   <symbol id="i-tag" viewBox="0 0 24 24"><path d="M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z"/><circle cx="7" cy="7" r=".5" fill="currentColor"/></symbol>
   <symbol id="i-heart" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></symbol>
+  <symbol id="i-suitcase" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="7" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></symbol>
+  <symbol id="i-backpack" viewBox="0 0 24 24"><path d="M4 10a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Z"/><path d="M9 6V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/><path d="M8 21v-5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v5"/><path d="M8 10h8"/><path d="M9 18h6"/></symbol>
+  <symbol id="i-mountain" viewBox="0 0 24 24"><path d="m8 3 4 8 5-5 5 15H2L8 3z"/></symbol>
 </svg>
 
 <div id="app"></div>
@@ -643,6 +646,14 @@
 
         <div class="fs-card-divider" aria-hidden="true"></div>
 
+        <!-- Bag Location Pillchooser -->
+        <div class="fs-chip-section">
+          <span class="fs-label">Bag</span>
+          <div class="chips" id="packBags" role="radiogroup" aria-label="Bag location"></div>
+        </div>
+
+        <div class="fs-card-divider" aria-hidden="true"></div>
+
         <!-- Status Toggles (To buy & Packed) -->
         <div class="fs-chip-section">
           <span class="fs-label">Status</span>
@@ -659,28 +670,15 @@
         </div>
       </div>
 
-      <!-- Quantity & Location Card -->
+      <!-- Quantity Card -->
       <div class="fs-group">
-        <div class="fs-group-label">Quantity & Bag</div>
+        <div class="fs-group-label">Quantity</div>
         <div class="fs-card fs-details-card">
-          <div class="row2">
-            <div class="field">
-              <label for="packItemQty">Quantity</label>
-              <div class="pack-qty-control">
-                <button type="button" class="pack-qty-btn" id="packQtyDec" aria-label="Decrease quantity">−</button>
-                <input type="number" id="packItemQty" min="1" max="99" value="1" inputmode="numeric">
-                <button type="button" class="pack-qty-btn" id="packQtyInc" aria-label="Increase quantity">+</button>
-              </div>
-            </div>
-            <div class="field">
-              <label for="packItemBag">Bag / Location</label>
-              <select id="packItemBag">
-                <option value="">No bag assigned</option>
-                <option value="Carry-on">Carry-on</option>
-                <option value="Checked bag">Checked bag</option>
-                <option value="Backpack">Backpack</option>
-                <option value="Personal item">Personal item</option>
-              </select>
+          <div class="field">
+            <div class="pack-qty-control">
+              <button type="button" class="pack-qty-btn" id="packQtyDec" aria-label="Decrease quantity">−</button>
+              <input type="number" id="packItemQty" min="1" max="99" value="1" inputmode="numeric" aria-label="Quantity">
+              <button type="button" class="pack-qty-btn" id="packQtyInc" aria-label="Increase quantity">+</button>
             </div>
           </div>
         </div>
@@ -1271,6 +1269,14 @@
 
         <div class="fs-card-divider" aria-hidden="true"></div>
 
+        <!-- Bag Location Pillchooser -->
+        <div class="fs-chip-section">
+          <span class="fs-label">Bag</span>
+          <div class="chips" id="packBags" role="radiogroup" aria-label="Bag location"></div>
+        </div>
+
+        <div class="fs-card-divider" aria-hidden="true"></div>
+
         <!-- Status Toggles (To buy & Packed) -->
         <div class="fs-chip-section">
           <span class="fs-label">Status</span>
@@ -1287,28 +1293,15 @@
         </div>
       </div>
 
-      <!-- Quantity & Location Card -->
+      <!-- Quantity Card -->
       <div class="fs-group">
-        <div class="fs-group-label">Quantity & Bag</div>
+        <div class="fs-group-label">Quantity</div>
         <div class="fs-card fs-details-card">
-          <div class="row2">
-            <div class="field">
-              <label for="packItemQty">Quantity</label>
-              <div class="pack-qty-control">
-                <button type="button" class="pack-qty-btn" id="packQtyDec" aria-label="Decrease quantity">−</button>
-                <input type="number" id="packItemQty" min="1" max="99" value="1" inputmode="numeric">
-                <button type="button" class="pack-qty-btn" id="packQtyInc" aria-label="Increase quantity">+</button>
-              </div>
-            </div>
-            <div class="field">
-              <label for="packItemBag">Bag / Location</label>
-              <select id="packItemBag">
-                <option value="">No bag assigned</option>
-                <option value="Carry-on">Carry-on</option>
-                <option value="Checked bag">Checked bag</option>
-                <option value="Backpack">Backpack</option>
-                <option value="Personal item">Personal item</option>
-              </select>
+          <div class="field">
+            <div class="pack-qty-control">
+              <button type="button" class="pack-qty-btn" id="packQtyDec" aria-label="Decrease quantity">−</button>
+              <input type="number" id="packItemQty" min="1" max="99" value="1" inputmode="numeric" aria-label="Quantity">
+              <button type="button" class="pack-qty-btn" id="packQtyInc" aria-label="Increase quantity">+</button>
             </div>
           </div>
         </div>

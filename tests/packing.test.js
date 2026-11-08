@@ -13,6 +13,7 @@ globalThis.localStorage = {
 import {
   PACK_CATEGORIES,
   PACK_CATEGORY_META,
+  PACK_BAGS,
   getPackingItems,
   getPackingItem,
   addPackingItem,
@@ -30,6 +31,12 @@ test("Packing: Categories and metadata are properly configured", () => {
     assert.ok(meta.bg, `Category ${cat} has a background color`);
     assert.ok(meta.color, `Category ${cat} has a text color`);
   }
+});
+
+test("Packing: Bag options are properly configured", () => {
+  assert.equal(PACK_BAGS.length, 4);
+  const labels = PACK_BAGS.map(b => b.label);
+  assert.deepEqual(labels, ["Suitcase", "Backpack", "Trolley", "Hiking bag"]);
 });
 
 test("Packing: Loads items array", () => {
@@ -106,13 +113,22 @@ test("Packing: New items are added to the top of the list", () => {
   assert.equal(items[0].title, "First on top");
 });
 
-test("Packing: initPacking runs and populates categories when container is present", async () => {
-  const dummyContainer = {
+test("Packing: initPacking runs and populates categories and bags when container is present", async () => {
+  const dummyCats = {
     hasChildNodes: () => false,
     innerHTML: ""
   };
+  const dummyBags = {
+    hasChildNodes: () => false,
+    innerHTML: "",
+    addEventListener: () => {}
+  };
   globalThis.document = {
-    getElementById: (id) => id === "packCategories" ? dummyContainer : null,
+    getElementById: (id) => {
+      if (id === "packCategories") return dummyCats;
+      if (id === "packBags") return dummyBags;
+      return null;
+    },
     querySelectorAll: () => [],
     addEventListener: () => {}
   };
@@ -126,6 +142,10 @@ test("Packing: initPacking runs and populates categories when container is prese
   assert.doesNotThrow(() => {
     initPacking();
   });
-  assert.ok(dummyContainer.innerHTML.includes("Clothes"));
-  assert.ok(dummyContainer.innerHTML.includes("Electronics"));
+  assert.ok(dummyCats.innerHTML.includes("Clothes"));
+  assert.ok(dummyCats.innerHTML.includes("Electronics"));
+  assert.ok(dummyBags.innerHTML.includes("Suitcase"));
+  assert.ok(dummyBags.innerHTML.includes("Backpack"));
+  assert.ok(dummyBags.innerHTML.includes("Trolley"));
+  assert.ok(dummyBags.innerHTML.includes("Hiking bag"));
 });

@@ -4,6 +4,7 @@ import { $, esc } from "../../utils/dom.js";
 import { confirmAsk } from "../../components/dialog.js";
 import {
   PACK_CATEGORIES,
+  PACK_BAGS,
   getPackingItems,
   getPackingItem,
   addPackingItem,
@@ -59,7 +60,7 @@ function renderItemRow(item) {
   const isPacked = Boolean(item.done);
   const catSlug = item.category ? item.category.toLowerCase() : "";
   const showCat = catSlug && catSlug !== "other";
-  const hasBadges = showCat || item.toBuy;
+  const hasBadges = showCat || item.toBuy || Boolean(item.bag);
   const qty = item.qty || 1;
 
   return `
@@ -72,6 +73,7 @@ function renderItemRow(item) {
         ${hasBadges ? `
           <div class="pack-row-badges">
             ${showCat ? `<span class="pack-pill cat-${esc(catSlug)}">${esc(catSlug)}</span>` : ""}
+            ${item.bag ? `<span class="pack-pill bag">${esc(item.bag.toLowerCase())}</span>` : ""}
             ${item.toBuy ? `<span class="pack-pill to-buy">to buy</span>` : ""}
           </div>
         ` : ""}
@@ -158,18 +160,45 @@ function ensureCategoryChips() {
   }
 }
 
+function ensureBagChips() {
+  const bagsContainer = $("packBags");
+  if (bagsContainer && !bagsContainer.hasChildNodes()) {
+    bagsContainer.innerHTML = PACK_BAGS.map(bag => `
+      <label class="chip-opt" style="--c: var(--accent);">
+        <input type="radio" name="packBag" value="${esc(bag.label)}">
+        <span><svg class="i" aria-hidden="true"><use href="#${esc(bag.icon)}"/></svg>${esc(bag.label)}</span>
+      </label>
+    `).join("");
+  }
+}
+
+function getSelectedBag() {
+  const checked = document.querySelector('input[name="packBag"]:checked');
+  return checked ? checked.value : "";
+}
+
+function setSelectedBag(bagName) {
+  const target = bagName
+    ? document.querySelector(`input[name="packBag"][value="${bagName}" i]`)
+    : null;
+  document.querySelectorAll('input[name="packBag"]').forEach(r => {
+    r.checked = Boolean(target && r === target);
+    r.dataset.wasChecked = String(r.checked);
+  });
+}
+
 // Dialog management
 function openItemDialog(itemId = null) {
   const dlg = $("packItemDialog");
   if (!dlg) return;
 
   ensureCategoryChips();
+  ensureBagChips();
 
   const titleEl = $("packDialogTitle");
   const idEl = $("packItemId");
   const nameEl = $("packItemTitle");
   const qtyEl = $("packItemQty");
-  const bagEl = $("packItemBag");
   const toBuyEl = $("packItemToBuy");
   const doneEl = $("packItemDone");
   const notesEl = $("packItemNotes");
@@ -184,8 +213,8 @@ function openItemDialog(itemId = null) {
     if (idEl) idEl.value = item.id;
     if (nameEl) nameEl.value = item.title;
     setSelectedCategory(item.category || "Other");
+    setSelectedBag(item.bag || "");
     if (qtyEl) qtyEl.value = item.qty || 1;
-    if (bagEl) bagEl.value = item.bag || "";
     if (toBuyEl) toBuyEl.checked = Boolean(item.toBuy);
     if (doneEl) doneEl.checked = Boolean(item.done);
     if (notesEl) notesEl.value = item.notes || "";
@@ -197,8 +226,8 @@ function openItemDialog(itemId = null) {
     if (idEl) idEl.value = "";
     if (nameEl) nameEl.value = "";
     setSelectedCategory("Clothes");
+    setSelectedBag("");
     if (qtyEl) qtyEl.value = "1";
-    if (bagEl) bagEl.value = "";
     if (toBuyEl) toBuyEl.checked = defaultToBuy;
     if (doneEl) doneEl.checked = false;
     if (notesEl) notesEl.value = "";
@@ -222,8 +251,27 @@ export function initPacking({ signal } = {}) {
     signal.addEventListener("abort", unsubscribe);
   }
 
-  // Pre-render categories into dialog if present
+  // Pre-render categories and bags into dialog if present
   ensureCategoryChips();
+  ensureBagChips();
+
+  // Allow toggling off a selected bag pill
+  const bagsContainer = $("packBags");
+  if (bagsContainer && typeof bagsContainer.addEventListener === "function") {
+    bagsContainer.addEventListener("click", e => {
+      const radio = e.target.closest('input[name="packBag"]');
+      if (!radio) return;
+      if (radio.dataset.wasChecked === "true") {
+        radio.checked = false;
+        radio.dataset.wasChecked = "false";
+      } else {
+        document.querySelectorAll('input[name="packBag"]').forEach(r => {
+          r.dataset.wasChecked = "false";
+        });
+        radio.dataset.wasChecked = "true";
+      }
+    });
+  }
 
   // Segmented view buttons
   const viewSwitcher = $("packViews");
@@ -329,8 +377,8 @@ export function initPacking({ signal } = {}) {
 
       const id = $("packItemId")?.value;
       const category = getSelectedCategory();
+      const bag = getSelectedBag();
       const qty = parseInt(qtyInput?.value, 10) || 1;
-      const bag = $("packItemBag")?.value || "";
       const toBuy = Boolean($("packItemToBuy")?.checked);
       const done = Boolean($("packItemDone")?.checked);
       const notes = $("packItemNotes")?.value || "";
