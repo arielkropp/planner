@@ -549,7 +549,6 @@ export function initPacking({ signal } = {}) {
   const quickAddBox = $("packQuickAddBox");
   const quickAddForm = $("packQuickAddForm");
   const quickAddInput = $("packQuickAddInput");
-  const quickAddClose = $("packQuickAddClose");
 
   function openQuickAdd() {
     if (!quickAddBox) return;
@@ -588,10 +587,6 @@ export function initPacking({ signal } = {}) {
         openQuickAdd();
       }
     });
-  }
-
-  if (quickAddClose) {
-    quickAddClose.addEventListener("click", () => closeQuickAdd());
   }
 
   if (window.visualViewport) {

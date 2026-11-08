@@ -178,19 +178,6 @@
   flex-shrink: 0;
 }
 
-.pack-quick-add-close {
-  width: 32px;
-  height: 32px;
-  border-radius: 999px;
-  flex-shrink: 0;
-  color: var(--muted);
-}
-
-.pack-quick-add-close:hover {
-  color: var(--ink);
-  background: color-mix(in srgb, var(--ink) 8%, transparent);
-}
-
 /* Circular Checkbox (hollow circle -> filled when packed) */
 .pack-check-circle {
   width: 22px;
