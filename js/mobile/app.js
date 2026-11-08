@@ -14,7 +14,7 @@ import {
   updateItineraryLens,
   itineraryRouteAdapter
 } from "./screens/itinerary/index.js";
-import { initPacking, renderPacking } from "./screens/packing/index.js";
+import { initPacking, renderPacking, updatePackLens } from "./screens/packing/index.js";
 import { initWork, renderWorkView } from "./screens/work/index.js";
 import { initBackupControls } from "./shell/backup-controls.js";
 import { initSettingsDrawer } from "./shell/settings-drawer.js";
@@ -39,7 +39,7 @@ export function mount({ signal }) {
   initTheme({ signal });
 
   initItinerary(getCurrentRoute, { signal });
-  initPacking();
+  initPacking({ signal });
   initWork({ onRatesChanged: () => renderItinerary() });
   initBackupControls();
   initSettingsDrawer({ signal });
@@ -53,8 +53,14 @@ export function mount({ signal }) {
   route(false);
 
   // Update the visual lens once fonts and layout are ready
-  requestAnimationFrame(() => updateItineraryLens(true));
+  requestAnimationFrame(() => {
+    updateItineraryLens(true);
+    updatePackLens(true);
+  });
   document.fonts?.ready?.then?.(() => {
-    if (!signal.aborted) updateItineraryLens(true);
+    if (!signal.aborted) {
+      updateItineraryLens(true);
+      updatePackLens(true);
+    }
   });
 }

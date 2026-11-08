@@ -38,7 +38,17 @@
   height: 48px;
 }
 
+.itinerary-actions #packTheme {
+  width: 48px;
+  height: 48px;
+}
+
 .itinerary-actions #theme .i {
+  width: 24px;
+  height: 24px;
+}
+
+.itinerary-actions #packTheme .i {
   width: 24px;
   height: 24px;
 }

@@ -1,4 +1,4 @@
-const CACHE_NAME = "trip-planner-fa62ad8e773d7b8ac16e0cfdaec11f1f63f77fd5";
+const CACHE_NAME = "trip-planner-7d1b2b7caa19658f237ba2b0e07c7889ac2f1c83";
 
 // The build replaces this line with the app shell, manifest and assets (see scripts/build.mjs)
 const STATIC_ASSETS = [
@@ -33,8 +33,6 @@ const STATIC_ASSETS = [
   "./js/desktop/screens/itinerary/index.js",
   "./js/desktop/screens/itinerary/markup.js",
   "./js/desktop/screens/packing/index.js",
-  "./js/desktop/screens/packing/table.js",
-  "./js/desktop/screens/packing/templates.js",
   "./js/desktop/screens/work/coverage.js",
   "./js/desktop/screens/work/dialogs.js",
   "./js/desktop/screens/work/index.js",
@@ -48,8 +46,6 @@ const STATIC_ASSETS = [
   "./js/mobile/screens/itinerary/index.js",
   "./js/mobile/screens/itinerary/markup.js",
   "./js/mobile/screens/packing/index.js",
-  "./js/mobile/screens/packing/table.js",
-  "./js/mobile/screens/packing/templates.js",
   "./js/mobile/screens/work/coverage.js",
   "./js/mobile/screens/work/dialogs.js",
   "./js/mobile/screens/work/index.js",
@@ -68,6 +64,8 @@ const STATIC_ASSETS = [
   "./js/shared/domain/work-calc.js",
   "./js/shared/platform.js",
   "./js/shared/router.js",
+  "./js/shared/screens/packing/index.js",
+  "./js/shared/screens/packing/storage.js",
   "./js/shared/state/migrations.js",
   "./js/shared/state/store.js",
   "./js/shared/state/validation.js",

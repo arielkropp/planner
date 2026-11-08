@@ -189,8 +189,12 @@ export function validateTrip(t, defaultsObj = {}) {
     const parsedQty = parsePackQty(p.qty);
     const qty = parsedQty !== null ? parsedQty : 1;
     const done = Boolean(p.done);
+    const toBuy = Boolean(p.toBuy);
+    const bag = typeof p.bag === "string" ? p.bag.slice(0, 100) : "";
+    const notes = typeof p.notes === "string" ? p.notes.slice(0, 1000) : "";
+    const createdAt = typeof p.createdAt === "string" ? p.createdAt : "";
 
-    packing.push({ id: pId, title, category, qty, done });
+    packing.push({ id: pId, title, category, qty, done, toBuy, bag, notes, createdAt });
   }
 
   const seenWorkIds = new Set();

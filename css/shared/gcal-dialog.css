@@ -2,7 +2,8 @@
    HYBRID FULL-SCREEN ITEM DIALOG (VIEW + EDIT MODES)
    ========================================================= */
 
-dialog#itemFullscreenDialog {
+dialog#itemFullscreenDialog,
+dialog#packItemDialog.fs-item-dialog {
   display: none;
   position: fixed;
   inset: 0;
@@ -22,17 +23,30 @@ dialog#itemFullscreenDialog {
   font-family: var(--font-ui);
 }
 
-dialog#itemFullscreenDialog[open] {
+dialog#itemFullscreenDialog[open],
+dialog#packItemDialog.fs-item-dialog[open] {
   display: flex;
   flex-direction: column;
 }
 
+dialog#itemFullscreenDialog form,
+dialog#packItemDialog.fs-item-dialog form {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+  max-height: 100%;
+  overflow: hidden;
+}
+
 @media (min-width: 761px) {
-  dialog#itemFullscreenDialog {
+  dialog#itemFullscreenDialog,
+  dialog#packItemDialog.fs-item-dialog {
     inset: auto;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    animation: none;
     width: 560px;
     max-width: calc(100vw - 40px);
     height: auto;
@@ -42,7 +56,8 @@ dialog#itemFullscreenDialog[open] {
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.28);
   }
 
-  dialog#itemFullscreenDialog::backdrop {
+  dialog#itemFullscreenDialog::backdrop,
+  dialog#packItemDialog.fs-item-dialog::backdrop {
     background: rgba(10, 14, 20, 0.55);
     backdrop-filter: blur(2px);
   }
@@ -376,6 +391,29 @@ input.fs-title-input::placeholder {
 .fs-hero-card .chip-opt .i {
   width: 14px;
   height: 14px;
+}
+
+/* On/Off Toggle Chips (e.g. To buy / Packed) */
+.chip-opt.chip-toggle input:not(:checked) + span {
+  border-color: var(--line);
+  color: var(--muted);
+  background: var(--surface-tonal);
+}
+
+.chip-opt.chip-toggle input:not(:checked) + span:hover {
+  border-color: var(--c);
+  color: var(--c);
+  background: color-mix(in srgb, var(--c) 10%, transparent);
+}
+
+.chip-opt.chip-toggle input:checked + span {
+  background: var(--c);
+  border-color: var(--c);
+  color: #ffffff;
+}
+
+:root[data-theme="dark"] .chip-opt.chip-toggle input:checked + span {
+  color: #101317;
 }
 
 /* Full-width Stacked Date/Time Rows */

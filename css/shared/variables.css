@@ -26,6 +26,13 @@
   --t-activity: #2C731D;
   --t-flight: #1E5CA8;
   --t-other: #525964;
+  --pack-clothes: #C23B5A;
+  --pack-electronics: #5B47D6;
+  --pack-documents: #1D63B8;
+  --pack-toiletries: #0E7490;
+  --pack-health: #387B1E;
+  --pack-other: #525964;
+  --pack-tobuy: #C85A17;
   --event-fill-mix: 20%;
   --event-hover-mix: 32%;
 
@@ -52,6 +59,13 @@
   --t-activity: #82CF70;
   --t-flight: #73B2F2;
   --t-other: #9AA2AD;
+  --pack-clothes: #F48FB1;
+  --pack-electronics: #A594F9;
+  --pack-documents: #73B2F2;
+  --pack-toiletries: #38BDF8;
+  --pack-health: #86EFAC;
+  --pack-other: #9AA2AD;
+  --pack-tobuy: #F5A64C;
   --event-fill-mix: 30%;
   --event-hover-mix: 38%;
 

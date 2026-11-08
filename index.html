@@ -61,6 +61,13 @@
   <symbol id="i-currency" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/></symbol>
   <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
   <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" x2="22" y1="12" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></symbol>
+  <symbol id="i-shirt" viewBox="0 0 24 24"><path d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"/></symbol>
+  <symbol id="i-zap" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></symbol>
+  <symbol id="i-sparkles" viewBox="0 0 24 24"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></symbol>
+  <symbol id="i-rotate-ccw" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></symbol>
+  <symbol id="i-package" viewBox="0 0 24 24"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></symbol>
+  <symbol id="i-tag" viewBox="0 0 24 24"><path d="M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z"/><circle cx="7" cy="7" r=".5" fill="currentColor"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></symbol>
 </svg>
 
 <div id="app"></div>
@@ -111,51 +118,28 @@
       <button class="fab" id="addItem" type="button" aria-label="Add itinerary item" title="Add itinerary item"><svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></button>
     </section>
 
-    <section data-screen="packing" aria-label="Packing" hidden>
-      <progress id="packingProgress" aria-label="Packing progress" max="1" value="0"></progress>
-      <div class="packing-toolbar">
-        <form class="quick-add-bar" id="packQuickForm" autocomplete="off">
-          <input id="packQuickTitle" type="text" maxlength="200" placeholder="Quick add item (press Enter)..." aria-label="New packing item name">
-          <select id="packQuickCat" aria-label="New item category"></select>
-          <input id="packQuickQty" type="number" min="1" max="99" step="1" value="1" inputmode="numeric" aria-label="New item quantity">
-          <button type="submit" class="btn sm primary">Add</button>
-        </form>
-        <div class="search-box">
-          <svg class="i sm search-icon" aria-hidden="true"><use href="#i-search"/></svg>
-          <input id="packSearch" type="search" placeholder="Search packing items..." aria-label="Search packing items" autocomplete="off">
-          <button type="button" class="search-clear" id="packSearchClear" aria-label="Clear search" hidden><svg class="i sm" aria-hidden="true"><use href="#i-x"/></svg></button>
-        </div>
-        <div class="chip-filter-group" id="packCatFilter" role="group" aria-label="Filter packing items by category"></div>
-        <div class="packing-actions">
-          <div class="packing-toggles">
-            <button type="button" class="pill-toggle" id="packGroupByCat" aria-pressed="false">
-              <span class="circle-check" aria-hidden="true"><svg class="i" viewBox="0 0 24 24"><use href="#i-check"/></svg></span>
-              <span>Group by category</span>
-            </button>
-            <button type="button" class="pill-toggle" id="packUnpackedOnly" aria-pressed="false">
-              <span class="circle-check" aria-hidden="true"><svg class="i" viewBox="0 0 24 24"><use href="#i-check"/></svg></span>
-              <span>Unpacked only</span>
-            </button>
+    <section data-screen="packing" aria-label="Packing list" hidden>
+      <div class="itinerary-toolbar">
+        <div class="itinerary-switcher">
+          <div class="seg" id="packViews" role="group" aria-label="Packing view">
+            <span class="seg-lens" id="packLens" aria-hidden="true"></span>
+            <button type="button" data-pack-view="all" aria-pressed="true">All</button>
+            <button type="button" data-pack-view="to-buy" aria-pressed="false">To buy</button>
+            <button type="button" data-pack-view="to-pack" aria-pressed="false">To pack</button>
           </div>
-          <button type="button" class="btn sm" id="packResetAll" title="Mark all items as unpacked">Reset checks</button>
-          <button type="button" class="btn sm" id="openTemplates">Templates</button>
-          <button class="icon-btn solid" id="addPack" type="button" aria-label="Add packing item" title="Add packing item"><svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></button>
+          <div class="itinerary-actions">
+            <button class="icon-btn tonal" id="packTheme" type="button" aria-label="Toggle dark mode" title="Toggle dark mode"><svg class="i" aria-hidden="true"><use href="#i-moon"/></svg></button>
+          </div>
         </div>
       </div>
-      <div class="table-wrap">
-        <table id="packTable">
-          <thead>
-            <tr>
-              <th class="col-check"><span class="sr-only">Packed</span></th>
-              <th class="col-item">Item</th>
-              <th class="col-cat">Category</th>
-              <th class="col-qty">Qty</th>
-              <th class="actions col-actions"><span class="sr-only">Actions</span></th>
-            </tr>
-          </thead>
-          <tbody id="packingRows"></tbody>
-        </table>
+
+      <div class="pack-card">
+        <div id="packingContent" class="pack-list"></div>
       </div>
+
+      <button class="fab" id="addPackItem" type="button" aria-label="Add packing item" title="Add packing item">
+        <svg class="i" aria-hidden="true"><use href="#i-plus"/></svg>
+      </button>
     </section>
 
     <section data-screen="work" aria-label="Work log" hidden>
@@ -559,12 +543,6 @@
   </form>
 </dialog>
 
-<dialog id="templatesDialog" class="small" aria-labelledby="templatesTitle">
-  <div class="dlg-head"><h2 id="templatesTitle">Packing templates</h2><button type="button" class="icon-btn" data-close aria-label="Close"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg></button></div>
-  <div class="dlg-body" id="templatesBody"></div>
-  <div class="dlg-foot"><button type="button" class="btn" data-close>Close</button></div>
-</dialog>
-
 <dialog id="confirmDialog" class="small" aria-labelledby="confirmTitle">
   <form method="dialog">
     <div class="dlg-body"><h2 id="confirmTitle" style="font-size:17px">Delete?</h2><p id="confirmText"></p></div>
@@ -634,6 +612,93 @@
     </div>
   </form>
 </dialog>
+
+<dialog id="packItemDialog" class="fs-item-dialog" aria-labelledby="packDialogTitle">
+  <form id="packItemForm" novalidate autocomplete="off">
+    <div class="fs-header">
+      <button type="button" class="icon-btn" data-close id="packClose" aria-label="Close dialog" title="Close"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg></button>
+      <div class="fs-handle" aria-hidden="true"></div>
+      <h2 id="packDialogTitle" class="sr-only">Add packing item</h2>
+      <div class="fs-header-actions" id="packHeaderActions">
+        <button type="button" class="icon-btn danger" id="packItemDelete" aria-label="Delete item" title="Delete item" hidden><svg class="i" aria-hidden="true"><use href="#i-trash"/></svg></button>
+        <button type="submit" class="fs-save-btn" id="packItemSubmit">Save</button>
+      </div>
+    </div>
+
+    <div class="fs-body" id="packEditBody">
+      <input type="hidden" id="packItemId">
+
+      <!-- Hero Card: Title, Category pillchooser & Status toggles -->
+      <div class="fs-card fs-hero-card">
+        <div class="fs-title-wrap">
+          <input id="packItemTitle" class="fs-title-input" required maxlength="200" autocomplete="off" placeholder="Add item name...">
+        </div>
+        <div class="fs-card-divider" aria-hidden="true"></div>
+
+        <!-- Category Pillchooser -->
+        <div class="fs-chip-section">
+          <span class="fs-label">Category</span>
+          <div class="chips" id="packCategories" role="radiogroup" aria-label="Category"></div>
+        </div>
+
+        <div class="fs-card-divider" aria-hidden="true"></div>
+
+        <!-- Status Toggles (To buy & Packed) -->
+        <div class="fs-chip-section">
+          <span class="fs-label">Status</span>
+          <div class="chips" id="packStatusChips" aria-label="Item status">
+            <label class="chip-opt chip-toggle" id="packToBuyChip" style="--c: var(--pack-tobuy);">
+              <input type="checkbox" id="packItemToBuy" name="packItemToBuy">
+              <span><svg class="i" aria-hidden="true"><use href="#i-tag"/></svg>To buy</span>
+            </label>
+            <label class="chip-opt chip-toggle" id="packPackedChip" style="--c: var(--ok);">
+              <input type="checkbox" id="packItemDone" name="packItemDone">
+              <span><svg class="i sm" aria-hidden="true"><use href="#i-check"/></svg>Packed</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quantity & Location Card -->
+      <div class="fs-group">
+        <div class="fs-group-label">Quantity & Bag</div>
+        <div class="fs-card fs-details-card">
+          <div class="row2">
+            <div class="field">
+              <label for="packItemQty">Quantity</label>
+              <div class="pack-qty-control">
+                <button type="button" class="pack-qty-btn" id="packQtyDec" aria-label="Decrease quantity">−</button>
+                <input type="number" id="packItemQty" min="1" max="99" value="1" inputmode="numeric">
+                <button type="button" class="pack-qty-btn" id="packQtyInc" aria-label="Increase quantity">+</button>
+              </div>
+            </div>
+            <div class="field">
+              <label for="packItemBag">Bag / Location</label>
+              <select id="packItemBag">
+                <option value="">No bag assigned</option>
+                <option value="Carry-on">Carry-on</option>
+                <option value="Checked bag">Checked bag</option>
+                <option value="Backpack">Backpack</option>
+                <option value="Personal item">Personal item</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Notes Card -->
+      <div class="fs-group">
+        <div class="fs-group-label">Notes</div>
+        <div class="fs-card fs-details-card">
+          <div class="field">
+            <label for="packItemNotes" class="sr-only">Notes</label>
+            <textarea id="packItemNotes" maxlength="500" placeholder="Size, brand, store, or packing reminder..."></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</dialog>
 </template>
 
 <template id="platform-mobile">
@@ -681,51 +746,28 @@
       <button class="fab" id="addItem" type="button" aria-label="Add itinerary item" title="Add itinerary item"><svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></button>
     </section>
 
-    <section data-screen="packing" aria-label="Packing" hidden>
-      <progress id="packingProgress" aria-label="Packing progress" max="1" value="0"></progress>
-      <div class="packing-toolbar">
-        <form class="quick-add-bar" id="packQuickForm" autocomplete="off">
-          <input id="packQuickTitle" type="text" maxlength="200" placeholder="Quick add item (press Enter)..." aria-label="New packing item name">
-          <select id="packQuickCat" aria-label="New item category"></select>
-          <input id="packQuickQty" type="number" min="1" max="99" step="1" value="1" inputmode="numeric" aria-label="New item quantity">
-          <button type="submit" class="btn sm primary">Add</button>
-        </form>
-        <div class="search-box">
-          <svg class="i sm search-icon" aria-hidden="true"><use href="#i-search"/></svg>
-          <input id="packSearch" type="search" placeholder="Search packing items..." aria-label="Search packing items" autocomplete="off">
-          <button type="button" class="search-clear" id="packSearchClear" aria-label="Clear search" hidden><svg class="i sm" aria-hidden="true"><use href="#i-x"/></svg></button>
-        </div>
-        <div class="chip-filter-group" id="packCatFilter" role="group" aria-label="Filter packing items by category"></div>
-        <div class="packing-actions">
-          <div class="packing-toggles">
-            <button type="button" class="pill-toggle" id="packGroupByCat" aria-pressed="false">
-              <span class="circle-check" aria-hidden="true"><svg class="i" viewBox="0 0 24 24"><use href="#i-check"/></svg></span>
-              <span>Group</span>
-            </button>
-            <button type="button" class="pill-toggle" id="packUnpackedOnly" aria-pressed="false">
-              <span class="circle-check" aria-hidden="true"><svg class="i" viewBox="0 0 24 24"><use href="#i-check"/></svg></span>
-              <span>Unpacked</span>
-            </button>
+    <section data-screen="packing" aria-label="Packing list" hidden>
+      <div class="itinerary-toolbar">
+        <div class="itinerary-switcher">
+          <div class="seg" id="packViews" role="group" aria-label="Packing view">
+            <span class="seg-lens" id="packLens" aria-hidden="true"></span>
+            <button type="button" data-pack-view="all" aria-pressed="true">All</button>
+            <button type="button" data-pack-view="to-buy" aria-pressed="false">To buy</button>
+            <button type="button" data-pack-view="to-pack" aria-pressed="false">To pack</button>
           </div>
-          <button type="button" class="btn sm" id="packResetAll" title="Mark all items as unpacked">Reset</button>
-          <button type="button" class="btn sm" id="openTemplates">Templates</button>
-          <button class="icon-btn solid" id="addPack" type="button" aria-label="Add packing item" title="Add packing item"><svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></button>
+          <div class="itinerary-actions">
+            <button class="icon-btn tonal" id="packTheme" type="button" aria-label="Toggle dark mode" title="Toggle dark mode"><svg class="i" aria-hidden="true"><use href="#i-moon"/></svg></button>
+          </div>
         </div>
       </div>
-      <div class="table-wrap">
-        <table id="packTable">
-          <thead>
-            <tr>
-              <th class="col-check"><span class="sr-only">Packed</span></th>
-              <th class="col-item">Item</th>
-              <th class="col-cat">Category</th>
-              <th class="col-qty">Qty</th>
-              <th class="actions col-actions"><span class="sr-only">Actions</span></th>
-            </tr>
-          </thead>
-          <tbody id="packingRows"></tbody>
-        </table>
+
+      <div class="pack-card">
+        <div id="packingContent" class="pack-list"></div>
       </div>
+
+      <button class="fab" id="addPackItem" type="button" aria-label="Add packing item" title="Add packing item">
+        <svg class="i" aria-hidden="true"><use href="#i-plus"/></svg>
+      </button>
     </section>
 
     <section data-screen="work" aria-label="Work log" hidden>
@@ -1129,12 +1171,6 @@
   </form>
 </dialog>
 
-<dialog id="templatesDialog" class="small" aria-labelledby="templatesTitle">
-  <div class="dlg-head"><h2 id="templatesTitle">Packing templates</h2><button type="button" class="icon-btn" data-close aria-label="Close"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg></button></div>
-  <div class="dlg-body" id="templatesBody"></div>
-  <div class="dlg-foot"><button type="button" class="btn" data-close>Close</button></div>
-</dialog>
-
 <dialog id="confirmDialog" class="small" aria-labelledby="confirmTitle">
   <form method="dialog">
     <div class="dlg-body"><h2 id="confirmTitle" style="font-size:17px">Delete?</h2><p id="confirmText"></p></div>
@@ -1201,6 +1237,93 @@
     </div>
     <div class="dlg-foot">
       <button type="button" class="btn" data-close id="tzCancelBtn">Cancel</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="packItemDialog" class="fs-item-dialog" aria-labelledby="packDialogTitle">
+  <form id="packItemForm" novalidate autocomplete="off">
+    <div class="fs-header">
+      <button type="button" class="icon-btn" data-close id="packClose" aria-label="Close dialog" title="Close"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg></button>
+      <div class="fs-handle" aria-hidden="true"></div>
+      <h2 id="packDialogTitle" class="sr-only">Add packing item</h2>
+      <div class="fs-header-actions" id="packHeaderActions">
+        <button type="button" class="icon-btn danger" id="packItemDelete" aria-label="Delete item" title="Delete item" hidden><svg class="i" aria-hidden="true"><use href="#i-trash"/></svg></button>
+        <button type="submit" class="fs-save-btn" id="packItemSubmit">Save</button>
+      </div>
+    </div>
+
+    <div class="fs-body" id="packEditBody">
+      <input type="hidden" id="packItemId">
+
+      <!-- Hero Card: Title, Category pillchooser & Status toggles -->
+      <div class="fs-card fs-hero-card">
+        <div class="fs-title-wrap">
+          <input id="packItemTitle" class="fs-title-input" required maxlength="200" autocomplete="off" placeholder="Add item name...">
+        </div>
+        <div class="fs-card-divider" aria-hidden="true"></div>
+
+        <!-- Category Pillchooser -->
+        <div class="fs-chip-section">
+          <span class="fs-label">Category</span>
+          <div class="chips" id="packCategories" role="radiogroup" aria-label="Category"></div>
+        </div>
+
+        <div class="fs-card-divider" aria-hidden="true"></div>
+
+        <!-- Status Toggles (To buy & Packed) -->
+        <div class="fs-chip-section">
+          <span class="fs-label">Status</span>
+          <div class="chips" id="packStatusChips" aria-label="Item status">
+            <label class="chip-opt chip-toggle" id="packToBuyChip" style="--c: var(--pack-tobuy);">
+              <input type="checkbox" id="packItemToBuy" name="packItemToBuy">
+              <span><svg class="i" aria-hidden="true"><use href="#i-tag"/></svg>To buy</span>
+            </label>
+            <label class="chip-opt chip-toggle" id="packPackedChip" style="--c: var(--ok);">
+              <input type="checkbox" id="packItemDone" name="packItemDone">
+              <span><svg class="i sm" aria-hidden="true"><use href="#i-check"/></svg>Packed</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quantity & Location Card -->
+      <div class="fs-group">
+        <div class="fs-group-label">Quantity & Bag</div>
+        <div class="fs-card fs-details-card">
+          <div class="row2">
+            <div class="field">
+              <label for="packItemQty">Quantity</label>
+              <div class="pack-qty-control">
+                <button type="button" class="pack-qty-btn" id="packQtyDec" aria-label="Decrease quantity">−</button>
+                <input type="number" id="packItemQty" min="1" max="99" value="1" inputmode="numeric">
+                <button type="button" class="pack-qty-btn" id="packQtyInc" aria-label="Increase quantity">+</button>
+              </div>
+            </div>
+            <div class="field">
+              <label for="packItemBag">Bag / Location</label>
+              <select id="packItemBag">
+                <option value="">No bag assigned</option>
+                <option value="Carry-on">Carry-on</option>
+                <option value="Checked bag">Checked bag</option>
+                <option value="Backpack">Backpack</option>
+                <option value="Personal item">Personal item</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Notes Card -->
+      <div class="fs-group">
+        <div class="fs-group-label">Notes</div>
+        <div class="fs-card fs-details-card">
+          <div class="field">
+            <label for="packItemNotes" class="sr-only">Notes</label>
+            <textarea id="packItemNotes" maxlength="500" placeholder="Size, brand, store, or packing reminder..."></textarea>
+          </div>
+        </div>
+      </div>
     </div>
   </form>
 </dialog>
