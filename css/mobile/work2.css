@@ -1,0 +1,214 @@
+/* =========================================================
+   WORK LOG 2: MOBILE STYLES
+   Stat capsule, work rows and swipe actions
+   ========================================================= */
+
+/* Stat Capsule (Logged / Target Pills) */
+.work2-stat-capsule {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  height: 38px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 1.5px solid color-mix(in srgb, var(--ink) 12%, var(--surface));
+  background: var(--surface);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  user-select: none;
+  font-family: var(--font-ui);
+  font-size: 13px;
+  color: var(--ink);
+}
+
+.work2-stat-pill {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 3px;
+  white-space: nowrap;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.work2-stat-pill strong {
+  font-weight: 800;
+  font-size: 14.5px;
+  color: var(--ink);
+}
+
+.work2-stat-divider {
+  width: 1px;
+  height: 16px;
+  background: var(--line);
+  margin: 0 10px;
+  flex-shrink: 0;
+}
+
+/* Card Container */
+.work2-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+  margin-top: 10px;
+  margin-bottom: calc(76px + env(safe-area-inset-bottom));
+  width: 100%;
+}
+
+.work2-header-row {
+  display: flex;
+  align-items: center;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--line);
+  font-family: var(--font-ui);
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.work2-col-desc {
+  flex: 1;
+  min-width: 0;
+  text-align: left;
+}
+
+.work2-col-date {
+  width: 76px;
+  text-align: right;
+  flex-shrink: 0;
+  margin-right: 14px;
+}
+
+.work2-col-hrs {
+  width: 38px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.work2-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.work2-empty {
+  padding: 32px 16px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+  font-family: var(--font-ui);
+}
+
+/* Row & Swipe Wrapper */
+.work2-row-wrapper {
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--line);
+  background: var(--surface);
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.work2-row-wrapper:last-child {
+  border-bottom: none;
+}
+
+.work2-swipe-bg {
+  position: absolute;
+  inset: 0;
+  background: var(--crit);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 18px;
+  color: #ffffff;
+  pointer-events: none;
+}
+
+.work2-swipe-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: var(--font-ui);
+  transform: scale(0.9);
+  opacity: 0.8;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.work2-swipe-bg.is-triggered .work2-swipe-action {
+  transform: scale(1.08);
+  opacity: 1;
+}
+
+.work2-row-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  min-height: 48px;
+  background: var(--surface);
+  cursor: pointer;
+  touch-action: pan-y;
+  transition: transform 0.25s cubic-bezier(0.2, 0, 0, 1), background-color 0.12s ease;
+  will-change: transform;
+  font-family: var(--font-ui);
+}
+
+.work2-row-content:active {
+  background: color-mix(in srgb, var(--ink) 3%, var(--surface));
+}
+
+.work2-row-content.is-swiping {
+  transition: none !important;
+}
+
+.work2-row-content .work2-col-desc {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.work2-row-content .work2-col-date {
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.work2-row-content .work2-col-hrs {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.work2-row-wrapper.is-deleting {
+  transition: max-height 0.24s ease, opacity 0.2s ease;
+  max-height: 0 !important;
+  opacity: 0 !important;
+  border-bottom-color: transparent !important;
+}
+
+/* Dialog fields */
+.fs-date-input {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface-tonal);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-size: 14px;
+  font-weight: 500;
+  padding: 8px 12px;
+  width: fit-content;
+  outline: none;
+  cursor: pointer;
+}
+
+.fs-date-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 25%, transparent);
+}

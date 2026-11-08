@@ -11,7 +11,7 @@ export function initTheme({ signal } = {}) {
   }, { signal });
 
   document.addEventListener("click", e => {
-    const btn = e.target.closest("#theme, #packTheme");
+    const btn = e.target.closest("#theme, #packTheme, #work2Theme");
     if (!btn) return;
     const root = document.documentElement;
     const next = root.dataset.theme === "dark" ? "light" : "dark";

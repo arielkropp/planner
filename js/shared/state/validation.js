@@ -34,6 +34,7 @@ export const defaultTrip = (name = "My Trip", startDate = START, endDate = END) 
   agenda: [],
   packing: [],
   work: [],
+  workTarget: 42,
   balance: defaultBalance()
 });
 
@@ -73,6 +74,16 @@ export function attachActiveTripProxies(st) {
       },
       set(val) {
         if (this.activeTrip) this.activeTrip.work = val;
+      },
+      enumerable: false,
+      configurable: true
+    },
+    workTarget: {
+      get() {
+        return this.activeTrip ? (this.activeTrip.workTarget ?? 42) : 42;
+      },
+      set(val) {
+        if (this.activeTrip) this.activeTrip.workTarget = val;
       },
       enumerable: false,
       configurable: true
@@ -235,6 +246,10 @@ export function validateTrip(t, defaultsObj = {}) {
     ? Number(b.stdDay)
     : DEFAULT_STD_DAY;
 
+  const workTarget = (Number.isFinite(Number(t.workTarget)) && Number(t.workTarget) >= 0)
+    ? Math.round(Number(t.workTarget) * 100) / 100
+    : (Number.isFinite(Number(defaultsObj.workTarget)) ? Number(defaultsObj.workTarget) : 42);
+
   const resultTrip = {
     id,
     name,
@@ -243,6 +258,7 @@ export function validateTrip(t, defaultsObj = {}) {
     agenda,
     packing,
     work,
+    workTarget,
     balance: { pre, novBalance, accrual, accrualMonths, stdDay }
   };
   Object.defineProperty(resultTrip, "_hadWarnings", { value: hadWarnings, enumerable: false });

@@ -224,4 +224,47 @@
   flex-shrink: 0;
 }
 
+.settings-row.static-row {
+  cursor: default;
+}
+
+.settings-row.static-row:hover,
+.settings-row.static-row:active {
+  background-color: transparent;
+}
+
+.settings-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.settings-number-input {
+  width: 72px;
+  height: 38px;
+  padding: 0 10px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: var(--surface-tonal);
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  text-align: right;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.settings-number-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 25%, transparent);
+}
+
+.settings-unit {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
 

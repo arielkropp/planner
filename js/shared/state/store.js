@@ -93,6 +93,7 @@ export function addTrip({ name, startDate, endDate }, setAsActive = true) {
     agenda: [],
     packing: [],
     work: [],
+    workTarget: 42,
     balance: defaultBalance()
   };
   s.trips.push(trip);

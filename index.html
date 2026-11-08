@@ -83,6 +83,7 @@
       <a class="nav-link" href="#itinerary"><svg class="i" aria-hidden="true"><use href="#i-calendar-days"/></svg><span>Itinerary</span></a>
       <a class="nav-link" href="#packing"><svg class="i" aria-hidden="true"><use href="#i-luggage"/></svg><span>Packing</span></a>
       <a class="nav-link" href="#work"><svg class="i" aria-hidden="true"><use href="#i-briefcase"/></svg><span>Work log</span></a>
+      <a class="nav-link" href="#work2"><svg class="i" aria-hidden="true"><use href="#i-briefcase"/></svg><span>Work Log 2</span></a>
       <a class="nav-link" href="#settings"><svg class="i" aria-hidden="true"><use href="#i-settings"/></svg><span>Settings</span></a>
     </nav>
     <p class="save-note" id="saveStatus" role="status">Saved in this browser only. Back up before switching browsers or devices.</p>
@@ -193,6 +194,34 @@
       </div>
     </section>
 
+    <section data-screen="work2" aria-label="Work Log 2" hidden>
+      <div class="itinerary-toolbar">
+        <div class="itinerary-switcher">
+          <div class="work2-stat-capsule" role="status" aria-label="Work log hours summary">
+            <span class="work2-stat-pill">Logged <strong id="work2Logged">0</strong> hrs</span>
+            <span class="work2-stat-divider" aria-hidden="true"></span>
+            <span class="work2-stat-pill">Target <strong id="work2Target">42</strong> hrs</span>
+          </div>
+          <div class="itinerary-actions">
+            <button class="icon-btn tonal" id="work2Theme" type="button" aria-label="Toggle dark mode" title="Toggle dark mode"><svg class="i" aria-hidden="true"><use href="#i-moon"/></svg></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="work2-card">
+        <div class="work2-header-row">
+          <div class="work2-col-desc">Description</div>
+          <div class="work2-col-date">Date</div>
+          <div class="work2-col-hrs">Hrs</div>
+        </div>
+        <div id="work2List" class="work2-list"></div>
+      </div>
+
+      <button class="fab" id="addWork2Item" type="button" aria-label="Add work log entry" title="Add work log entry">
+        <svg class="i" aria-hidden="true"><use href="#i-plus"/></svg>
+      </button>
+    </section>
+
     <section data-screen="settings" aria-label="Settings" hidden>
       <div class="settings-screen">
         <div class="settings-head">
@@ -212,6 +241,23 @@
               </div>
               <div class="settings-chevron"><svg class="i sm" aria-hidden="true"><use href="#i-right"/></svg></div>
             </button>
+          </div>
+        </div>
+
+        <div class="settings-group">
+          <div class="settings-group-label">Work Log</div>
+          <div class="settings-card">
+            <div class="settings-row static-row">
+              <div class="settings-icon-well"><svg class="i" aria-hidden="true"><use href="#i-briefcase"/></svg></div>
+              <div class="settings-text">
+                <label class="settings-name" for="workTargetInput">Work log target</label>
+                <div class="settings-desc">Target hours for active trip</div>
+              </div>
+              <div class="settings-input-wrap">
+                <input id="workTargetInput" type="number" min="0" max="999" step="any" class="settings-number-input" aria-label="Work log target hours">
+                <span class="settings-unit">hrs</span>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -692,6 +738,47 @@
     </div>
   </form>
 </dialog>
+
+<dialog id="work2ItemDialog" class="fs-item-dialog" aria-labelledby="work2DialogTitle">
+  <form id="work2ItemForm" novalidate autocomplete="off">
+    <div class="fs-header">
+      <button type="button" class="icon-btn" data-close id="work2Close" aria-label="Close dialog" title="Close"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg></button>
+      <div class="fs-handle" aria-hidden="true"></div>
+      <h2 id="work2DialogTitle" class="sr-only">Add work entry</h2>
+      <div class="fs-header-actions" id="work2HeaderActions">
+        <button type="button" class="icon-btn danger" id="work2ItemDelete" aria-label="Delete entry" title="Delete entry" hidden><svg class="i" aria-hidden="true"><use href="#i-trash"/></svg></button>
+        <button type="submit" class="fs-save-btn" id="work2ItemSubmit">Save</button>
+      </div>
+    </div>
+
+    <div class="fs-body" id="work2EditBody">
+      <input type="hidden" id="work2ItemId">
+
+      <div class="fs-card fs-hero-card">
+        <div class="fs-title-wrap">
+          <input id="work2ItemNote" class="fs-title-input" required maxlength="200" autocomplete="off" placeholder="Description of work...">
+        </div>
+        <div class="fs-card-divider" aria-hidden="true"></div>
+
+        <div class="fs-field-section">
+          <label class="fs-label" for="work2ItemDate">Date</label>
+          <input type="date" id="work2ItemDate" class="tbl-input fs-date-input" required aria-label="Date">
+        </div>
+
+        <div class="fs-card-divider" aria-hidden="true"></div>
+
+        <div class="fs-field-section">
+          <label class="fs-label" for="work2ItemHours">Hours</label>
+          <div class="pack-qty-control">
+            <button type="button" class="pack-qty-btn" id="work2HoursDec" aria-label="Decrease hours">−</button>
+            <input type="number" id="work2ItemHours" min="0.1" max="24" step="any" value="4" inputmode="decimal" aria-label="Hours">
+            <button type="button" class="pack-qty-btn" id="work2HoursInc" aria-label="Increase hours">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</dialog>
 </template>
 
 <template id="platform-mobile">
@@ -701,6 +788,7 @@
       <a class="nav-link" href="#itinerary"><svg class="i" aria-hidden="true"><use href="#i-calendar-days"/></svg><span>Itinerary</span></a>
       <a class="nav-link" href="#packing"><svg class="i" aria-hidden="true"><use href="#i-luggage"/></svg><span>Packing</span></a>
       <a class="nav-link" href="#work"><svg class="i" aria-hidden="true"><use href="#i-briefcase"/></svg><span>Work log</span></a>
+      <a class="nav-link" href="#work2"><svg class="i" aria-hidden="true"><use href="#i-briefcase"/></svg><span>Work Log 2</span></a>
       <a class="nav-link" href="#settings" id="mobileSettings" aria-label="Settings"><svg class="i" aria-hidden="true"><use href="#i-settings"/></svg><span>Settings</span></a>
     </nav>
     <p class="save-note" id="saveStatus" role="status">Saved in this browser only. Back up before switching browsers or devices.</p>
@@ -811,6 +899,34 @@
       </div>
     </section>
 
+    <section data-screen="work2" aria-label="Work Log 2" hidden>
+      <div class="itinerary-toolbar">
+        <div class="itinerary-switcher">
+          <div class="work2-stat-capsule" role="status" aria-label="Work log hours summary">
+            <span class="work2-stat-pill">Logged <strong id="work2Logged">0</strong> hrs</span>
+            <span class="work2-stat-divider" aria-hidden="true"></span>
+            <span class="work2-stat-pill">Target <strong id="work2Target">42</strong> hrs</span>
+          </div>
+          <div class="itinerary-actions">
+            <button class="icon-btn tonal" id="work2Theme" type="button" aria-label="Toggle dark mode" title="Toggle dark mode"><svg class="i" aria-hidden="true"><use href="#i-moon"/></svg></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="work2-card">
+        <div class="work2-header-row">
+          <div class="work2-col-desc">Description</div>
+          <div class="work2-col-date">Date</div>
+          <div class="work2-col-hrs">Hrs</div>
+        </div>
+        <div id="work2List" class="work2-list"></div>
+      </div>
+
+      <button class="fab" id="addWork2Item" type="button" aria-label="Add work log entry" title="Add work log entry">
+        <svg class="i" aria-hidden="true"><use href="#i-plus"/></svg>
+      </button>
+    </section>
+
     <section data-screen="settings" aria-label="Settings" hidden>
       <div class="settings-screen">
         <div class="settings-head">
@@ -830,6 +946,23 @@
               </div>
               <div class="settings-chevron"><svg class="i sm" aria-hidden="true"><use href="#i-right"/></svg></div>
             </button>
+          </div>
+        </div>
+
+        <div class="settings-group">
+          <div class="settings-group-label">Work Log</div>
+          <div class="settings-card">
+            <div class="settings-row static-row">
+              <div class="settings-icon-well"><svg class="i" aria-hidden="true"><use href="#i-briefcase"/></svg></div>
+              <div class="settings-text">
+                <label class="settings-name" for="workTargetInput">Work log target</label>
+                <div class="settings-desc">Target hours for active trip</div>
+              </div>
+              <div class="settings-input-wrap">
+                <input id="workTargetInput" type="number" min="0" max="999" step="any" class="settings-number-input" aria-label="Work log target hours">
+                <span class="settings-unit">hrs</span>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -1304,6 +1437,47 @@
               <input type="checkbox" id="packItemToBuy" name="packItemToBuy">
               <span><svg class="i" aria-hidden="true"><use href="#i-tag"/></svg>To buy</span>
             </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="work2ItemDialog" class="fs-item-dialog" aria-labelledby="work2DialogTitle">
+  <form id="work2ItemForm" novalidate autocomplete="off">
+    <div class="fs-header">
+      <button type="button" class="icon-btn" data-close id="work2Close" aria-label="Close dialog" title="Close"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg></button>
+      <div class="fs-handle" aria-hidden="true"></div>
+      <h2 id="work2DialogTitle" class="sr-only">Add work entry</h2>
+      <div class="fs-header-actions" id="work2HeaderActions">
+        <button type="button" class="icon-btn danger" id="work2ItemDelete" aria-label="Delete entry" title="Delete entry" hidden><svg class="i" aria-hidden="true"><use href="#i-trash"/></svg></button>
+        <button type="submit" class="fs-save-btn" id="work2ItemSubmit">Save</button>
+      </div>
+    </div>
+
+    <div class="fs-body" id="work2EditBody">
+      <input type="hidden" id="work2ItemId">
+
+      <div class="fs-card fs-hero-card">
+        <div class="fs-title-wrap">
+          <input id="work2ItemNote" class="fs-title-input" required maxlength="200" autocomplete="off" placeholder="Description of work...">
+        </div>
+        <div class="fs-card-divider" aria-hidden="true"></div>
+
+        <div class="fs-field-section">
+          <label class="fs-label" for="work2ItemDate">Date</label>
+          <input type="date" id="work2ItemDate" class="tbl-input fs-date-input" required aria-label="Date">
+        </div>
+
+        <div class="fs-card-divider" aria-hidden="true"></div>
+
+        <div class="fs-field-section">
+          <label class="fs-label" for="work2ItemHours">Hours</label>
+          <div class="pack-qty-control">
+            <button type="button" class="pack-qty-btn" id="work2HoursDec" aria-label="Decrease hours">−</button>
+            <input type="number" id="work2ItemHours" min="0.1" max="24" step="any" value="4" inputmode="decimal" aria-label="Hours">
+            <button type="button" class="pack-qty-btn" id="work2HoursInc" aria-label="Increase hours">+</button>
           </div>
         </div>
       </div>
