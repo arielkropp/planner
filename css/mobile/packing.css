@@ -307,24 +307,110 @@
   margin: 0;
 }
 
-.pack-status-toggles {
+/* Dialog: Title Row with Round Checkbox */
+.pack-title-row {
   display: flex;
   align-items: center;
-  gap: 16px;
-  min-height: 36px;
+  gap: 12px;
 }
 
-.pack-dialog-check-label {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 14px;
-  color: var(--ink);
+.pack-title-row .pack-check-circle {
+  width: 26px;
+  height: 26px;
   cursor: pointer;
+  flex-shrink: 0;
+  display: inline-grid;
+  place-items: center;
+  margin: 0;
+  touch-action: manipulation;
 }
 
-.pack-dialog-check-label input[type="checkbox"] {
-  width: 20px;
-  height: 20px;
-  accent-color: var(--accent);
+.pack-title-row .pack-check-circle:active {
+  transform: scale(0.94);
+}
+
+.pack-title-row .pack-check-circle:has(input:checked),
+.pack-title-row .pack-check-circle.is-checked {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.pack-title-row .pack-check-circle:has(input:checked) .i,
+.pack-title-row .pack-check-circle.is-checked .i {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Dialog: Location Cards (Transparent, dark grey border, card border-radius) */
+#packBags {
+  gap: 8px;
+}
+
+#packBags .chip-opt span {
+  background: transparent;
+  border: 1px solid var(--muted);
+  border-radius: 8px;
+  color: var(--ink);
+  padding: 7px 12px;
+  font-size: 12.5px;
+  font-weight: 500;
+  transition: all 0.12s ease;
+  touch-action: manipulation;
+}
+
+#packBags .chip-opt span:active {
+  background: color-mix(in srgb, var(--ink) 8%, transparent);
+}
+
+#packBags .chip-opt input:checked + span {
+  background: color-mix(in srgb, var(--ink) 12%, transparent);
+  border: 1.5px solid var(--ink);
+  color: var(--ink);
+  font-weight: 600;
+}
+
+:root[data-theme="dark"] #packBags .chip-opt span {
+  border-color: var(--muted);
+  color: var(--ink);
+}
+
+:root[data-theme="dark"] #packBags .chip-opt input:checked + span {
+  background: color-mix(in srgb, var(--ink) 16%, transparent);
+  border-color: var(--ink);
+  color: var(--ink);
+}
+
+/* Dialog: Top card fields (Quantity & Notes) */
+.fs-field-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+#packItemNotes {
+  width: 100%;
+  box-sizing: border-box;
+  font-family: var(--font-ui);
+  font-size: 14px;
+  line-height: 1.45;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  padding: 10px 12px;
+  min-height: 110px;
+  resize: vertical;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+#packItemNotes:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 25%, transparent);
+}
+
+:root[data-theme="dark"] #packItemNotes {
+  background: var(--surface-tonal);
+  border-color: var(--line);
+  color: var(--ink);
 }

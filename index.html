@@ -631,9 +631,14 @@
     <div class="fs-body" id="packEditBody">
       <input type="hidden" id="packItemId">
 
-      <!-- Hero Card: Title, Category pillchooser & Status toggles -->
+      <!-- Single Main Card: Title, Category, Location, Quantity, Notes, To Buy -->
       <div class="fs-card fs-hero-card">
-        <div class="fs-title-wrap">
+        <!-- Title Row with Round Packed Checkbox -->
+        <div class="fs-title-wrap pack-title-row">
+          <label class="pack-check-circle" id="packDoneLabel" aria-label="Mark packed" title="Mark packed">
+            <input type="checkbox" id="packItemDone" name="packItemDone" class="sr-only">
+            <svg class="i sm" aria-hidden="true"><use href="#i-check"/></svg>
+          </label>
           <input id="packItemTitle" class="fs-title-input" required maxlength="200" autocomplete="off" placeholder="Add item name...">
         </div>
         <div class="fs-card-divider" aria-hidden="true"></div>
@@ -646,51 +651,41 @@
 
         <div class="fs-card-divider" aria-hidden="true"></div>
 
-        <!-- Bag Location Pillchooser -->
+        <!-- Location Pillchooser -->
         <div class="fs-chip-section">
-          <span class="fs-label">Bag</span>
-          <div class="chips" id="packBags" role="radiogroup" aria-label="Bag location"></div>
+          <span class="fs-label">Location</span>
+          <div class="chips" id="packBags" role="radiogroup" aria-label="Location"></div>
         </div>
 
         <div class="fs-card-divider" aria-hidden="true"></div>
 
-        <!-- Status Toggles (To buy & Packed) -->
+        <!-- Quantity Field -->
+        <div class="fs-field-section">
+          <label class="fs-label" for="packItemQty">Quantity</label>
+          <div class="pack-qty-control">
+            <button type="button" class="pack-qty-btn" id="packQtyDec" aria-label="Decrease quantity">−</button>
+            <input type="number" id="packItemQty" min="1" max="99" value="1" inputmode="numeric" aria-label="Quantity">
+            <button type="button" class="pack-qty-btn" id="packQtyInc" aria-label="Increase quantity">+</button>
+          </div>
+        </div>
+
+        <div class="fs-card-divider" aria-hidden="true"></div>
+
+        <!-- Notes Field (5 lines) -->
+        <div class="fs-field-section">
+          <label class="fs-label" for="packItemNotes">Notes</label>
+          <textarea id="packItemNotes" rows="5" maxlength="500" placeholder="Size, brand, store, or packing reminder..."></textarea>
+        </div>
+
+        <div class="fs-card-divider" aria-hidden="true"></div>
+
+        <!-- To buy Toggle (last on the form) -->
         <div class="fs-chip-section">
-          <span class="fs-label">Status</span>
-          <div class="chips" id="packStatusChips" aria-label="Item status">
+          <div class="chips" id="packStatusChips" aria-label="Item flags">
             <label class="chip-opt chip-toggle" id="packToBuyChip" style="--c: var(--pack-tobuy);">
               <input type="checkbox" id="packItemToBuy" name="packItemToBuy">
               <span><svg class="i" aria-hidden="true"><use href="#i-tag"/></svg>To buy</span>
             </label>
-            <label class="chip-opt chip-toggle" id="packPackedChip" style="--c: var(--ok);">
-              <input type="checkbox" id="packItemDone" name="packItemDone">
-              <span><svg class="i sm" aria-hidden="true"><use href="#i-check"/></svg>Packed</span>
-            </label>
-          </div>
-        </div>
-      </div>
-
-      <!-- Quantity Card -->
-      <div class="fs-group">
-        <div class="fs-group-label">Quantity</div>
-        <div class="fs-card fs-details-card">
-          <div class="field">
-            <div class="pack-qty-control">
-              <button type="button" class="pack-qty-btn" id="packQtyDec" aria-label="Decrease quantity">−</button>
-              <input type="number" id="packItemQty" min="1" max="99" value="1" inputmode="numeric" aria-label="Quantity">
-              <button type="button" class="pack-qty-btn" id="packQtyInc" aria-label="Increase quantity">+</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Notes Card -->
-      <div class="fs-group">
-        <div class="fs-group-label">Notes</div>
-        <div class="fs-card fs-details-card">
-          <div class="field">
-            <label for="packItemNotes" class="sr-only">Notes</label>
-            <textarea id="packItemNotes" maxlength="500" placeholder="Size, brand, store, or packing reminder..."></textarea>
           </div>
         </div>
       </div>
@@ -1254,9 +1249,14 @@
     <div class="fs-body" id="packEditBody">
       <input type="hidden" id="packItemId">
 
-      <!-- Hero Card: Title, Category pillchooser & Status toggles -->
+      <!-- Single Main Card: Title, Category, Location, Quantity, Notes, To Buy -->
       <div class="fs-card fs-hero-card">
-        <div class="fs-title-wrap">
+        <!-- Title Row with Round Packed Checkbox -->
+        <div class="fs-title-wrap pack-title-row">
+          <label class="pack-check-circle" id="packDoneLabel" aria-label="Mark packed" title="Mark packed">
+            <input type="checkbox" id="packItemDone" name="packItemDone" class="sr-only">
+            <svg class="i sm" aria-hidden="true"><use href="#i-check"/></svg>
+          </label>
           <input id="packItemTitle" class="fs-title-input" required maxlength="200" autocomplete="off" placeholder="Add item name...">
         </div>
         <div class="fs-card-divider" aria-hidden="true"></div>
@@ -1269,51 +1269,41 @@
 
         <div class="fs-card-divider" aria-hidden="true"></div>
 
-        <!-- Bag Location Pillchooser -->
+        <!-- Location Pillchooser -->
         <div class="fs-chip-section">
-          <span class="fs-label">Bag</span>
-          <div class="chips" id="packBags" role="radiogroup" aria-label="Bag location"></div>
+          <span class="fs-label">Location</span>
+          <div class="chips" id="packBags" role="radiogroup" aria-label="Location"></div>
         </div>
 
         <div class="fs-card-divider" aria-hidden="true"></div>
 
-        <!-- Status Toggles (To buy & Packed) -->
+        <!-- Quantity Field -->
+        <div class="fs-field-section">
+          <label class="fs-label" for="packItemQty">Quantity</label>
+          <div class="pack-qty-control">
+            <button type="button" class="pack-qty-btn" id="packQtyDec" aria-label="Decrease quantity">−</button>
+            <input type="number" id="packItemQty" min="1" max="99" value="1" inputmode="numeric" aria-label="Quantity">
+            <button type="button" class="pack-qty-btn" id="packQtyInc" aria-label="Increase quantity">+</button>
+          </div>
+        </div>
+
+        <div class="fs-card-divider" aria-hidden="true"></div>
+
+        <!-- Notes Field (5 lines) -->
+        <div class="fs-field-section">
+          <label class="fs-label" for="packItemNotes">Notes</label>
+          <textarea id="packItemNotes" rows="5" maxlength="500" placeholder="Size, brand, store, or packing reminder..."></textarea>
+        </div>
+
+        <div class="fs-card-divider" aria-hidden="true"></div>
+
+        <!-- To buy Toggle (last on the form) -->
         <div class="fs-chip-section">
-          <span class="fs-label">Status</span>
-          <div class="chips" id="packStatusChips" aria-label="Item status">
+          <div class="chips" id="packStatusChips" aria-label="Item flags">
             <label class="chip-opt chip-toggle" id="packToBuyChip" style="--c: var(--pack-tobuy);">
               <input type="checkbox" id="packItemToBuy" name="packItemToBuy">
               <span><svg class="i" aria-hidden="true"><use href="#i-tag"/></svg>To buy</span>
             </label>
-            <label class="chip-opt chip-toggle" id="packPackedChip" style="--c: var(--ok);">
-              <input type="checkbox" id="packItemDone" name="packItemDone">
-              <span><svg class="i sm" aria-hidden="true"><use href="#i-check"/></svg>Packed</span>
-            </label>
-          </div>
-        </div>
-      </div>
-
-      <!-- Quantity Card -->
-      <div class="fs-group">
-        <div class="fs-group-label">Quantity</div>
-        <div class="fs-card fs-details-card">
-          <div class="field">
-            <div class="pack-qty-control">
-              <button type="button" class="pack-qty-btn" id="packQtyDec" aria-label="Decrease quantity">−</button>
-              <input type="number" id="packItemQty" min="1" max="99" value="1" inputmode="numeric" aria-label="Quantity">
-              <button type="button" class="pack-qty-btn" id="packQtyInc" aria-label="Increase quantity">+</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Notes Card -->
-      <div class="fs-group">
-        <div class="fs-group-label">Notes</div>
-        <div class="fs-card fs-details-card">
-          <div class="field">
-            <label for="packItemNotes" class="sr-only">Notes</label>
-            <textarea id="packItemNotes" maxlength="500" placeholder="Size, brand, store, or packing reminder..."></textarea>
           </div>
         </div>
       </div>

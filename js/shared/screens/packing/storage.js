@@ -63,6 +63,8 @@ export const PACK_BAGS = [
   { id: "hiking-bag", label: "Hiking bag", icon: "i-mountain" }
 ];
 
+export const PACK_LOCATIONS = PACK_BAGS;
+
 export function getPackingItems() {
   const state = getState();
   return (state && Array.isArray(state.packing)) ? state.packing : [];

@@ -164,7 +164,7 @@ function ensureBagChips() {
   const bagsContainer = $("packBags");
   if (bagsContainer && !bagsContainer.hasChildNodes()) {
     bagsContainer.innerHTML = PACK_BAGS.map(bag => `
-      <label class="chip-opt" style="--c: var(--accent);">
+      <label class="chip-opt">
         <input type="radio" name="packBag" value="${esc(bag.label)}">
         <span><svg class="i" aria-hidden="true"><use href="#${esc(bag.icon)}"/></svg>${esc(bag.label)}</span>
       </label>
@@ -216,7 +216,14 @@ function openItemDialog(itemId = null) {
     setSelectedBag(item.bag || "");
     if (qtyEl) qtyEl.value = item.qty || 1;
     if (toBuyEl) toBuyEl.checked = Boolean(item.toBuy);
-    if (doneEl) doneEl.checked = Boolean(item.done);
+    if (doneEl) {
+      doneEl.checked = Boolean(item.done);
+      const doneLabel = $("packDoneLabel");
+      if (doneLabel) {
+        doneLabel.classList.toggle("is-checked", doneEl.checked);
+        doneLabel.setAttribute("aria-label", doneEl.checked ? "Mark unpacked" : "Mark packed");
+      }
+    }
     if (notesEl) notesEl.value = item.notes || "";
     if (deleteBtn) deleteBtn.hidden = false;
     if (submitBtn) submitBtn.textContent = "Save";
@@ -229,7 +236,14 @@ function openItemDialog(itemId = null) {
     setSelectedBag("");
     if (qtyEl) qtyEl.value = "1";
     if (toBuyEl) toBuyEl.checked = defaultToBuy;
-    if (doneEl) doneEl.checked = false;
+    if (doneEl) {
+      doneEl.checked = false;
+      const doneLabel = $("packDoneLabel");
+      if (doneLabel) {
+        doneLabel.classList.toggle("is-checked", false);
+        doneLabel.setAttribute("aria-label", "Mark packed");
+      }
+    }
     if (notesEl) notesEl.value = "";
     if (deleteBtn) deleteBtn.hidden = true;
     if (submitBtn) submitBtn.textContent = "Save";
@@ -270,6 +284,16 @@ export function initPacking({ signal } = {}) {
         });
         radio.dataset.wasChecked = "true";
       }
+    });
+  }
+
+  // Round packed checkbox in dialog
+  const doneInput = $("packItemDone");
+  const doneLabel = $("packDoneLabel");
+  if (doneInput && doneLabel && typeof doneInput.addEventListener === "function") {
+    doneInput.addEventListener("change", () => {
+      doneLabel.classList.toggle("is-checked", doneInput.checked);
+      doneLabel.setAttribute("aria-label", doneInput.checked ? "Mark unpacked" : "Mark packed");
     });
   }
 

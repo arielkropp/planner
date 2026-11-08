@@ -14,6 +14,7 @@ import {
   PACK_CATEGORIES,
   PACK_CATEGORY_META,
   PACK_BAGS,
+  PACK_LOCATIONS,
   getPackingItems,
   getPackingItem,
   addPackingItem,
@@ -37,6 +38,7 @@ test("Packing: Bag options are properly configured", () => {
   assert.equal(PACK_BAGS.length, 4);
   const labels = PACK_BAGS.map(b => b.label);
   assert.deepEqual(labels, ["Suitcase", "Backpack", "Trolley", "Hiking bag"]);
+  assert.equal(PACK_LOCATIONS, PACK_BAGS);
 });
 
 test("Packing: Loads items array", () => {

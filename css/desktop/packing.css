@@ -311,24 +311,115 @@
   margin: 0;
 }
 
-.pack-status-toggles {
+/* Dialog: Title Row with Round Checkbox */
+.pack-title-row {
   display: flex;
   align-items: center;
-  gap: 16px;
-  min-height: 32px;
+  gap: 12px;
 }
 
-.pack-dialog-check-label {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 13px;
-  color: var(--ink);
+.pack-title-row .pack-check-circle {
+  width: 24px;
+  height: 24px;
   cursor: pointer;
+  flex-shrink: 0;
+  display: inline-grid;
+  place-items: center;
+  margin: 0;
 }
 
-.pack-dialog-check-label input[type="checkbox"] {
-  width: 18px;
-  height: 18px;
-  accent-color: var(--accent);
+.pack-title-row .pack-check-circle:hover {
+  border-color: var(--accent);
+  transform: scale(1.08);
+}
+
+.pack-title-row .pack-check-circle:has(input:checked),
+.pack-title-row .pack-check-circle.is-checked {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.pack-title-row .pack-check-circle:has(input:checked) .i,
+.pack-title-row .pack-check-circle.is-checked .i {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.pack-title-row .pack-check-circle:has(input:focus-visible) {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Dialog: Location Cards (Transparent, dark grey border, card border-radius) */
+#packBags {
+  gap: 8px;
+}
+
+#packBags .chip-opt span {
+  background: transparent;
+  border: 1px solid var(--muted);
+  border-radius: 8px;
+  color: var(--ink);
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  transition: all 0.12s ease;
+}
+
+#packBags .chip-opt span:hover {
+  background: color-mix(in srgb, var(--ink) 6%, transparent);
+  border-color: var(--ink);
+}
+
+#packBags .chip-opt input:checked + span {
+  background: color-mix(in srgb, var(--ink) 12%, transparent);
+  border: 1.5px solid var(--ink);
+  color: var(--ink);
+  font-weight: 600;
+}
+
+:root[data-theme="dark"] #packBags .chip-opt span {
+  border-color: var(--muted);
+  color: var(--ink);
+}
+
+:root[data-theme="dark"] #packBags .chip-opt input:checked + span {
+  background: color-mix(in srgb, var(--ink) 16%, transparent);
+  border-color: var(--ink);
+  color: var(--ink);
+}
+
+/* Dialog: Top card fields (Quantity & Notes) */
+.fs-field-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+#packItemNotes {
+  width: 100%;
+  box-sizing: border-box;
+  font-family: var(--font-ui);
+  font-size: 13.5px;
+  line-height: 1.45;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  padding: 10px 12px;
+  min-height: 110px;
+  resize: vertical;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+#packItemNotes:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 25%, transparent);
+}
+
+:root[data-theme="dark"] #packItemNotes {
+  background: var(--surface-tonal);
+  border-color: var(--line);
+  color: var(--ink);
 }
