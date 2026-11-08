@@ -3,6 +3,7 @@
    { getView(), setView(view), onShow(isFirstShow), scrollToToday() } */
 
 import { SCREENS } from "./constants.js";
+import { updatePackLens } from "./screens/packing/index.js";
 
 const HOME = "itinerary";
 const LEGACY_HASHES = { agenda: "schedule", trip: "week" };
@@ -64,6 +65,8 @@ export function route(focus = true) {
 
   if (screen === HOME) {
     requestAnimationFrame(() => itinerary.onShow(firstShow));
+  } else if (screen === "packing") {
+    requestAnimationFrame(() => updatePackLens(true));
   }
 
   if (changed) {

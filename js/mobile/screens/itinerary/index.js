@@ -19,20 +19,28 @@ export function updateItineraryLens(immediate = false) {
   if (!container || !lens) return;
 
   const active = container.querySelector('[data-itinerary-view][aria-pressed="true"]');
-  if (!active || active.offsetWidth === 0) return;
+  if (!active) return;
+
+  const aRect = active.getBoundingClientRect?.();
+  const cRect = container.getBoundingClientRect?.();
+  const left = aRect && cRect
+    ? aRect.left - cRect.left - (container.clientLeft || 0)
+    : active.offsetLeft;
+  const width = aRect ? aRect.width : active.offsetWidth;
+  if (!width) return;
 
   if (immediate) {
     lens.style.transition = "none";
-    lens.style.transform = `translateX(${active.offsetLeft}px)`;
-    lens.style.width = `${active.offsetWidth}px`;
+    lens.style.transform = `translateX(${left}px)`;
+    lens.style.width = `${width}px`;
     lens.classList.add("is-ready");
     void lens.offsetHeight;
     lens.style.transition = "";
     return;
   }
 
-  lens.style.transform = `translateX(${active.offsetLeft}px)`;
-  lens.style.width = `${active.offsetWidth}px`;
+  lens.style.transform = `translateX(${left}px)`;
+  lens.style.width = `${width}px`;
   lens.classList.add("is-ready");
 }
 

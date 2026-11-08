@@ -151,3 +151,39 @@ test("Packing: initPacking runs and populates categories and bags when container
   assert.ok(dummyBags.innerHTML.includes("Trolley"));
   assert.ok(dummyBags.innerHTML.includes("Hiking bag"));
 });
+
+test("Packing: updatePackLens positions lens accurately with getBoundingClientRect", async () => {
+  const lens = {
+    style: {},
+    classList: { add: () => {} }
+  };
+  const activeBtn = {
+    getBoundingClientRect: () => ({ left: 104.671875, width: 69.640625 }),
+    offsetLeft: 105,
+    offsetWidth: 70
+  };
+  const container = {
+    getBoundingClientRect: () => ({ left: 0, width: 177.3125 }),
+    clientLeft: 0,
+    querySelector: () => activeBtn,
+    querySelectorAll: () => [activeBtn]
+  };
+
+  globalThis.document = {
+    getElementById: (id) => {
+      if (id === "packViews") return container;
+      if (id === "packLens") return lens;
+      return null;
+    },
+    querySelectorAll: () => []
+  };
+
+  const { updatePackLens, setPackView } = await import("../js/shared/screens/packing/index.js");
+  activeBtn.dataset = { packView: "to-pack" };
+  activeBtn.setAttribute = () => {};
+  setPackView("to-pack");
+  updatePackLens(true);
+
+  assert.equal(lens.style.transform, "translateX(104.671875px)");
+  assert.equal(lens.style.width, "69.640625px");
+});
