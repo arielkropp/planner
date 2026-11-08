@@ -20,26 +20,175 @@
   flex-direction: column;
 }
 
-.pack-list .pack-row:last-child {
+/* Compact Checklist Row & Swipe Wrapper */
+.pack-row-wrapper {
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--line);
+  background: var(--surface);
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.pack-list .pack-row-wrapper:last-child {
   border-bottom: none;
 }
 
-/* Compact Checklist Row */
+.pack-swipe-bg {
+  position: absolute;
+  inset: 0;
+  background: var(--crit);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 18px;
+  color: #ffffff;
+  pointer-events: none;
+}
+
+.pack-swipe-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: var(--font-ui);
+  transform: scale(0.9);
+  opacity: 0.8;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.pack-swipe-bg.is-triggered .pack-swipe-action {
+  transform: scale(1.08);
+  opacity: 1;
+}
+
 .pack-row {
   display: flex;
   align-items: center;
   gap: 12px;
   padding: 7px 14px;
   min-height: 46px;
-  border-bottom: 1px solid var(--line);
+  border-bottom: none;
   background: var(--surface);
   min-width: 0;
-  transition: background-color 0.12s ease;
-  touch-action: manipulation;
+  cursor: pointer;
+  touch-action: pan-y;
+  transition: transform 0.25s cubic-bezier(0.2, 0, 0, 1), background-color 0.12s ease;
+  will-change: transform;
+}
+
+.pack-row.is-swiping {
+  transition: none !important;
+}
+
+.pack-row-wrapper.is-deleting {
+  transition: max-height 0.24s ease, opacity 0.2s ease;
+  max-height: 0 !important;
+  opacity: 0 !important;
+  border-bottom-color: transparent !important;
 }
 
 .pack-row:active {
   background: color-mix(in srgb, var(--ink) 3%, var(--surface));
+}
+
+/* FAB Group & Quick Add */
+.pack-fab-group {
+  position: fixed;
+  z-index: 25;
+  right: max(16px, env(safe-area-inset-right));
+  bottom: calc(76px + env(safe-area-inset-bottom));
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pack-fab-group .fab {
+  position: static;
+}
+
+.fab.fab-quick {
+  background: var(--surface);
+  color: var(--accent);
+  border: 1.5px solid var(--line);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.fab.fab-quick:hover {
+  background: color-mix(in srgb, var(--accent) 12%, var(--surface));
+  border-color: var(--accent);
+}
+
+.fab.fab-quick .i {
+  color: var(--accent);
+}
+
+:root[data-theme="dark"] .fab.fab-quick {
+  background: var(--surface-tonal);
+  color: var(--accent);
+  border-color: var(--line);
+}
+
+/* Floating Quick Add Box */
+.pack-quick-add-box {
+  position: fixed;
+  z-index: 50;
+  bottom: calc(76px + env(safe-area-inset-bottom) + 68px);
+  left: 14px;
+  right: 14px;
+  margin: 0 auto;
+  max-width: 480px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.22), 0 2px 8px rgba(0, 0, 0, 0.12);
+  padding: 8px 10px;
+  animation: spring-in var(--motion-duration) var(--motion-spring);
+}
+
+.pack-quick-add-box[hidden] {
+  display: none;
+}
+
+.pack-quick-add-form {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pack-quick-add-input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  background: transparent;
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-size: 14.5px;
+  padding: 6px 8px;
+  outline: none;
+}
+
+.pack-quick-add-save {
+  height: 36px;
+  padding: 0 16px;
+  border-radius: 10px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.pack-quick-add-close {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  flex-shrink: 0;
+  color: var(--muted);
+}
+
+.pack-quick-add-close:hover {
+  color: var(--ink);
+  background: color-mix(in srgb, var(--ink) 8%, transparent);
 }
 
 /* Circular Checkbox (hollow circle -> filled when packed) */

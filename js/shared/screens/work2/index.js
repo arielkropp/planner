@@ -2,10 +2,14 @@
 
 import { $, esc } from "../../utils/dom.js";
 import { fmtDate, validAnyDate, todayIso } from "../../utils/date.js";
+import { pad } from "../../constants.js";
 import { uid, num } from "../../utils/format.js";
-import { getState, getActiveTrip, save } from "../../state/store.js";
+import { getActiveTrip, save } from "../../state/store.js";
 import { confirmAsk } from "../../components/dialog.js";
 import { nextWorkDate } from "../../domain/work-calc.js";
+
+let activeEditId = null;
+let lastSwipedTime = 0;
 
 export function getWork2Items() {
   return getActiveTrip()?.work || [];
@@ -13,6 +17,17 @@ export function getWork2Items() {
 
 export function getWork2Item(id) {
   return getWork2Items().find(w => w.id === id) || null;
+}
+
+export function parseAnyDate(text) {
+  if (!text) return null;
+  const t = String(text).trim();
+  if (/^\d{4}-\d{2}-\d{2}$/.test(t) && validAnyDate(t)) return t;
+  const m = /^(\d{1,2})\/(\d{1,2})\/(\d{2}|\d{4})$/.exec(t);
+  if (!m) return null;
+  const yr = m[3].length === 2 ? `20${m[3]}` : m[3];
+  const iso = `${yr}-${pad(m[2])}-${pad(m[1])}`;
+  return validAnyDate(iso) ? iso : null;
 }
 
 export function addWork2Item({ date, hours, note }) {
@@ -29,6 +44,7 @@ export function addWork2Item({ date, hours, note }) {
   });
   save();
   renderWork2();
+  return id;
 }
 
 export function updateWork2Item(id, { date, hours, note }) {
@@ -50,6 +66,7 @@ export function deleteWork2Item(id) {
   const idx = active.work.findIndex(w => w.id === id);
   if (idx !== -1) {
     active.work.splice(idx, 1);
+    if (activeEditId === id) activeEditId = null;
     save();
     renderWork2();
   }
@@ -77,6 +94,103 @@ export function renderSettingsTarget() {
     const active = getActiveTrip();
     inp.value = active?.workTarget ?? 42;
   }
+}
+
+export function commitActiveEdit(skipRender = false) {
+  if (!activeEditId) return;
+  const idToCommit = activeEditId;
+  const wrapper = document?.querySelector?.(`.work2-row-wrapper[data-id="${idToCommit}"]`);
+  if (wrapper) {
+    const descInput = wrapper.querySelector(".work2-inline-desc");
+    const dateInput = wrapper.querySelector(".work2-inline-date");
+    const pickerInput = wrapper.querySelector(".work2-date-picker");
+    const hrsInput = wrapper.querySelector(".work2-inline-hrs");
+
+    const note = descInput ? descInput.value.trim() : "";
+    const rawHrs = hrsInput ? parseFloat(hrsInput.value) : NaN;
+    const parsedHrs = Number.isFinite(rawHrs) && rawHrs > 0
+      ? Math.round(Math.min(24, Math.max(0.1, rawHrs)) * 100) / 100
+      : 4;
+
+    let date = null;
+    if (pickerInput && validAnyDate(pickerInput.value)) {
+      date = pickerInput.value;
+    }
+    if (dateInput && dateInput.value) {
+      const parsed = parseAnyDate(dateInput.value);
+      if (parsed) date = parsed;
+    }
+    if (!validAnyDate(date)) {
+      const existing = getWork2Item(idToCommit);
+      date = existing?.date || todayIso();
+    }
+
+    const active = getActiveTrip();
+    if (active?.work) {
+      const item = active.work.find(w => w.id === idToCommit);
+      if (item) {
+        item.date = date;
+        item.hours = parsedHrs;
+        item.note = typeof note === "string" ? note.slice(0, 200) : "";
+        save();
+      }
+    }
+  }
+
+  activeEditId = null;
+  if (!skipRender) {
+    renderWork2();
+  }
+}
+
+export function activateInlineEdit(id) {
+  if (!id) return;
+  if (activeEditId === id) return;
+  if (activeEditId) {
+    commitActiveEdit(true);
+  }
+  activeEditId = id;
+  renderWork2();
+  requestAnimationFrame(() => {
+    const descInput = document?.querySelector?.(`.work2-row-wrapper[data-id="${id}"] .work2-inline-desc`);
+    descInput?.focus?.();
+    if (descInput && typeof descInput.select === "function") {
+      descInput.selectionStart = descInput.selectionEnd = descInput.value.length;
+    }
+  });
+}
+
+// Legacy alias in case invoked elsewhere
+export function openWork2Dialog(id = null) {
+  if (id) {
+    activateInlineEdit(id);
+  } else {
+    handleAddNewRow();
+  }
+}
+
+function handleAddNewRow() {
+  if (activeEditId) {
+    commitActiveEdit(true);
+  }
+  const active = getActiveTrip();
+  if (!active) return;
+  if (!active.work) active.work = [];
+  const id = uid();
+  const date = nextWorkDate() || todayIso();
+  active.work.unshift({
+    id,
+    date,
+    hours: 4,
+    note: ""
+  });
+  save();
+  activeEditId = id;
+  renderWork2();
+  requestAnimationFrame(() => {
+    const descInput = document?.querySelector?.(`.work2-row-wrapper[data-id="${id}"] .work2-inline-desc`);
+    descInput?.focus?.();
+  });
 }
 
 function attachSwipeHandlers(wrapper, item) {
@@ -111,7 +225,7 @@ function attachSwipeHandlers(wrapper, item) {
 
     if (!isDragging) {
       if (Math.abs(dx) > 8 && Math.abs(dx) > Math.abs(dy)) {
-        if (dx > 0) {
+        if (dx < 0) {
           isDragging = true;
           isSwiping = true;
           content.classList.add("is-swiping");
@@ -127,9 +241,9 @@ function attachSwipeHandlers(wrapper, item) {
 
     if (isSwiping) {
       currentX = e.clientX;
-      const moveX = Math.max(0, dx);
+      const moveX = Math.min(0, dx);
       content.style.transform = `translateX(${moveX}px)`;
-      if (moveX >= threshold) {
+      if (moveX <= -threshold) {
         bg?.classList.add("is-triggered");
       } else {
         bg?.classList.remove("is-triggered");
@@ -142,14 +256,14 @@ function attachSwipeHandlers(wrapper, item) {
     activePointerId = null;
 
     if (isSwiping) {
+      lastSwipedTime = Date.now();
       content.classList.remove("is-swiping");
-      const dx = Math.max(0, currentX - startX);
+      const dx = Math.min(0, currentX - startX);
       bg?.classList.remove("is-triggered");
 
-      if (dx >= threshold) {
-        // Slide out to the right (classic animation)
+      if (dx <= -threshold) {
         content.style.transition = "transform 0.22s cubic-bezier(0.2, 0, 0, 1)";
-        content.style.transform = "translateX(100%)";
+        content.style.transform = "translateX(-100%)";
 
         const desc = item.note || fmtDate(item.date) || "this work entry";
         const ok = await confirmAsk(`Delete "${desc}"?`, "Delete work entry", "Delete", true);
@@ -171,17 +285,78 @@ function attachSwipeHandlers(wrapper, item) {
       isSwiping = false;
       isDragging = false;
     } else {
-      // Tap or click -> open edit dialog
+      // Tap/click -> activate inline editing on this row
       const dx = Math.abs(e.clientX - startX);
       const dy = Math.abs(e.clientY - startY);
       if (dx < 6 && dy < 6) {
-        openWork2Dialog(item.id);
+        activateInlineEdit(item.id);
       }
     }
   };
 
   content.addEventListener("pointerup", finishGesture);
   content.addEventListener("pointercancel", finishGesture);
+}
+
+function wireInlineEditInputs(wrapper, item) {
+  const descInput = wrapper.querySelector(".work2-inline-desc");
+  const dateInput = wrapper.querySelector(".work2-inline-date");
+  const datePicker = wrapper.querySelector(".work2-date-picker");
+  const dateBtn = wrapper.querySelector(".work2-date-picker-btn");
+  const hrsInput = wrapper.querySelector(".work2-inline-hrs");
+
+  if (dateBtn && datePicker) {
+    dateBtn.addEventListener("click", e => {
+      e.stopPropagation();
+      try {
+        if (typeof datePicker.showPicker === "function") {
+          datePicker.showPicker();
+        } else {
+          datePicker.focus();
+        }
+      } catch {
+        datePicker.focus();
+      }
+    });
+  }
+
+  if (datePicker && dateInput) {
+    datePicker.addEventListener("change", () => {
+      if (datePicker.value) {
+        dateInput.value = fmtDate(datePicker.value);
+      }
+    });
+  }
+
+  if (dateInput && datePicker) {
+    dateInput.addEventListener("change", () => {
+      const parsed = parseAnyDate(dateInput.value);
+      if (parsed) {
+        datePicker.value = parsed;
+        dateInput.value = fmtDate(parsed);
+      }
+    });
+  }
+
+  if (hrsInput) {
+    hrsInput.addEventListener("input", () => {
+      let val = hrsInput.value.replace(/[^0-9.]/g, "");
+      const parts = val.split(".");
+      if (parts.length > 2) {
+        val = parts[0] + "." + parts.slice(1).join("");
+      }
+      hrsInput.value = val;
+    });
+  }
+
+  [descInput, dateInput, hrsInput].forEach(inp => {
+    inp?.addEventListener("keydown", e => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        commitActiveEdit();
+      }
+    });
+  });
 }
 
 export function renderWork2List() {
@@ -194,11 +369,37 @@ export function renderWork2List() {
     return;
   }
 
-  // Sort by date descending
+  // Sort by date descending, then id descending
   const sorted = [...work].sort((a, b) => (b.date || "").localeCompare(a.date || "") || (b.id || "").localeCompare(a.id || ""));
 
   listEl.innerHTML = sorted.map(w => {
+    const isEditing = w.id === activeEditId;
     const hrs = Number.isInteger(w.hours) ? String(w.hours) : num(w.hours, 1);
+
+    if (isEditing) {
+      return `
+        <div class="work2-row-wrapper is-editing" data-id="${esc(w.id)}">
+          <div class="work2-row-content is-editing" data-id="${esc(w.id)}">
+            <div class="work2-col-desc">
+              <input type="text" class="work2-inline-input work2-inline-desc" value="${esc(w.note || "")}" placeholder="Description of work..." maxlength="200" aria-label="Description">
+            </div>
+            <div class="work2-col-date">
+              <div class="work2-date-wrap">
+                <input type="text" class="work2-inline-input work2-inline-date" value="${esc(fmtDate(w.date))}" placeholder="DD/MM/YY" maxlength="10" aria-label="Date">
+                <button type="button" class="work2-date-picker-btn" aria-label="Choose date" title="Choose date" tabindex="-1">
+                  <svg class="i" aria-hidden="true"><use href="#i-calendar"/></svg>
+                </button>
+                <input type="date" class="work2-date-picker" value="${esc(w.date || todayIso())}" aria-label="Pick date" tabindex="-1">
+              </div>
+            </div>
+            <div class="work2-col-hrs">
+              <input type="text" inputmode="decimal" class="work2-inline-input work2-inline-hrs" value="${esc(hrs)}" placeholder="Hrs" maxlength="5" aria-label="Hours">
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
     return `
       <div class="work2-row-wrapper" data-id="${esc(w.id)}">
         <div class="work2-swipe-bg" aria-hidden="true">
@@ -207,7 +408,7 @@ export function renderWork2List() {
             <span>Delete</span>
           </div>
         </div>
-        <div class="work2-row-content" data-action="edit" data-id="${esc(w.id)}">
+        <div class="work2-row-content" data-action="inline-edit" data-id="${esc(w.id)}">
           <div class="work2-col-desc">${esc(w.note || "(No description)")}</div>
           <div class="work2-col-date">${fmtDate(w.date)}</div>
           <div class="work2-col-hrs">${hrs}</div>
@@ -216,10 +417,16 @@ export function renderWork2List() {
     `;
   }).join("");
 
-  listEl.querySelectorAll(".work2-row-wrapper").forEach(wrapper => {
+  listEl.querySelectorAll?.(".work2-row-wrapper")?.forEach(wrapper => {
     const id = wrapper.dataset.id;
     const item = work.find(w => w.id === id);
-    if (item) attachSwipeHandlers(wrapper, item);
+    if (!item) return;
+
+    if (id === activeEditId) {
+      wireInlineEditInputs(wrapper, item);
+    } else {
+      attachSwipeHandlers(wrapper, item);
+    }
   });
 }
 
@@ -229,127 +436,11 @@ export function renderWork2() {
   renderSettingsTarget();
 }
 
-export function openWork2Dialog(itemId = null) {
-  const dlg = $("work2ItemDialog");
-  if (!dlg) return;
-
-  const titleEl = $("work2DialogTitle");
-  const idEl = $("work2ItemId");
-  const noteEl = $("work2ItemNote");
-  const dateEl = $("work2ItemDate");
-  const hoursEl = $("work2ItemHours");
-  const delBtn = $("work2ItemDelete");
-  const submitBtn = $("work2ItemSubmit");
-
-  if (itemId) {
-    const item = getWork2Item(itemId);
-    if (!item) return;
-
-    if (titleEl) titleEl.textContent = "Edit work entry";
-    if (idEl) idEl.value = item.id;
-    if (noteEl) noteEl.value = item.note || "";
-    if (dateEl) dateEl.value = item.date || todayIso();
-    if (hoursEl) hoursEl.value = item.hours || 4;
-    if (delBtn) delBtn.hidden = false;
-    if (submitBtn) submitBtn.textContent = "Save";
-  } else {
-    if (titleEl) titleEl.textContent = "Add work entry";
-    if (idEl) idEl.value = "";
-    if (noteEl) noteEl.value = "";
-    if (dateEl) dateEl.value = nextWorkDate() || todayIso();
-    if (hoursEl) hoursEl.value = 4;
-    if (delBtn) delBtn.hidden = true;
-    if (submitBtn) submitBtn.textContent = "Save";
-  }
-
-  noteEl?.classList.remove("is-invalid");
-  noteEl?.closest(".fs-title-wrap")?.classList.remove("is-invalid");
-
-  dlg.showModal();
-  requestAnimationFrame(() => noteEl?.focus());
-}
-
 export function initWork2({ signal } = {}) {
+  // Add FAB
   const fab = $("addWork2Item");
   if (fab) {
-    fab.addEventListener("click", () => openWork2Dialog());
-  }
-
-  const closeBtn = $("work2Close");
-  const dlg = $("work2ItemDialog");
-  if (closeBtn && dlg) {
-    closeBtn.addEventListener("click", () => dlg.close());
-  }
-
-  const hoursDec = $("work2HoursDec");
-  const hoursInc = $("work2HoursInc");
-  const hoursInput = $("work2ItemHours");
-
-  if (hoursDec && hoursInput) {
-    hoursDec.addEventListener("click", () => {
-      const val = parseFloat(hoursInput.value) || 1;
-      const next = val > 1 ? val - 1 : Math.max(0.25, val - 0.25);
-      hoursInput.value = String(Math.round(next * 100) / 100);
-    });
-  }
-
-  if (hoursInc && hoursInput) {
-    hoursInc.addEventListener("click", () => {
-      const val = parseFloat(hoursInput.value) || 0;
-      const next = Math.min(24, val + 1);
-      hoursInput.value = String(Math.round(next * 100) / 100);
-    });
-  }
-
-  const noteInput = $("work2ItemNote");
-  if (noteInput) {
-    noteInput.addEventListener("input", () => {
-      noteInput.classList.remove("is-invalid");
-      noteInput.closest(".fs-title-wrap")?.classList.remove("is-invalid");
-    });
-  }
-
-  const delBtn = $("work2ItemDelete");
-  if (delBtn) {
-    delBtn.addEventListener("click", async () => {
-      const id = $("work2ItemId")?.value;
-      if (!id) return;
-
-      const item = getWork2Item(id);
-      const desc = item?.note || fmtDate(item?.date) || "this work entry";
-      const ok = await confirmAsk(`Delete "${desc}"?`, "Delete work entry", "Delete", true);
-      if (!ok) return;
-
-      deleteWork2Item(id);
-      dlg?.close();
-    });
-  }
-
-  const form = $("work2ItemForm");
-  if (form) {
-    form.addEventListener("submit", e => {
-      e.preventDefault();
-
-      const note = noteInput?.value?.trim() || "";
-      if (!note) {
-        noteInput?.classList.add("is-invalid");
-        noteInput?.closest(".fs-title-wrap")?.classList.add("is-invalid");
-        noteInput?.focus();
-        return;
-      }
-
-      const id = $("work2ItemId")?.value;
-      const date = $("work2ItemDate")?.value || todayIso();
-      const hours = parseFloat(hoursInput?.value) || 4;
-
-      if (id) {
-        updateWork2Item(id, { date, hours, note });
-      } else {
-        addWork2Item({ date, hours, note });
-      }
-
-      dlg?.close();
-    });
+    fab.addEventListener("click", () => handleAddNewRow());
   }
 
   // Work log target setting input
@@ -364,6 +455,32 @@ export function initWork2({ signal } = {}) {
       renderWork2Stats();
     });
   }
+
+  // Row selection delegation: clicking another row saves the active row and activates edit mode on the clicked row
+  const listEl = $("work2List");
+  if (listEl) {
+    listEl.addEventListener("click", e => {
+      if (Date.now() - lastSwipedTime < 300) return;
+
+      const trigger = e.target.closest('[data-action="inline-edit"]');
+      if (trigger) {
+        const id = trigger.dataset.id;
+        if (id && id !== activeEditId) {
+          activateInlineEdit(id);
+        }
+      }
+    });
+  }
+
+  // Click outside active editing row commits active edit
+  document.addEventListener("pointerdown", e => {
+    if (!activeEditId) return;
+    const activeWrapper = document.querySelector(`.work2-row-wrapper[data-id="${activeEditId}"]`);
+    const addFab = $("addWork2Item");
+    if (activeWrapper && !activeWrapper.contains(e.target) && (!addFab || !addFab.contains(e.target))) {
+      commitActiveEdit();
+    }
+  });
 
   renderWork2();
 }

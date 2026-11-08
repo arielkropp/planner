@@ -187,3 +187,67 @@ test("Packing: updatePackLens positions lens accurately with getBoundingClientRe
   assert.equal(lens.style.transform, "translateX(104.671875px)");
   assert.equal(lens.style.width, "69.640625px");
 });
+
+test("Packing: renderPacking renders row wrappers with swipe background", async () => {
+  const contentEl = {
+    innerHTML: "",
+    querySelectorAll: () => []
+  };
+
+  globalThis.document = {
+    getElementById: id => (id === "packingContent" ? contentEl : null),
+    querySelectorAll: () => []
+  };
+
+  const { renderPacking } = await import("../js/shared/screens/packing/index.js");
+  addPackingItem({ title: "Passport", category: "Documents" });
+
+  renderPacking();
+
+  assert.ok(contentEl.innerHTML.includes("pack-row-wrapper"));
+  assert.ok(contentEl.innerHTML.includes("pack-swipe-bg"));
+  assert.ok(contentEl.innerHTML.includes("pack-swipe-action"));
+  assert.ok(contentEl.innerHTML.includes("Passport"));
+});
+
+test("Packing: quick add adds item with default Other category and qty 1", async () => {
+  let submitHandler = null;
+  const dummyForm = {
+    addEventListener: (evt, handler) => {
+      if (evt === "submit") submitHandler = handler;
+    }
+  };
+  const dummyInput = { value: "Toothbrush", focus: () => {} };
+  const dummyBox = { hidden: false, style: {} };
+  const contentEl = { innerHTML: "", querySelectorAll: () => [], addEventListener: () => {} };
+
+  globalThis.document = {
+    getElementById: id => {
+      if (id === "packQuickAddForm") return dummyForm;
+      if (id === "packQuickAddInput") return dummyInput;
+      if (id === "packQuickAddBox") return dummyBox;
+      if (id === "packingContent") return contentEl;
+      return null;
+    },
+    querySelectorAll: () => [],
+    addEventListener: () => {}
+  };
+  globalThis.window = {
+    addEventListener: () => {},
+    location: { hash: "" }
+  };
+
+  const { initPacking } = await import("../js/shared/screens/packing/index.js");
+  initPacking();
+
+  assert.ok(submitHandler, "quick add form submit handler registered");
+  submitHandler({ preventDefault: () => {} });
+
+  const items = getPackingItems();
+  const added = items.find(it => it.title === "Toothbrush");
+  assert.ok(added, "Toothbrush added to packing items");
+  assert.equal(added.category, "Other");
+  assert.equal(added.qty, 1);
+  assert.equal(dummyBox.hidden, true);
+});
+

@@ -64,6 +64,108 @@ export function setPackView(view) {
   renderPacking();
 }
 
+let lastSwipedTime = 0;
+
+function attachPackSwipeHandlers(wrapper, item) {
+  const row = wrapper.querySelector(".pack-row");
+  const bg = wrapper.querySelector(".pack-swipe-bg");
+  if (!row) return;
+
+  let startX = 0;
+  let startY = 0;
+  let currentX = 0;
+  let isSwiping = false;
+  let isDragging = false;
+  let activePointerId = null;
+
+  const threshold = 75;
+
+  row.addEventListener("pointerdown", e => {
+    if (e.button !== 0) return;
+    if (e.target.closest('[data-action="toggle"]')) return;
+    startX = e.clientX;
+    startY = e.clientY;
+    currentX = startX;
+    isSwiping = false;
+    isDragging = false;
+    activePointerId = e.pointerId;
+  });
+
+  row.addEventListener("pointermove", e => {
+    if (activePointerId !== e.pointerId) return;
+
+    const dx = e.clientX - startX;
+    const dy = e.clientY - startY;
+
+    if (!isDragging) {
+      if (Math.abs(dx) > 8 && Math.abs(dx) > Math.abs(dy)) {
+        if (dx < 0) {
+          isDragging = true;
+          isSwiping = true;
+          row.classList.add("is-swiping");
+          try {
+            row.setPointerCapture(e.pointerId);
+          } catch {}
+        }
+      } else if (Math.abs(dy) > 8) {
+        activePointerId = null;
+        return;
+      }
+    }
+
+    if (isSwiping) {
+      currentX = e.clientX;
+      const moveX = Math.min(0, dx);
+      row.style.transform = `translateX(${moveX}px)`;
+      if (moveX <= -threshold) {
+        bg?.classList.add("is-triggered");
+      } else {
+        bg?.classList.remove("is-triggered");
+      }
+    }
+  });
+
+  const finishGesture = async e => {
+    if (activePointerId !== e.pointerId) return;
+    activePointerId = null;
+
+    if (isSwiping) {
+      lastSwipedTime = Date.now();
+      row.classList.remove("is-swiping");
+      const dx = Math.min(0, currentX - startX);
+      bg?.classList.remove("is-triggered");
+
+      if (dx <= -threshold) {
+        row.style.transition = "transform 0.22s cubic-bezier(0.2, 0, 0, 1)";
+        row.style.transform = "translateX(-100%)";
+
+        const title = item.title ? `"${item.title}"` : "this item";
+        const ok = await confirmAsk(`Delete ${title}?`, "Delete item", "Delete", true);
+        if (ok) {
+          wrapper.style.maxHeight = `${wrapper.offsetHeight}px`;
+          void wrapper.offsetHeight;
+          wrapper.classList.add("is-deleting");
+          setTimeout(() => {
+            deletePackingItem(item.id);
+            renderPacking();
+          }, 240);
+        } else {
+          row.style.transition = "transform 0.25s cubic-bezier(0.2, 0, 0, 1)";
+          row.style.transform = "translateX(0)";
+        }
+      } else {
+        row.style.transition = "transform 0.25s cubic-bezier(0.2, 0, 0, 1)";
+        row.style.transform = "translateX(0)";
+      }
+      isSwiping = false;
+      isDragging = false;
+    }
+  };
+
+  row.addEventListener("pointerup", finishGesture);
+  row.addEventListener("pointercancel", finishGesture);
+}
+
 function renderItemRow(item) {
   const isPacked = Boolean(item.done);
   const catSlug = item.category ? item.category.toLowerCase() : "";
@@ -72,21 +174,29 @@ function renderItemRow(item) {
   const qty = item.qty || 1;
 
   return `
-    <div class="pack-row ${isPacked ? "is-packed" : ""}" data-id="${esc(item.id)}">
-      <button type="button" class="pack-check-circle ${isPacked ? "is-checked" : ""}" data-action="toggle" data-id="${esc(item.id)}" aria-label="${isPacked ? "Mark unpacked" : "Mark packed"}">
-        <svg class="i sm" aria-hidden="true"><use href="#i-check"/></svg>
-      </button>
-      <div class="pack-row-content" data-action="edit" data-id="${esc(item.id)}">
-        <span class="pack-title">${esc(item.title)}</span>
-        ${hasBadges ? `
-          <div class="pack-row-badges">
-            ${showCat ? `<span class="pack-pill cat-${esc(catSlug)}">${esc(catSlug)}</span>` : ""}
-            ${item.bag ? `<span class="pack-pill bag">${esc(item.bag.toLowerCase())}</span>` : ""}
-            ${item.toBuy ? `<span class="pack-pill to-buy">to buy</span>` : ""}
-          </div>
-        ` : ""}
+    <div class="pack-row-wrapper" data-id="${esc(item.id)}">
+      <div class="pack-swipe-bg" aria-hidden="true">
+        <div class="pack-swipe-action">
+          <svg class="i sm" aria-hidden="true"><use href="#i-trash"/></svg>
+          <span>Delete</span>
+        </div>
       </div>
-      <span class="pack-qty-pill" data-action="edit" data-id="${esc(item.id)}" title="Quantity: ${qty}. Click to edit.">x${qty}</span>
+      <div class="pack-row ${isPacked ? "is-packed" : ""}" data-id="${esc(item.id)}">
+        <button type="button" class="pack-check-circle ${isPacked ? "is-checked" : ""}" data-action="toggle" data-id="${esc(item.id)}" aria-label="${isPacked ? "Mark unpacked" : "Mark packed"}">
+          <svg class="i sm" aria-hidden="true"><use href="#i-check"/></svg>
+        </button>
+        <div class="pack-row-content" data-action="edit" data-id="${esc(item.id)}">
+          <span class="pack-title">${esc(item.title)}</span>
+          ${hasBadges ? `
+            <div class="pack-row-badges">
+              ${showCat ? `<span class="pack-pill cat-${esc(catSlug)}">${esc(catSlug)}</span>` : ""}
+              ${item.bag ? `<span class="pack-pill bag">${esc(item.bag.toLowerCase())}</span>` : ""}
+              ${item.toBuy ? `<span class="pack-pill to-buy">to buy</span>` : ""}
+            </div>
+          ` : ""}
+        </div>
+        <span class="pack-qty-pill" data-action="edit" data-id="${esc(item.id)}" title="Quantity: ${qty}. Click to edit.">x${qty}</span>
+      </div>
     </div>
   `;
 }
@@ -121,6 +231,12 @@ export function renderPacking() {
 
   // Render straight list of rows
   contentEl.innerHTML = visibleItems.map(renderItemRow).join("");
+
+  contentEl.querySelectorAll?.(".pack-row-wrapper")?.forEach(wrapper => {
+    const id = wrapper.dataset.id;
+    const item = allItems.find(it => it.id === id);
+    if (item) attachPackSwipeHandlers(wrapper, item);
+  });
 }
 
 const PACK_CATEGORY_ICONS = {
@@ -322,8 +438,10 @@ export function initPacking({ signal } = {}) {
 
   // Content clicks (delegation for checkbox toggle and row edit)
   const contentEl = $("packingContent");
-  if (contentEl) {
+  if (contentEl && typeof contentEl.addEventListener === "function") {
     contentEl.addEventListener("click", e => {
+      if (Date.now() - lastSwipedTime < 300) return;
+
       // 1. Checkbox toggle (always toggles packed status)
       const checkBtn = e.target.closest('[data-action="toggle"]');
       if (checkBtn) {
@@ -425,6 +543,97 @@ export function initPacking({ signal } = {}) {
       renderPacking();
     });
   }
+
+  // Quick Add controls
+  const quickAddBtn = $("quickAddPackItem");
+  const quickAddBox = $("packQuickAddBox");
+  const quickAddForm = $("packQuickAddForm");
+  const quickAddInput = $("packQuickAddInput");
+  const quickAddClose = $("packQuickAddClose");
+
+  function openQuickAdd() {
+    if (!quickAddBox) return;
+    quickAddBox.hidden = false;
+    if (quickAddInput) {
+      quickAddInput.value = "";
+      requestAnimationFrame(() => quickAddInput.focus());
+    }
+    updateQuickAddPosition();
+  }
+
+  function closeQuickAdd() {
+    if (!quickAddBox) return;
+    quickAddBox.hidden = true;
+    quickAddBox.style.bottom = "";
+  }
+
+  function updateQuickAddPosition() {
+    if (!quickAddBox || quickAddBox.hidden) return;
+    if (window.visualViewport) {
+      const vv = window.visualViewport;
+      const kbHeight = window.innerHeight - vv.height - vv.offsetTop;
+      if (kbHeight > 40) {
+        quickAddBox.style.bottom = `${kbHeight + 12}px`;
+      } else {
+        quickAddBox.style.bottom = "";
+      }
+    }
+  }
+
+  if (quickAddBtn) {
+    quickAddBtn.addEventListener("click", () => {
+      if (quickAddBox && !quickAddBox.hidden) {
+        closeQuickAdd();
+      } else {
+        openQuickAdd();
+      }
+    });
+  }
+
+  if (quickAddClose) {
+    quickAddClose.addEventListener("click", () => closeQuickAdd());
+  }
+
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener("resize", updateQuickAddPosition, { signal });
+    window.visualViewport.addEventListener("scroll", updateQuickAddPosition, { signal });
+  }
+
+  if (quickAddForm) {
+    quickAddForm.addEventListener("submit", e => {
+      e.preventDefault();
+      const title = quickAddInput?.value?.trim() || "";
+      if (!title) {
+        quickAddInput?.focus();
+        return;
+      }
+      addPackingItem({
+        title,
+        category: "Other",
+        qty: 1,
+        toBuy: packState.view === "to-buy",
+        bag: "",
+        done: false,
+        notes: ""
+      });
+      closeQuickAdd();
+      renderPacking();
+    });
+  }
+
+  window.addEventListener("keydown", e => {
+    if (e.key === "Escape" && quickAddBox && !quickAddBox.hidden) {
+      closeQuickAdd();
+    }
+  }, { signal });
+
+  document.addEventListener("pointerdown", e => {
+    if (quickAddBox && !quickAddBox.hidden) {
+      if (!quickAddBox.contains(e.target) && !quickAddBtn?.contains(e.target)) {
+        closeQuickAdd();
+      }
+    }
+  });
 
   // Render initial packing items
   renderPacking();

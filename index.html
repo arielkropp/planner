@@ -63,6 +63,7 @@
   <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" x2="22" y1="12" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></symbol>
   <symbol id="i-shirt" viewBox="0 0 24 24"><path d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"/></symbol>
   <symbol id="i-zap" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></symbol>
+  <symbol id="i-zap-plus" viewBox="0 0 24 24"><polygon points="11 2 2 13 9 13 8 22 17 11 11 11 11 2"/><path d="M19 2v6M16 5h6"/></symbol>
   <symbol id="i-sparkles" viewBox="0 0 24 24"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></symbol>
   <symbol id="i-rotate-ccw" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></symbol>
   <symbol id="i-package" viewBox="0 0 24 24"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></symbol>
@@ -141,9 +142,22 @@
         <div id="packingContent" class="pack-list"></div>
       </div>
 
-      <button class="fab" id="addPackItem" type="button" aria-label="Add packing item" title="Add packing item">
-        <svg class="i" aria-hidden="true"><use href="#i-plus"/></svg>
-      </button>
+      <div class="pack-quick-add-box" id="packQuickAddBox" hidden>
+        <form id="packQuickAddForm" class="pack-quick-add-form" autocomplete="off">
+          <input type="text" id="packQuickAddInput" class="pack-quick-add-input" placeholder="Quick add item..." maxlength="200" autocomplete="off" aria-label="Item title">
+          <button type="submit" id="packQuickAddSave" class="btn primary pack-quick-add-save">Save</button>
+          <button type="button" id="packQuickAddClose" class="icon-btn pack-quick-add-close" aria-label="Close quick add"><svg class="i sm" aria-hidden="true"><use href="#i-x"/></svg></button>
+        </form>
+      </div>
+
+      <div class="pack-fab-group">
+        <button class="fab fab-quick" id="quickAddPackItem" type="button" aria-label="Quick add packing item" title="Quick add">
+          <svg class="i" aria-hidden="true"><use href="#i-zap-plus"/></svg>
+        </button>
+        <button class="fab" id="addPackItem" type="button" aria-label="Add packing item" title="Add packing item">
+          <svg class="i" aria-hidden="true"><use href="#i-plus"/></svg>
+        </button>
+      </div>
     </section>
 
     <section data-screen="work" aria-label="Work log" hidden>
@@ -738,47 +752,6 @@
     </div>
   </form>
 </dialog>
-
-<dialog id="work2ItemDialog" class="fs-item-dialog" aria-labelledby="work2DialogTitle">
-  <form id="work2ItemForm" novalidate autocomplete="off">
-    <div class="fs-header">
-      <button type="button" class="icon-btn" data-close id="work2Close" aria-label="Close dialog" title="Close"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg></button>
-      <div class="fs-handle" aria-hidden="true"></div>
-      <h2 id="work2DialogTitle" class="sr-only">Add work entry</h2>
-      <div class="fs-header-actions" id="work2HeaderActions">
-        <button type="button" class="icon-btn danger" id="work2ItemDelete" aria-label="Delete entry" title="Delete entry" hidden><svg class="i" aria-hidden="true"><use href="#i-trash"/></svg></button>
-        <button type="submit" class="fs-save-btn" id="work2ItemSubmit">Save</button>
-      </div>
-    </div>
-
-    <div class="fs-body" id="work2EditBody">
-      <input type="hidden" id="work2ItemId">
-
-      <div class="fs-card fs-hero-card">
-        <div class="fs-title-wrap">
-          <input id="work2ItemNote" class="fs-title-input" required maxlength="200" autocomplete="off" placeholder="Description of work...">
-        </div>
-        <div class="fs-card-divider" aria-hidden="true"></div>
-
-        <div class="fs-field-section">
-          <label class="fs-label" for="work2ItemDate">Date</label>
-          <input type="date" id="work2ItemDate" class="tbl-input fs-date-input" required aria-label="Date">
-        </div>
-
-        <div class="fs-card-divider" aria-hidden="true"></div>
-
-        <div class="fs-field-section">
-          <label class="fs-label" for="work2ItemHours">Hours</label>
-          <div class="pack-qty-control">
-            <button type="button" class="pack-qty-btn" id="work2HoursDec" aria-label="Decrease hours">−</button>
-            <input type="number" id="work2ItemHours" min="0.1" max="24" step="any" value="4" inputmode="decimal" aria-label="Hours">
-            <button type="button" class="pack-qty-btn" id="work2HoursInc" aria-label="Increase hours">+</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </form>
-</dialog>
 </template>
 
 <template id="platform-mobile">
@@ -846,9 +819,22 @@
         <div id="packingContent" class="pack-list"></div>
       </div>
 
-      <button class="fab" id="addPackItem" type="button" aria-label="Add packing item" title="Add packing item">
-        <svg class="i" aria-hidden="true"><use href="#i-plus"/></svg>
-      </button>
+      <div class="pack-quick-add-box" id="packQuickAddBox" hidden>
+        <form id="packQuickAddForm" class="pack-quick-add-form" autocomplete="off">
+          <input type="text" id="packQuickAddInput" class="pack-quick-add-input" placeholder="Quick add item..." maxlength="200" autocomplete="off" aria-label="Item title">
+          <button type="submit" id="packQuickAddSave" class="btn primary pack-quick-add-save">Save</button>
+          <button type="button" id="packQuickAddClose" class="icon-btn pack-quick-add-close" aria-label="Close quick add"><svg class="i sm" aria-hidden="true"><use href="#i-x"/></svg></button>
+        </form>
+      </div>
+
+      <div class="pack-fab-group">
+        <button class="fab fab-quick" id="quickAddPackItem" type="button" aria-label="Quick add packing item" title="Quick add">
+          <svg class="i" aria-hidden="true"><use href="#i-zap-plus"/></svg>
+        </button>
+        <button class="fab" id="addPackItem" type="button" aria-label="Add packing item" title="Add packing item">
+          <svg class="i" aria-hidden="true"><use href="#i-plus"/></svg>
+        </button>
+      </div>
     </section>
 
     <section data-screen="work" aria-label="Work log" hidden>
@@ -1437,47 +1423,6 @@
               <input type="checkbox" id="packItemToBuy" name="packItemToBuy">
               <span><svg class="i" aria-hidden="true"><use href="#i-tag"/></svg>To buy</span>
             </label>
-          </div>
-        </div>
-      </div>
-    </div>
-  </form>
-</dialog>
-
-<dialog id="work2ItemDialog" class="fs-item-dialog" aria-labelledby="work2DialogTitle">
-  <form id="work2ItemForm" novalidate autocomplete="off">
-    <div class="fs-header">
-      <button type="button" class="icon-btn" data-close id="work2Close" aria-label="Close dialog" title="Close"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg></button>
-      <div class="fs-handle" aria-hidden="true"></div>
-      <h2 id="work2DialogTitle" class="sr-only">Add work entry</h2>
-      <div class="fs-header-actions" id="work2HeaderActions">
-        <button type="button" class="icon-btn danger" id="work2ItemDelete" aria-label="Delete entry" title="Delete entry" hidden><svg class="i" aria-hidden="true"><use href="#i-trash"/></svg></button>
-        <button type="submit" class="fs-save-btn" id="work2ItemSubmit">Save</button>
-      </div>
-    </div>
-
-    <div class="fs-body" id="work2EditBody">
-      <input type="hidden" id="work2ItemId">
-
-      <div class="fs-card fs-hero-card">
-        <div class="fs-title-wrap">
-          <input id="work2ItemNote" class="fs-title-input" required maxlength="200" autocomplete="off" placeholder="Description of work...">
-        </div>
-        <div class="fs-card-divider" aria-hidden="true"></div>
-
-        <div class="fs-field-section">
-          <label class="fs-label" for="work2ItemDate">Date</label>
-          <input type="date" id="work2ItemDate" class="tbl-input fs-date-input" required aria-label="Date">
-        </div>
-
-        <div class="fs-card-divider" aria-hidden="true"></div>
-
-        <div class="fs-field-section">
-          <label class="fs-label" for="work2ItemHours">Hours</label>
-          <div class="pack-qty-control">
-            <button type="button" class="pack-qty-btn" id="work2HoursDec" aria-label="Decrease hours">−</button>
-            <input type="number" id="work2ItemHours" min="0.1" max="24" step="any" value="4" inputmode="decimal" aria-label="Hours">
-            <button type="button" class="pack-qty-btn" id="work2HoursInc" aria-label="Increase hours">+</button>
           </div>
         </div>
       </div>

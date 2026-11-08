@@ -120,8 +120,8 @@
   background: var(--crit);
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  padding-left: 20px;
+  justify-content: flex-end;
+  padding-right: 20px;
   color: #ffffff;
   pointer-events: none;
 }
@@ -191,6 +191,90 @@
   max-height: 0 !important;
   opacity: 0 !important;
   border-bottom-color: transparent !important;
+}
+
+/* Inline Editing in Work Log 2 */
+.work2-row-content.is-editing {
+  cursor: default;
+  background: color-mix(in srgb, var(--accent) 3%, var(--surface));
+}
+
+.work2-inline-input {
+  border: none;
+  border-bottom: 1.5px solid color-mix(in srgb, var(--accent) 60%, var(--line));
+  background: transparent;
+  border-radius: 0;
+  outline: none;
+  color: var(--ink);
+  font-family: var(--font-ui);
+  padding: 2px 0 3px 0;
+  margin: 0;
+  box-shadow: none;
+  -webkit-appearance: none;
+  transition: border-bottom-color 0.15s ease;
+}
+
+.work2-inline-input:focus {
+  border-bottom-color: var(--accent);
+}
+
+.work2-inline-desc {
+  width: 100%;
+  font-size: 14.5px;
+  font-weight: 500;
+}
+
+.work2-date-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.work2-inline-date {
+  width: 66px;
+  text-align: right;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.work2-date-picker-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  padding: 2px;
+  margin-left: 2px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: color 0.15s ease;
+}
+
+.work2-date-picker-btn:hover {
+  color: var(--accent);
+}
+
+.work2-date-picker-btn .i {
+  width: 14px;
+  height: 14px;
+}
+
+.work2-date-picker {
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.work2-inline-hrs {
+  width: 100%;
+  text-align: right;
+  font-size: 14.5px;
+  font-weight: 500;
 }
 
 /* Dialog fields */
