@@ -350,16 +350,16 @@
   outline-offset: 2px;
 }
 
-/* Dialog: Location Cards (Transparent, dark grey border, card border-radius) */
+/* Dialog: Location Cards (Transparent, dark grey #474747, card border-radius) */
 #packBags {
   gap: 8px;
 }
 
 #packBags .chip-opt span {
   background: transparent;
-  border: 1px solid var(--muted);
+  border: 1px solid #474747;
   border-radius: 8px;
-  color: var(--ink);
+  color: #474747;
   padding: 6px 12px;
   font-size: 12px;
   font-weight: 500;
@@ -367,26 +367,52 @@
 }
 
 #packBags .chip-opt span:hover {
-  background: color-mix(in srgb, var(--ink) 6%, transparent);
-  border-color: var(--ink);
+  background: color-mix(in srgb, #474747 8%, transparent);
+  border-color: #474747;
 }
 
 #packBags .chip-opt input:checked + span {
-  background: color-mix(in srgb, var(--ink) 12%, transparent);
-  border: 1.5px solid var(--ink);
-  color: var(--ink);
+  background: #474747;
+  border: 1.5px solid #474747;
+  color: #ffffff;
   font-weight: 600;
 }
 
 :root[data-theme="dark"] #packBags .chip-opt span {
-  border-color: var(--muted);
-  color: var(--ink);
+  border-color: #6E6E6E;
+  color: #E0E0E0;
+}
+
+:root[data-theme="dark"] #packBags .chip-opt span:hover {
+  background: color-mix(in srgb, #ffffff 8%, transparent);
+  border-color: #8A8A8A;
 }
 
 :root[data-theme="dark"] #packBags .chip-opt input:checked + span {
-  background: color-mix(in srgb, var(--ink) 16%, transparent);
-  border-color: var(--ink);
-  color: var(--ink);
+  background: #474747;
+  border-color: #888888;
+  color: #ffffff;
+}
+
+/* Dialog: To Buy Toggle Chip (Unselected uses the hover color) */
+#packToBuyChip input:not(:checked) + span {
+  border-color: var(--c);
+  color: var(--c);
+  background: color-mix(in srgb, var(--c) 10%, transparent);
+}
+
+#packToBuyChip input:not(:checked) + span:hover {
+  background: color-mix(in srgb, var(--c) 18%, transparent);
+}
+
+#packToBuyChip input:checked + span {
+  background: var(--c);
+  border-color: var(--c);
+  color: #ffffff;
+}
+
+:root[data-theme="dark"] #packToBuyChip input:checked + span {
+  color: #101317;
 }
 
 /* Dialog: Top card fields (Quantity & Notes) */
