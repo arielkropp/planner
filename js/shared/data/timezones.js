@@ -4834,10 +4834,10 @@ export function findTimezone(id) {
   const lower = String(id).toLowerCase();
   return TIMEZONES.find(t =>
     t.id.toLowerCase() === lower ||
-    t.countryCode.toLowerCase() === lower ||
-    t.country.toLowerCase() === lower ||
-    t.title.toLowerCase() === lower ||
-    t.searchTerms.some(st => st.toLowerCase().includes(lower))
+    (t.countryCode && t.countryCode.toLowerCase() === lower) ||
+    (t.country && t.country.toLowerCase() === lower) ||
+    (t.title && t.title.toLowerCase() === lower) ||
+    (Array.isArray(t.searchTerms) && t.searchTerms.some(st => st.toLowerCase().includes(lower)))
   ) || null;
 }
 
@@ -4845,7 +4845,7 @@ export function searchTimezones(query) {
   if (!query || typeof query !== "string") {
     return TIMEZONES.map(tz => ({
       tz,
-      matchedTerm: tz.searchTerms[0] || tz.country,
+      matchedTerm: (Array.isArray(tz.searchTerms) && tz.searchTerms[0]) || tz.country || tz.title || tz.id,
       query: ""
     }));
   }
@@ -4854,7 +4854,7 @@ export function searchTimezones(query) {
   if (!q) {
     return TIMEZONES.map(tz => ({
       tz,
-      matchedTerm: tz.searchTerms[0] || tz.country,
+      matchedTerm: (Array.isArray(tz.searchTerms) && tz.searchTerms[0]) || tz.country || tz.title || tz.id,
       query: ""
     }));
   }
@@ -4866,7 +4866,8 @@ export function searchTimezones(query) {
     let bestTerm = null;
     let bestScore = 0;
 
-    for (const term of tz.searchTerms) {
+    const terms = Array.isArray(tz.searchTerms) ? tz.searchTerms : [];
+    for (const term of terms) {
       const termLower = term.toLowerCase();
       if (!termLower.includes(q)) continue;
 
@@ -4898,15 +4899,15 @@ export function searchTimezones(query) {
         query
       });
     } else {
-      const titleMatch = tz.title.toLowerCase().includes(q);
-      const countryMatch = tz.country.toLowerCase().includes(q);
-      const codeMatch = tz.countryCode.toLowerCase() === q;
-      const offsetMatch = tz.offset.toLowerCase().replace(/\s+/g, "").includes(qNoSpace);
+      const titleMatch = tz.title && tz.title.toLowerCase().includes(q);
+      const countryMatch = tz.country && tz.country.toLowerCase().includes(q);
+      const codeMatch = tz.countryCode && tz.countryCode.toLowerCase() === q;
+      const offsetMatch = tz.offset && tz.offset.toLowerCase().replace(/\s+/g, "").includes(qNoSpace);
 
       if (titleMatch || countryMatch || codeMatch || offsetMatch) {
         results.push({
           tz,
-          matchedTerm: tz.searchTerms[0] || tz.country,
+          matchedTerm: (Array.isArray(tz.searchTerms) && tz.searchTerms[0]) || tz.country || tz.title || tz.id,
           query
         });
       }

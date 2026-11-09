@@ -42,6 +42,13 @@ const browserTz = (() => {
 if (!TIMEZONES.some(z => z.id === browserTz)) {
   const city = browserTz.split("/").pop().replace(/_/g, " ");
   TIMEZONES.unshift({
+    title: city,
+    offset: "GMT+0",
+    utcOffsetStandard: "+00:00",
+    utcOffsetDST: "+00:00",
+    country: city,
+    countryCode: "",
+    searchTerms: [city],
     "country name": city,
     "country code": "",
     region_city: city,
@@ -49,13 +56,11 @@ if (!TIMEZONES.some(z => z.id === browserTz)) {
     "daylight savings start": "",
     "Daylight savings end": "",
     countryName: city,
-    countryCode: "",
     regionCity: city,
     id: browserTz,
     city,
-    country: "",
     label: city,
-    aliases: []
+    aliases: [city]
   });
 }
 

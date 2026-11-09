@@ -109,3 +109,57 @@ test("Timezone search: deduplicates search results per timezone", () => {
   assert.equal(ids.length, uniqueIds.size, "Every returned timezone in US search must have a unique id");
 });
 
+test("Timezone search: handles entries with missing or fallback searchTerms without throwing", () => {
+  // Empty query returns all timezones
+  const emptyResults = searchTimezones("");
+  assert.ok(emptyResults.length >= 308, "Empty query returns all timezone entries");
+  for (const r of emptyResults) {
+    assert.ok(r.tz, "Entry must have tz");
+    assert.ok(typeof r.matchedTerm === "string" && r.matchedTerm.length > 0, "Entry must have non-empty matchedTerm");
+  }
+});
+
+test("Timezone picker: openTimezoneDialog function is exported and can be called", async () => {
+  const { openTimezoneDialog, initTimezoneDialog } = await import("../js/shared/components/timezone-picker.js");
+  assert.equal(typeof openTimezoneDialog, "function");
+  assert.equal(typeof initTimezoneDialog, "function");
+
+  const origDoc = globalThis.document;
+  try {
+    let showModalCalled = false;
+    const mockDlg = {
+      dataset: {},
+      showModal: () => { showModalCalled = true; },
+      close: () => {},
+      addEventListener: () => {}
+    };
+    const mockList = {
+      innerHTML: "",
+      hidden: false,
+      querySelector: () => null,
+      querySelectorAll: () => [],
+      addEventListener: () => {}
+    };
+    const mockInput = { value: "", addEventListener: () => {}, focus: () => {} };
+
+    globalThis.document = {
+      getElementById: id => {
+        if (id === "timezoneDialog") return mockDlg;
+        if (id === "tzResultsList") return mockList;
+        if (id === "tzSearchInput") return mockInput;
+        if (id === "tzSearchClear") return { hidden: true, addEventListener: () => {} };
+        if (id === "tzEmptyMsg") return { hidden: true };
+        return null;
+      },
+      querySelector: () => null,
+      querySelectorAll: () => []
+    };
+
+    openTimezoneDialog({ currentTz: "Asia/Jerusalem", onSelect: () => {} });
+    assert.equal(showModalCalled, true, "showModal must be called on timezoneDialog");
+  } finally {
+    globalThis.document = origDoc;
+  }
+});
+
+

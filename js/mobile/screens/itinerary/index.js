@@ -140,6 +140,12 @@ export function initItinerary(getCurrentRoute = () => "itinerary", { signal } = 
     else $("addItem")?.focus({ preventScroll: true });
   });
 
+  initItemDialog(id => {
+    renderItinerary();
+    if (id) focusItem(id, getCurrentRoute);
+    else $("addItem")?.focus({ preventScroll: true });
+  });
+
   $("addItem")?.addEventListener("click", () => openItemFullscreenDialog());
 
   $("itineraryViews")?.addEventListener("click", e => {

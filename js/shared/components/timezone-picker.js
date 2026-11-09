@@ -2,11 +2,10 @@
 
 import { $ } from "../utils/dom.js";
 import { esc } from "../utils/dom.js";
-import { TIMEZONES, searchTimezones, highlightMatch } from "../data/timezones.js";
+import { TIMEZONES, searchTimezones, highlightMatch, findTimezone } from "../data/timezones.js";
 
 let activeCallback = null;
 let activeCurrentTz = "";
-let isInitialized = false;
 
 function renderItemHtml(result, isSelected) {
   const { tz, matchedTerm, query } = result;
@@ -74,14 +73,13 @@ function selectTimezone(tzId) {
 }
 
 export function initTimezoneDialog() {
-  if (isInitialized) return;
   const dlg = $("timezoneDialog");
+  if (!dlg || dlg.dataset.tzInit) return;
+  dlg.dataset.tzInit = "true";
+
   const input = $("tzSearchInput");
   const clearBtn = $("tzSearchClear");
   const listEl = $("tzResultsList");
-  if (!dlg) return;
-
-  isInitialized = true;
 
   input?.addEventListener("input", () => {
     updateList(input.value);
