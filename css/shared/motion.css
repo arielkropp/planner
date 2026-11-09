@@ -17,9 +17,41 @@
 @media (prefers-reduced-motion: reduce) {
   dialog,
   .seg button,
-  .view-enter {
+  .view-enter,
+  .is-deleting {
     transition: none !important;
     animation: none !important;
     transform: none !important;
   }
+}
+
+/* =========================================================
+   SWIPE GESTURES & ANIMATIONS (SHARED)
+   Used by packing list, work log, and interactive list items
+   ========================================================= */
+
+/* Immediate tracking while dragging/swiping */
+.is-swiping,
+.pack-row.is-swiping,
+.work-row-content.is-swiping {
+  transition: none !important;
+}
+
+/* Threshold reached: trigger indicator feedback */
+.is-triggered .pack-swipe-action,
+.is-triggered .work-swipe-action,
+.pack-swipe-bg.is-triggered .pack-swipe-action,
+.work-swipe-bg.is-triggered .work-swipe-action {
+  transform: scale(1.08);
+  opacity: 1;
+}
+
+/* Deletion confirmation: height collapse & fade */
+.is-deleting,
+.pack-row-wrapper.is-deleting,
+.work-row-wrapper.is-deleting {
+  transition: max-height 0.24s ease, opacity 0.2s ease;
+  max-height: 0 !important;
+  opacity: 0 !important;
+  border-bottom-color: transparent !important;
 }

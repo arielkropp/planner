@@ -1,6 +1,6 @@
 /* Packing Storage and State Manager */
 
-import { getState, save, subscribe } from "../../state/store.js";
+import { getState, commit, subscribe } from "../../state/store.js";
 import { uid } from "../../utils/format.js";
 
 export const PACK_CATEGORY_META = {
@@ -88,7 +88,7 @@ export function addPackingItem({ title, category = "Other", qty = 1, bag = "", n
     createdAt: new Date().toISOString()
   };
   items.unshift(newItem);
-  save();
+  commit();
   return newItem;
 }
 
@@ -111,7 +111,7 @@ export function updatePackingItem(id, updates) {
   };
 
   items[index] = updated;
-  save();
+  commit();
   return updated;
 }
 
@@ -120,7 +120,7 @@ export function togglePackingItemDone(id) {
   const item = items.find(i => i.id === id);
   if (!item) return false;
   item.done = !item.done;
-  save();
+  commit();
   return item.done;
 }
 
@@ -129,7 +129,7 @@ export function deletePackingItem(id) {
   const index = items.findIndex(i => i.id === id);
   if (index === -1) return false;
   items.splice(index, 1);
-  save();
+  commit();
   return true;
 }
 

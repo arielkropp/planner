@@ -8,7 +8,6 @@ import { initRouter, route, getCurrentRoute } from "../shared/router.js";
 import {
   initItinerary,
   renderItinerary,
-  requestCloseItemDialog,
   requestCloseFsDialog,
   setItineraryView,
   updateItineraryLens,
@@ -33,7 +32,6 @@ export function mount({ signal }) {
   signal.addEventListener("abort", unsubscribe);
 
   initDialogs({
-    itemDialog: () => requestCloseItemDialog(),
     itemFullscreenDialog: (dlg, isSwipe) => requestCloseFsDialog(isSwipe)
   }, { signal });
   initTheme({ signal });

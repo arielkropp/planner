@@ -1,4 +1,4 @@
-const CACHE_NAME = "trip-planner-55cd1aa389b503deeea4e6b058ad008d9483d5cc";
+const CACHE_NAME = "trip-planner-3eaa48987a4c2c815bf0cc6ea336b24442a40976";
 
 // The build replaces this line with the app shell, manifest and assets (see scripts/build.mjs)
 const STATIC_ASSETS = [
@@ -19,17 +19,20 @@ const STATIC_ASSETS = [
   "./css/mobile/screens.css",
   "./css/mobile/work.css",
   "./css/shared/base.css",
+  "./css/shared/dialogs.css",
   "./css/shared/gcal-dialog.css",
+  "./css/shared/itinerary.css",
   "./css/shared/main.css",
   "./css/shared/motion.css",
+  "./css/shared/packing.css",
   "./css/shared/settings.css",
   "./css/shared/variables.css",
+  "./css/shared/work.css",
   "./js/boot.js",
   "./js/desktop/app.js",
   "./js/desktop/screens/itinerary/agenda.js",
   "./js/desktop/screens/itinerary/calendar.js",
   "./js/desktop/screens/itinerary/dialog-fullscreen.js",
-  "./js/desktop/screens/itinerary/dialog.js",
   "./js/desktop/screens/itinerary/index.js",
   "./js/desktop/screens/itinerary/markup.js",
   "./js/desktop/screens/packing/index.js",
@@ -38,7 +41,6 @@ const STATIC_ASSETS = [
   "./js/mobile/screens/itinerary/agenda.js",
   "./js/mobile/screens/itinerary/calendar.js",
   "./js/mobile/screens/itinerary/dialog-fullscreen.js",
-  "./js/mobile/screens/itinerary/dialog.js",
   "./js/mobile/screens/itinerary/index.js",
   "./js/mobile/screens/itinerary/markup.js",
   "./js/mobile/screens/packing/index.js",
@@ -58,7 +60,6 @@ const STATIC_ASSETS = [
   "./js/shared/platform.js",
   "./js/shared/router.js",
   "./js/shared/screens/itinerary/dialog-fullscreen.js",
-  "./js/shared/screens/itinerary/dialog.js",
   "./js/shared/screens/itinerary/markup.js",
   "./js/shared/screens/packing/index.js",
   "./js/shared/screens/packing/storage.js",

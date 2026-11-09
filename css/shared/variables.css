@@ -6,6 +6,11 @@
   --motion-spring: cubic-bezier(0.2, 0, 0, 1);
   --motion-spring-bouncy: cubic-bezier(0.2, 0, 0, 1);
 
+  /* Dialog & Platform Geometry Tokens (Mobile default) */
+  --dialog-radius: 20px;
+  --dialog-shadow: 0 12px 40px rgb(0 0 0 / .28);
+  --card-radius: 16px;
+
   --bg: #F4F6F8;
   --surface: #FFFFFF;
   --surface-tonal: #EAEFF5;
@@ -70,4 +75,13 @@
   --event-hover-mix: 38%;
 
   color-scheme: dark;
+}
+
+/* Desktop Breakpoint Token Overrides (matches js/shared/platform.js: 760px) */
+@media (min-width: 761px) {
+  :root {
+    --dialog-radius: 14px;
+    --dialog-shadow: 0 20px 60px rgb(0 0 0 / .35);
+    --card-radius: 18px;
+  }
 }

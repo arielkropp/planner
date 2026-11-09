@@ -4,7 +4,7 @@ import { $, esc } from "../../utils/dom.js";
 import { fmtDate, validAnyDate, todayIso } from "../../utils/date.js";
 import { pad } from "../../constants.js";
 import { uid, num } from "../../utils/format.js";
-import { getActiveTrip, save } from "../../state/store.js";
+import { getActiveTrip, commit } from "../../state/store.js";
 import { confirmAsk } from "../../components/dialog.js";
 import { nextWorkDate } from "../../domain/work-calc.js";
 
@@ -42,7 +42,7 @@ export function addWorkItem({ date, hours, note }) {
     hours: parsedHours,
     note: typeof note === "string" ? note.slice(0, 200) : ""
   });
-  save();
+  commit();
   renderWork();
   return id;
 }
@@ -56,7 +56,7 @@ export function updateWorkItem(id, { date, hours, note }) {
   item.date = validAnyDate(date) ? date : item.date;
   item.hours = parsedHours;
   item.note = typeof note === "string" ? note.slice(0, 200) : "";
-  save();
+  commit();
   renderWork();
 }
 
@@ -67,7 +67,7 @@ export function deleteWorkItem(id) {
   if (idx !== -1) {
     active.work.splice(idx, 1);
     if (activeEditId === id) activeEditId = null;
-    save();
+    commit();
     renderWork();
   }
 }
@@ -132,7 +132,8 @@ export function commitActiveEdit(skipRender = false) {
         item.date = date;
         item.hours = parsedHrs;
         item.note = typeof note === "string" ? note.slice(0, 200) : "";
-        save();
+        activeEditId = null;
+        commit();
       }
     }
   }
@@ -184,8 +185,8 @@ function handleAddNewRow() {
     hours: 4,
     note: ""
   });
-  save();
   activeEditId = id;
+  commit();
   renderWork();
   requestAnimationFrame(() => {
     const descInput = document?.querySelector?.(`.work-row-wrapper[data-id="${id}"] .work-inline-desc`);
@@ -451,7 +452,7 @@ export function initWork({ signal } = {}) {
       if (!active) return;
       const val = parseFloat(e.target.value);
       active.workTarget = Number.isFinite(val) && val >= 0 ? val : 0;
-      save();
+      commit();
       renderWorkStats();
     });
   }
@@ -480,7 +481,7 @@ export function initWork({ signal } = {}) {
     if (activeWrapper && !activeWrapper.contains(e.target) && (!addFab || !addFab.contains(e.target))) {
       commitActiveEdit();
     }
-  });
+  }, { signal });
 
   renderWork();
 }

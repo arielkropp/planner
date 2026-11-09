@@ -628,7 +628,7 @@ export function initPacking({ signal } = {}) {
         closeQuickAdd();
       }
     }
-  });
+  }, { signal });
 
   // Render initial packing items
   renderPacking();

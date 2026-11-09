@@ -4,7 +4,6 @@ import { $ } from "../../../shared/utils/dom.js";
 import { viewState } from "../../../shared/state/view-state.js";
 import { renderAgenda, setAgendaFocusDate, scrollAgendaToToday } from "./agenda.js";
 import { tv, renderCalendar, step } from "./calendar.js";
-import { openItemDialog, initItemDialog, requestCloseItemDialog } from "./dialog.js";
 import { openItemFullscreenDialog, initItemFullscreenDialog, requestCloseFsDialog } from "./dialog-fullscreen.js";
 
 const itineraryScrollPositions = new Map();
@@ -140,12 +139,6 @@ export function initItinerary(getCurrentRoute = () => "itinerary", { signal } = 
     else $("addItem")?.focus({ preventScroll: true });
   });
 
-  initItemDialog(id => {
-    renderItinerary();
-    if (id) focusItem(id, getCurrentRoute);
-    else $("addItem")?.focus({ preventScroll: true });
-  });
-
   $("addItem")?.addEventListener("click", () => openItemFullscreenDialog());
 
   $("itineraryViews")?.addEventListener("click", e => {
@@ -185,4 +178,4 @@ export const itineraryRouteAdapter = {
   scrollToToday: scrollAgendaToToday
 };
 
-export { requestCloseItemDialog, requestCloseFsDialog };
+export { requestCloseFsDialog };

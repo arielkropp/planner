@@ -287,73 +287,6 @@
   </main>
 </div>
 
-<dialog id="itemDialog" aria-labelledby="itemDialogTitle">
-  <form id="itemForm" novalidate>
-    <h2 id="itemDialogTitle" class="sr-only">Add item</h2>
-    <div class="dlg-body">
-      <div class="field">
-        <div class="title-head-row">
-          <label for="itemTitle"><span>Title <span class="req" aria-hidden="true">*</span></span></label>
-          <button type="button" class="icon-btn" data-close aria-label="Close"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg></button>
-        </div>
-        <div class="title-status-box">
-          <input id="itemTitle" required maxlength="200" autocomplete="off" placeholder="Hotel, train to the coast, museum tour...">
-        </div>
-        <div class="chips title-status-chips" id="itemStatuses" role="radiogroup" aria-label="Status"></div>
-      </div>
-      <div class="row2 dt-row">
-        <div class="field">
-          <label for="itemStartDate">Start <span class="req" aria-hidden="true">*</span></label>
-          <div class="dt-box">
-            <input type="date" id="itemStartDate" required aria-label="Start date">
-            <div class="sep" aria-hidden="true"></div>
-            <input type="time" id="itemStartTime" aria-label="Start time">
-            <div class="sep" aria-hidden="true"></div>
-            <button type="button" class="dtz-wrap" id="itemTzBtn" aria-label="Start timezone" title="Start timezone">
-              <span class="dtz-badge" id="itemTzBadge" aria-hidden="true">TZ</span>
-              <svg class="dtz-arrow" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-            </button>
-            <input type="hidden" id="itemTz">
-          </div>
-        </div>
-        <div class="field">
-          <label for="itemEndDate">End</label>
-          <div class="dt-box">
-            <input type="date" id="itemEndDate" aria-label="End date">
-            <div class="sep" aria-hidden="true"></div>
-            <input type="time" id="itemEndTime" aria-label="End time">
-            <div class="sep" aria-hidden="true"></div>
-            <button type="button" class="dtz-wrap" id="itemEndTzBtn" aria-label="End timezone" title="End timezone">
-              <span class="dtz-badge" id="itemEndTzBadge" aria-hidden="true">TZ</span>
-              <svg class="dtz-arrow" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-            </button>
-            <input type="hidden" id="itemEndTz">
-          </div>
-        </div>
-      </div>
-      <div id="itemTzPreview" class="tz-info-banner" hidden></div>
-      <fieldset class="field"><legend>Type</legend><div class="chips" id="itemTypes"></div></fieldset>
-      <div class="cost-currency-box">
-        <label class="field" style="flex:1;max-width:240px;min-width:0"><span>Cost</span><input id="itemCost" type="number" min="0" step="any" placeholder="0"></label>
-        <label class="field" style="width:88px;flex-shrink:0"><span>Currency</span>
-          <select id="itemCurrency">
-            <option value="USD">USD</option>
-            <option value="EUR">EUR</option>
-            <option value="GBP">GBP</option>
-            <option value="ILS">ILS</option>
-          </select>
-        </label>
-      </div>
-      <label class="field"><span>Notes</span><textarea id="itemNotes" maxlength="1000" rows="3" placeholder="Address, details..."></textarea></label>
-    </div>
-    <div class="dlg-foot">
-      <button type="button" class="btn danger left" id="itemDelete"><svg class="i sm" aria-hidden="true"><use href="#i-trash"/></svg>Delete</button>
-      <button type="button" class="btn" data-close>Cancel</button>
-      <button type="submit" class="btn primary">Save</button>
-    </div>
-  </form>
-</dialog>
-
 <dialog id="itemFullscreenDialog" class="fs-item-dialog" aria-labelledby="fsDialogTitle">
   <form id="fsItemForm" novalidate>
     <div class="fs-header">
@@ -538,25 +471,6 @@
     <div class="dlg-foot">
       <button type="button" class="btn" data-close>Cancel</button>
       <button type="submit" class="btn primary">Save rates</button>
-    </div>
-  </form>
-</dialog>
-
-<dialog id="leaveDialog" class="small" aria-labelledby="leaveTitle">
-  <form id="leaveForm">
-    <div class="dlg-head"><h2 id="leaveTitle">Leave calculation settings</h2><button type="button" class="icon-btn" data-close aria-label="Close"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg></button></div>
-    <div class="dlg-body">
-      <label class="field"><span>Starting leave balance (hours)</span><input id="leaveStartBal" type="number" step="any" min="-500" max="1000" required></label>
-      <div class="row2">
-        <label class="field"><span>Monthly accrual (hours)</span><input id="leaveAccrual" type="number" step="any" min="0" max="200" required></label>
-        <label class="field"><span>Accrual months</span><input id="leaveMonths" type="number" step="1" min="0" max="24" required></label>
-      </div>
-      <label class="field"><span>Standard weekday hours</span><input id="leaveStdDay" type="number" step="any" min="0" max="24" required></label>
-    </div>
-    <div class="dlg-foot">
-      <button type="button" class="btn left" id="leaveResetDefaults">Defaults</button>
-      <button type="button" class="btn" data-close>Cancel</button>
-      <button type="submit" class="btn primary">Save</button>
     </div>
   </form>
 </dialog>
@@ -918,73 +832,6 @@
   </main>
 </div>
 
-<dialog id="itemDialog" aria-labelledby="itemDialogTitle">
-  <form id="itemForm" novalidate>
-    <h2 id="itemDialogTitle" class="sr-only">Add item</h2>
-    <div class="dlg-body">
-      <div class="field">
-        <div class="title-head-row">
-          <label for="itemTitle"><span>Title <span class="req" aria-hidden="true">*</span></span></label>
-          <button type="button" class="icon-btn" data-close aria-label="Close"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg></button>
-        </div>
-        <div class="title-status-box">
-          <input id="itemTitle" required maxlength="200" autocomplete="off" placeholder="Hotel, train to the coast, museum tour...">
-        </div>
-        <div class="chips title-status-chips" id="itemStatuses" role="radiogroup" aria-label="Status"></div>
-      </div>
-      <div class="row2 dt-row">
-        <div class="field">
-          <label for="itemStartDate">Start <span class="req" aria-hidden="true">*</span></label>
-          <div class="dt-box">
-            <input type="date" id="itemStartDate" required aria-label="Start date">
-            <div class="sep" aria-hidden="true"></div>
-            <input type="time" id="itemStartTime" aria-label="Start time">
-            <div class="sep" aria-hidden="true"></div>
-            <button type="button" class="dtz-wrap" id="itemTzBtn" aria-label="Start timezone" title="Start timezone">
-              <span class="dtz-badge" id="itemTzBadge" aria-hidden="true">TZ</span>
-              <svg class="dtz-arrow" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-            </button>
-            <input type="hidden" id="itemTz">
-          </div>
-        </div>
-        <div class="field">
-          <label for="itemEndDate">End</label>
-          <div class="dt-box">
-            <input type="date" id="itemEndDate" aria-label="End date">
-            <div class="sep" aria-hidden="true"></div>
-            <input type="time" id="itemEndTime" aria-label="End time">
-            <div class="sep" aria-hidden="true"></div>
-            <button type="button" class="dtz-wrap" id="itemEndTzBtn" aria-label="End timezone" title="End timezone">
-              <span class="dtz-badge" id="itemEndTzBadge" aria-hidden="true">TZ</span>
-              <svg class="dtz-arrow" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-            </button>
-            <input type="hidden" id="itemEndTz">
-          </div>
-        </div>
-      </div>
-      <div id="itemTzPreview" class="tz-info-banner" hidden></div>
-      <fieldset class="field"><legend>Type</legend><div class="chips" id="itemTypes"></div></fieldset>
-      <div class="cost-currency-box">
-        <label class="field" style="flex:1;max-width:240px;min-width:0"><span>Cost</span><input id="itemCost" type="number" min="0" step="any" placeholder="0"></label>
-        <label class="field" style="width:88px;flex-shrink:0"><span>Currency</span>
-          <select id="itemCurrency">
-            <option value="USD">USD</option>
-            <option value="EUR">EUR</option>
-            <option value="GBP">GBP</option>
-            <option value="ILS">ILS</option>
-          </select>
-        </label>
-      </div>
-      <label class="field"><span>Notes</span><textarea id="itemNotes" maxlength="1000" rows="3" placeholder="Address, details..."></textarea></label>
-    </div>
-    <div class="dlg-foot">
-      <button type="button" class="btn danger left" id="itemDelete"><svg class="i sm" aria-hidden="true"><use href="#i-trash"/></svg>Delete</button>
-      <button type="button" class="btn" data-close>Cancel</button>
-      <button type="submit" class="btn primary">Save</button>
-    </div>
-  </form>
-</dialog>
-
 <dialog id="itemFullscreenDialog" class="fs-item-dialog" aria-labelledby="fsDialogTitle">
   <form id="fsItemForm" novalidate>
     <div class="fs-header">
@@ -1169,25 +1016,6 @@
     <div class="dlg-foot">
       <button type="button" class="btn" data-close>Cancel</button>
       <button type="submit" class="btn primary">Save rates</button>
-    </div>
-  </form>
-</dialog>
-
-<dialog id="leaveDialog" class="small" aria-labelledby="leaveTitle">
-  <form id="leaveForm">
-    <div class="dlg-head"><h2 id="leaveTitle">Leave calculation settings</h2><button type="button" class="icon-btn" data-close aria-label="Close"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg></button></div>
-    <div class="dlg-body">
-      <label class="field"><span>Starting leave balance (hours)</span><input id="leaveStartBal" type="number" step="any" min="-500" max="1000" required></label>
-      <div class="row2">
-        <label class="field"><span>Monthly accrual (hours)</span><input id="leaveAccrual" type="number" step="any" min="0" max="200" required></label>
-        <label class="field"><span>Accrual months</span><input id="leaveMonths" type="number" step="1" min="0" max="24" required></label>
-      </div>
-      <label class="field"><span>Standard weekday hours</span><input id="leaveStdDay" type="number" step="any" min="0" max="24" required></label>
-    </div>
-    <div class="dlg-foot">
-      <button type="button" class="btn left" id="leaveResetDefaults">Defaults</button>
-      <button type="button" class="btn" data-close>Cancel</button>
-      <button type="submit" class="btn primary">Save</button>
     </div>
   </form>
 </dialog>

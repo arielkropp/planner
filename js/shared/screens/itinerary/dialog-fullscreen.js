@@ -4,7 +4,7 @@ import { TYPES, TYPE_META, STATUSES, TIMEZONES, DEFAULT_TZ } from "../../constan
 import { $, icon } from "../../utils/dom.js";
 import { defaultDate, validDate, fmtDateLong, fmtDay, toUtcMs, formatDurationMs, tzInfo, getTripStart, getTripEnd, hasTripEndDate } from "../../utils/date.js";
 import { uid, fmtCost } from "../../utils/format.js";
-import { getState, save } from "../../state/store.js";
+import { getState, commit } from "../../state/store.js";
 import { isValidTimeInterval } from "../../state/validation.js";
 import { confirmAsk } from "../../components/dialog.js";
 import { openTimezoneDialog } from "../../components/timezone-picker.js";
@@ -538,7 +538,7 @@ export function initItemFullscreenDialog(onItemChanged) {
     }
     fsInitialSnapshot = getFsSnapshot();
     $("itemFullscreenDialog").close();
-    save();
+    commit();
     if (onItemChanged) onItemChanged(id);
   });
 
@@ -556,7 +556,7 @@ export function initItemFullscreenDialog(onItemChanged) {
     state.agenda = state.agenda.filter(a => a !== editingItem);
     fsInitialSnapshot = getFsSnapshot();
     $("itemFullscreenDialog").close();
-    save();
+    commit();
     if (onItemChanged) onItemChanged(null);
   }
 

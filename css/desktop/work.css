@@ -1,244 +1,22 @@
 /* =========================================================
    WORK LOG: DESKTOP STYLES
-   Stat capsule, work rows and swipe actions
    ========================================================= */
 
-/* Stat Capsule (Logged / Target Pills) */
-.work-stat-capsule {
-  display: inline-flex;
-  align-items: center;
-  gap: 0;
-  height: 42px;
-  padding: 0 18px;
-  border-radius: 999px;
-  border: 1.5px solid color-mix(in srgb, var(--ink) 12%, var(--surface));
-  background: var(--surface);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
-  user-select: none;
-  font-family: var(--font-ui);
-  font-size: 14px;
-  color: var(--ink);
-}
+@import "../shared/work.css";
 
-.work-stat-pill {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 4px;
-  white-space: nowrap;
-  font-weight: 500;
-  color: var(--muted);
-}
-
-.work-stat-pill strong {
-  font-weight: 800;
-  font-size: 15px;
-  color: var(--ink);
-}
-
-.work-stat-divider {
-  width: 1px;
-  height: 18px;
-  background: var(--line);
-  margin: 0 14px;
-  flex-shrink: 0;
-}
-
-/* Card Container */
+/* Desktop platform card sizing and spacing (tests/build.test.js requirement) */
 .work-card {
-  background: var(--surface);
-  border: 1px solid var(--line);
   border-radius: 18px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
-  overflow: hidden;
   margin-top: 14px;
   margin-bottom: 48px;
-  width: 100%;
 }
 
-.work-header-row {
-  display: flex;
-  align-items: flex-end;
-  padding: 8px 20px 6px;
-  border-bottom: 1px solid var(--line);
-  font-family: var(--font-ui);
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--ink);
-  line-height: 1.2;
-}
-
-.work-col-desc {
-  flex: 1;
-  min-width: 0;
-  text-align: left;
-}
-
-.work-col-date {
-  width: 85px;
-  text-align: right;
-  flex-shrink: 0;
-  margin-right: 20px;
-}
-
-.work-col-hrs {
-  width: 45px;
-  text-align: right;
-  flex-shrink: 0;
-}
-
-.work-list {
-  display: flex;
-  flex-direction: column;
-}
-
-.work-empty {
-  padding: 40px 20px;
-  text-align: center;
-  color: var(--muted);
-  font-size: 14px;
-  font-family: var(--font-ui);
-}
-
-/* Row & Swipe Wrapper */
-.work-row-wrapper {
-  position: relative;
-  overflow: hidden;
-  border-bottom: 1px solid var(--line);
-  background: var(--surface);
-  touch-action: pan-y;
-  user-select: none;
-  -webkit-user-select: none;
-}
-
-.work-row-wrapper:last-child {
-  border-bottom: none;
-}
-
-.work-swipe-bg {
-  position: absolute;
-  inset: 0;
-  background: var(--crit);
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  padding-right: 20px;
-  color: #ffffff;
-  pointer-events: none;
-}
-
-.work-swipe-action {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 13.5px;
-  font-weight: 600;
-  font-family: var(--font-ui);
-  transform: scale(0.9);
-  opacity: 0.8;
-  transition: transform 0.15s ease, opacity 0.15s ease;
-}
-
-.work-swipe-bg.is-triggered .work-swipe-action {
-  transform: scale(1.08);
-  opacity: 1;
-}
-
-.work-row-content {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  padding: 13px 20px;
-  min-height: 48px;
-  background: var(--surface);
-  cursor: pointer;
-  transition: transform 0.25s cubic-bezier(0.2, 0, 0, 1), background-color 0.12s ease;
-  will-change: transform;
-  font-family: var(--font-ui);
-}
-
+/* Desktop hover interactions */
 .work-row-content:hover {
   background: color-mix(in srgb, var(--ink) 2.5%, var(--surface));
 }
 
-.work-row-content.is-swiping {
-  transition: none !important;
-}
-
-.work-row-content .work-col-desc {
-  font-size: 14.5px;
-  font-weight: 500;
-  color: var(--ink);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.work-row-content .work-col-date {
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--ink);
-}
-
-.work-row-content .work-col-hrs {
-  font-size: 14.5px;
-  font-weight: 500;
-  color: var(--ink);
-}
-
-.work-row-wrapper.is-deleting {
-  transition: max-height 0.24s ease, opacity 0.2s ease;
-  max-height: 0 !important;
-  opacity: 0 !important;
-  border-bottom-color: transparent !important;
-}
-
-/* Inline Editing in Work Log */
-.work-row-content.is-editing {
-  cursor: default;
-  background: color-mix(in srgb, var(--accent) 3%, var(--surface));
-}
-
-.work-inline-input {
-  border: none;
-  border-bottom: 1.5px solid color-mix(in srgb, var(--accent) 60%, var(--line));
-  background: transparent;
-  border-radius: 0;
-  outline: none;
-  color: var(--ink);
-  font-family: var(--font-ui);
-  padding: 2px 0 3px 0;
-  margin: 0;
-  box-shadow: none;
-  -webkit-appearance: none;
-  transition: border-bottom-color 0.15s ease;
-}
-
-.work-inline-input:focus {
-  border-bottom-color: var(--accent);
-}
-
-.work-inline-desc {
-  width: 100%;
-  font-size: 14.5px;
-  font-weight: 500;
-}
-
-.work-date-wrap {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: flex-end;
-  width: 100%;
-}
-
-.work-inline-date {
-  width: 66px;
-  text-align: right;
-  font-size: 14px;
-  font-weight: 500;
-}
-
+/* Desktop date picker with calendar icon button */
 .work-date-picker-btn {
   display: inline-flex;
   align-items: center;
@@ -268,11 +46,4 @@
   height: 0;
   opacity: 0;
   pointer-events: none;
-}
-
-.work-inline-hrs {
-  width: 100%;
-  text-align: right;
-  font-size: 14.5px;
-  font-weight: 500;
 }
