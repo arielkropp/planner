@@ -90,3 +90,22 @@ test("Timezone helpers: findTimezone", () => {
 
   assert.equal(findTimezone("UNKNOWN"), null);
 });
+
+test("Timezone search: deduplicates search results per timezone", () => {
+  // Query "Isr" should only return Israel once, not multiple times for Jerusalem and Tel Aviv
+  const isrResults = searchTimezones("Isr");
+  const israelMatches = isrResults.filter(r => r.tz.id === "Asia/Jerusalem");
+  assert.equal(israelMatches.length, 1, "Should only return Israel once in search results");
+
+  // Query "Argentina" should only return Argentina once, not 14 times
+  const argResults = searchTimezones("Argentina");
+  const argMatches = argResults.filter(r => r.tz.id === "America/Argentina/Buenos_Aires");
+  assert.equal(argMatches.length, 1, "Should only return Argentina once in search results");
+
+  // Query "United States" should return distinct timezones with no duplicate ids
+  const usResults = searchTimezones("United States");
+  const ids = usResults.map(r => r.tz.id);
+  const uniqueIds = new Set(ids);
+  assert.equal(ids.length, uniqueIds.size, "Every returned timezone in US search must have a unique id");
+});
+

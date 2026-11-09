@@ -4829,7 +4829,16 @@ export const TIMEZONES = [
 
 export function findTimezone(id) {
   if (!id) return null;
-  return TIMEZONES.find(t => t.id === id || t.title === id || t.countryCode === id) || null;
+  const match = TIMEZONES.find(t => t.id === id);
+  if (match) return match;
+  const lower = String(id).toLowerCase();
+  return TIMEZONES.find(t =>
+    t.id.toLowerCase() === lower ||
+    t.countryCode.toLowerCase() === lower ||
+    t.country.toLowerCase() === lower ||
+    t.title.toLowerCase() === lower ||
+    t.searchTerms.some(st => st.toLowerCase().includes(lower))
+  ) || null;
 }
 
 export function searchTimezones(query) {
@@ -4854,19 +4863,41 @@ export function searchTimezones(query) {
   const results = [];
 
   for (const tz of TIMEZONES) {
-    let matchedInTerms = false;
+    let bestTerm = null;
+    let bestScore = 0;
+
     for (const term of tz.searchTerms) {
-      if (term.toLowerCase().includes(q)) {
-        results.push({
-          tz,
-          matchedTerm: term,
-          query
-        });
-        matchedInTerms = true;
+      const termLower = term.toLowerCase();
+      if (!termLower.includes(q)) continue;
+
+      const cityName = termLower.split(",")[0].trim();
+      let score = 1;
+      if (termLower.startsWith(q)) {
+        score = 2;
+      }
+      if (cityName.includes(q)) {
+        score = 3;
+      }
+      if (cityName.startsWith(q)) {
+        score = 4;
+      }
+      if (cityName === q) {
+        score = 5;
+      }
+
+      if (score > bestScore) {
+        bestScore = score;
+        bestTerm = term;
       }
     }
 
-    if (!matchedInTerms) {
+    if (bestTerm) {
+      results.push({
+        tz,
+        matchedTerm: bestTerm,
+        query
+      });
+    } else {
       const titleMatch = tz.title.toLowerCase().includes(q);
       const countryMatch = tz.country.toLowerCase().includes(q);
       const codeMatch = tz.countryCode.toLowerCase() === q;

@@ -724,7 +724,18 @@ button.dtz-wrap,
   border: 1px solid var(--line);
   border-radius: 8px;
   outline: none;
+  -webkit-appearance: none;
+  appearance: none;
   transition: border-color .15s ease, box-shadow .15s ease;
+}
+
+.tz-search-input::-webkit-search-cancel-button,
+.tz-search-input::-webkit-search-decoration,
+.tz-search-input::-webkit-search-results-button,
+.tz-search-input::-webkit-search-results-decoration {
+  -webkit-appearance: none;
+  appearance: none;
+  display: none;
 }
 
 .tz-search-input:focus {

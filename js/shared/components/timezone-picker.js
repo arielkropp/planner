@@ -47,16 +47,19 @@ function updateList(query = "") {
   listEl.hidden = false;
 
   const html = matches.map(result => {
-    const isSelected = result.tz.id === activeCurrentTz || result.tz.title === activeCurrentTz;
+    const isSelected = Boolean(activeCurrentTz && result.tz.id === activeCurrentTz);
     return renderItemHtml(result, isSelected);
   }).join("");
 
   listEl.innerHTML = html;
 
-  // Set active class on first item if none is currently active
-  const active = listEl.querySelector(".tz-item.active") || listEl.querySelector(".tz-item");
-  if (active) {
-    active.classList.add("active");
+  // Set active class on selected item if present, else on first item
+  const selectedEl = listEl.querySelector(".tz-item.selected");
+  if (selectedEl) {
+    selectedEl.classList.add("active");
+  } else {
+    const first = listEl.querySelector(".tz-item");
+    if (first) first.classList.add("active");
   }
 }
 
@@ -136,7 +139,8 @@ export function openTimezoneDialog({ currentTz = "", onSelect } = {}) {
 
   initTimezoneDialog();
 
-  activeCurrentTz = currentTz;
+  const found = currentTz ? findTimezone(currentTz) : null;
+  activeCurrentTz = found ? found.id : (currentTz || "");
   activeCallback = onSelect;
 
   const input = $("tzSearchInput");
