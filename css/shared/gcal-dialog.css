@@ -21,6 +21,8 @@ dialog#packItemDialog.fs-item-dialog {
   z-index: 100;
   box-sizing: border-box;
   font-family: var(--font-ui);
+  --fs-swipe-y: 0px;
+  transform: translateY(var(--fs-swipe-y));
 }
 
 dialog#itemFullscreenDialog[open],
@@ -45,7 +47,7 @@ dialog#packItemDialog.fs-item-dialog form {
     inset: auto;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, calc(-50% + var(--fs-swipe-y)));
     animation: none;
     width: 560px;
     max-width: calc(100vw - 40px);
@@ -98,11 +100,30 @@ dialog#packItemDialog.fs-item-dialog form {
 }
 
 .fs-handle {
+  position: absolute;
+  left: 50%;
+  top: calc(max(10px, env(safe-area-inset-top)) + 20px);
+  transform: translate(-50%, -50%);
   width: 36px;
   height: 4px;
   border-radius: 999px;
   background: var(--line);
-  margin: 0 auto;
+  cursor: grab;
+  touch-action: none;
+}
+
+.fs-handle:active {
+  cursor: grabbing;
+}
+
+.fs-handle::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80px;
+  height: 36px;
 }
 
 .fs-header-actions {

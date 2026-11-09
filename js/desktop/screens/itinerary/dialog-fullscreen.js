@@ -78,9 +78,9 @@ export function setFsMode(mode) {
   }
 }
 
-export async function requestCloseFsDialog() {
+export async function requestCloseFsDialog(forceClose = false) {
   const d = $("itemFullscreenDialog");
-  if (!d?.open) return;
+  if (!d?.open) return false;
   if (isFsDirty()) {
     const discard = await confirmAsk(
       "Discard unsaved changes?",
@@ -90,19 +90,20 @@ export async function requestCloseFsDialog() {
     );
     if (!discard) {
       focusFsTitle();
-      return;
+      return false;
     }
   }
-  if (currentMode === "edit" && editingItem) {
+  if (!forceClose && currentMode === "edit" && editingItem) {
     populateFsForm(editingItem);
     renderFsView(editingItem);
     setFsMode("view");
     try {
       $("fsEditBtn")?.focus({ preventScroll: true });
     } catch {}
-    return;
+    return true;
   }
   d.close();
+  return true;
 }
 
 export function updateFsTzBadges() {

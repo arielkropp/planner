@@ -35,7 +35,7 @@ export function mount({ signal }) {
 
   initDialogs({
     itemDialog: () => requestCloseItemDialog(),
-    itemFullscreenDialog: () => requestCloseFsDialog()
+    itemFullscreenDialog: (dlg, isSwipe) => requestCloseFsDialog(isSwipe)
   }, { signal });
   initTheme({ signal });
 
