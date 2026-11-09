@@ -387,7 +387,7 @@
 .cal {
   background: var(--surface);
   border: 1px solid var(--line);
-  border-radius: 12px;
+  border-radius: 16px;
   overflow: hidden;
 }
 
