@@ -534,6 +534,7 @@ export function initWork({ signal } = {}) {
     });
 
     listEl.addEventListener("keydown", async e => {
+      if (document.querySelector("dialog[open]")) return;
       const trigger = e.target.closest('[data-action="inline-edit"]');
       if (!trigger) return;
       const id = trigger.dataset.id;

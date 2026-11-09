@@ -14,6 +14,8 @@ export function confirmAsk(title, text, okLabel = "Delete", isDanger = true) {
   const titleEl = $("confirmTitle");
   const textEl = $("confirmText");
   const okBtn = $("confirmOk");
+  const cancelBtn = $("confirmCancel");
+  const form = d.querySelector("form");
 
   if (titleEl) titleEl.textContent = title;
   if (textEl) textEl.textContent = text;
@@ -24,17 +26,25 @@ export function confirmAsk(title, text, okLabel = "Delete", isDanger = true) {
 
   d.returnValue = "";
   return new Promise(resolve => {
-    const cancelBtn = $("confirmCancel");
-    const onOk = () => { d.returnValue = "ok"; };
-    const onCancel = () => { d.returnValue = "cancel"; };
-    okBtn?.addEventListener("click", onOk, { once: true });
-    cancelBtn?.addEventListener("click", onCancel, { once: true });
+    let isConfirmed = false;
+    const onOk = () => { isConfirmed = true; d.returnValue = "ok"; };
+    const onCancel = () => { isConfirmed = false; d.returnValue = "cancel"; };
+    const onSubmit = e => {
+      if (e.submitter?.value === "ok" || e.submitter === okBtn) {
+        isConfirmed = true;
+      }
+    };
+
+    okBtn?.addEventListener("click", onOk);
+    cancelBtn?.addEventListener("click", onCancel);
+    form?.addEventListener("submit", onSubmit);
 
     d?.addEventListener?.("close", () => {
       okBtn?.removeEventListener("click", onOk);
       cancelBtn?.removeEventListener("click", onCancel);
+      form?.removeEventListener("submit", onSubmit);
       prevActive?.focus?.();
-      resolve(d.returnValue === "ok");
+      resolve(isConfirmed || d.returnValue === "ok");
     }, { once: true });
     d.showModal();
     const focusTarget = isDanger ? cancelBtn || okBtn : okBtn;
