@@ -88,8 +88,8 @@
 
 /* Mobile Dialog Controls (enlarged touch targets) */
 .pack-qty-btn {
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
   font-size: 18px;
   touch-action: manipulation;
 }
@@ -100,7 +100,7 @@
 
 #packItemQty {
   width: 48px;
-  height: 36px;
+  height: 44px;
   font-size: 14px;
 }
 

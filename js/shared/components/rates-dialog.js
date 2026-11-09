@@ -5,12 +5,18 @@ import { $ } from "../utils/dom.js";
 import { getState, save } from "../state/store.js";
 
 export function openRatesDialog() {
+  const triggerEl = document.activeElement;
+  const dlg = $("ratesDialog");
   const r = getState().rates || DEFAULT_RATES;
   if ($("ratesBase")) $("ratesBase").value = r.base || "USD";
   if ($("rateEUR")) $("rateEUR").value = r.EUR ?? "";
   if ($("rateGBP")) $("rateGBP").value = r.GBP ?? "";
   if ($("rateILS")) $("rateILS").value = r.ILS ?? "";
-  $("ratesDialog")?.showModal();
+  if (dlg) {
+    dlg?.addEventListener?.("close", () => { triggerEl?.focus?.(); }, { once: true });
+    dlg.showModal();
+    $("ratesBase")?.focus();
+  }
 }
 
 export function initRatesDialog() {

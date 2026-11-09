@@ -14,7 +14,7 @@ export function icsEscape(strVal) {
     .replace(/\r?\n/g, "\\n");
 }
 
-export function exportIcsCalendar() {
+export function formatIcsCalendar(agenda = getState().agenda || []) {
   const nowStamp = new Date().toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
   const lines = [
     "BEGIN:VCALENDAR",
@@ -23,7 +23,7 @@ export function exportIcsCalendar() {
     "CALSCALE:GREGORIAN",
     "METHOD:PUBLISH"
   ];
-  const sorted = [...(getState().agenda || [])].sort(sortItems);
+  const sorted = [...(agenda || [])].sort(sortItems);
 
   for (const a of sorted) {
     lines.push("BEGIN:VEVENT");
@@ -79,7 +79,12 @@ export function exportIcsCalendar() {
   }
 
   lines.push("END:VCALENDAR");
-  const url = URL.createObjectURL(new Blob([lines.join("\r\n")], { type: "text/calendar;charset=utf-8" }));
+  return lines.join("\r\n");
+}
+
+export function exportIcsCalendar() {
+  const content = formatIcsCalendar();
+  const url = URL.createObjectURL(new Blob([content], { type: "text/calendar;charset=utf-8" }));
   const link = document.createElement("a");
   link.href = url;
   link.download = `trip-${todayIso()}.ics`;

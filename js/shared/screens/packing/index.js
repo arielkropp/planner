@@ -185,7 +185,7 @@ function renderItemRow(item) {
         <button type="button" class="pack-check-circle ${isPacked ? "is-checked" : ""}" data-action="toggle" data-id="${esc(item.id)}" aria-label="${isPacked ? "Mark unpacked" : "Mark packed"}">
           <svg class="i sm" aria-hidden="true"><use href="#i-check"/></svg>
         </button>
-        <div class="pack-row-content" data-action="edit" data-id="${esc(item.id)}">
+        <div class="pack-row-content" data-action="edit" data-id="${esc(item.id)}" role="button" tabindex="0" aria-label="Edit ${esc(item.title)}">
           <span class="pack-title">${esc(item.title)}</span>
           ${hasBadges ? `
             <div class="pack-row-badges">
@@ -315,6 +315,7 @@ function setSelectedBag(bagName) {
 export function openItemDialog(itemId = null) {
   const dlg = $("packItemDialog");
   if (!dlg) return;
+  const triggerEl = document.activeElement;
 
   ensureCategoryChips();
   ensureBagChips();
@@ -376,6 +377,7 @@ export function openItemDialog(itemId = null) {
   nameEl?.classList.remove("is-invalid");
   nameEl?.closest(".fs-title-wrap")?.classList.remove("is-invalid");
 
+  dlg?.addEventListener?.("close", () => { triggerEl?.focus?.(); }, { once: true });
   dlg.showModal();
   requestAnimationFrame(() => nameEl?.focus());
 }
@@ -447,8 +449,13 @@ export function initPacking({ signal } = {}) {
       if (checkBtn) {
         const id = checkBtn.dataset.id;
         if (id) {
+          const hadFocus = document.activeElement === checkBtn;
           togglePackingItemDone(id);
           renderPacking();
+          if (hadFocus) {
+            const nextBtn = contentEl.querySelector(`[data-action="toggle"][data-id="${id}"]`);
+            nextBtn?.focus();
+          }
         }
         return;
       }
@@ -460,6 +467,18 @@ export function initPacking({ signal } = {}) {
         if (id) openItemDialog(id);
       }
     });
+
+    // Keyboard navigation (Enter / Space on row edit trigger)
+    contentEl.addEventListener("keydown", e => {
+      if (e.key === "Enter" || e.key === " " || e.key === "Spacebar") {
+        const editTrigger = e.target.closest('[data-action="edit"]');
+        if (editTrigger) {
+          e.preventDefault();
+          const id = editTrigger.dataset.id;
+          if (id) openItemDialog(id);
+        }
+      }
+    }, signal ? { signal } : undefined);
   }
 
   // Dialog Controls

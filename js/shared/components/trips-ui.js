@@ -7,6 +7,7 @@ import { getTrips, getActiveTrip, setActiveTrip, addTrip, updateTrip, deleteTrip
 import { confirmAsk } from "./dialog.js";
 
 export function openAddTripDialog() {
+  const triggerEl = document.activeElement;
   const dlg = $("tripDialog");
   if (!dlg) return;
   const titleEl = $("tripTitle");
@@ -21,13 +22,16 @@ export function openAddTripDialog() {
   }
   if ($("tripSubmit")) $("tripSubmit").textContent = "Add trip";
   try {
+    dlg?.addEventListener?.("close", () => { triggerEl?.focus?.(); }, { once: true });
     dlg.showModal();
+    $("tripName")?.focus();
   } catch (err) {
     console.error("Could not open tripDialog:", err);
   }
 }
 
 export function openEditTripDialog(tripId) {
+  const triggerEl = document.activeElement;
   const dlg = $("tripDialog");
   if (!dlg) return;
   const trip = getTrips().find(t => t.id === tripId);
@@ -44,7 +48,10 @@ export function openEditTripDialog(tripId) {
   }
   if ($("tripSubmit")) $("tripSubmit").textContent = "Save changes";
   try {
+    dlg?.addEventListener?.("close", () => { triggerEl?.focus?.(); }, { once: true });
     dlg.showModal();
+    $("tripName")?.focus();
+    $("tripName")?.select?.();
   } catch (err) {
     console.error("Could not open tripDialog:", err);
   }

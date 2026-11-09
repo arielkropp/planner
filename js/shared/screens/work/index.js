@@ -141,7 +141,30 @@ export function commitActiveEdit(skipRender = false) {
   activeEditId = null;
   if (!skipRender) {
     renderWork();
+    const row = document?.querySelector?.(`.work-row-wrapper[data-id="${idToCommit}"] .work-row-content`);
+    row?.focus?.();
+    requestAnimationFrame(() => {
+      const row = document?.querySelector?.(`.work-row-wrapper[data-id="${idToCommit}"] .work-row-content`);
+      row?.focus?.();
+    });
   }
+}
+
+export function cancelActiveEdit() {
+  if (!activeEditId) return;
+  const idToRestore = activeEditId;
+  activeEditId = null;
+  renderWork();
+  const row = document?.querySelector?.(`.work-row-wrapper[data-id="${idToRestore}"] .work-row-content`);
+  if (row) {
+    row.focus();
+  } else {
+    $("addWorkItem")?.focus?.();
+  }
+  requestAnimationFrame(() => {
+    const r = document?.querySelector?.(`.work-row-wrapper[data-id="${idToRestore}"] .work-row-content`);
+    if (r) r.focus();
+  });
 }
 
 export function activateInlineEdit(id) {
@@ -192,6 +215,29 @@ function handleAddNewRow() {
     const descInput = document?.querySelector?.(`.work-row-wrapper[data-id="${id}"] .work-inline-desc`);
     descInput?.focus?.();
   });
+}
+
+async function requestDeleteWorkItem(item, wrapper, isSwipe = false) {
+  const desc = item.note || fmtDate(item.date) || "this work entry";
+  const ok = await confirmAsk(`Delete "${desc}"?`, "Delete work entry", "Delete", true);
+  if (ok) {
+    if (isSwipe && wrapper) {
+      wrapper.style.maxHeight = `${wrapper.offsetHeight}px`;
+      void wrapper.offsetHeight;
+      wrapper.classList.add("is-deleting");
+      setTimeout(() => {
+        deleteWorkItem(item.id);
+      }, 240);
+    } else {
+      deleteWorkItem(item.id);
+    }
+  } else if (isSwipe && wrapper) {
+    const content = wrapper.querySelector(".work-row-content");
+    if (content) {
+      content.style.transition = "transform 0.25s cubic-bezier(0.2, 0, 0, 1)";
+      content.style.transform = "translateX(0)";
+    }
+  }
 }
 
 function attachSwipeHandlers(wrapper, item) {
@@ -265,20 +311,7 @@ function attachSwipeHandlers(wrapper, item) {
       if (dx <= -threshold) {
         content.style.transition = "transform 0.22s cubic-bezier(0.2, 0, 0, 1)";
         content.style.transform = "translateX(-100%)";
-
-        const desc = item.note || fmtDate(item.date) || "this work entry";
-        const ok = await confirmAsk(`Delete "${desc}"?`, "Delete work entry", "Delete", true);
-        if (ok) {
-          wrapper.style.maxHeight = `${wrapper.offsetHeight}px`;
-          void wrapper.offsetHeight;
-          wrapper.classList.add("is-deleting");
-          setTimeout(() => {
-            deleteWorkItem(item.id);
-          }, 240);
-        } else {
-          content.style.transition = "transform 0.25s cubic-bezier(0.2, 0, 0, 1)";
-          content.style.transform = "translateX(0)";
-        }
+        await requestDeleteWorkItem(item, wrapper, true);
       } else {
         content.style.transition = "transform 0.25s cubic-bezier(0.2, 0, 0, 1)";
         content.style.transform = "translateX(0)";
@@ -305,6 +338,15 @@ function wireInlineEditInputs(wrapper, item) {
   const datePicker = wrapper.querySelector(".work-date-picker");
   const dateBtn = wrapper.querySelector(".work-date-picker-btn");
   const hrsInput = wrapper.querySelector(".work-inline-hrs");
+  const deleteBtn = wrapper.querySelector(".work-inline-delete-btn") || wrapper.querySelector(".work-inline-delete");
+
+  if (deleteBtn) {
+    deleteBtn.addEventListener("click", async e => {
+      e.stopPropagation();
+      e.preventDefault();
+      await requestDeleteWorkItem(item, wrapper);
+    });
+  }
 
   if (dateBtn && datePicker) {
     dateBtn.addEventListener("click", e => {
@@ -350,11 +392,25 @@ function wireInlineEditInputs(wrapper, item) {
     });
   }
 
+  // Only text inputs commit on Enter
   [descInput, dateInput, hrsInput].forEach(inp => {
     inp?.addEventListener("keydown", e => {
       if (e.key === "Enter") {
         e.preventDefault();
         commitActiveEdit();
+      } else if (e.key === "Escape") {
+        e.preventDefault();
+        cancelActiveEdit();
+      }
+    });
+  });
+
+  // Buttons in inline edit row cancel on Escape, but allow native Enter/Space activation
+  [dateBtn, deleteBtn].forEach(btn => {
+    btn?.addEventListener("keydown", e => {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        cancelActiveEdit();
       }
     });
   });
@@ -387,7 +443,7 @@ export function renderWorkList() {
             <div class="work-col-date">
               <div class="work-date-wrap">
                 <input type="text" class="work-inline-input work-inline-date" value="${esc(fmtDate(w.date))}" placeholder="DD/MM/YY" maxlength="10" aria-label="Date">
-                <button type="button" class="work-date-picker-btn" aria-label="Choose date" title="Choose date" tabindex="-1">
+                <button type="button" class="work-date-picker-btn" aria-label="Choose date" title="Choose date">
                   <svg class="i" aria-hidden="true"><use href="#i-calendar"/></svg>
                 </button>
                 <input type="date" class="work-date-picker" value="${esc(w.date || todayIso())}" aria-label="Pick date" tabindex="-1">
@@ -395,6 +451,11 @@ export function renderWorkList() {
             </div>
             <div class="work-col-hrs">
               <input type="text" inputmode="decimal" class="work-inline-input work-inline-hrs" value="${esc(hrs)}" placeholder="Hrs" maxlength="5" aria-label="Hours">
+            </div>
+            <div class="work-col-del">
+              <button type="button" class="work-inline-delete-btn work-inline-delete icon-btn danger" aria-label="Delete work entry" title="Delete work entry">
+                <svg class="i sm" aria-hidden="true"><use href="#i-trash"/></svg>
+              </button>
             </div>
           </div>
         </div>
@@ -409,7 +470,7 @@ export function renderWorkList() {
             <span>Delete</span>
           </div>
         </div>
-        <div class="work-row-content" data-action="inline-edit" data-id="${esc(w.id)}">
+        <div class="work-row-content" data-action="inline-edit" data-id="${esc(w.id)}" role="button" tabindex="0" aria-label="Edit work entry: ${esc(w.note || 'No description')}, ${fmtDate(w.date)}, ${hrs} hours">
           <div class="work-col-desc">${esc(w.note || "(No description)")}</div>
           <div class="work-col-date">${fmtDate(w.date)}</div>
           <div class="work-col-hrs">${hrs}</div>
@@ -471,11 +532,30 @@ export function initWork({ signal } = {}) {
         }
       }
     });
+
+    listEl.addEventListener("keydown", async e => {
+      const trigger = e.target.closest('[data-action="inline-edit"]');
+      if (!trigger) return;
+      const id = trigger.dataset.id;
+      if (!id) return;
+      const item = getWorkItem(id);
+      if (!item) return;
+
+      if (e.key === "Enter" || e.key === " " || e.key === "Spacebar") {
+        e.preventDefault();
+        activateInlineEdit(id);
+      } else if (e.key === "Delete" || e.key === "Backspace") {
+        e.preventDefault();
+        const wrapper = trigger.closest(".work-row-wrapper");
+        await requestDeleteWorkItem(item, wrapper);
+      }
+    }, signal ? { signal } : undefined);
   }
 
   // Click outside active editing row commits active edit
   document.addEventListener("pointerdown", e => {
     if (!activeEditId) return;
+    if (document.querySelector("dialog[open]")) return;
     const activeWrapper = document.querySelector(`.work-row-wrapper[data-id="${activeEditId}"]`);
     const addFab = $("addWorkItem");
     if (activeWrapper && !activeWrapper.contains(e.target) && (!addFab || !addFab.contains(e.target))) {

@@ -7,11 +7,12 @@ import { TIMEZONES, searchTimezones, highlightMatch, findTimezone } from "../dat
 let activeCallback = null;
 let activeCurrentTz = "";
 
-function renderItemHtml(result, isSelected) {
+function renderItemHtml(result, isSelected, index) {
   const { tz, matchedTerm, query } = result;
   const highlightedTerm = highlightMatch(matchedTerm, query);
+  const optId = `tzOpt_${index}`;
 
-  return `<button type="button" class="tz-item${isSelected ? " selected active" : ""}" role="option" data-tz-id="${esc(tz.id)}" aria-selected="${isSelected ? "true" : "false"}">
+  return `<button type="button" id="${optId}" class="tz-item${isSelected ? " selected active" : ""}" role="option" data-tz-id="${esc(tz.id)}" aria-selected="${isSelected ? "true" : "false"}" tabindex="-1">
     <div class="tz-item-main">
       <div class="tz-item-header">
         <strong class="tz-item-title">${esc(tz.title)}</strong>
@@ -27,6 +28,7 @@ function updateList(query = "") {
   const listEl = $("tzResultsList");
   const emptyEl = $("tzEmptyMsg");
   const clearBtn = $("tzSearchClear");
+  const input = $("tzSearchInput");
   if (!listEl) return;
 
   if (clearBtn) {
@@ -39,26 +41,41 @@ function updateList(query = "") {
     listEl.innerHTML = "";
     listEl.hidden = true;
     if (emptyEl) emptyEl.hidden = false;
+    if (input) {
+      input?.setAttribute?.("aria-expanded", "false");
+      input?.removeAttribute?.("aria-activedescendant");
+    }
     return;
   }
 
   if (emptyEl) emptyEl.hidden = true;
   listEl.hidden = false;
 
-  const html = matches.map(result => {
+  const html = matches.map((result, idx) => {
     const isSelected = Boolean(activeCurrentTz && result.tz.id === activeCurrentTz);
-    return renderItemHtml(result, isSelected);
+    return renderItemHtml(result, isSelected, idx);
   }).join("");
 
   listEl.innerHTML = html;
 
   // Set active class on selected item if present, else on first item
   const selectedEl = listEl.querySelector(".tz-item.selected");
+  let activeEl = selectedEl;
   if (selectedEl) {
     selectedEl.classList.add("active");
   } else {
     const first = listEl.querySelector(".tz-item");
-    if (first) first.classList.add("active");
+    if (first) {
+      first.classList.add("active");
+      activeEl = first;
+    }
+  }
+
+  if (input) {
+    input?.setAttribute?.("aria-expanded", "true");
+    if (activeEl?.id) {
+      input?.setAttribute?.("aria-activedescendant", activeEl.id);
+    }
   }
 }
 
@@ -101,6 +118,7 @@ export function initTimezoneDialog() {
   });
 
   dlg.addEventListener("keydown", e => {
+    const input = $("tzSearchInput");
     if (e.key === "ArrowDown" || e.key === "ArrowUp") {
       e.preventDefault();
       const items = [...(listEl?.querySelectorAll(".tz-item") || [])];
@@ -113,7 +131,11 @@ export function initTimezoneDialog() {
         nextIndex = currentIndex > 0 ? currentIndex - 1 : items.length - 1;
       }
       items.forEach((el, idx) => el.classList.toggle("active", idx === nextIndex));
-      items[nextIndex]?.scrollIntoView({ block: "nearest" });
+      const activeItem = items[nextIndex];
+      activeItem?.scrollIntoView({ block: "nearest" });
+      if (input && activeItem?.id) {
+        input?.setAttribute?.("aria-activedescendant", activeItem.id);
+      }
       return;
     }
 
@@ -123,6 +145,13 @@ export function initTimezoneDialog() {
       if (active) {
         selectTimezone(active.dataset.tzId);
       }
+      return;
+    }
+
+    if (e.key === "Escape") {
+      e.preventDefault();
+      selectTimezone(null);
+      return;
     }
   });
 
@@ -132,6 +161,7 @@ export function initTimezoneDialog() {
 }
 
 export function openTimezoneDialog({ currentTz = "", onSelect } = {}) {
+  const triggerEl = document.activeElement;
   const dlg = $("timezoneDialog");
   if (!dlg) return;
 
@@ -149,6 +179,10 @@ export function openTimezoneDialog({ currentTz = "", onSelect } = {}) {
   updateList("");
 
   try {
+    dlg?.addEventListener?.("close", () => {
+      triggerEl?.focus?.();
+      activeCallback = null;
+    }, { once: true });
     dlg.showModal();
   } catch (err) {
     console.error("Could not open timezone dialog:", err);

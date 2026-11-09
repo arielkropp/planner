@@ -91,6 +91,7 @@
   </aside>
 
   <main>
+    <h1 class="sr-only">Trip Planner</h1>
     <p class="notice" id="storageError" role="alert" hidden></p>
     <section data-screen="itinerary" aria-label="Itinerary">
       <div class="itinerary-toolbar">
@@ -198,7 +199,7 @@
 
       <div class="settings-screen">
         <div class="settings-group">
-          <div class="settings-group-label">Trips</div>
+          <h2 class="settings-group-label">Trips</h2>
           <div class="settings-card">
             <div id="tripsList"></div>
             <div class="settings-divider" id="tripsDivider" aria-hidden="true" hidden></div>
@@ -214,7 +215,7 @@
         </div>
 
         <div class="settings-group">
-          <div class="settings-group-label">Work Log</div>
+          <h2 class="settings-group-label">Work Log</h2>
           <div class="settings-card">
             <div class="settings-row static-row">
               <div class="settings-icon-well"><svg class="i" aria-hidden="true"><use href="#i-laptop"/></svg></div>
@@ -231,7 +232,7 @@
         </div>
 
         <div class="settings-group">
-          <div class="settings-group-label">Data &amp; Export</div>
+          <h2 class="settings-group-label">Data &amp; Export</h2>
           <div class="settings-card">
             <button type="button" class="settings-row" id="exportIcs">
               <div class="settings-icon-well"><svg class="i" aria-hidden="true"><use href="#i-calendar-download-02"/></svg></div>
@@ -287,7 +288,7 @@
   </main>
 </div>
 
-<dialog id="itemFullscreenDialog" class="fs-item-dialog" aria-labelledby="fsDialogTitle">
+<dialog id="itemFullscreenDialog" class="fs-item-dialog" aria-labelledby="fsDialogTitle" aria-modal="true">
   <form id="fsItemForm" novalidate>
     <div class="fs-header">
       <button type="button" class="icon-btn" data-close id="fsClose" aria-label="Close" title="Close"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg></button>
@@ -311,7 +312,7 @@
       </div>
 
       <div class="fs-group">
-        <div class="fs-group-label">Schedule</div>
+        <h3 class="fs-group-label">Schedule</h3>
         <div class="fs-card fs-view-list">
           <div class="fs-view-row" id="fsViewStartRow">
             <div class="fs-view-icon" aria-hidden="true"><svg class="i"><use href="#i-calendar-days"/></svg></div>
@@ -338,7 +339,7 @@
       </div>
 
       <div class="fs-group" id="fsViewDetailsGroup">
-        <div class="fs-group-label">Details</div>
+        <h3 class="fs-group-label">Details</h3>
         <div class="fs-card fs-view-list">
           <div class="fs-view-row" id="fsViewCostRow" hidden>
             <div class="fs-view-icon" aria-hidden="true"><svg class="i"><use href="#i-currency"/></svg></div>
@@ -368,7 +369,8 @@
       <!-- Title, Type & Status Card -->
       <div class="fs-card fs-hero-card">
         <div class="fs-title-wrap">
-          <input id="fsTitle" class="fs-title-input" required maxlength="200" autocomplete="off" placeholder="Add title...">
+          <label for="fsTitle" class="sr-only">Item title</label>
+          <input id="fsTitle" class="fs-title-input" required maxlength="200" autocomplete="off" placeholder="Add title..." aria-label="Item title">
         </div>
         <div class="fs-card-divider" aria-hidden="true"></div>
         <div class="fs-chip-section">
@@ -383,7 +385,7 @@
 
       <!-- Schedule Card (Stacked Start & End) -->
       <div class="fs-group">
-        <div class="fs-group-label">Schedule</div>
+        <h3 class="fs-group-label">Schedule</h3>
         <div class="fs-card fs-schedule-card">
           <div class="field">
             <label for="fsStartDate">Start <span class="req" aria-hidden="true">*</span></label>
@@ -421,7 +423,7 @@
 
       <!-- Details & Cost Card -->
       <div class="fs-group">
-        <div class="fs-group-label">Details</div>
+        <h3 class="fs-group-label">Details</h3>
         <div class="fs-card fs-details-card">
           <div class="cost-currency-box">
             <label class="field" style="flex:1;min-width:0">
@@ -449,7 +451,7 @@
   </form>
 </dialog>
 
-<dialog id="ratesDialog" class="small" aria-labelledby="ratesTitle">
+<dialog id="ratesDialog" class="small" aria-labelledby="ratesTitle" aria-modal="true">
   <form id="ratesForm">
     <div class="dlg-head"><h2 id="ratesTitle">Budget &amp; exchange rates</h2><button type="button" class="icon-btn" data-close aria-label="Close"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg></button></div>
     <div class="dlg-body">
@@ -475,17 +477,17 @@
   </form>
 </dialog>
 
-<dialog id="confirmDialog" class="small" aria-labelledby="confirmTitle">
+<dialog id="confirmDialog" class="small" aria-labelledby="confirmTitle" aria-modal="true">
   <form method="dialog">
     <div class="dlg-body"><h2 id="confirmTitle" style="font-size:17px">Delete?</h2><p id="confirmText"></p></div>
     <div class="dlg-foot">
-      <button class="btn" value="cancel">Cancel</button>
+      <button class="btn" value="cancel" id="confirmCancel">Cancel</button>
       <button class="btn danger-solid" value="ok" id="confirmOk">Delete</button>
     </div>
   </form>
 </dialog>
 
-<dialog id="tripDialog" class="small" aria-labelledby="tripTitle">
+<dialog id="tripDialog" class="small" aria-labelledby="tripTitle" aria-modal="true">
   <form id="tripForm">
     <div class="dlg-head">
       <h2 id="tripTitle">Add trip</h2>
@@ -518,7 +520,7 @@
   </form>
 </dialog>
 
-<dialog id="timezoneDialog" class="small tz-dialog" aria-labelledby="tzDialogTitle">
+<dialog id="timezoneDialog" class="small tz-dialog" aria-labelledby="tzDialogTitle" aria-modal="true">
   <form id="timezoneForm" onsubmit="event.preventDefault()">
     <div class="dlg-head">
       <h2 id="tzDialogTitle">Select timezone</h2>
@@ -529,7 +531,7 @@
     <div class="tz-search-header">
       <div class="tz-search-box">
         <svg class="i sm tz-search-icon" aria-hidden="true"><use href="#i-search"/></svg>
-        <input type="search" id="tzSearchInput" class="tz-search-input" placeholder="Search country or city..." autocomplete="off" spellcheck="false" aria-label="Search country or city">
+        <input type="search" id="tzSearchInput" class="tz-search-input" placeholder="Search country or city..." autocomplete="off" spellcheck="false" aria-label="Search country or city" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-haspopup="listbox" aria-controls="tzResultsList">
         <button type="button" class="icon-btn sm tz-search-clear" id="tzSearchClear" aria-label="Clear search" hidden>
           <svg class="i sm" aria-hidden="true"><use href="#i-x"/></svg>
         </button>
@@ -545,7 +547,7 @@
   </form>
 </dialog>
 
-<dialog id="packItemDialog" class="fs-item-dialog" aria-labelledby="packDialogTitle">
+<dialog id="packItemDialog" class="fs-item-dialog" aria-labelledby="packDialogTitle" aria-modal="true">
   <form id="packItemForm" novalidate autocomplete="off">
     <div class="fs-header">
       <button type="button" class="icon-btn" data-close id="packClose" aria-label="Close dialog" title="Close"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg></button>
@@ -568,7 +570,8 @@
             <input type="checkbox" id="packItemDone" name="packItemDone" class="sr-only">
             <svg class="i sm" aria-hidden="true"><use href="#i-check"/></svg>
           </label>
-          <input id="packItemTitle" class="fs-title-input" required maxlength="200" autocomplete="off" placeholder="Add item name...">
+          <label for="packItemTitle" class="sr-only">Item title</label>
+          <input id="packItemTitle" class="fs-title-input" required maxlength="200" autocomplete="off" placeholder="Add item name..." aria-label="Item title">
         </div>
         <div class="fs-card-divider" aria-hidden="true"></div>
 
@@ -636,6 +639,7 @@
   </aside>
 
   <main>
+    <h1 class="sr-only">Trip Planner</h1>
     <p class="notice" id="storageError" role="alert" hidden></p>
     <section data-screen="itinerary" aria-label="Itinerary">
       <div class="itinerary-toolbar">
@@ -743,7 +747,7 @@
 
       <div class="settings-screen">
         <div class="settings-group">
-          <div class="settings-group-label">Trips</div>
+          <h2 class="settings-group-label">Trips</h2>
           <div class="settings-card">
             <div id="tripsList"></div>
             <div class="settings-divider" id="tripsDivider" aria-hidden="true" hidden></div>
@@ -759,7 +763,7 @@
         </div>
 
         <div class="settings-group">
-          <div class="settings-group-label">Work Log</div>
+          <h2 class="settings-group-label">Work Log</h2>
           <div class="settings-card">
             <div class="settings-row static-row">
               <div class="settings-icon-well"><svg class="i" aria-hidden="true"><use href="#i-laptop"/></svg></div>
@@ -776,7 +780,7 @@
         </div>
 
         <div class="settings-group">
-          <div class="settings-group-label">Data &amp; Export</div>
+          <h2 class="settings-group-label">Data &amp; Export</h2>
           <div class="settings-card">
             <button type="button" class="settings-row" id="exportIcs">
               <div class="settings-icon-well"><svg class="i" aria-hidden="true"><use href="#i-calendar-download-02"/></svg></div>
@@ -832,7 +836,7 @@
   </main>
 </div>
 
-<dialog id="itemFullscreenDialog" class="fs-item-dialog" aria-labelledby="fsDialogTitle">
+<dialog id="itemFullscreenDialog" class="fs-item-dialog" aria-labelledby="fsDialogTitle" aria-modal="true">
   <form id="fsItemForm" novalidate>
     <div class="fs-header">
       <button type="button" class="icon-btn" data-close id="fsClose" aria-label="Close" title="Close"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg></button>
@@ -856,7 +860,7 @@
       </div>
 
       <div class="fs-group">
-        <div class="fs-group-label">Schedule</div>
+        <h3 class="fs-group-label">Schedule</h3>
         <div class="fs-card fs-view-list">
           <div class="fs-view-row" id="fsViewStartRow">
             <div class="fs-view-icon" aria-hidden="true"><svg class="i"><use href="#i-calendar-days"/></svg></div>
@@ -883,7 +887,7 @@
       </div>
 
       <div class="fs-group" id="fsViewDetailsGroup">
-        <div class="fs-group-label">Details</div>
+        <h3 class="fs-group-label">Details</h3>
         <div class="fs-card fs-view-list">
           <div class="fs-view-row" id="fsViewCostRow" hidden>
             <div class="fs-view-icon" aria-hidden="true"><svg class="i"><use href="#i-currency"/></svg></div>
@@ -913,7 +917,8 @@
       <!-- Title, Type & Status Card -->
       <div class="fs-card fs-hero-card">
         <div class="fs-title-wrap">
-          <input id="fsTitle" class="fs-title-input" required maxlength="200" autocomplete="off" placeholder="Add title...">
+          <label for="fsTitle" class="sr-only">Item title</label>
+          <input id="fsTitle" class="fs-title-input" required maxlength="200" autocomplete="off" placeholder="Add title..." aria-label="Item title">
         </div>
         <div class="fs-card-divider" aria-hidden="true"></div>
         <div class="fs-chip-section">
@@ -928,7 +933,7 @@
 
       <!-- Schedule Card (Stacked Start & End) -->
       <div class="fs-group">
-        <div class="fs-group-label">Schedule</div>
+        <h3 class="fs-group-label">Schedule</h3>
         <div class="fs-card fs-schedule-card">
           <div class="field">
             <label for="fsStartDate">Start <span class="req" aria-hidden="true">*</span></label>
@@ -966,7 +971,7 @@
 
       <!-- Details & Cost Card -->
       <div class="fs-group">
-        <div class="fs-group-label">Details</div>
+        <h3 class="fs-group-label">Details</h3>
         <div class="fs-card fs-details-card">
           <div class="cost-currency-box">
             <label class="field" style="flex:1;min-width:0">
@@ -994,7 +999,7 @@
   </form>
 </dialog>
 
-<dialog id="ratesDialog" class="small" aria-labelledby="ratesTitle">
+<dialog id="ratesDialog" class="small" aria-labelledby="ratesTitle" aria-modal="true">
   <form id="ratesForm">
     <div class="dlg-head"><h2 id="ratesTitle">Budget &amp; exchange rates</h2><button type="button" class="icon-btn" data-close aria-label="Close"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg></button></div>
     <div class="dlg-body">
@@ -1020,17 +1025,17 @@
   </form>
 </dialog>
 
-<dialog id="confirmDialog" class="small" aria-labelledby="confirmTitle">
+<dialog id="confirmDialog" class="small" aria-labelledby="confirmTitle" aria-modal="true">
   <form method="dialog">
     <div class="dlg-body"><h2 id="confirmTitle" style="font-size:17px">Delete?</h2><p id="confirmText"></p></div>
     <div class="dlg-foot">
-      <button class="btn" value="cancel">Cancel</button>
+      <button class="btn" value="cancel" id="confirmCancel">Cancel</button>
       <button class="btn danger-solid" value="ok" id="confirmOk">Delete</button>
     </div>
   </form>
 </dialog>
 
-<dialog id="tripDialog" class="small" aria-labelledby="tripTitle">
+<dialog id="tripDialog" class="small" aria-labelledby="tripTitle" aria-modal="true">
   <form id="tripForm">
     <div class="dlg-head">
       <h2 id="tripTitle">Add trip</h2>
@@ -1063,7 +1068,7 @@
   </form>
 </dialog>
 
-<dialog id="timezoneDialog" class="small tz-dialog" aria-labelledby="tzDialogTitle">
+<dialog id="timezoneDialog" class="small tz-dialog" aria-labelledby="tzDialogTitle" aria-modal="true">
   <form id="timezoneForm" onsubmit="event.preventDefault()">
     <div class="dlg-head">
       <h2 id="tzDialogTitle">Select timezone</h2>
@@ -1074,7 +1079,7 @@
     <div class="tz-search-header">
       <div class="tz-search-box">
         <svg class="i sm tz-search-icon" aria-hidden="true"><use href="#i-search"/></svg>
-        <input type="search" id="tzSearchInput" class="tz-search-input" placeholder="Search country or city..." autocomplete="off" spellcheck="false" aria-label="Search country or city">
+        <input type="search" id="tzSearchInput" class="tz-search-input" placeholder="Search country or city..." autocomplete="off" spellcheck="false" aria-label="Search country or city" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-haspopup="listbox" aria-controls="tzResultsList">
         <button type="button" class="icon-btn sm tz-search-clear" id="tzSearchClear" aria-label="Clear search" hidden>
           <svg class="i sm" aria-hidden="true"><use href="#i-x"/></svg>
         </button>
@@ -1090,7 +1095,7 @@
   </form>
 </dialog>
 
-<dialog id="packItemDialog" class="fs-item-dialog" aria-labelledby="packDialogTitle">
+<dialog id="packItemDialog" class="fs-item-dialog" aria-labelledby="packDialogTitle" aria-modal="true">
   <form id="packItemForm" novalidate autocomplete="off">
     <div class="fs-header">
       <button type="button" class="icon-btn" data-close id="packClose" aria-label="Close dialog" title="Close"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg></button>
@@ -1113,7 +1118,8 @@
             <input type="checkbox" id="packItemDone" name="packItemDone" class="sr-only">
             <svg class="i sm" aria-hidden="true"><use href="#i-check"/></svg>
           </label>
-          <input id="packItemTitle" class="fs-title-input" required maxlength="200" autocomplete="off" placeholder="Add item name...">
+          <label for="packItemTitle" class="sr-only">Item title</label>
+          <input id="packItemTitle" class="fs-title-input" required maxlength="200" autocomplete="off" placeholder="Add item name..." aria-label="Item title">
         </div>
         <div class="fs-card-divider" aria-hidden="true"></div>
 

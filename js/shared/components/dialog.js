@@ -6,6 +6,10 @@ import { parseDate } from "../utils/date.js";
 export function confirmAsk(title, text, okLabel = "Delete", isDanger = true) {
   const d = $("confirmDialog");
   if (!d) return Promise.resolve(false);
+  if (d.open) {
+    try { d.close(); } catch {}
+  }
+  const prevActive = document.activeElement;
 
   const titleEl = $("confirmTitle");
   const textEl = $("confirmText");
@@ -20,8 +24,21 @@ export function confirmAsk(title, text, okLabel = "Delete", isDanger = true) {
 
   d.returnValue = "";
   return new Promise(resolve => {
-    d.addEventListener("close", () => resolve(d.returnValue === "ok"), { once: true });
+    const cancelBtn = $("confirmCancel");
+    const onOk = () => { d.returnValue = "ok"; };
+    const onCancel = () => { d.returnValue = "cancel"; };
+    okBtn?.addEventListener("click", onOk, { once: true });
+    cancelBtn?.addEventListener("click", onCancel, { once: true });
+
+    d?.addEventListener?.("close", () => {
+      okBtn?.removeEventListener("click", onOk);
+      cancelBtn?.removeEventListener("click", onCancel);
+      prevActive?.focus?.();
+      resolve(d.returnValue === "ok");
+    }, { once: true });
     d.showModal();
+    const focusTarget = isDanger ? cancelBtn || okBtn : okBtn;
+    focusTarget?.focus();
   });
 }
 
@@ -54,7 +71,7 @@ export function initDialogs(customCloseHandlers = {}, { signal } = {}) {
       } else {
         d.close();
       }
-    });
+    }, { signal });
   });
 
   // Swipe drag bar down to dismiss fullscreen dialogs
@@ -73,9 +90,12 @@ function initFullscreenSwipe(customCloseHandlers, { signal } = {}) {
     let activePointerId = null;
     let isDragging = false;
 
-    header.addEventListener("pointerdown", e => {
+    const onPointerDown = e => {
       if (e.button !== 0) return;
-      if (e.target.closest("button, a, input, select, textarea, label")) return;
+      if (e.target.closest("button, a, input, select, textarea, label, .chips, .pack-check-circle, .pack-qty-btn")) return;
+
+      const body = e.target.closest(".fs-body");
+      if (body && body.scrollTop > 0) return;
 
       startX = e.clientX;
       startY = e.clientY;
@@ -83,9 +103,15 @@ function initFullscreenSwipe(customCloseHandlers, { signal } = {}) {
       startTime = Date.now();
       activePointerId = e.pointerId;
       isDragging = false;
+    };
+
+    header.addEventListener("pointerdown", onPointerDown, { signal });
+    dialog.addEventListener("pointerdown", e => {
+      if (e.target.closest(".fs-header")) return;
+      onPointerDown(e);
     }, { signal });
 
-    header.addEventListener("pointermove", e => {
+    const onPointerMove = e => {
       if (activePointerId !== e.pointerId) return;
 
       const dy = e.clientY - startY;
@@ -96,9 +122,17 @@ function initFullscreenSwipe(customCloseHandlers, { signal } = {}) {
           isDragging = true;
           try {
             header.setPointerCapture(e.pointerId);
-          } catch {}
+          } catch {
+            try {
+              dialog.setPointerCapture(e.pointerId);
+            } catch {}
+          }
+          dialog.classList.add("is-dragging");
           dialog.style.transition = "none";
-        } else if (Math.abs(dx) > 8 || dy < -8) {
+        } else if (Math.abs(dx) > 12 && Math.abs(dx) > dy) {
+          activePointerId = null;
+          return;
+        } else if (dy < -12) {
           activePointerId = null;
           return;
         }
@@ -106,10 +140,18 @@ function initFullscreenSwipe(customCloseHandlers, { signal } = {}) {
 
       if (isDragging) {
         currentY = e.clientY;
-        const moveY = Math.max(0, dy);
+        const moveY = dy < 0 ? -Math.min(18, Math.sqrt(Math.abs(dy)) * 2) : dy;
         dialog.style.setProperty("--fs-swipe-y", `${moveY}px`);
+
+        const sheetHeight = dialog.offsetHeight || 500;
+        const dragRatio = Math.min(1, Math.max(0, moveY / sheetHeight));
+        const backdropOpacity = Math.max(0, 0.55 * (1 - dragRatio));
+        dialog.style.setProperty("--fs-backdrop-opacity", backdropOpacity.toFixed(3));
       }
-    }, { signal });
+    };
+
+    header.addEventListener("pointermove", onPointerMove, { signal });
+    dialog.addEventListener("pointermove", onPointerMove, { signal });
 
     const finishSwipe = async e => {
       if (activePointerId !== e.pointerId) return;
@@ -118,9 +160,13 @@ function initFullscreenSwipe(customCloseHandlers, { signal } = {}) {
       try {
         header.releasePointerCapture(e.pointerId);
       } catch {}
+      try {
+        dialog.releasePointerCapture(e.pointerId);
+      } catch {}
 
       if (!isDragging) return;
       isDragging = false;
+      dialog.classList.remove("is-dragging");
 
       const dy = Math.max(0, currentY - startY);
       const dt = Math.max(1, Date.now() - startTime);
@@ -129,8 +175,9 @@ function initFullscreenSwipe(customCloseHandlers, { signal } = {}) {
       const shouldDismiss = dy >= threshold || (dy >= 30 && velocity >= 0.4);
 
       if (shouldDismiss) {
-        dialog.style.transition = "transform 0.22s cubic-bezier(0.2, 0, 0, 1)";
+        dialog.style.transition = "transform 0.22s cubic-bezier(0.2, 0, 0, 1), opacity 0.2s ease-out";
         dialog.style.setProperty("--fs-swipe-y", "100vh");
+        dialog.style.setProperty("--fs-backdrop-opacity", "0");
 
         setTimeout(async () => {
           let closed = true;
@@ -144,31 +191,40 @@ function initFullscreenSwipe(customCloseHandlers, { signal } = {}) {
           if (!closed && dialog.open) {
             dialog.style.transition = "transform 0.25s cubic-bezier(0.2, 0, 0, 1)";
             dialog.style.setProperty("--fs-swipe-y", "0px");
+            dialog.style.setProperty("--fs-backdrop-opacity", "0.55");
             setTimeout(() => {
               dialog.style.transition = "";
               dialog.style.removeProperty("--fs-swipe-y");
+              dialog.style.removeProperty("--fs-backdrop-opacity");
             }, 250);
           } else {
             dialog.style.transition = "";
             dialog.style.removeProperty("--fs-swipe-y");
+            dialog.style.removeProperty("--fs-backdrop-opacity");
           }
         }, 220);
       } else {
-        dialog.style.transition = "transform 0.2s cubic-bezier(0.2, 0, 0, 1)";
+        dialog.style.transition = "transform 0.25s cubic-bezier(0.2, 0.9, 0.3, 1)";
         dialog.style.setProperty("--fs-swipe-y", "0px");
+        dialog.style.setProperty("--fs-backdrop-opacity", "0.55");
         setTimeout(() => {
           dialog.style.transition = "";
           dialog.style.removeProperty("--fs-swipe-y");
-        }, 200);
+          dialog.style.removeProperty("--fs-backdrop-opacity");
+        }, 250);
       }
     };
 
     header.addEventListener("pointerup", finishSwipe, { signal });
     header.addEventListener("pointercancel", finishSwipe, { signal });
+    dialog.addEventListener("pointerup", finishSwipe, { signal });
+    dialog.addEventListener("pointercancel", finishSwipe, { signal });
 
     dialog.addEventListener("close", () => {
+      dialog.classList.remove("is-dragging");
       dialog.style.transition = "";
       dialog.style.removeProperty("--fs-swipe-y");
+      dialog.style.removeProperty("--fs-backdrop-opacity");
     }, { signal });
   });
 

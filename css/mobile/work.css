@@ -112,3 +112,22 @@
   z-index: 2;
   -webkit-appearance: none;
 }
+
+.work-col-del {
+  margin-left: 4px;
+}
+
+.work-inline-delete-btn {
+  width: 32px;
+  height: 32px;
+}
+
+.work-inline-delete-btn::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 44px;
+  height: 44px;
+}

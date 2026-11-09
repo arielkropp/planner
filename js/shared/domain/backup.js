@@ -5,20 +5,34 @@ import { getState, setState, showError, setBlocked } from "../state/store.js";
 import { fromAnyVersion } from "../state/migrations.js";
 import { confirmAsk } from "../components/dialog.js";
 
-export function downloadBackup() {
-  const state = getState();
+export function serializeBackup(state = getState()) {
   const exportTrips = (state.trips || []).map(t => ({
     ...t,
     packing: (t.packing || []).filter(p => !p._draft)
   }));
-  const exportState = {
+  return {
     version: 2,
-    activeTripId: state.activeTripId,
-    trips: exportTrips,
-    rates: state.rates
+    state: {
+      version: 2,
+      activeTripId: state.activeTripId,
+      trips: exportTrips,
+      rates: state.rates
+    }
   };
+}
+
+export function parseBackupText(text) {
+  const backup = JSON.parse(text);
+  if (![1, 2].includes(backup?.version) || !backup?.state) {
+    throw new Error("This is not a planner backup.");
+  }
+  return fromAnyVersion(backup.state);
+}
+
+export function downloadBackup() {
+  const payload = serializeBackup();
   const url = URL.createObjectURL(
-    new Blob([JSON.stringify({ version: 2, state: exportState }, null, 2)], {
+    new Blob([JSON.stringify(payload, null, 2)], {
       type: "application/json"
     })
   );
@@ -32,11 +46,8 @@ export function downloadBackup() {
 export async function restoreBackup(file) {
   if (!file) return;
   try {
-    const backup = JSON.parse(await file.text());
-    if (![1, 2].includes(backup?.version) || !backup.state) {
-      throw new Error("This is not a planner backup.");
-    }
-    const restored = fromAnyVersion(backup.state);
+    const text = await file.text();
+    const restored = parseBackupText(text);
     const confirmed = await confirmAsk(
       "Replace current planner?",
       "This will overwrite your current trip data with the selected backup. Download a backup first if you want to keep your current changes.",

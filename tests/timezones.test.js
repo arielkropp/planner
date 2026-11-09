@@ -162,4 +162,60 @@ test("Timezone picker: openTimezoneDialog function is exported and can be called
   }
 });
 
+test("Timezone picker: renders combobox ARIA attributes, unique option IDs and active descendant", async () => {
+  const { openTimezoneDialog } = await import("../js/shared/components/timezone-picker.js");
+  const origDoc = globalThis.document;
+  try {
+    const setAttrs = {};
+    const mockInput = {
+      value: "",
+      setAttribute: (k, v) => { setAttrs[k] = v; },
+      removeAttribute: k => { delete setAttrs[k]; },
+      addEventListener: () => {},
+      focus: () => {}
+    };
+    const mockDlg = {
+      dataset: {},
+      showModal: () => {},
+      close: () => {},
+      addEventListener: () => {}
+    };
+    let renderedHtml = "";
+    const mockList = {
+      set innerHTML(html) { renderedHtml = html; },
+      get innerHTML() { return renderedHtml; },
+      hidden: false,
+      querySelector: sel => {
+        if (sel === ".tz-item.selected" || sel === ".tz-item") {
+          return { id: "tzOpt_0", classList: { add: () => {} } };
+        }
+        return null;
+      },
+      querySelectorAll: () => [],
+      addEventListener: () => {}
+    };
+
+    globalThis.document = {
+      getElementById: id => {
+        if (id === "timezoneDialog") return mockDlg;
+        if (id === "tzResultsList") return mockList;
+        if (id === "tzSearchInput") return mockInput;
+        if (id === "tzSearchClear") return { hidden: true, addEventListener: () => {} };
+        if (id === "tzEmptyMsg") return { hidden: true };
+        return null;
+      },
+      querySelector: () => null,
+      querySelectorAll: () => []
+    };
+
+    openTimezoneDialog({ currentTz: "Asia/Jerusalem" });
+    assert.equal(setAttrs["aria-expanded"], "true");
+    assert.equal(setAttrs["aria-activedescendant"], "tzOpt_0");
+    assert.ok(renderedHtml.includes('id="tzOpt_0"'), "renders unique option id");
+    assert.ok(renderedHtml.includes('tabindex="-1"'), "renders option with tabindex -1");
+  } finally {
+    globalThis.document = origDoc;
+  }
+});
+
 

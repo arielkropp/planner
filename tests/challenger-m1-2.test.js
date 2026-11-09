@@ -132,7 +132,11 @@ test("Challenger M1.2 - 2. Complete absence of dead files and dead code in sourc
   assert.ok(!constantsJs.includes("PACK_TEMPLATES"), "constants.js does not contain PACK_TEMPLATES");
 
   // Check built dist/index.html
-  const distHtmlPath = resolve(root, "dist/index.html");
+  const distDir = resolve(root, "dist");
+  if (!existsSync(resolve(distDir, "index.html"))) {
+    build({ outDir: distDir });
+  }
+  const distHtmlPath = resolve(distDir, "index.html");
   assert.ok(existsSync(distHtmlPath), "dist/index.html exists");
   const distHtml = readFileSync(distHtmlPath, "utf8");
 
@@ -192,7 +196,11 @@ test("Challenger M1.2 - 3. Dialog count in build output is exactly 6 for desktop
     }
 
     // Also verify dist/index.html produced by normal build
-    const distHtml = readFileSync(resolve(root, "dist/index.html"), "utf8");
+    const distHtmlPath = resolve(root, "dist/index.html");
+    if (!existsSync(distHtmlPath)) {
+      build({ outDir: resolve(root, "dist") });
+    }
+    const distHtml = readFileSync(distHtmlPath, "utf8");
     for (const platform of ["desktop", "mobile"]) {
       const markup = getPlatformMarkup(distHtml, platform);
       const dialogIds = [...markup.matchAll(/<dialog\b[^>]*\bid="([^"]+)"[^>]*>/g)].map(m => m[1]);

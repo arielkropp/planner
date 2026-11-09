@@ -5,10 +5,11 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { chromium } from "playwright";
+import { tmpdir } from "node:os";
 import { build } from "../scripts/build.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const distDir = path.resolve(root, "dist");
+let distDir;
 
 function findChromeExecutable() {
   if (process.env.CHROME_BIN && fs.existsSync(process.env.CHROME_BIN)) return process.env.CHROME_BIN;
@@ -507,6 +508,7 @@ describe("Challenger M1.1 - Real Chromium Browser Leak & Reactivity Verification
   let browser;
 
   before(async () => {
+    distDir = fs.mkdtempSync(path.join(tmpdir(), "planner-m1-1-"));
     build({ outDir: distDir });
 
     server = http.createServer((req, res) => {
@@ -538,6 +540,9 @@ describe("Challenger M1.1 - Real Chromium Browser Leak & Reactivity Verification
   after(async () => {
     if (browser) await browser.close();
     if (server) await new Promise(resolve => server.close(resolve));
+    if (distDir && fs.existsSync(distDir)) {
+      fs.rmSync(distDir, { recursive: true, force: true });
+    }
   });
 
   test("15. Chromium: Viewport switching (Desktop <-> Mobile) does not leak pointerdown listeners", async () => {

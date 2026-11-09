@@ -256,3 +256,48 @@ test("Work Log: openWorkDialog(null) adds a new row and activates inline edit", 
   assert.equal(items[0].hours, 4);
   assert.ok(listEl.innerHTML.includes("is-editing"));
 });
+
+test("Work Log: inline edit renders accessible delete button", () => {
+  setState(defaults(), false);
+  addWorkItem({ note: "Refactor API", date: "2027-01-12", hours: 4 });
+  const item = getWorkItems()[0];
+  const listEl = { innerHTML: "", querySelectorAll: () => [] };
+  globalThis.document = {
+    getElementById: id => (id === "workList" ? listEl : null),
+    querySelector: () => null,
+    querySelectorAll: () => []
+  };
+  globalThis.requestAnimationFrame = fn => fn();
+  activateInlineEdit(item.id);
+  assert.ok(listEl.innerHTML.includes("work-inline-delete-btn"), "Must render inline delete button");
+  assert.ok(listEl.innerHTML.includes('aria-label="Delete work entry"'), "Delete button must have aria-label");
+});
+
+test("Work Log: row content has button semantics and keyboard accessibility", () => {
+  setState(defaults(), false);
+  addWorkItem({ note: "Row A11y", date: "2027-01-15", hours: 2 });
+  const listEl = { innerHTML: "", querySelectorAll: () => [] };
+  globalThis.document = {
+    getElementById: id => (id === "workList" ? listEl : null),
+    querySelectorAll: () => []
+  };
+  renderWorkList();
+  assert.ok(listEl.innerHTML.includes('role="button"'), "Work row content must have role button");
+  assert.ok(listEl.innerHTML.includes('tabindex="0"'), "Work row content must have tabindex 0");
+  assert.ok(listEl.innerHTML.includes('aria-label="Edit work entry: Row A11y'), "Work row content must have aria-label");
+});
+
+test("Work Log: date picker button is keyboard focusable (no tabindex=-1)", () => {
+  setState(defaults(), false);
+  addWorkItem({ note: "Date test", date: "2027-01-12", hours: 4 });
+  const item = getWorkItems()[0];
+  const listEl = { innerHTML: "", querySelectorAll: () => [] };
+  globalThis.document = {
+    getElementById: id => (id === "workList" ? listEl : null),
+    querySelector: () => null,
+    querySelectorAll: () => []
+  };
+  globalThis.requestAnimationFrame = fn => fn();
+  activateInlineEdit(item.id);
+  assert.ok(!listEl.innerHTML.includes('class="work-date-picker-btn" aria-label="Choose date" title="Choose date" tabindex="-1"'), "Date picker btn must not have tabindex -1");
+});

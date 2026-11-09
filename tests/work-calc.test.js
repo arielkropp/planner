@@ -73,3 +73,47 @@ test("Work calculations: maxHoursFor single day clamping", () => {
   setState(originalState, false);
 });
 
+test("Work calculations: nextWorkDate selection logic", () => {
+  const originalState = initStore();
+  const workdays = getTripWorkdays();
+  assert.ok(workdays.length >= 3);
+
+  // 1. Initial empty state: returns first unlogged workday (or today if today is an unlogged workday in trip)
+  const stEmpty = defaults();
+  stEmpty.work = [];
+  setState(stEmpty, false);
+  const initialDate = nextWorkDate();
+  assert.ok(workdays.includes(initialDate));
+
+  // 2. Sequential progression: if work is logged on workday 0, next should be workday 1
+  const stProg = defaults();
+  stProg.work = [
+    { id: "w1", date: workdays[0], hours: 8, note: "" }
+  ];
+  setState(stProg, false);
+  assert.equal(nextWorkDate(), workdays[1]);
+
+  // 3. Wrap around: if work is logged on the last workday, picks the first unlogged workday
+  const stWrap = defaults();
+  stWrap.work = [
+    { id: "wLast", date: workdays[workdays.length - 1], hours: 8, note: "" }
+  ];
+  setState(stWrap, false);
+  assert.equal(nextWorkDate(), workdays[0]);
+
+  // 4. All workdays have entries but some have capacity (< 24 hours)
+  const stCapacity = defaults();
+  stCapacity.work = workdays.map((d, i) => ({
+    id: `w-${i}`,
+    date: d,
+    hours: 8,
+    note: ""
+  }));
+  setState(stCapacity, false);
+  // All workdays are logged, so it should find a workday with room <= 23.99h
+  const capacityDate = nextWorkDate();
+  assert.ok(workdays.includes(capacityDate));
+
+  setState(originalState, false);
+});
+
