@@ -15,17 +15,11 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .utilities,
   dialog,
   .seg button,
   .view-enter {
     transition: none !important;
     animation: none !important;
-    transform: none !important;
-  }
-
-  .settings-toggle .i {
-    transition: none !important;
     transform: none !important;
   }
 }

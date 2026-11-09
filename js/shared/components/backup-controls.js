@@ -1,8 +1,8 @@
 /* Backup and Settings Controls */
 
-import { $ } from "../../shared/utils/dom.js";
-import { downloadBackup, restoreBackup } from "../../shared/domain/backup.js";
-import { exportIcsCalendar } from "../../shared/domain/ics.js";
+import { $ } from "../utils/dom.js";
+import { downloadBackup, restoreBackup } from "../domain/backup.js";
+import { exportIcsCalendar } from "../domain/ics.js";
 
 export function initBackupControls() {
   $("exportIcs")?.addEventListener("click", exportIcsCalendar);
