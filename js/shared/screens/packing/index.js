@@ -312,7 +312,7 @@ function setSelectedBag(bagName) {
 }
 
 // Dialog management
-function openItemDialog(itemId = null) {
+export function openItemDialog(itemId = null) {
   const dlg = $("packItemDialog");
   if (!dlg) return;
 
@@ -356,7 +356,7 @@ function openItemDialog(itemId = null) {
     if (titleEl) titleEl.textContent = "Add item";
     if (idEl) idEl.value = "";
     if (nameEl) nameEl.value = "";
-    setSelectedCategory("Clothes");
+    setSelectedCategory("Other");
     setSelectedBag("");
     if (qtyEl) qtyEl.value = "1";
     if (toBuyEl) toBuyEl.checked = defaultToBuy;

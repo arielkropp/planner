@@ -251,3 +251,62 @@ test("Packing: quick add adds item with default Other category and qty 1", async
   assert.equal(dummyBox.hidden, true);
 });
 
+test("Packing: openItemDialog defaults category to Other when adding a new item", async () => {
+  const dummyDialog = { showModal: () => {}, close: () => {} };
+  const dummyCats = { hasChildNodes: () => true, innerHTML: "" };
+  const dummyBags = { hasChildNodes: () => true, innerHTML: "" };
+  const titleEl = { textContent: "" };
+  const idEl = { value: "" };
+  const nameEl = {
+    value: "",
+    classList: { remove: () => {} },
+    closest: () => ({ classList: { remove: () => {} } }),
+    focus: () => {}
+  };
+  const qtyEl = { value: "" };
+  const toBuyEl = { checked: false };
+  const doneEl = { checked: false };
+  const doneLabel = { classList: { toggle: () => {} }, setAttribute: () => {} };
+  const notesEl = { value: "" };
+  const deleteBtn = { hidden: false };
+  const submitBtn = { textContent: "" };
+
+  const otherRadio = { value: "Other", checked: false };
+  const clothesRadio = { value: "Clothes", checked: false };
+
+  globalThis.document = {
+    getElementById: id => {
+      if (id === "packItemDialog") return dummyDialog;
+      if (id === "packCategories") return dummyCats;
+      if (id === "packBags") return dummyBags;
+      if (id === "packDialogTitle") return titleEl;
+      if (id === "packItemId") return idEl;
+      if (id === "packItemTitle") return nameEl;
+      if (id === "packItemQty") return qtyEl;
+      if (id === "packItemToBuy") return toBuyEl;
+      if (id === "packItemDone") return doneEl;
+      if (id === "packDoneLabel") return doneLabel;
+      if (id === "packItemNotes") return notesEl;
+      if (id === "packItemDelete") return deleteBtn;
+      if (id === "packItemSubmit") return submitBtn;
+      return null;
+    },
+    querySelector: sel => {
+      if (sel.includes('value="Other"')) return otherRadio;
+      if (sel.includes('value="Clothes"')) return clothesRadio;
+      if (sel.includes('input[name="packCategory"]:checked')) {
+        return otherRadio.checked ? otherRadio : clothesRadio.checked ? clothesRadio : null;
+      }
+      return null;
+    },
+    querySelectorAll: () => []
+  };
+
+  const { openItemDialog } = await import("../js/shared/screens/packing/index.js");
+  openItemDialog(null);
+
+  assert.equal(otherRadio.checked, true, "Category Other is checked by default when adding an item");
+  assert.equal(clothesRadio.checked, false, "Category Clothes is not checked");
+});
+
+

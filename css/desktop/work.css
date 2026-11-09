@@ -58,13 +58,14 @@
 
 .work-header-row {
   display: flex;
-  align-items: center;
-  padding: 12px 20px;
+  align-items: flex-end;
+  padding: 8px 20px 6px;
   border-bottom: 1px solid var(--line);
   font-family: var(--font-ui);
   font-size: 14px;
   font-weight: 700;
   color: var(--ink);
+  line-height: 1.2;
 }
 
 .work-col-desc {
