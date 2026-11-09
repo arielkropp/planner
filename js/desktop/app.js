@@ -18,6 +18,7 @@ import { initPacking, renderPacking, updatePackLens } from "./screens/packing/in
 import { initWork, renderWork } from "./screens/work/index.js";
 import { initBackupControls } from "./shell/backup-controls.js";
 import { initTripControls, renderTripsList } from "../shared/components/trips-ui.js";
+import { initRatesDialog } from "../shared/components/rates-dialog.js";
 
 function renderAll() {
   renderItinerary();
@@ -42,6 +43,7 @@ export function mount({ signal }) {
   initWork({ signal });
   initBackupControls();
   initTripControls();
+  initRatesDialog();
 
   // Re-apply the itinerary view chosen before this platform was mounted
   setItineraryView(viewState.itineraryView, () => "itinerary");
